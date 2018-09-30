@@ -1,10 +1,19 @@
-const express = require('express');
+import express  from 'express';
 const path = require('path');
 
 const app = express();
+const session = require('express-session');
+const bodyParser = require('body-parser');
+var Users = require('./server/users/routes/userRouter');
 const port = process.env.PORT || 5000;
 
 // API calls
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+
+app.use('/users',Users);
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express great  ' });
 });
