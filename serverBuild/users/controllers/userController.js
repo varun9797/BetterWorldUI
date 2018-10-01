@@ -26,25 +26,36 @@ var UserController = function UserController() {
             "email": req.body.email,
             "password": req.body.password,
             "created": today
-        };
 
-        database.connection.getConnection(function (err, connection) {
-            if (err) {
-                appData["error"] = 1;
-                appData["data"] = "Internal Server Error";
-                res.status(500).json(appData);
+            /*database.connection.getConnection(function(err, connection) {
+                if (err) {
+                    appData["error"] = 1;
+                    appData["data"] = "Internal Server Error";
+                    res.status(500).json(appData);
+                } else {
+                    connection.query('INSERT INTO users SET ?', userData, function(err, rows, fields) {
+                        if (!err) {
+                            appData.error = 0;
+                            appData["data"] = "User registered successfully!";
+                            res.status(201).json(appData);
+                        } else {
+                            appData["data"] = "Error Occured!";
+                            res.status(400).json(err);
+                        }
+                    });
+                    connection.release();
+                }
+            });*/
+        };database.query('INSERT INTO users SET ?', userData, function (err, rows, fields) {
+            if (!err) {
+                console.log("query is working fine " + rows);
+                appData.error = 0;
+                appData["data"] = "User registered successfully!";
+                res.status(201).json(appData);
             } else {
-                connection.query('INSERT INTO users SET ?', userData, function (err, rows, fields) {
-                    if (!err) {
-                        appData.error = 0;
-                        appData["data"] = "User registered successfully!";
-                        res.status(201).json(appData);
-                    } else {
-                        appData["data"] = "Error Occured!";
-                        res.status(400).json(err);
-                    }
-                });
-                connection.release();
+                console.log("got error " + err);
+                appData["data"] = "Error Occured!";
+                res.status(400).json(err);
             }
         });
     };

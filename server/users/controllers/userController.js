@@ -18,7 +18,7 @@ class UserController {
             "created": today
         }
     
-        database.connection.getConnection(function(err, connection) {
+        /*database.connection.getConnection(function(err, connection) {
             if (err) {
                 appData["error"] = 1;
                 appData["data"] = "Internal Server Error";
@@ -35,6 +35,18 @@ class UserController {
                     }
                 });
                 connection.release();
+            }
+        });*/
+        database.query('INSERT INTO users SET ?', userData, function(err, rows, fields) {
+            if (!err) {
+                console.log("query is working fine "+rows);
+                appData.error = 0;
+                appData["data"] = "User registered successfully!";
+                res.status(201).json(appData);
+            } else {
+                console.log("got error "+err)
+                appData["data"] = "Error Occured!";
+                res.status(400).json(err);
             }
         });
     }
