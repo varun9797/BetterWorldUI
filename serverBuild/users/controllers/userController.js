@@ -46,7 +46,7 @@ var UserController = function UserController() {
                     connection.release();
                 }
             });*/
-        };database.query('INSERT INTO users SET ?', userData, function (err, rows, fields) {
+        };database.connection.query('INSERT INTO users SET ?', userData, function (err, rows, fields) {
             if (!err) {
                 console.log("query is working fine " + rows);
                 appData.error = 0;
