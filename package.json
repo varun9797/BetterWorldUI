@@ -10,7 +10,7 @@
   "license": "MIT",
   "scripts": {
     "client": "cd client && npm run start",
-    "server": "nodemon babel bin/start.js",
+    "server": "nodemon bin/start.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "dev:server": "cd client && npm run build && cd .. && npm run start",
     "start": "node bin/start.js",
