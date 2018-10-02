@@ -132,8 +132,11 @@ class UserController {
                 appData["error"] = err;
                 res.status(400).json(appData);
             } else {
+                console.log("no error is ");
                 if (rows.length > 0) {
+                    console.log("rows.length is ");
                     if (rows[0].password == password) {
+                        console.log("password match ");
                         console.log("rows[0] "+JSON.stringify(rows[0]));
                         let token = jwt.sign(rows[0], process.env.SECRET_KEY, {
                             expiresIn: 1440
@@ -142,11 +145,13 @@ class UserController {
                         appData["token"] = token;
                         res.status(200).json(appData);
                     } else {
+                        console.log("password not match ");
                         appData.error = 1;
                         appData["data"] = "Email and Password does not match";
                         res.status(204).json(appData);
                     }
                 } else {
+                    console.log("else ");
                     appData.error = 1;
                     appData["data"] = "Email does not exists!";
                     res.status(204).json(appData);
