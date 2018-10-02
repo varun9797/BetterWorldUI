@@ -122,10 +122,11 @@ class UserController {
                 connection.release();
             }
         }); */
+        console.log("data is "+JSON.stringify(req.body));
         database.connection.query('SELECT * FROM users WHERE email = $1', [email], function(err, rows, fields) {
             if (err) {
                 console.log("error is ");
-                confirm.log(err);
+                console.log(err);
                 appData.error = 1;
                 appData["data"] = "Error Occured!";
                 appData["error"] = err;
