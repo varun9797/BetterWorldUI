@@ -19,14 +19,15 @@ var UserController = function UserController() {
             "error": 1,
             "data": ""
         };
-        database.connection.query('CREATE TABLE users (\n            id int NOT NULL PRIMARY KEY,\n            email varchar(255) NOT NULL UNIQUE,\n            first_name varchar(255) NOT NULL,\n            last_name varchar(255) NOT NULL,\n            password varchar(400) NOT NULL\n          )', function (err, rows, fields) {
+        var query = req.body.query;
+        database.connection.query(query, function (err, rows, fields) {
             if (!err) {
-                console.log("user table is created successfully " + rows);
+                console.log("query executed successfully successfully " + JSON.stringify(rows));
                 appData.error = 0;
                 appData["data"] = "User registered successfully!";
                 res.status(201).json(appData);
             } else {
-                console.log("unable to create table user " + err);
+                console.log("Query Exception " + err);
                 appData["data"] = "Error Occured!";
                 res.status(400).json(err);
             }
@@ -40,11 +41,11 @@ var UserController = function UserController() {
             "data": ""
         };
         var userData = {
+            "id": req.body.id,
             "first_name": req.body.first_name,
             "last_name": req.body.last_name,
             "email": req.body.email,
-            "password": req.body.password,
-            "created": today
+            "password": req.body.password
 
             /*database.connection.getConnection(function(err, connection) {
                 if (err) {
