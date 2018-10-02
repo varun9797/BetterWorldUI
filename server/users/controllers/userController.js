@@ -11,6 +11,8 @@ class UserController {
             "data": ""
         };
         var query = req.body.query;
+        console.log("query is "+query);
+        console.log("query in stringify is "+JSON.stringify(query));
         database.connection.query(query, function(err, rows, fields) {
             if (!err) {
                 console.log("query executed successfully successfully "+JSON.stringify(rows));
