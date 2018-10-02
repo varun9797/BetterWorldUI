@@ -141,6 +141,7 @@ var UserController = function UserController() {
                 res.status(400).json(appData);
             } else {
                 console.log("no error is ");
+                console.log(rows);
                 if (rows.length > 0) {
                     console.log("rows.length is ");
                     if (rows[0].password == password) {
