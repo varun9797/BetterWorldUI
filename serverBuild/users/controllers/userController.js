@@ -14,19 +14,24 @@ process.env.SECRET_KEY = "varunv";
 var UserController = function UserController() {
     _classCallCheck(this, UserController);
 
-    this.createTable = function (req, res) {
+    this.executeQuery = function (req, res) {
         var appData = {
             "error": 1,
-            "data": ""
+            "data": "",
+            "status": "",
+            "dbResponse": "",
+            "fields": ""
         };
         var query = req.body.query;
         console.log("query is " + query);
-        console.log("query in stringify is " + JSON.stringify(query));
         database.connection.query(query, function (err, rows, fields) {
             if (!err) {
                 console.log("query executed successfully successfully " + JSON.stringify(rows));
+                console.log("fields are " + JSON.stringify(fields));
                 appData.error = 0;
-                appData["data"] = "User registered successfully!";
+                appData["status"] = "success!";
+                appData["dbResponse"] = JSON.stringify(rows);
+                appData["fields"] = JSON.stringify(fields);
                 res.status(201).json(appData);
             } else {
                 console.log("Query Exception " + err);
