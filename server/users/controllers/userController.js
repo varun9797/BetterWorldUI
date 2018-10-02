@@ -67,7 +67,7 @@ class UserController {
                 connection.release();
             }
         });*/
-        database.connection.query('(email,first_name,last_name,password, phonenumber) value (?,?,?,?,?)', userData, function(err, rows, fields) {
+        database.connection.query('insert into users(email,first_name,last_name,password, phonenumber) value (?,?,?,?,?)', userData, function(err, rows, fields) {
             if (!err) {
                 console.log("query is working fine "+rows);
                 appData.error = 0;
