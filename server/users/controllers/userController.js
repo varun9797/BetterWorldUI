@@ -6,13 +6,16 @@ process.env.SECRET_KEY = "varunv";
 class UserController {
 
     createTable = (req, res) =>{
+        var appData = {
+            "error": 1,
+            "data": ""
+        };
         database.connection.query(`CREATE TABLE users (
             id int NOT NULL PRIMARY KEY,
-            email varchar(255) NOT NULL,
+            email varchar(255) NOT NULL UNIQUE,
             first_name varchar(255) NOT NULL,
             last_name varchar(255) NOT NULL,
-            password varchar(400) NOT NULL,
-            UNIQUE KEY email (email)
+            password varchar(400) NOT NULL
           )`, function(err, rows, fields) {
             if (!err) {
                 console.log("user table is created successfully "+rows);

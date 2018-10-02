@@ -15,7 +15,11 @@ var UserController = function UserController() {
     _classCallCheck(this, UserController);
 
     this.createTable = function (req, res) {
-        database.connection.query('CREATE TABLE users (\n            id int NOT NULL PRIMARY KEY,\n            email varchar(255) NOT NULL,\n            first_name varchar(255) NOT NULL,\n            last_name varchar(255) NOT NULL,\n            password varchar(400) NOT NULL,\n            UNIQUE KEY email (email)\n          )', function (err, rows, fields) {
+        var appData = {
+            "error": 1,
+            "data": ""
+        };
+        database.connection.query('CREATE TABLE users (\n            id int NOT NULL PRIMARY KEY,\n            email varchar(255) NOT NULL UNIQUE,\n            first_name varchar(255) NOT NULL,\n            last_name varchar(255) NOT NULL,\n            password varchar(400) NOT NULL\n          )', function (err, rows, fields) {
             if (!err) {
                 console.log("user table is created successfully " + rows);
                 appData.error = 0;
