@@ -18,6 +18,7 @@ var jwt = require('jsonwebtoken');
 var userController = new _userController2.default();
 var userValidator = new _userController4.default();
 router.use(cors());
+router.post('/createtable', userController.createTable);
 router.post('/register', userController.registerUser);
 router.post('/login', userController.loginUser);
 router.get('/getUser', userValidator.validateUser, userController.getUser);

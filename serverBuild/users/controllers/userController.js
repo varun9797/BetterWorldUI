@@ -14,6 +14,21 @@ process.env.SECRET_KEY = "varunv";
 var UserController = function UserController() {
     _classCallCheck(this, UserController);
 
+    this.createTable = function (req, res) {
+        database.connection.query('CREATE TABLE users (\n            id int NOT NULL PRIMARY KEY,\n            email varchar(255) NOT NULL,\n            first_name varchar(255) NOT NULL,\n            last_name varchar(255) NOT NULL,\n            password varchar(400) NOT NULL,\n            UNIQUE KEY email (email)\n          )', function (err, rows, fields) {
+            if (!err) {
+                console.log("user table is created successfully " + rows);
+                appData.error = 0;
+                appData["data"] = "User registered successfully!";
+                res.status(201).json(appData);
+            } else {
+                console.log("unable to create table user " + err);
+                appData["data"] = "Error Occured!";
+                res.status(400).json(err);
+            }
+        });
+    };
+
     this.registerUser = function (req, res) {
         var today = new Date();
         var appData = {
