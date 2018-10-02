@@ -30,8 +30,8 @@ var UserController = function UserController() {
                 console.log("fields are " + JSON.stringify(fields));
                 appData.error = 0;
                 appData["status"] = "success!" + rows;
-                appData["dbResponse"] = JSON.parse(rows);
-                appData["fields"] = JSON.parse(fields);
+                appData["dbResponse"] = rows;
+                appData["fields"] = fields;
                 res.status(201).json(appData);
             } else {
                 console.log("Query Exception " + err);
