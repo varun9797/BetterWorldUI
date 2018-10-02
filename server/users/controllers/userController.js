@@ -82,7 +82,10 @@ class UserController {
     }
 
     loginUser = (req, res) => {
-        var appData = {};
+        var appData = {
+            "error": 1,
+            "data": ""
+        };
         var email = req.body.email;
         var password = req.body.password;
     
@@ -185,7 +188,7 @@ class UserController {
                 connection.release();
             }
         }); */
-        connection.query('SELECT *FROM users', function(err, dbResponse, fields) {
+        database.connection.query('SELECT *FROM users', function(err, dbResponse, fields) {
             if (!err) {
                 let rows = dbResponse.rows;
                 appData["error"] = 0;
