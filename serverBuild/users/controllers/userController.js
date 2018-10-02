@@ -75,7 +75,7 @@ var UserController = function UserController() {
                 connection.release();
             }
         });*/
-        database.connection.query('insert into users(email,first_name,last_name,password, phonenumber) values (?,?,?,?,?)', userData, function (err, rows, fields) {
+        database.connection.query('insert into users(email,first_name,last_name,password, phonenumber) values ($1, $2, $3, $4, $5)', userData, function (err, rows, fields) {
             if (!err) {
                 console.log("query is working fine " + rows);
                 appData.error = 0;
