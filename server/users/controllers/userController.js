@@ -20,7 +20,7 @@ class UserController {
                 console.log("query executed successfully successfully "+JSON.stringify(rows));
                 console.log("fields are "+JSON.stringify(fields));
                 appData.error = 0;
-                appData["status"] = "success!"+rows;
+                appData["status"] = "success!";
                 appData["dbResponse"] = rows;
                 appData["fields"] = fields;
                 res.status(201).json(appData);
@@ -122,10 +122,11 @@ class UserController {
                 connection.release();
             }
         }); */
-        database.connection.query('SELECT * FROM users WHERE email = ?', [email], function(err, rows, fields) {
+        database.connection.query('SELECT * FROM users WHERE email = $1', [email], function(err, rows, fields) {
             if (err) {
                 appData.error = 1;
                 appData["data"] = "Error Occured!";
+                appData["error"] = err;
                 res.status(400).json(appData);
             } else {
                 if (rows.length > 0) {
