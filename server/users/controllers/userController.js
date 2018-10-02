@@ -123,7 +123,7 @@ class UserController {
             }
         }); */
         console.log("data is "+JSON.stringify(req.body));
-        database.connection.query('SELECT * FROM users WHERE email = $1', [email], function(err, rows, fields) {
+        database.connection.query('SELECT * FROM users WHERE email = $1', [email], function(err, dbResponse, fields) {
             if (err) {
                 console.log("error is ");
                 console.log(err);
@@ -133,6 +133,7 @@ class UserController {
                 res.status(400).json(appData);
             } else {
                 console.log("no error is ");
+                let rows = dbResponse.rows;
                 console.log(rows);
                 if (rows.length > 0) {
                     console.log("rows.length is ");
@@ -184,8 +185,9 @@ class UserController {
                 connection.release();
             }
         }); */
-        connection.query('SELECT *FROM users', function(err, rows, fields) {
+        connection.query('SELECT *FROM users', function(err, dbResponse, fields) {
             if (!err) {
+                let rows = dbResponse.rows;
                 appData["error"] = 0;
                 appData["data"] = rows;
                 res.status(200).json(appData);
