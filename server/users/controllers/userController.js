@@ -18,7 +18,6 @@ class UserController {
         database.connection.query(query, function(err, rows) {
             if (!err) {
                 console.log("query executed successfully successfully "+JSON.stringify(rows));
-                console.log("fields are "+JSON.stringify(fields));
                 appData.error = 0;
                 appData["status"] = "success!";
                 appData["dbResponse"] = rows;
