@@ -24,14 +24,13 @@ var UserController = function UserController() {
         };
         var query = req.body.query;
         console.log("query is " + query);
-        database.connection.query(query, function (err, rows, fields) {
+        database.connection.query(query, function (err, rows) {
             if (!err) {
                 console.log("query executed successfully successfully " + JSON.stringify(rows));
                 console.log("fields are " + JSON.stringify(fields));
                 appData.error = 0;
                 appData["status"] = "success!";
                 appData["dbResponse"] = rows;
-                appData["fields"] = fields;
                 res.status(201).json(appData);
             } else {
                 console.log("Query Exception " + err);
@@ -195,7 +194,7 @@ var UserController = function UserController() {
                 connection.release();
             }
         }); */
-        database.connection.query('SELECT *FROM users', function (err, dbResponse, fields) {
+        database.connection.query('SELECT * FROM users', function (err, dbResponse, fields) {
             if (!err) {
                 var rows = dbResponse.rows;
                 appData["error"] = 0;
