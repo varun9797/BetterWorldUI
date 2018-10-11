@@ -6,13 +6,13 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var database = require('./../../../database/database');
+var database = require('../../../../database/database');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
 process.env.SECRET_KEY = "varunv";
 
-var UserController = function UserController() {
-    _classCallCheck(this, UserController);
+var SocietyController = function SocietyController() {
+    _classCallCheck(this, SocietyController);
 
     this.executeQuery = function (req, res) {
         var appData = {
@@ -207,5 +207,5 @@ var UserController = function UserController() {
     };
 };
 
-exports.default = UserController;
-//# sourceMappingURL=userController.js.map
+exports.default = SocietyController;
+//# sourceMappingURL=societyController.js.map

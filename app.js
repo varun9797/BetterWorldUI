@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
-var Users = require('./serverBuild/users/routes/userRouter');
+var Users = require('./serverBuild/modules/users/routes/userRouter');
 const port = process.env.PORT || 5000;
 
 // API calls
