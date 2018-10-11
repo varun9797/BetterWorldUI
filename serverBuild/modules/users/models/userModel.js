@@ -20,7 +20,7 @@ var UserModel = function UserModel() {
                 "error": 1,
                 "data": "",
                 "status": "",
-                "dbResponse": "",
+                "dbData": "",
                 "fields": "",
                 "satusCode": ""
             };
@@ -31,8 +31,8 @@ var UserModel = function UserModel() {
                     console.log("query executed successfully successfully " + JSON.stringify(rows));
                     appData.error = 0;
                     appData["status"] = "success!";
-                    appData["status"] = "success!";
                     appData["satusCode"] = 201;
+                    appData["dbData"] = rows;
                     resolve(appData);
                     //res.status(201).json(appData);
                 } else {
@@ -52,7 +52,8 @@ var UserModel = function UserModel() {
             var appData = {
                 "error": 1,
                 "data": "",
-                "satusCode": ""
+                "satusCode": "",
+                "dbResponse": ""
             };
             var userData = [req.body.email, req.body.first_name, req.body.last_name, req.body.password, req.body.phoneNumber];
             database.connection.query('insert into users(email,first_name,last_name,password, phonenumber) values ($1, $2, $3, $4, $5)', userData, function (err, rows, fields) {
@@ -60,13 +61,15 @@ var UserModel = function UserModel() {
                     console.log("query is working fine " + rows);
                     appData.error = 0;
                     appData["data"] = "User registered successfully!";
-                    appData["satusCode"] = 201;
+                    appData["satusCode"] = rows;
+                    appData["dbResponse"] = 201;
                     resolve(appData);
                     //res.status(201).json(appData);
                 } else {
                     console.log("got error " + err);
                     appData["data"] = "Error Occured!";
                     appData["satusCode"] = 400;
+                    appData.error = err;
                     reject(appData);
                     //res.status(400).json(err);
                 }
