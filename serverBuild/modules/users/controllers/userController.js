@@ -13,16 +13,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var UserController = function UserController() {
+    var _this = this;
+
     _classCallCheck(this, UserController);
 
-    _initialiseProps.call(this);
-
-    var userModel = new _userModel2.default();
-};
-
-var _initialiseProps = function _initialiseProps() {
     this.executeQuery = function (req, res) {
-        userModel.executeQuery(req).then(function (dbResponse) {
+        _this.userModel.executeQuery(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             res.status(dbResponse.satusCode).json(err);
@@ -30,7 +26,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.registerUser = function (req, res) {
-        userModel.registerUser(req).then(function (dbResponse) {
+        _this.userModel.registerUser(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             res.status(dbResponse.satusCode).json(err);
@@ -38,7 +34,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.loginUser = function (req, res) {
-        userModel.loginUser(req).then(function (dbResponse) {
+        _this.userModel.loginUser(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             res.status(dbResponse.satusCode).json(err);
@@ -46,12 +42,14 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.getUser = function (req, res) {
-        userModel.getUser(req).then(function (dbResponse) {
+        _this.userModel.getUser(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             res.status(dbResponse.satusCode).json(err);
         });
     };
+
+    this.userModel = new _userModel2.default();
 };
 
 exports.default = UserController;
