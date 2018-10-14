@@ -39,6 +39,7 @@ var UserModel = function UserModel() {
                     console.log("Query Exception " + err);
                     appData["data"] = "Error Occured!";
                     appData["satusCode"] = 400;
+                    appData["err"] = err;
                     reject(appData);
                     //res.status(400).json(err);
                 }
