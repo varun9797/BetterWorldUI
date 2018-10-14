@@ -24,7 +24,7 @@ var SocietyModel = function SocietyModel() {
                 "satusCode": "",
                 "dbResponse": ""
             };
-            database.connection.query("select ownerid from owner where phonenumber = $1, email = $2 ", searchData, function (err, rows) {
+            database.connection.query("select ownerid from owner where phonenumber = $1 and email = $2 ", searchData, function (err, rows) {
                 if (!err) {
                     console.log("select owner query working fine " + rows);
                     appData.error = 0;
