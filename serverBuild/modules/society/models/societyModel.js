@@ -12,6 +12,8 @@ var jwt = require('jsonwebtoken');
 process.env.SECRET_KEY = "varunv";
 
 var SocietyModel = function SocietyModel() {
+    var _this = this;
+
     _classCallCheck(this, SocietyModel);
 
     this.getOwner = function (req, searchData) {
@@ -52,7 +54,7 @@ var SocietyModel = function SocietyModel() {
             database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender) values ($1, $2, $3, $4, $5, $6)', ownerInsertData, function (err, rows) {
                 if (!err) {
 
-                    this.getOwner(null, ownerSearchData).then(function (dbResponse) {
+                    _this.getOwner(null, ownerSearchData).then(function (dbResponse) {
                         console.log("select query is working fine " + dbResponse);
                         appData.error = 0;
                         appData["data"] = "User registered successfully!";
