@@ -4,10 +4,6 @@ var _societyController = require('../controllers/societyController');
 
 var _societyController2 = _interopRequireDefault(_societyController);
 
-var _userController = require('./../validator/userController');
-
-var _userController2 = _interopRequireDefault(_userController);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require("express");
@@ -15,10 +11,9 @@ var router = express.Router();
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
 
-var userController = new _societyController2.default();
-var userValidator = new _userController2.default();
+var societyController = new _societyController2.default();
 router.use(cors());
-router.post('/registerOwner', userController.registerOwner);
+router.post('/registerOwner', societyController.registerOwner);
 
 module.exports = router;
 //# sourceMappingURL=societyRouter.js.map

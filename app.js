@@ -5,6 +5,7 @@ const app = express();
 const session = require('express-session');
 const bodyParser = require('body-parser');
 var Users = require('./serverBuild/modules/users/routes/userRouter');
+var Society = require('./serverBuild/modules/society/routes/societyRouter');
 const port = process.env.PORT || 5000;
 
 // API calls
@@ -12,7 +13,7 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+app.use('./society',Society)
 app.use('/users',Users);
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express great  ' });

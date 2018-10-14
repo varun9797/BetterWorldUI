@@ -24,14 +24,14 @@ var SocietyController = function SocietyController() {
     _classCallCheck(this, SocietyController);
 
     this.registerOwner = function (req, res) {
-        _this.SocietyModel.registerOwner(req).then(function (dbResponse) {
+        _this.societyModel.registerOwner(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             res.status(err.satusCode).json(err);
         });
     };
 
-    societyModel = new _societyModel2.default();
+    this.societyModel = new _societyModel2.default();
 };
 
 exports.default = SocietyController;
