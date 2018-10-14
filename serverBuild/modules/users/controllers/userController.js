@@ -23,7 +23,7 @@ var UserController = function UserController() {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             console.log("-----db err----", err);
-            res.status(dbResponse.satusCode).json(err);
+            res.status(err.satusCode).json(err);
         });
     };
 
@@ -31,7 +31,7 @@ var UserController = function UserController() {
         _this.userModel.registerUser(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            res.status(dbResponse.satusCode).json(err);
+            res.status(err.satusCode).json(err);
         });
     };
 
@@ -39,7 +39,7 @@ var UserController = function UserController() {
         _this.userModel.loginUser(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            res.status(dbResponse.satusCode).json(err);
+            res.status(err.satusCode).json(err);
         });
     };
 
@@ -47,7 +47,7 @@ var UserController = function UserController() {
         _this.userModel.getUser(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            res.status(dbResponse.satusCode).json(err);
+            res.status(err.satusCode).json(err);
         });
     };
 

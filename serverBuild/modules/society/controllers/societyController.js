@@ -16,6 +16,7 @@ var SocietyController = function SocietyController() {
 
     this.executeQuery = function (req, res) {
         var appData = {
+
             "error": 1,
             "data": "",
             "status": "",
