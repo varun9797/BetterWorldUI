@@ -18,6 +18,12 @@ var SocietyModel = function SocietyModel() {
 
     this.getOwner = function (req, searchData) {
         return new Promise(function (resolve, reject) {
+            var appData = {
+                "error": 1,
+                "data": "",
+                "satusCode": "",
+                "dbResponse": ""
+            };
             database.connection.query("select ownerid from owner where phonenumber = $1, email = $2 ", searchData, function (err, rows) {
                 if (!err) {
                     console.log("select owner query working fine " + rows);
