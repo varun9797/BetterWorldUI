@@ -24,7 +24,38 @@ var SocietyModel = function SocietyModel() {
                 "satusCode": "",
                 "dbResponse": ""
             };
-            database.connection.query("select ownerid from owner where phonenumber = $1 and email = $2 ", searchData, function (err, rows) {
+            var temp = database.connection.query("select ownerid from owner where phonenumber = $1 and email = $2 ", searchData, function (err, rows) {
+                console.log(temp.sql);
+                if (!err) {
+                    console.log("select owner query working fine " + rows);
+                    appData.error = 0;
+                    appData["data"] = "User registered successfully!";
+                    appData["dbResponse"] = rows;
+                    appData["satusCode"] = 201;
+                    resolve(appData);
+                    //res.status(201).json(appData);
+                } else {
+                    console.log("got error " + err);
+                    appData["data"] = "Error Occured!";
+                    appData["satusCode"] = 400;
+                    appData.error = err;
+                    reject(appData);
+                    //res.status(400).json(err);
+                }
+            });
+        });
+    };
+
+    this.updateFlat = function (req, searchData, updateValue) {
+        return new Promise(function (resolve, reject) {
+            var appData = {
+                "error": 1,
+                "data": "",
+                "satusCode": "",
+                "dbResponse": ""
+            };
+            var temp = database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n        flatname = ' + searchData[2], function (err, rows) {
+                console.log(temp.sql);
                 if (!err) {
                     console.log("select owner query working fine " + rows);
                     appData.error = 0;
@@ -57,17 +88,21 @@ var SocietyModel = function SocietyModel() {
             var flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
             var ownerSearchData = [req.body.phoneNumber, req.body.email];
             var ownerInsertData = [req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender];
-            database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender) values ($1, $2, $3, $4, $5, $6)', ownerInsertData, function (err, rows) {
+            var temp = database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender) values ($1, $2, $3, $4, $5, $6)', ownerInsertData, function (err, rows) {
+                console.log(temp.sql);
                 if (!err) {
 
                     _this.getOwner(null, ownerSearchData).then(function (dbResponse) {
                         console.log("select query is working fine " + dbResponse);
                         appData.error = 0;
-                        appData["data"] = "User registered successfully!";
-                        appData["dbResponse"] = dbResponse;
+                        //appData["data"] = "Owner id is "+dbResponse.rows[0].ownerid;
+                        appData["ownerid"] = dbResponse.rows[0].ownerid;
                         appData["satusCode"] = 201;
-                        resolve(appData);
+                        //resolve(appData);
+                        return appData;
                         // res.status(dbResponse.satusCode).json(dbResponse);
+                    }).then(function (appData) {
+                        _this.updateFlat(null, flatData, appData.ownerid);
                     }).catch(function (err) {
                         console.log("got error " + err);
                         appData["data"] = "Error Occured!";
