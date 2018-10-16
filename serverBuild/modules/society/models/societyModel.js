@@ -24,8 +24,8 @@ var SocietyModel = function SocietyModel() {
                 "satusCode": "",
                 "dbResponse": ""
             };
-            var temp = database.connection.query("select ownerid from owner where phonenumber = $1 and email = $2 ", searchData, function (err, rows) {
-                console.log(temp.sql);
+            database.connection.query("select ownerid from owner where phonenumber = $1 and email = $2 ", searchData, function (err, rows) {
+                //console.log(temp.sql);
                 if (!err) {
                     console.log("select owner query working fine " + rows);
                     appData.error = 0;
@@ -54,8 +54,8 @@ var SocietyModel = function SocietyModel() {
                 "satusCode": "",
                 "dbResponse": ""
             };
-            var temp = database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n        flatname = ' + searchData[2], function (err, rows) {
-                console.log(temp.sql);
+            database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n        flatname = ' + searchData[2], function (err, rows) {
+                //console.log(temp.sql);
                 if (!err) {
                     console.log("select owner query working fine " + rows);
                     appData.error = 0;
@@ -88,8 +88,8 @@ var SocietyModel = function SocietyModel() {
             var flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
             var ownerSearchData = [req.body.phoneNumber, req.body.email];
             var ownerInsertData = [req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender];
-            var temp = database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender) values ($1, $2, $3, $4, $5, $6)', ownerInsertData, function (err, rows) {
-                console.log(temp.sql);
+            database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender) values ($1, $2, $3, $4, $5, $6)', ownerInsertData, function (err, rows) {
+                //console.log(temp.sql);
                 if (!err) {
 
                     _this.getOwner(null, ownerSearchData).then(function (dbResponse) {
