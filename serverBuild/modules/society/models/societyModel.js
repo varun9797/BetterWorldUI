@@ -70,6 +70,7 @@ var SocietyModel = function SocietyModel() {
                         //res.status(201).json(appData);
                     } else {
                         console.log("got error " + err);
+                        console.log('query is ------------ update flat set ownerid = ' + updateValue + ' where \n                societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n                flatname = ' + searchData[2]);
                         appData["data"] = "Error Occured!";
                         appData["satusCode"] = 400;
                         appData.error = err;
