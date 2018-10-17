@@ -55,26 +55,32 @@ var SocietyModel = function SocietyModel() {
                 "dbResponse": ""
             };
             console.log("searchData is ", searchData);
-            console.log("update value is ", _this.updateValue);
-            database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n        flatname = ' + searchData[2], function (err, rows) {
-                //console.log(temp.sql);
-                if (!err) {
-                    console.log("select owner query working fine " + rows);
-                    appData.error = 0;
-                    appData["data"] = "User registered successfully!";
-                    appData["dbResponse"] = rows;
-                    appData["satusCode"] = 201;
-                    resolve(appData);
-                    //res.status(201).json(appData);
-                } else {
-                    console.log("got error " + err);
-                    appData["data"] = "Error Occured!";
-                    appData["satusCode"] = 400;
-                    appData.error = err;
-                    reject(appData);
-                    //res.status(400).json(err);
-                }
-            });
+            console.log("update value is ", updateValue);
+            try {
+
+                database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n        flatname = ' + searchData[2], function (err, rows) {
+                    //console.log(temp.sql);
+                    if (!err) {
+                        console.log("select owner query working fine " + rows);
+                        appData.error = 0;
+                        appData["data"] = "User registered successfully!";
+                        appData["dbResponse"] = rows;
+                        appData["satusCode"] = 201;
+                        resolve(appData);
+                        //res.status(201).json(appData);
+                    } else {
+                        console.log("got error " + err);
+                        appData["data"] = "Error Occured!";
+                        appData["satusCode"] = 400;
+                        appData.error = err;
+                        reject(appData);
+                        //res.status(400).json(err);
+                    }
+                });
+            } catch (error) {
+                console.log("got error------", error);
+                reject(error);
+            }
         });
     };
 
