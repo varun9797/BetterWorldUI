@@ -115,7 +115,7 @@ var SocietyModel = function SocietyModel() {
                         return appData;
                         // res.status(dbResponse.satusCode).json(dbResponse);
                     }).then(function (appData) {
-                        _this.updateFlat(null, flatData, appData.ownerid);
+                        resolve(_this.updateFlat(null, flatData, appData.ownerid));
                     }).catch(function (err) {
                         console.log("got error " + err);
                         appData["data"] = "Error Occured!";
