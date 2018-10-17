@@ -94,15 +94,15 @@ var SocietyModel = function SocietyModel() {
                 //console.log(temp.sql);
                 if (!err) {
 
-                    _this.getOwner(null, ownerSearchData).then(function (dbResponse) {
-                        console.log("select owner query is working fine " + JSON.stringify(dbResponse));
-                        console.log("dbResponse.rows is ", JSON.stringify(dbResponse.rows));
-                        console.log("dbResponse.rows[0] is ", JSON.stringify(dbResponse.rows[0]));
-                        console.log("dbResponse.rows[0].ownerid is ", JSON.stringify(dbResponse.rows[0].ownerid));
+                    _this.getOwner(null, ownerSearchData).then(function (response) {
+                        console.log("select owner query is working fine " + JSON.stringify(response));
+                        console.log("dbResponse.rows is ", JSON.stringify(response.dbResponse.rows));
+                        console.log("dbResponse.rows[0] is ", JSON.stringify(response.dbResponse.rows[0]));
+                        console.log("dbResponse.rows[0].ownerid is ", JSON.stringify(response.dbResponse.rows[0].ownerid));
 
                         appData.error = 0;
                         //appData["data"] = "Owner id is "+dbResponse.rows[0].ownerid;
-                        appData["ownerid"] = dbResponse.rows[0].ownerid;
+                        appData["ownerid"] = response.dbResponse.rows[0].ownerid;
                         appData["satusCode"] = 201;
                         //resolve(appData);
                         return appData;
@@ -138,7 +138,9 @@ var SocietyModel = function SocietyModel() {
                 "satusCode": "",
                 "dbResponse": ""
             };
-            database.connection.query('select * from ' + req.params.tableName, searchData, function (err, rows) {
+
+            console.log("req.params.tableName", req.params.tableName);
+            database.connection.query('select * from ' + req.params.tableName, function (err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
                     console.log("select query working fine " + rows);
