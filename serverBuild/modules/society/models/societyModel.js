@@ -95,7 +95,7 @@ var SocietyModel = function SocietyModel() {
                 if (!err) {
 
                     _this.getOwner(null, ownerSearchData).then(function (dbResponse) {
-                        console.log("select query is working fine " + dbResponse);
+                        console.log("select owner query is working fine " + JSON.stringify(dbResponse));
                         appData.error = 0;
                         //appData["data"] = "Owner id is "+dbResponse.rows[0].ownerid;
                         appData["ownerid"] = dbResponse.rows[0].ownerid;
@@ -126,7 +126,7 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
-    this.getOwnerDetails = function (req) {
+    this.getDetails = function (req) {
         return new Promise(function (resolve, reject) {
             var appData = {
                 "error": 1,
@@ -137,7 +137,7 @@ var SocietyModel = function SocietyModel() {
             database.connection.query('select * from ' + req.param.tableName, searchData, function (err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
-                    console.log("select owner query working fine " + rows);
+                    console.log("select query working fine " + rows);
                     appData.error = 0;
                     appData["dbResponse"] = rows;
                     appData["satusCode"] = 201;

@@ -14,7 +14,7 @@ var jwt = require('jsonwebtoken');
 var societyController = new _societyController2.default();
 router.use(cors());
 router.post('/registerOwner', societyController.registerOwner);
-router.post('/:tableName', societyController.registerOwner);
+router.get('/:tableName', societyController.getDetails);
 
 module.exports = router;
 //# sourceMappingURL=societyRouter.js.map
