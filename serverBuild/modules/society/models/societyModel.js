@@ -58,7 +58,7 @@ var SocietyModel = function SocietyModel() {
             console.log("update value is ", updateValue);
             try {
 
-                database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = ' + searchData[1] + ' and \n        flatname = ' + searchData[2], function (err, rows) {
+                database.connection.query('update flat set ownerid = ' + updateValue + ' where \n        societyid = ' + searchData[0] + ' and buildingname = \'' + searchData[1] + '\' and \n        flatname = \'' + searchData[2] + '\'', function (err, rows) {
                     //console.log(temp.sql);
                     if (!err) {
                         console.log("select owner query working fine " + rows);
