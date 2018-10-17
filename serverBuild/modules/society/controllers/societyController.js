@@ -31,6 +31,22 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.getOwnerDetails = function (req, res) {
+        _this.societyModel.getOwnerDetails(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.getFlatDetails = function (req, res) {
+        _this.societyModel.getFlatDetails(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
 };
 
