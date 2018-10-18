@@ -166,6 +166,36 @@ var SocietyModel = function SocietyModel() {
             });
         });
     };
+
+    this.getDetailsUsingQueryParam = function (req) {
+        return new Promise(function (resolve, reject) {
+            var appData = {
+                "error": 1,
+                "data": "",
+                "satusCode": "",
+                "dbResponse": ""
+            };
+
+            console.log("req.params.tableName", req.params.tableName);
+            database.connection.query('select * from ' + req.params.tableName + ' where ' + req.params.columnName + ' = ' + req.query.value, function (err, rows) {
+                //console.log(temp.sql);
+                if (!err) {
+                    console.log("select query working fine " + rows);
+                    appData.error = 0;
+                    appData["dbResponse"] = rows;
+                    appData["satusCode"] = 201;
+                    resolve(appData);
+                    //res.status(201).json(appData);
+                } else {
+                    console.log("got error " + err);
+                    appData["satusCode"] = 400;
+                    appData.error = err;
+                    reject(appData);
+                    //res.status(400).json(err);
+                }
+            });
+        });
+    };
 };
 
 exports.default = SocietyModel;

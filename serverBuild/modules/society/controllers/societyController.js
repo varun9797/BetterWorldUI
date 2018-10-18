@@ -39,6 +39,15 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.getDetailsUsingQueryParam = function (req, res) {
+        console.log('select * from ' + req.params.tableName + ' where ' + req.params.columnName + ' = ' + req.query.value);
+        _this.societyModel.getDetailsUsingQueryParam(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
 };
 
