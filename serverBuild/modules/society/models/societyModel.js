@@ -96,8 +96,8 @@ var SocietyModel = function SocietyModel() {
             };
             var flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
             var ownerSearchData = [req.body.phoneNumber, req.body.email];
-            var ownerInsertData = [req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender];
-            database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender) values ($1, $2, $3, $4, $5, $6)', ownerInsertData, function (err, rows) {
+            var ownerInsertData = [req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password];
+            database.connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values ($1, $2, $3, $4, $5, $6, $7)', ownerInsertData, function (err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
 

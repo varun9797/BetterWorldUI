@@ -88,7 +88,7 @@ var UserModel = function UserModel() {
             var email = req.body.email;
             var password = req.body.password;
             console.log("data is " + JSON.stringify(req.body));
-            database.connection.query('SELECT * FROM users WHERE email = $1', [email], function (err, dbResponse, fields) {
+            database.connection.query('SELECT * FROM owner WHERE email = $1', [email], function (err, dbResponse, fields) {
                 if (err) {
                     console.log("error is ");
                     console.log(err);
