@@ -27,6 +27,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.registerOwner(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
+            console.log("catch block of registerOwner ", err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -35,6 +36,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.getDetails(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
+            console.log("catch block of getDetails", err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -44,6 +46,17 @@ var SocietyController = function SocietyController() {
         _this.societyModel.getDetailsUsingQueryParam(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
+            console.log("catch block of getDetailsUsingQueryParam", err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.updatePendingPaymentOfFlat = function (req, res) {
+        console.log('update flat set pendingpayment = \'' + req.body.pendingPayment + '\' where ownerid =' + req.body.ownerid + ' and flatId =' + req.body.flatid + ';');
+        _this.societyModel.updatePendingPaymentOfFlat(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log("catch block of updatePendingPaymentOfFlat", err);
             res.status(err.satusCode).json(err);
         });
     };
