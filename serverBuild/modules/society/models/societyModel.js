@@ -237,7 +237,7 @@ var SocietyModel = function SocietyModel() {
             };
             var currentDate = new Date();
 
-            database.connection.query('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + req.body.flatid + ',' + req.body.pendingPayment + ',' + currentDate.toISOString() + ',' + currentDate.toISOString() + ',' + req.body.ownerid + ');', function (err, rows) {
+            database.connection.query('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + req.body.flatid + ',' + req.body.pendingPayment + ',\'' + currentDate.toISOString() + '\',\'' + currentDate.toISOString() + '\',' + req.body.ownerid + ');', function (err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
                     console.log("pending payment history successfully updated " + rows);

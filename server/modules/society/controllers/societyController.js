@@ -54,7 +54,7 @@ class SocietyController {
     updatePaymentHistory= (reqBody,callback) =>{
         const currentDate = new Date();
         //console.log(`update paymentHistory set paymentHistory = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`)
-        console.log(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},${currentDate.toISOString()},${currentDate.toISOString()},${reqBody.body.ownerid});`);
+        console.log(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},'${currentDate.toISOString()}','${currentDate.toISOString()}',${reqBody.body.ownerid});`);
         this.societyModel.updatePaymentHistory(reqBody).then((dbResponse)=>{
             callback(true, dbResponse);
             //res.status(dbResponse.satusCode).json(dbResponse);
