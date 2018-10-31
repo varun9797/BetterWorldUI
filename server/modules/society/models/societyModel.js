@@ -213,15 +213,16 @@ class SocietyModel {
         });
     })
 
-    updatePendingPaymentOfFlat = (req) => new Promise((resolve, reject)=>{
+    updatePaymentHistory = (req) => new Promise((resolve, reject)=>{
         var appData = {
             "error": 1,
             "data": "",
             "satusCode":"",
             "dbResponse":""
         };
+        const currentDate = new Date();
 
-        database.connection.query(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${req.body.flatid},${req.body.pendingPayment},${currentDate},${currentDate},${req.body.ownerid});`,function(err, rows) {
+        database.connection.query(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},${currentDate.toISOString()},${currentDate.toISOString()},${reqBody.body.ownerid});`,function(err, rows) {
             //console.log(temp.sql);
             if (!err) {
                 console.log("pending payment history successfully updated "+rows);

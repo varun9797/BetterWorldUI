@@ -227,7 +227,7 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
-    this.updatePendingPaymentOfFlat = function (req) {
+    this.updatePaymentHistory = function (req) {
         return new Promise(function (resolve, reject) {
             var appData = {
                 "error": 1,
@@ -235,8 +235,9 @@ var SocietyModel = function SocietyModel() {
                 "satusCode": "",
                 "dbResponse": ""
             };
+            var currentDate = new Date();
 
-            database.connection.query('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + req.body.flatid + ',' + req.body.pendingPayment + ',' + currentDate + ',' + currentDate + ',' + req.body.ownerid + ');', function (err, rows) {
+            database.connection.query('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + reqBody.body.flatid + ',' + reqBody.body.pendingPayment + ',' + currentDate.toISOString() + ',' + currentDate.toISOString() + ',' + reqBody.body.ownerid + ');', function (err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
                     console.log("pending payment history successfully updated " + rows);
