@@ -197,7 +197,34 @@ class SocietyModel {
         database.connection.query(`update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}` ,function(err, rows) {
             //console.log(temp.sql);
             if (!err) {
-                console.log("pending payment success fully updated "+rows);
+                console.log("pending payment successfully updated "+rows);
+                appData.error = 0;
+                appData["dbResponse"] = rows;
+                appData["satusCode"] = 201;
+                resolve(appData);
+                //res.status(201).json(appData);
+            } else {
+                console.log("got error "+err)
+                appData["satusCode"] = 400;
+                appData.error = err;
+                reject(appData);
+                //res.status(400).json(err);
+            }
+        });
+    })
+
+    updatePendingPaymentOfFlat = (req) => new Promise((resolve, reject)=>{
+        var appData = {
+            "error": 1,
+            "data": "",
+            "satusCode":"",
+            "dbResponse":""
+        };
+
+        database.connection.query(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${req.body.flatid},${req.body.pendingPayment},${currentDate},${currentDate},${req.body.ownerid});`,function(err, rows) {
+            //console.log(temp.sql);
+            if (!err) {
+                console.log("pending payment history successfully updated "+rows);
                 appData.error = 0;
                 appData["dbResponse"] = rows;
                 appData["satusCode"] = 201;

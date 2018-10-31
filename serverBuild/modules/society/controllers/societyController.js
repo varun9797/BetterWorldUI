@@ -54,10 +54,31 @@ var SocietyController = function SocietyController() {
     this.updatePendingPaymentOfFlat = function (req, res) {
         console.log('update flat set pendingpayment = \'' + req.body.pendingPayment + '\' where ownerid =' + req.body.ownerid + ' and flatId =' + req.body.flatid + ';');
         _this.societyModel.updatePendingPaymentOfFlat(req).then(function (dbResponse) {
-            res.status(dbResponse.satusCode).json(dbResponse);
+            console.log("updatePendingPaymentOfFlat successfully done!!");
+            _this.updatePaymentHistory(req, function (resFlag, responseData) {
+                if (resFlag) {
+                    res.status(dbResponse.satusCode).json(responseData);
+                } else {
+                    res.status(400).json(responseData);
+                }
+            });
         }).catch(function (err) {
             console.log("catch block of updatePendingPaymentOfFlat", err);
             res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.updatePaymentHistory = function (reqBody, callback) {
+        var currentDate = new Date();
+        //console.log(`update paymentHistory set paymentHistory = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`)
+        console.log('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + reqBody.body.flatid + ',' + reqBody.body.pendingPayment + ',' + currentDate.toISOString() + ',' + currentDate.toISOString() + ',' + reqBody.body.ownerid + ');');
+        _this.societyModel.updatePaymentHistory(reqBody).then(function (dbResponse) {
+            callback(true, dbResponse);
+            //res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log("catch block of updatePaymentHistory", err);
+            callback(false, err);
+            //res.status(err.satusCode).json(err);
         });
     };
 

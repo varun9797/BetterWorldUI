@@ -37,10 +37,31 @@ class SocietyController {
     updatePendingPaymentOfFlat= (req, res) =>{
         console.log(`update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`)
         this.societyModel.updatePendingPaymentOfFlat(req).then((dbResponse)=>{
-            res.status(dbResponse.satusCode).json(dbResponse);
+            console.log("updatePendingPaymentOfFlat successfully done!!")
+            this.updatePaymentHistory(req, (resFlag, responseData)=>{
+                if(resFlag){
+                    res.status(dbResponse.satusCode).json(responseData);
+                } else {
+                    res.status(400).json(responseData);
+                }
+            })
         }).catch((err)=>{
             console.log("catch block of updatePendingPaymentOfFlat",err);
             res.status(err.satusCode).json(err);
+        }) 
+    }
+
+    updatePaymentHistory= (reqBody,callback) =>{
+        const currentDate = new Date();
+        //console.log(`update paymentHistory set paymentHistory = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`)
+        console.log(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},${currentDate.toISOString()},${currentDate.toISOString()},${reqBody.body.ownerid});`);
+        this.societyModel.updatePaymentHistory(reqBody).then((dbResponse)=>{
+            callback(true, dbResponse);
+            //res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log("catch block of updatePaymentHistory",err);
+            callback(false, err);
+            //res.status(err.satusCode).json(err);
         }) 
     }
 }
