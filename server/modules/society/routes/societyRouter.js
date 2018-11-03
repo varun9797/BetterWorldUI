@@ -9,6 +9,8 @@ import UserValidator from "./../../users/validator/userController";
 const societyController = new SocietyController();
 const userValidator = new UserValidator();
 router.use(cors());
+router.post('/registerBuilding',societyController.registerBuilding);
+router.post('/registerSociety',societyController.registerSociety);
 router.post('/registerOwner',societyController.registerOwner);
 router.put('/flat/pendingPayment',userValidator.validateUser, societyController.updatePendingPaymentOfFlat);
 router.get('/:tableName/:columnName',societyController.getDetailsUsingQueryParam);

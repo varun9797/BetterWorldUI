@@ -240,7 +240,62 @@ class SocietyModel {
             }
         });
     })
+    registerBuilding = (req) => new Promise((resolve, reject)=>{
+        var appData = {
+            "error": 1,
+            "data": "",
+            "satusCode":"",
+            "dbResponse":""
+        };
+        const currentDate = new Date();
 
+        database.connection.query(`insert into building(buildingname, societyid) values
+         (${req.body.buildingName},${req.body.societyid});`,function(err, rows) {
+            //console.log(temp.sql);
+            if (!err) {
+                console.log("pending payment history successfully updated "+rows);
+                appData.error = 0;
+                appData["dbResponse"] = rows;
+                appData["satusCode"] = 201;
+                resolve(appData);
+                //res.status(201).json(appData);
+            } else {
+                console.log("got error "+err)
+                appData["satusCode"] = 400;
+                appData.error = err;
+                reject(appData);
+                //res.status(400).json(err);
+            }
+        });
+    })
+
+    registerSociety = (req) => new Promise((resolve, reject)=>{
+        var appData = {
+            "error": 1,
+            "data": "",
+            "satusCode":"",
+            "dbResponse":""
+        };
+        const currentDate = new Date();
+
+        database.connection.query(`insert into society(societyName, address, pincode) values ('${req.body.societyName}', '${req.body.address}', '${req.body.pincode}');`,function(err, rows) {
+            //console.log(temp.sql);
+            if (!err) {
+                console.log("Society is successfully Inserted"+rows);
+                appData.error = 0;
+                appData["dbResponse"] = rows;
+                appData["satusCode"] = 201;
+                resolve(appData);
+                //res.status(201).json(appData);
+            } else {
+                console.log("got error "+err)
+                appData["satusCode"] = 400;
+                appData.error = err;
+                reject(appData);
+                //res.status(400).json(err);
+            }
+        });
+    })
 }
 
 export default SocietyModel;

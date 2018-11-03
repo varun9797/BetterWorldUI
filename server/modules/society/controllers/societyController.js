@@ -64,6 +64,29 @@ class SocietyController {
             //res.status(err.satusCode).json(err);
         }) 
     }
+
+    registerBuilding = (req, res) => {
+        console.log(`insert into building(buildingname, societyid) values
+        (${req.body.buildingName},${req.body.societyid});`);
+        this.societyModel.registerBuilding(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log("catch block of registerOwner ",err);
+            res.status(err.satusCode).json(err);
+        })
+    }
+
+    registerSociety = (req, res) => {
+        console.log(`society register query is--- 
+        insert into society(societyName, address, pincode) values 
+        ('${req.body.societyName}', '${req.body.address}', '${req.body.pincode}'`);
+        this.societyModel.registerSociety(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log("catch block of registerOwner ",err);
+            res.status(err.satusCode).json(err);
+        })
+    }
 }
 
 export default SocietyController;

@@ -82,6 +82,26 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.registerBuilding = function (req, res) {
+        console.log('insert into building(buildingname, societyid) values\n        (' + req.body.buildingName + ',' + req.body.societyid + ');');
+        _this.societyModel.registerBuilding(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log("catch block of registerOwner ", err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.registerSociety = function (req, res) {
+        console.log('society register query is--- \n        insert into society(societyName, address, pincode) values \n        (\'' + req.body.societyName + '\', \'' + req.body.address + '\', \'' + req.body.pincode + '\'');
+        _this.societyModel.registerSociety(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log("catch block of registerOwner ", err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
 };
 
