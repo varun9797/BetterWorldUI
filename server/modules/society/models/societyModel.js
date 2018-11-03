@@ -250,7 +250,7 @@ class SocietyModel {
         const currentDate = new Date();
 
         database.connection.query(`insert into building(buildingname, societyid) values
-         (${req.body.buildingName},${req.body.societyid});`,function(err, rows) {
+         ('${req.body.buildingName}',${req.body.societyid});`,function(err, rows) {
             //console.log(temp.sql);
             if (!err) {
                 console.log("pending payment history successfully updated "+rows);

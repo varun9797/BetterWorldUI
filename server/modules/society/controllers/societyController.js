@@ -67,7 +67,7 @@ class SocietyController {
 
     registerBuilding = (req, res) => {
         console.log(`insert into building(buildingname, societyid) values
-        (${req.body.buildingName},${req.body.societyid});`);
+        (${req.body.buildingName},'${req.body.societyid}');`);
         this.societyModel.registerBuilding(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{

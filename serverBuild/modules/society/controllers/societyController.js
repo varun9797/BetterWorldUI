@@ -83,7 +83,7 @@ var SocietyController = function SocietyController() {
     };
 
     this.registerBuilding = function (req, res) {
-        console.log('insert into building(buildingname, societyid) values\n        (' + req.body.buildingName + ',' + req.body.societyid + ');');
+        console.log('insert into building(buildingname, societyid) values\n        (' + req.body.buildingName + ',\'' + req.body.societyid + '\');');
         _this.societyModel.registerBuilding(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {

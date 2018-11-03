@@ -267,7 +267,7 @@ var SocietyModel = function SocietyModel() {
             };
             var currentDate = new Date();
 
-            database.connection.query('insert into building(buildingname, societyid) values\n         (' + req.body.buildingName + ',' + req.body.societyid + ');', function (err, rows) {
+            database.connection.query('insert into building(buildingname, societyid) values\n         (\'' + req.body.buildingName + '\',' + req.body.societyid + ');', function (err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
                     console.log("pending payment history successfully updated " + rows);
