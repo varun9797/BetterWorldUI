@@ -98,6 +98,7 @@ class UserModel {
                             expiresIn: 1440
                         });
                         appData.error = 0;
+                        appData.isAdmin = rows[0].isadmin;
                         appData["token"] = token;
                         appData["satusCode"] = 200;
                         resolve(appData);
