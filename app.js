@@ -13,8 +13,9 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/society',Society)
+
 app.use('/users',Users);
+app.use('/society',Society)
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express great  ' });
 });

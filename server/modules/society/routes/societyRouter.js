@@ -4,12 +4,13 @@ var cors = require('cors');
 var jwt = require('jsonwebtoken');
 
 import SocietyController from "../controllers/societyController";
-
+import UserValidator from "./../../users/validator/userController";
 
 const societyController = new SocietyController();
+const userValidator = new UserValidator();
 router.use(cors());
 router.post('/registerOwner',societyController.registerOwner);
-router.put('/flat/pendingPayment',societyController.updatePendingPaymentOfFlat);
+router.put('/flat/pendingPayment',userValidator.validateUser, societyController.updatePendingPaymentOfFlat);
 router.get('/:tableName/:columnName',societyController.getDetailsUsingQueryParam);
 router.get('/:tableName',societyController.getDetails);
 
