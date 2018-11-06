@@ -18,7 +18,13 @@ import { LoginComponent } from './login/login.component';
 import { SocietyComponent } from './society-mgmt/society/society.component';
 import { Component } from '@angular/core/src/metadata/directives';
 import { ModalComponent } from './society-mgmt/modal/modal.component';
-import { NeedAuthGuard } from './NeedAuthGuard'
+import { NeedAuthGuard } from './NeedAuthGuard';
+import { CalendarComponent } from './society-mgmt/calendar/calendar.component';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   { path: "", redirectTo: '/home', pathMatch: "full" },
@@ -61,13 +67,21 @@ const routes: Routes = [
     RegisterMemberComponent,
     LoginComponent,
     SocietyComponent,
-    ModalComponent
+    ModalComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
+    BrowserAnimationsModule
   ],
   providers: [NeedAuthGuard],
   bootstrap: [AppComponent]
