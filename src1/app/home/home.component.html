@@ -1,0 +1,11 @@
+
+<div>This is home page</div>
+  <a routerLink="/search"><button class="btn btn-success pull-right" > Search Page</button></a>
+  <!-- <button class="btn btn-success pull-right" (click)="btnClick()"> Society</button> -->
+  <ul class="list-group">
+    <li (click)="onSelect(nav)" *ngFor="let nav of navigation">
+      <span class="list-group-item" >{{nav.id}} - {{nav.name}} </span>
+    </li>
+  </ul>
+
+

@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+body{
+    background-color: #dff0e8;
+}
+
+.thin {font-weight:100;font-family: 'Raleway', sans-serif;}
+.bold, strong  {font-weight:600;font-family: 'Raleway', sans-serif;}
+.extrabold {font-weight:800;font-family: 'Raleway', sans-serif;}
+.ultrabold {font-weight:900;font-family: 'Raleway', sans-serif;}
+
+h1 { font-size:44px; font-weight:200;font-family: 'Raleway', sans-serif;}
+h2 {font-size:33px; font-weight:300;font-family: 'Raleway', sans-serif;}
+h3 {font-size:22px; font-weight:700;font-family: 'Raleway', sans-serif;}
+h4, h5 {font-weight:800;font-family: 'Raleway', sans-serif;}
+
+
+.mainContainer{
+    background-color: #FFF;
+    margin-top:1em;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);    
+}
+
+.btn{border-radius: 40px; min-width: 150px}
+.contentContainer{
+    padding: 15px
+}
+.homeicons{margin: 5px}
