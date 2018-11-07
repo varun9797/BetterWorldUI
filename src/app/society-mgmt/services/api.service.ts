@@ -20,7 +20,6 @@ export class ApiService {
 
   getUser(){
     let headers = new HttpHeaders().set('token',localStorage.getItem(this.TOKEN));
-
     return this.http.get("https://betterworld.herokuapp.com/users/getUser",{
       headers:headers
     })

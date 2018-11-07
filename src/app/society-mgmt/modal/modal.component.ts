@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { UserService } from "./../user.service";
+import { UserService } from "../services/user.service";
 import {BuildingComponent} from './../building/building.component';
+import { NeedAuthGuard } from "../services/NeedAuthGuard";
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-modal',
@@ -19,7 +20,7 @@ export class ModalComponent implements OnInit {
   //@Output()
   //eventEm = new EventEmitter();
   
-  constructor(public _userService: UserService, public router: Router) { 
+  constructor(public _userService: UserService, public router: Router, public _needAuthGuard : NeedAuthGuard) { 
     
   }
 
@@ -56,11 +57,12 @@ export class ModalComponent implements OnInit {
 
   onSubmit(){
     console.log(this.modalName);
-    if(this.modalName=='society')
+    if(this.modalName=='buildings')
       this.router.navigate(['societyManagment',this.sid,'buildings']);  
-     else if(this.modalName=='buildings')
+     else if(this.modalName=='flats')
      this.router.navigate(['societyManagment',this.sid,'buildings',this.bid,'flats']);
-     else if(this.modalName=='owners')  
-     this.router.navigate(['owners']);
+     else if(this.modalName=='owners') {   
+        this.router.navigate(['societyManagment','owners']); 
+     }    
   }
 }

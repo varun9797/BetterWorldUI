@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "./../user.service"
+import { UserService } from "../services/user.service"
 import { ParamMap, Router, ActivatedRoute } from '@angular/router';
 import { OnChanges } from '@angular/core';
-import { CustomerService } from '../../customer.service'
+import { TokenService } from '../services/token.service'
 
 @Component({
   selector: 'app-flats',
@@ -18,7 +18,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   payAmount;
   param1;param2; societyInfo: any;responseData:any;
   flatObj:any;
-  constructor(public _userService: UserService, public router: Router, private route: ActivatedRoute, public _customerService: CustomerService) { }
+  constructor(public _userService: UserService, public router: Router, private route: ActivatedRoute, public _tokenService: TokenService) { }
 
   ngOnInit() {
     this.getflatList();

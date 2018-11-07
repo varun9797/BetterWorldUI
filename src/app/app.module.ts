@@ -13,12 +13,12 @@ import { OwnersComponent } from './society-mgmt/owners/owners.component';
 import { TenantComponent } from './society-mgmt/tenant/tenant.component';
 import { ErrorComponent } from './error/error.component';
 import { SocietyHeaderComponent } from './society-mgmt/society-header/society-header.component';
-import { RegisterMemberComponent } from './register/register-member.component';
-import { LoginComponent } from './login/login.component';
+import { RegisterMemberComponent } from './society-mgmt/register/register-member.component';
+import { LoginComponent } from './society-mgmt/login/login.component';
 import { SocietyComponent } from './society-mgmt/society/society.component';
 import { Component } from '@angular/core/src/metadata/directives';
 import { ModalComponent } from './society-mgmt/modal/modal.component';
-import { NeedAuthGuard } from './NeedAuthGuard';
+import { NeedAuthGuard } from './society-mgmt/services/NeedAuthGuard';
 import { CalendarComponent } from './society-mgmt/calendar/calendar.component';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -32,8 +32,7 @@ const routes: Routes = [
   { path: "register", component: RegisterMemberComponent },
   { path: "home", component: HomeComponent },
   {
-    path: "societyManagment", component: SocietyMgmtComponent,   
-    canActivate: [NeedAuthGuard],
+    path: "societyManagment", component: SocietyMgmtComponent,
 
     children: [
       { path: "society", component: SocietyComponent },
@@ -43,8 +42,8 @@ const routes: Routes = [
         component: FlatsComponent,
         canActivate: [NeedAuthGuard]
       },
-      { path: "owners", component: OwnersComponent },
-      { path: "tenats", component: TenantComponent },
+      { path: "owners", component: OwnersComponent, canActivate: [NeedAuthGuard] },
+      { path: "tenats", component: TenantComponent, canActivate: [NeedAuthGuard] },
     ]
 
   },

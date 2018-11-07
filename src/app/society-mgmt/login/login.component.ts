@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Route } from '@angular/compiler/src/core';
-import { ApiService } from '../api.service';
-import { CustomerService } from '../customer.service';
+import { ApiService } from '../services/api.service';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   username = "sdfsdf29112";
   password = "soword";
 
-  constructor(private api: ApiService, private _customer: CustomerService, public router: Router) { }
+  constructor(private api: ApiService, private _tokenService: TokenService, public router: Router) { }
 
   ngOnInit() {
   }
@@ -27,12 +27,13 @@ export class LoginComponent implements OnInit {
       .subscribe(
         r => {
           if (r.token) {
-            this._customer.setToken(r.token);
+           // alert(r.token);
+            this._tokenService.setToken(r.token);
             this.router.navigateByUrl('/societyManagment');
           }
         },
-        r => {
-          alert(r.error.error);
+        err => {
+          alert(err);
         });
   }
 }

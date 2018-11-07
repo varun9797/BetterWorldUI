@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "./../user.service"
+import { UserService } from "../services/user.service"
 
 @Component({
   selector: 'app-owners',
@@ -15,8 +15,6 @@ export class OwnersComponent implements OnInit {
       this.ownerData = data;
     }, error =>{
       this.ownerData = error;
-    }, ()=>{
-      alert("All ok");
     });
   }
 

@@ -27,17 +27,17 @@
             <option *ngFor="let building of buildingList" value="{{building.buildingid}}">{{building.buildingname}}</option>
           </select>
         </div> -->
-        <div>
-          <select *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'society')" name="society" [(ngModel)]="sid" (change)="onSocietyChange($event.target.value)">
+        <div> {{modalName}}
+          <select *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )" name="society" [(ngModel)]="sid" (change)="onSocietyChange($event.target.value)">
             
             <option>Select Society from list</option>
             <option *ngFor="let s of society" value="{{s.societyid}}">{{s.societyname}}</option>
           </select>
-          <select *ngIf="(modalName == 'flats' || modalName == 'buildings')"  [(ngModel)]="bid" name="building" (change)="onBuildingChange($event.target.value)">
+          <select *ngIf="(modalName == 'flats' || modalName == 'owners')"  [(ngModel)]="bid" name="building" (change)="onBuildingChange($event.target.value)">
             <option>Select Buildings from list</option>
             <option *ngFor="let building of buildingList" value="{{building.buildingname}}">{{building.buildingname}}</option>
           </select>
-          <select name="flats" *ngIf="modalName == 'flats'">
+          <select name="flats" *ngIf="modalName == 'owners'">
               <option>Select Flats from list</option>
               <option *ngFor="let flat of flatList" value="{{flat.flatid}}">{{flat.flatname}}</option>
             </select>

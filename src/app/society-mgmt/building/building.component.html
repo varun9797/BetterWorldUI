@@ -6,7 +6,7 @@
       Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>
     </div>
   </div>
-  <calendar-component></calendar-component>
+  
 <div class="row">
     <div class="col-xs-12 col-sm-12 text-center contentContainer">
       
@@ -18,13 +18,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr (click)="onSelect(building)" *ngFor="let building of buildingList">
+            <tr *ngFor="let building of buildingList">
               <td>{{building.buildingid}}</td>
               <td>{{building.buildingname}}</td>
             </tr>
           </tbody>
         </table>
     </div>
+    <calendar-component></calendar-component>
   </div>
 <div *ngFor="">
     {{building | json}}
