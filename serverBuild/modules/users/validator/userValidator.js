@@ -43,7 +43,7 @@ var UserValidator = function UserValidator() {
                     appData["data"] = "Token is invalid";
                     res.status(500).json(appData);
                 } else {
-                    appDatap['error'] = 0;
+                    appData['error'] = 0;
                     appData['data'] = 'Token is valid';
                     res.status(200).json(appData);
                 }
