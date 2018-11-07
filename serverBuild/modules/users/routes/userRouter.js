@@ -17,7 +17,7 @@ var cors = require('cors');
 var userController = new _userController2.default();
 var userValidator = new _userValidator2.default();
 router.use(cors());
-router.post('/validateToken', userValidator.validateToken);
+router.get('/validateToken', userValidator.validateToken);
 router.post('/executeQuery', userController.executeQuery);
 router.post('/register', userController.registerUser);
 router.post('/login', userController.loginUser);

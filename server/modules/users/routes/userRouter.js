@@ -9,7 +9,7 @@ import UserValidator from "./../validator/userValidator";
 const userController = new UserController();
 const userValidator = new UserValidator();
 router.use(cors());
-router.post('/validateToken',userValidator.validateToken);
+router.get('/validateToken',userValidator.validateToken);
 router.post('/executeQuery',userController.executeQuery);
 router.post('/register',userController.registerUser);
 router.post('/login',userController.loginUser);
