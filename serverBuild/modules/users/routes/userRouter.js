@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
-var _userController = require('./../controllers/userController');
+var _userController = require("./../controllers/userController");
 
 var _userController2 = _interopRequireDefault(_userController);
 
-var _userController3 = require('./../validator/userController');
+var _userValidator = require("./../validator/userValidator");
 
-var _userController4 = _interopRequireDefault(_userController3);
+var _userValidator2 = _interopRequireDefault(_userValidator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var express = require("express");
 var router = express.Router();
 var cors = require('cors');
-var jwt = require('jsonwebtoken');
 
 var userController = new _userController2.default();
-var userValidator = new _userController4.default();
+var userValidator = new _userValidator2.default();
 router.use(cors());
+router.post('/validateToken', userValidator.validateToken);
 router.post('/executeQuery', userController.executeQuery);
 router.post('/register', userController.registerUser);
 router.post('/login', userController.loginUser);

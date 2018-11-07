@@ -1,15 +1,15 @@
 var express = require("express");
 var router = express.Router();
 var cors = require('cors');
-var jwt = require('jsonwebtoken');
 
 import UserController from "./../controllers/userController";
-import UserValidator from "./../validator/userController";
+import UserValidator from "./../validator/userValidator";
 
 
 const userController = new UserController();
 const userValidator = new UserValidator();
 router.use(cors());
+router.post('/validateToken',userValidator.validateToken);
 router.post('/executeQuery',userController.executeQuery);
 router.post('/register',userController.registerUser);
 router.post('/login',userController.loginUser);

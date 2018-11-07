@@ -4,7 +4,7 @@ var cors = require('cors');
 var jwt = require('jsonwebtoken');
 
 import SocietyController from "../controllers/societyController";
-import UserValidator from "./../../users/validator/userController";
+import UserValidator from "./../../users/validator/userValidator";
 
 const societyController = new SocietyController();
 const userValidator = new UserValidator();
