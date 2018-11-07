@@ -9,7 +9,7 @@ const TOKEN = 'TOKEN';
   providedIn: 'root'
 })
 export class TokenService {
-  validateTokenUrl = "http://betterworld.herokuapp.com/users/validateToken";
+  validateTokenUrl = "https://betterworld.herokuapp.com/users/validateToken";
   constructor(private http: HttpClient) {
   }
 

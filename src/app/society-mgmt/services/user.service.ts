@@ -10,10 +10,10 @@ export class UserService {
   TOKEN = 'TOKEN';
   constructor(public http: HttpClient) { }
 
-  getSocietyURL = "http://betterworld.herokuapp.com/society/society";
-  getBuildingsURL = "http://betterworld.herokuapp.com/society/building";
-  getOwnerURL = "http://betterworld.herokuapp.com/society/owner";
-  getFlatURL = "http://betterworld.herokuapp.com/society/flat";
+  getSocietyURL = "https://betterworld.herokuapp.com/society/society";
+  getBuildingsURL = "https://betterworld.herokuapp.com/society/building";
+  getOwnerURL = "https://betterworld.herokuapp.com/society/owner";
+  getFlatURL = "https://betterworld.herokuapp.com/society/flat";
   putPayment = "https://betterworld.herokuapp.com/society/flat/pendingPayment";
 
   getOwner(query): Observable<any> {
