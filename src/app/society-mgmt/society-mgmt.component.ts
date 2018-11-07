@@ -23,6 +23,7 @@ export class SocietyMgmtComponent implements OnInit {
     });
     
   }
+  
 
   ShowModal(type){
     console.log(type);
