@@ -27,7 +27,10 @@
             owners</a>
         </div>
       </div>
-      <app-modal [modalName]="modalVar"></app-modal>
+      <div *ngIf="modalVar">
+        <app-modal [modalName]="modalVar"></app-modal>
+      </div>
+      
       <router-outlet></router-outlet>
 
     </div>
