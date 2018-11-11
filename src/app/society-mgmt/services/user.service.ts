@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import * as config from "./../config.json";
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ export class UserService {
   TOKEN = 'TOKEN';
   constructor(public http: HttpClient) { }
 
-  getSocietyURL = "https://betterworld.herokuapp.com/society/society";
-  getBuildingsURL = "https://betterworld.herokuapp.com/society/building";
-  getOwnerURL = "https://betterworld.herokuapp.com/society/owner";
-  getFlatURL = "https://betterworld.herokuapp.com/society/flat";
-  putPayment = "https://betterworld.herokuapp.com/society/flat/pendingPayment";
+  getSocietyURL = config.default.HOST_NAME+"/society/society";
+  getBuildingsURL = config.default.HOST_NAME+"/society/building";
+  getOwnerURL = config.default.HOST_NAME+"/society/owner";
+  getFlatURL = config.default.HOST_NAME+"/society/flat";
+  putPayment = config.default.HOST_NAME+"/society/flat/pendingPayment";
+  flatPaymentHistory = config.default.HOST_NAME+"/society/paymenthistory";
 
   getOwner(query): Observable<any> {
     console.log(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`);
@@ -63,6 +65,12 @@ export class UserService {
       headers:headers
     })
     .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+  getFlatPaymentHistory(flatId): Observable<any> {
+    console.log("uuuuuuuu",`${this.flatPaymentHistory}/flatid/?value=${flatId}`);
+    return this.http.get(`${this.flatPaymentHistory}/flatid/?value=${flatId}`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }
 }

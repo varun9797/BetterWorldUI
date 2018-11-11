@@ -22,7 +22,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
-import { CommonService } from './../services/common.service';
+import { CommonService } from '../services/common.service';
 
 const colors: any = {
   red: {
@@ -40,12 +40,12 @@ const colors: any = {
 };
 
 @Component({
-  selector: 'calendar-component',
+  selector: 'event-calendar-component',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./calendar.component.css'],
-  templateUrl: './calendar.component.html'
+  styleUrls: ['./event-calendar.component.css'],
+  templateUrl: './event-calendar.component.html'
 })
-export class CalendarComponent {
+export class EventCalendarComponent {
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
 
@@ -95,6 +95,12 @@ export class CalendarComponent {
     {
       start: startOfDay(new Date()),
       title: 'An event with no end date',
+      color: colors.yellow,
+      actions: this.actions
+    },
+    {
+      start: new Date('2018-11-10 07:46:03'),
+      title: 'custome varun event',
       color: colors.yellow,
       actions: this.actions
     },

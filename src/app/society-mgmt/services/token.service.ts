@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import * as config from "./../config.json";
 
 const TOKEN = 'TOKEN';
 
@@ -9,7 +10,7 @@ const TOKEN = 'TOKEN';
   providedIn: 'root'
 })
 export class TokenService {
-  validateTokenUrl = "https://betterworld.herokuapp.com/users/validateToken";
+  validateTokenUrl = config.default.HOST_NAME+"/users/validateToken";
   constructor(private http: HttpClient) {
   }
 

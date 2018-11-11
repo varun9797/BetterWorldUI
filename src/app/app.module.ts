@@ -25,6 +25,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EventCalendarComponent } from './society-mgmt/event-calendar/event-calendar.component';
 
 const routes: Routes = [
   { path: "", redirectTo: '/home', pathMatch: "full" },
@@ -67,7 +68,8 @@ const routes: Routes = [
     LoginComponent,
     SocietyComponent,
     ModalComponent,
-    CalendarComponent
+    CalendarComponent,
+    EventCalendarComponent
   ],
   imports: [
     BrowserModule,

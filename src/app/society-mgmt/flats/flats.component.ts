@@ -3,6 +3,7 @@ import { UserService } from "../services/user.service"
 import { ParamMap, Router, ActivatedRoute } from '@angular/router';
 import { OnChanges } from '@angular/core';
 import { TokenService } from '../services/token.service'
+import { CommonService } from '../services/common.service'
 
 @Component({
   selector: 'app-flats',
@@ -18,7 +19,9 @@ export class FlatsComponent implements OnInit, OnChanges {
   payAmount;
   param1;param2; societyInfo: any;responseData:any;
   flatObj:any;
-  constructor(public _userService: UserService, public router: Router, private route: ActivatedRoute, public _tokenService: TokenService) { }
+  constructor(public _userService: UserService,
+     public router: Router, private route: 
+     ActivatedRoute, public _tokenService: TokenService, public _commonService:CommonService) { }
 
   ngOnInit() {
     this.getflatList();
@@ -69,5 +72,15 @@ export class FlatsComponent implements OnInit, OnChanges {
   }
   paymentID(flatObj){
     this.flatObj =flatObj;
+  }
+  showCalender(flatId){
+    this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
+      console.log(data.dbResponse.rows);
+      this._commonService.emitCalanderData(data.dbResponse.rows);
+    },
+      error => {
+        console.log(error);
+        this.society = error.message;
+      });
   }
 }
