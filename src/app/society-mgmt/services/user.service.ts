@@ -17,6 +17,7 @@ export class UserService {
   getFlatURL = config.default.HOST_NAME+"/society/flat";
   putPayment = config.default.HOST_NAME+"/society/flat/pendingPayment";
   flatPaymentHistory = config.default.HOST_NAME+"/society/paymenthistory";
+  societyEventURL = config.default.HOST_NAME+"/society/societyEvent";
 
   getOwner(query): Observable<any> {
     console.log(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`);
@@ -70,6 +71,12 @@ export class UserService {
   getFlatPaymentHistory(flatId): Observable<any> {
     console.log("uuuuuuuu",`${this.flatPaymentHistory}/flatid/?value=${flatId}`);
     return this.http.get(`${this.flatPaymentHistory}/flatid/?value=${flatId}`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+  getSocietyEvents(societyId): Observable<any> {
+    console.log(`${this.societyEventURL}/societyid/?value='${societyId}'`);
+    return this.http.get(`${this.societyEventURL}/societyid/?value='${societyId}'`)
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }

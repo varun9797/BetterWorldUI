@@ -29,7 +29,7 @@
 <div *ngFor="">
     {{building | json}}
 </div>
-<div>
-  <calendar-component></calendar-component>
+<div [hidden]="!buildingList">
+  <event-calendar-component></event-calendar-component>
 </div>
 

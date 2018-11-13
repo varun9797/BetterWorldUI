@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from "../services/user.service"
 import { ParamMap, Router, ActivatedRoute } from '@angular/router';
 import { OnChanges } from '@angular/core';
+import { CommonService } from '../services/common.service'
 
 @Component({
   selector: 'app-building',
@@ -11,7 +12,8 @@ import { OnChanges } from '@angular/core';
 export class BuildingComponent implements OnInit, OnChanges {
   society; buildingList;
   param1; societyInfo: any;
-  constructor(public _userService: UserService, public router: Router, private route: ActivatedRoute) { }
+  constructor(public _userService: UserService, 
+    public router: Router, private route: ActivatedRoute, public _commonService: CommonService ) { }
 
   ngOnInit() {
     this.getBuildingList();
@@ -24,6 +26,7 @@ export class BuildingComponent implements OnInit, OnChanges {
     this.route.params.subscribe((value) => {
       this.param1 = value["societyid"]; // get param
       console.log("this.param1:::" + JSON.stringify(value));
+      this.updateCalendar(this.param1);
       this._userService.getBuilding(this.param1).subscribe((data) => {
         this.buildingList = data.dbResponse.rows;
       },
@@ -39,6 +42,16 @@ export class BuildingComponent implements OnInit, OnChanges {
           console.log(error);
           this.society = error.message;
         });
+    });
+  }
+
+  updateCalendar(societyid){
+    this._userService.getSocietyEvents(societyid).subscribe((societyEvevts) => {
+      this._commonService.emitEventCalanderData(societyEvevts.dbResponse.rows)
+    },
+    error => {
+      console.log(error);
+      this.society = error.message;
     });
   }
 }

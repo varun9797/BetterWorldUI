@@ -79,7 +79,7 @@ export class EventCalendarComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    {
+   /* {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
       title: 'A 3 day event',
@@ -122,24 +122,27 @@ export class EventCalendarComponent {
         afterEnd: true
       },
       draggable: true
-    }
+    }*/
   ];
 
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal, private _commonService:CommonService) { }
   ngOnInit() {
-    this._commonService.calenderData.subscribe((data)=>{
+    this._commonService.eventCalenderData.subscribe((data)=>{
       this.events = [];
       data.forEach(element => {
-        console.log("****",element);
+        console.log("****",element);     
         this.events.push({
-          title: 'payment of rs '+ element.paid+' for flat id'+element.flatid+' Reciept Number is '+element.id+' and ownerid is '+element.ownerid,
-          start: new Date(element.createddate),
+          title:element.eventheading+' Event Description '+element.eventdiscription,
+          start: new Date(element.eventstartdate),
+          
           color: colors.red,
         });
+
         this.refresh.next();
       });
+      this.refresh.next();
     })
   }
 

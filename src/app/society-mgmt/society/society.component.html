@@ -28,3 +28,6 @@
     Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>
   </div>
 </div>
+<div [hidden]="!(societyInfo && societyInfo[0]?.societyid)">
+  <event-calendar-component></event-calendar-component>
+</div>

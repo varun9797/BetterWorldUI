@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class SocietyMgmtComponent implements OnInit {
   modalVar;
   isLogged = false;
-  constructor(public _tokenService : TokenService, public router: Router ) { }
+  constructor(public _tokenService : TokenService, public router: Router) { }
 
   ngOnInit() {
     console.log("tttttttt",localStorage.getItem('TOKEN'));
