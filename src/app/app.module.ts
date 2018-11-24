@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
+import { MaterialModule } from './material-module';
 import { AppComponent } from './app.component';
 import { SocietyMgmtComponent } from './society-mgmt/society-mgmt.component';
 import { HomeComponent } from './home/home.component';
@@ -26,6 +27,7 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventCalendarComponent } from './society-mgmt/event-calendar/event-calendar.component';
+
 
 const routes: Routes = [
   { path: "", redirectTo: '/home', pathMatch: "full" },
