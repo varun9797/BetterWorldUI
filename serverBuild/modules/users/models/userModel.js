@@ -129,7 +129,7 @@ var UserModel = function UserModel() {
                                 console.log("password not match ");
                                 appData.error = 1;
                                 appData["data"] = "Email and Password does not match";
-                                appData["satusCode"] = 204;
+                                appData["satusCode"] = 200;
                                 reject(appData);
                                 //res.status(204).json(appData);
                             }
@@ -137,7 +137,7 @@ var UserModel = function UserModel() {
                             console.log("else ");
                             appData.error = 1;
                             appData["data"] = "Email does not exists!";
-                            appData["satusCode"] = 204;
+                            appData["satusCode"] = 404;
                             reject(appData);
                             //res.status(204).json(appData);
                         }
@@ -161,7 +161,7 @@ var UserModel = function UserModel() {
                         //res.status(200).json(appData);
                     } else {
                         appData["data"] = "No data found";
-                        appData["satusCode"] = 204;
+                        appData["satusCode"] = 200;
                         reject(appData);
                         //res.status(204).json(appData);
                     }
