@@ -33,6 +33,7 @@ var SocietyController = function SocietyController() {
     };
 
     this.getDetails = function (req, res) {
+        console.log("checking auto deploye1111");
         _this.societyModel.getDetails(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
