@@ -18,6 +18,7 @@ class SocietyController {
         })
     }
     getDetails= (req, res) =>{
+        console.log("checking auto deploye");
         this.societyModel.getDetails(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
