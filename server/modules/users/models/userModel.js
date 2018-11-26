@@ -35,7 +35,7 @@ class UserModel {
                     appData["data"] = "Error Occured!";
                     appData["satusCode"] = 400;
                     appData["err"] = err;
-                    reject(appData)
+                    resolve(appData)
                     //res.status(400).json(err);
                 }
             });
@@ -67,7 +67,7 @@ class UserModel {
                     appData["data"] = "Error Occured!";
                     appData["satusCode"] = 400;
                     appData.error = err;
-                    reject(appData);
+                    resolve(appData);
                     //res.status(400).json(err);
                 }
             });
@@ -93,7 +93,7 @@ class UserModel {
                     appData["data"] = "Error Occured!";
                     appData["error"] = err;
                     appData["satusCode"] = 400;
-                    reject(appData);
+                    resolve(appData);
                     //res.status(400).json(appData);
                 } else {
                     console.log("no error is ",JSON.stringify(dbResponse));
@@ -118,7 +118,7 @@ class UserModel {
                             appData.error = 1;
                             appData["data"] = "Email and Password does not match";
                             appData["satusCode"] = 204;
-                            reject(appData);
+                            resolve(appData);
                             //res.status(204).json(appData);
                         }
                     } else {
@@ -126,7 +126,7 @@ class UserModel {
                         appData.error = 1;
                         appData["data"] = "Email does not exists!";
                         appData["satusCode"] = 204;
-                        reject(appData);
+                        resolve(appData);
                         //res.status(204).json(appData);
                     }
                 }
