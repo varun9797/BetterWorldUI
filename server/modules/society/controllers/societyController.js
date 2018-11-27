@@ -43,6 +43,7 @@ class SocietyController {
                 if(resFlag){
                     res.status(dbResponse.satusCode).json(responseData);
                 } else {
+                    
                     res.status(400).json(responseData);
                 }
             })
