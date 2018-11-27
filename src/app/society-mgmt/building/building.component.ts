@@ -28,7 +28,7 @@ export class BuildingComponent implements OnInit, OnChanges {
       console.log("this.param1:::" + JSON.stringify(value));
       this.updateCalendar(this.param1);
       this._userService.getBuilding(this.param1).subscribe((data) => {
-        this.buildingList = data.dbResponse.rows;
+        this.buildingList = data.dbResponse;
       },
         error => {
           console.log(error);
@@ -36,7 +36,7 @@ export class BuildingComponent implements OnInit, OnChanges {
         });
 
       this._userService.getSocietyInfo(this.param1).subscribe((data) => {
-        this.societyInfo = data.dbResponse.rows;
+        this.societyInfo = data.dbResponse;
       },
         error => {
           console.log(error);
@@ -47,7 +47,7 @@ export class BuildingComponent implements OnInit, OnChanges {
 
   updateCalendar(societyid){
     this._userService.getSocietyEvents(societyid).subscribe((societyEvevts) => {
-      this._commonService.emitEventCalanderData(societyEvevts.dbResponse.rows)
+      this._commonService.emitEventCalanderData(societyEvevts.dbResponse)
     },
     error => {
       console.log(error);

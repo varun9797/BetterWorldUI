@@ -17,7 +17,7 @@ export class SocietyComponent implements OnInit {
   
   ngOnInit() {
     this._userService.getSociety().subscribe((data) => {
-      this.society = data.dbResponse.rows;
+      this.society = data.dbResponse;
     },
       error => {
         console.log(error);
@@ -27,14 +27,14 @@ export class SocietyComponent implements OnInit {
 
   onSelect(societyid) {
     this._userService.getSocietyEvents(societyid).subscribe((societyEvevts) => {
-      this._commonService.emitEventCalanderData(societyEvevts.dbResponse.rows)
+      this._commonService.emitEventCalanderData(societyEvevts.dbResponse)
     },
     error => {
       console.log(error);
       this.society = error.message;
     });
     this._userService.getSocietyInfo(societyid).subscribe((data) => {
-      this.societyInfo = data.dbResponse.rows;
+      this.societyInfo = data.dbResponse;
     },
     error => {
       console.log(error);

@@ -34,7 +34,7 @@ export class FlatsComponent implements OnInit, OnChanges {
       this.param1 = value["societyid"]; // get param
       this.param2 = value["buildingid"]; // get param
       this._userService.getFlatList(this.param2).subscribe((data) => {
-        this.flatList = data.dbResponse.rows;
+        this.flatList = data.dbResponse;
       },
       error => {
         console.log(error);
@@ -42,7 +42,7 @@ export class FlatsComponent implements OnInit, OnChanges {
       });
 
       this._userService.getSocietyInfo(this.param1).subscribe((data) => {
-        this.societyInfo = data.dbResponse.rows;
+        this.societyInfo = data.dbResponse;
       },
         error => {
           console.log(error);
@@ -57,7 +57,7 @@ export class FlatsComponent implements OnInit, OnChanges {
     
     this._userService.putFlatPayment(this.flatObj).subscribe(
       (data) => {
-      this.responseData = data.dbResponse.rows;
+      this.responseData = data.dbResponse;
       },
       error => {
         console.log(error);
@@ -75,8 +75,8 @@ export class FlatsComponent implements OnInit, OnChanges {
   }
   showCalender(flatId){
     this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
-      console.log(data.dbResponse.rows);
-      this._commonService.emitCalanderData(data.dbResponse.rows);
+      console.log(data.dbResponse);
+      this._commonService.emitCalanderData(data.dbResponse);
     },
       error => {
         console.log(error);

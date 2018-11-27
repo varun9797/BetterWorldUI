@@ -26,7 +26,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit() {
     this._userService.getSociety().subscribe((data) => {
-      this.society = data.dbResponse.rows;
+      this.society = data.dbResponse;
     },
       error => {
         console.log(error);
@@ -37,7 +37,7 @@ export class ModalComponent implements OnInit {
   onSocietyChange(societyid) {
     this.sid=societyid;
     this._userService.getBuilding(societyid).subscribe((data) => {
-      this.buildingList = data.dbResponse.rows;
+      this.buildingList = data.dbResponse;
     },
       error => {
         console.log(error);
@@ -47,7 +47,7 @@ export class ModalComponent implements OnInit {
 
   onBuildingChange(buildingId) {
     this._userService.getFlatList(buildingId).subscribe((data) => {
-      this.flatList = data.dbResponse.rows;
+      this.flatList = data.dbResponse;
     },
       error => {
         console.log(error);
