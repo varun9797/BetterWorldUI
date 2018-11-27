@@ -1,4 +1,4 @@
-import UserModel from './../models/userModel'
+import UserModel from './../models/userModel';
 
 class UserController {
     
@@ -7,12 +7,12 @@ class UserController {
     }
     executeQuery = (req, res) =>{
         this.userModel.executeQuery(req).then((dbResponse)=>{
-            console.log("-----db response----",dbResponse);
+            console.log('-----db response----',dbResponse);
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
-            console.log("-----db err----",err);
+            console.log('-----db err----',err);
             res.status(err.satusCode).json(err);
-        })
+        });
     }
 
     registerUser= (req, res) =>{
@@ -20,7 +20,7 @@ class UserController {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
             res.status(err.satusCode).json(err);
-        })
+        });
     }
 
     loginUser = (req, res) => {
@@ -28,7 +28,7 @@ class UserController {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
             res.status(err.satusCode).json(err);
-        })
+        });
     }
 
     getUser = (req, res) =>{
@@ -36,7 +36,7 @@ class UserController {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
             res.status(err.satusCode).json(err);
-        })
+        });
     }
 }
 

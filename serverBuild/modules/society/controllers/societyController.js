@@ -12,11 +12,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var database = require('../../../../database/database');
-var cors = require('cors');
-var jwt = require('jsonwebtoken');
-
-process.env.SECRET_KEY = "varunv";
+process.env.SECRET_KEY = 'varunv';
 
 var SocietyController = function SocietyController() {
     var _this = this;
@@ -27,17 +23,17 @@ var SocietyController = function SocietyController() {
         _this.societyModel.registerOwner(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log("catch block of registerOwner ", err);
+            console.log('catch block of registerOwner ', err);
             res.status(err.satusCode).json(err);
         });
     };
 
     this.getDetails = function (req, res) {
-        console.log("checking auto deploye1111");
+        console.log('checking auto deploye1111');
         _this.societyModel.getDetails(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log("catch block of getDetails", err);
+            console.log('catch block of getDetails', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -47,7 +43,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.getDetailsUsingQueryParam(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log("catch block of getDetailsUsingQueryParam", err);
+            console.log('catch block of getDetailsUsingQueryParam', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -55,16 +51,17 @@ var SocietyController = function SocietyController() {
     this.updatePendingPaymentOfFlat = function (req, res) {
         console.log('update flat set pendingpayment = \'' + req.body.pendingPayment + '\' where ownerid =' + req.body.ownerid + ' and flatId =' + req.body.flatid + ';');
         _this.societyModel.updatePendingPaymentOfFlat(req).then(function (dbResponse) {
-            console.log("updatePendingPaymentOfFlat successfully done!!");
+            console.log('updatePendingPaymentOfFlat successfully done!!');
             _this.updatePaymentHistory(req, function (resFlag, responseData) {
                 if (resFlag) {
                     res.status(dbResponse.satusCode).json(responseData);
                 } else {
+
                     res.status(400).json(responseData);
                 }
             });
         }).catch(function (err) {
-            console.log("catch block of updatePendingPaymentOfFlat", err);
+            console.log('catch block of updatePendingPaymentOfFlat', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -75,11 +72,9 @@ var SocietyController = function SocietyController() {
         console.log('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + reqBody.body.flatid + ',' + reqBody.body.pendingPayment + ',\'' + currentDate.toISOString() + '\',\'' + currentDate.toISOString() + '\',' + reqBody.body.ownerid + ');');
         _this.societyModel.updatePaymentHistory(reqBody).then(function (dbResponse) {
             callback(true, dbResponse);
-            //res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log("catch block of updatePaymentHistory", err);
+            console.log('catch block of updatePaymentHistory', err);
             callback(false, err);
-            //res.status(err.satusCode).json(err);
         });
     };
 
@@ -88,7 +83,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.registerBuilding(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log("catch block of registerOwner ", err);
+            console.log('catch block of registerOwner ', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -98,7 +93,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.registerSociety(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log("catch block of registerOwner ", err);
+            console.log('catch block of registerOwner ', err);
             res.status(err.satusCode).json(err);
         });
     };

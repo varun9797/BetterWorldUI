@@ -10,7 +10,7 @@ var _userValidator2 = _interopRequireDefault(_userValidator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 var cors = require('cors');
 var jwt = require('jsonwebtoken');

@@ -1,9 +1,9 @@
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 var cors = require('cors');
 
-import UserController from "./../controllers/userController";
-import UserValidator from "./../validator/userValidator";
+import UserController from './../controllers/userController';
+import UserValidator from './../validator/userValidator';
 
 
 const userController = new UserController();

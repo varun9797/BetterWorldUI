@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
-var _userController = require("./../controllers/userController");
+var _userController = require('./../controllers/userController');
 
 var _userController2 = _interopRequireDefault(_userController);
 
-var _userValidator = require("./../validator/userValidator");
+var _userValidator = require('./../validator/userValidator');
 
 var _userValidator2 = _interopRequireDefault(_userValidator);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 var cors = require('cors');
 
