@@ -98,6 +98,16 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.registerFlat = function (req, res) {
+        console.log('insert into flat(flatname, buildingname, societyid, ownerid) \n        values (' + req.body.flatName + ', ' + req.body.buildingName + ', ' + req.body.societyId + ',\n             ' + req.body.ownerId + ');');
+        _this.societyModel.registerFlat(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of registerOwner ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
 };
 

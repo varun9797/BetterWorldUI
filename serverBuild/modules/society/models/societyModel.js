@@ -7,8 +7,6 @@ Object.defineProperty(exports, "__esModule", {
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var database = require('./../../../../database/database');
-var cors = require('cors');
-var jwt = require('jsonwebtoken');
 process.env.SECRET_KEY = 'varunv';
 
 var SocietyModel = function SocietyModel() {
@@ -91,7 +89,6 @@ var SocietyModel = function SocietyModel() {
 
     this.registerOwner = function (req) {
         return new Promise(function (resolve, reject) {
-            var today = new Date();
             var appData = {
                 'error': 1,
                 'data': '',
@@ -102,7 +99,7 @@ var SocietyModel = function SocietyModel() {
             var ownerSearchData = [req.body.phoneNumber, req.body.email];
             var ownerInsertData = [req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password];
             database.connection.getConnection(function (err, connection) {
-                connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values (?,?,?,?,?,?,?)', ownerInsertData, function (err, rows) {
+                connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values (?,?,?,?,?,?,?)', ownerInsertData, function (err) {
                     //console.log(temp.sql);
                     if (!err) {
 
@@ -154,23 +151,30 @@ var SocietyModel = function SocietyModel() {
 
             console.log('req.params.tableName', req.params.tableName);
             database.connection.getConnection(function (err, connection) {
-                connection.query('select * from ' + req.params.tableName, function (err, rows) {
-                    //console.log(temp.sql);
-                    if (!err) {
-                        console.log('select query working fine ' + rows);
-                        appData.error = 0;
-                        appData['dbResponse'] = rows;
-                        appData['satusCode'] = 201;
-                        resolve(appData);
-                        //res.status(201).json(appData);
-                    } else {
-                        console.log('got error ' + err);
-                        appData['satusCode'] = 400;
-                        appData.error = err;
-                        reject(appData);
-                        //res.status(400).json(err);
-                    }
-                });
+                if (err) {
+                    console.log('got error ' + err);
+                    appData['satusCode'] = 500;
+                    appData.error = err;
+                    reject(appData);
+                } else {
+                    connection.query('select * from ' + req.params.tableName, function (err, rows) {
+                        //console.log(temp.sql);
+                        if (!err) {
+                            console.log('select query working fine ' + rows);
+                            appData.error = 0;
+                            appData['dbResponse'] = rows;
+                            appData['satusCode'] = 201;
+                            resolve(appData);
+                            //res.status(201).json(appData);
+                        } else {
+                            console.log('got error ' + err);
+                            appData['satusCode'] = 400;
+                            appData.error = err;
+                            reject(appData);
+                            //res.status(400).json(err);
+                        }
+                    });
+                }
             });
         });
     };
@@ -280,7 +284,6 @@ var SocietyModel = function SocietyModel() {
                 'satusCode': '',
                 'dbResponse': ''
             };
-            var currentDate = new Date();
             database.connection.getConnection(function (err, connection) {
                 connection.query('insert into building(buildingname, societyid) values\n         (\'' + req.body.buildingName + '\',' + req.body.societyid + ');', function (err, rows) {
                     //console.log(temp.sql);
@@ -311,12 +314,41 @@ var SocietyModel = function SocietyModel() {
                 'satusCode': '',
                 'dbResponse': ''
             };
-            var currentDate = new Date();
             database.connection.getConnection(function (err, connection) {
                 connection.query('insert into society(societyName, address, pincode) values (\'' + req.body.societyName + '\', \'' + req.body.address + '\', \'' + req.body.pincode + '\');', function (err, rows) {
                     //console.log(temp.sql);
                     if (!err) {
                         console.log('Society is successfully Inserted' + rows);
+                        appData.error = 0;
+                        appData['dbResponse'] = rows;
+                        appData['satusCode'] = 201;
+                        resolve(appData);
+                        //res.status(201).json(appData);
+                    } else {
+                        console.log('got error ' + err);
+                        appData['satusCode'] = 400;
+                        appData.error = err;
+                        reject(appData);
+                        //res.status(400).json(err);
+                    }
+                });
+            });
+        });
+    };
+
+    this.registerFlat = function (req) {
+        return new Promise(function (resolve, reject) {
+            var appData = {
+                'error': 1,
+                'data': '',
+                'satusCode': '',
+                'dbResponse': ''
+            };
+            database.connection.getConnection(function (err, connection) {
+                connection.query('insert into flat(flatname, buildingname, societyid, ownerid) values (\'' + req.body.flatName + '\', \'' + req.body.buildingName + '\', ' + req.body.societyId + ', ' + req.body.ownerId + ');', function (err, rows) {
+                    //console.log(temp.sql);
+                    if (!err) {
+                        console.log('flat is successfully Inserted' + rows);
                         appData.error = 0;
                         appData['dbResponse'] = rows;
                         appData['satusCode'] = 201;

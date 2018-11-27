@@ -84,6 +84,18 @@ class SocietyController {
             res.status(err.satusCode).json(err);
         });
     }
+
+    registerFlat = (req, res) => {
+        console.log(`insert into flat(flatname, buildingname, societyid, ownerid) 
+        values (${req.body.flatName}, ${req.body.buildingName}, ${req.body.societyId},
+             ${req.body.ownerId});`);
+        this.societyModel.registerFlat(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of registerOwner ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
 }
 
 export default SocietyController;

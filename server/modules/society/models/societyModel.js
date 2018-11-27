@@ -1,6 +1,4 @@
 var database = require('./../../../../database/database');
-var cors = require('cors');
-var jwt = require('jsonwebtoken');
 process.env.SECRET_KEY = 'varunv';
 
 class SocietyModel {
@@ -83,7 +81,6 @@ class SocietyModel {
 
 
     registerOwner = (req) => new Promise((resolve, reject)=>{
-        var today = new Date();
         var appData = {
             'error': 1,
             'data': '',
@@ -96,7 +93,7 @@ class SocietyModel {
             req.body.email, req.body.age, req.body.gender, req.body.password
             ];
             database.connection.getConnection((err, connection) => {
-                connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values (?,?,?,?,?,?,?)', ownerInsertData, (err, rows) => {
+                connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values (?,?,?,?,?,?,?)', ownerInsertData, (err) => {
                     //console.log(temp.sql);
                     if (!err) {
         
@@ -147,6 +144,12 @@ class SocietyModel {
 
         console.log('req.params.tableName', req.params.tableName);
         database.connection.getConnection((err, connection) => {
+            if(err){
+                console.log('got error '+err);
+                appData['satusCode'] = 500;
+                appData.error = err;
+                reject(appData);
+            } else {
             connection.query(`select * from ${req.params.tableName}` ,function(err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
@@ -164,6 +167,7 @@ class SocietyModel {
                     //res.status(400).json(err);
                 }
             });
+        }
         });
         
     })
@@ -269,7 +273,6 @@ class SocietyModel {
             'satusCode':'',
             'dbResponse':''
         };
-        const currentDate = new Date();
         database.connection.getConnection((err, connection)=> {
             connection.query(`insert into building(buildingname, societyid) values
          ('${req.body.buildingName}',${req.body.societyid});`,function(err, rows) {
@@ -300,12 +303,40 @@ class SocietyModel {
             'satusCode':'',
             'dbResponse':''
         };
-        const currentDate = new Date();
         database.connection.getConnection((err, connection) =>{
             connection.query(`insert into society(societyName, address, pincode) values ('${req.body.societyName}', '${req.body.address}', '${req.body.pincode}');`,function(err, rows) {
                 //console.log(temp.sql);
                 if (!err) {
                     console.log('Society is successfully Inserted'+rows);
+                    appData.error = 0;
+                    appData['dbResponse'] = rows;
+                    appData['satusCode'] = 201;
+                    resolve(appData);
+                    //res.status(201).json(appData);
+                } else {
+                    console.log('got error '+err);
+                    appData['satusCode'] = 400;
+                    appData.error = err;
+                    reject(appData);
+                    //res.status(400).json(err);
+                }
+            });
+        });
+        
+    })
+
+    registerFlat = (req) => new Promise((resolve, reject)=>{
+        var appData = {
+            'error': 1,
+            'data': '',
+            'satusCode':'',
+            'dbResponse':''
+        };
+        database.connection.getConnection((err, connection) =>{
+            connection.query(`insert into flat(flatname, buildingname, societyid, ownerid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId}, ${req.body.ownerId});`,function(err, rows) {
+                //console.log(temp.sql);
+                if (!err) {
+                    console.log('flat is successfully Inserted'+rows);
                     appData.error = 0;
                     appData['dbResponse'] = rows;
                     appData['satusCode'] = 201;

@@ -19,6 +19,7 @@ var societyController = new _societyController2.default();
 var userValidator = new _userValidator2.default();
 router.use(cors());
 router.post('/registerBuilding', societyController.registerBuilding);
+router.post('/registerFlat', societyController.registerFlat);
 router.post('/registerSociety', societyController.registerSociety);
 router.post('/registerOwner', societyController.registerOwner);
 router.put('/flat/pendingPayment', userValidator.validateUser, societyController.updatePendingPaymentOfFlat);
