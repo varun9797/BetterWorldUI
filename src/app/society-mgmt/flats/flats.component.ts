@@ -51,10 +51,9 @@ export class FlatsComponent implements OnInit, OnChanges {
     });
   }
   paymentMethod(payAmount){
-    this.flatObj.pendingPayment = payAmount;
-    console.log(payAmount , this.flatObj.pendingPayment);
-    console.log(this.flatObj);
     
+    this.flatObj.pendingPayment = this.flatObj.pendingpayment-payAmount;
+    //console.log(payAmount , this.flatObj.pendingpayment);
     this._userService.putFlatPayment(this.flatObj).subscribe(
       (data) => {
       this.responseData = data.dbResponse.rows;
