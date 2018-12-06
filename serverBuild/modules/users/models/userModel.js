@@ -32,6 +32,7 @@ var UserModel = function UserModel() {
                     reject(err);
                 }
                 connection.query(query, function (err, rows) {
+                    connection.release();
                     if (!err) {
                         console.log('query executed successfully successfully ' + JSON.stringify(rows));
                         appData.error = 0;
@@ -65,6 +66,7 @@ var UserModel = function UserModel() {
             var userData = [req.body.email, req.body.first_name, req.body.last_name, req.body.password, req.body.phoneNumber];
             database.connection.getConnection(function (err, connection) {
                 connection.query('insert into users(email,first_name,last_name,password, phonenumber) values ($1, $2, $3, $4, $5)', userData, function (err, rows, fields) {
+                    connection.release();
                     if (!err) {
                         console.log('query is working fine ' + rows);
                         appData.error = 0;
@@ -98,6 +100,7 @@ var UserModel = function UserModel() {
             console.log('data is ' + JSON.stringify(req.body));
             database.connection.getConnection(function (err, connection) {
                 connection.query('SELECT * FROM owner WHERE email = ?', [email], function (err, dbResponse, fields) {
+                    connection.release();
                     if (err) {
                         console.log('error is ');
                         console.log(err);
@@ -152,6 +155,7 @@ var UserModel = function UserModel() {
             var appData = {};
             database.connection.getConnection(function (err, connection) {
                 connection.query('SELECT * FROM owner', function (err, dbResponse, fields) {
+                    connection.release();
                     if (!err) {
                         var rows = dbResponse;
                         appData['error'] = 0;

@@ -13,6 +13,7 @@ class SocietyModel {
         database.connection.getConnection((err, connection)=> {
             connection.query('select ownerid from owner where phonenumber = ? and email = ? ', searchData ,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     console.log('select owner query working fine '+rows);
                     appData.error = 0;
@@ -49,6 +50,7 @@ class SocietyModel {
                 connection.query(`update flat set ownerid = ${updateValue} where 
         societyid = ${searchData[0]} and buildingname = '${searchData[1]}' and 
         flatname = '${searchData[2]}'` ,function(err, rows) {
+            connection.release();
             //console.log(temp.sql);
             if (!err) {
                 console.log('select owner query working fine '+rows);
@@ -95,6 +97,7 @@ class SocietyModel {
             database.connection.getConnection((err, connection) => {
                 connection.query('insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values (?,?,?,?,?,?,?)', ownerInsertData, (err) => {
                     //console.log(temp.sql);
+                    connection.release();
                     if (!err) {
         
                         this.getOwner(null, ownerSearchData).then((response)=>{
@@ -106,7 +109,7 @@ class SocietyModel {
                             appData.error = 0;
                             //appData["data"] = "Owner id is "+dbResponse.rows[0].ownerid;
                             appData['ownerid'] = response.dbResponse[0].ownerid;
-                            appData['satusCode'] = 201;
+                            appData['satusCode'] = 201;                      
                             //resolve(appData);
                             return appData;
                            // res.status(dbResponse.satusCode).json(dbResponse);
@@ -152,6 +155,7 @@ class SocietyModel {
             } else {
             connection.query(`select * from ${req.params.tableName}` ,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     console.log('select query working fine '+rows);
                     appData.error = 0;
@@ -184,6 +188,7 @@ class SocietyModel {
         database.connection.getConnection((err, connection)=> {
             connection.query(`select * from ${req.params.tableName} where ${req.params.columnName} = ${req.query.value}` ,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     console.log('select query working fine '+rows);
                     appData.error = 0;
@@ -215,6 +220,7 @@ class SocietyModel {
         database.connection.getConnection((err, connection) =>{
             connection.query(`update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}` ,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     
                         console.log('pending payment successfully updated '+rows);
@@ -248,6 +254,7 @@ class SocietyModel {
         database.connection.getConnection((err, connection) => {
             connection.query(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${req.body.flatid},${req.body.pendingPayment},'${currentDate.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2') }','${currentDate.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2') }',${req.body.ownerid});`,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     console.log('pending payment history successfully updated '+rows);
                     appData.error = 0;
@@ -277,6 +284,7 @@ class SocietyModel {
             connection.query(`insert into building(buildingname, societyid) values
          ('${req.body.buildingName}',${req.body.societyid});`,function(err, rows) {
             //console.log(temp.sql);
+            connection.release();
             if (!err) {
                 console.log('pending payment history successfully updated '+rows);
                 appData.error = 0;
@@ -306,6 +314,7 @@ class SocietyModel {
         database.connection.getConnection((err, connection) =>{
             connection.query(`insert into society(societyName, address, pincode) values ('${req.body.societyName}', '${req.body.address}', '${req.body.pincode}');`,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     console.log('Society is successfully Inserted'+rows);
                     appData.error = 0;
@@ -335,6 +344,7 @@ class SocietyModel {
         database.connection.getConnection((err, connection) =>{
             connection.query(`insert into flat(flatname, buildingname, societyid, ownerid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId}, ${req.body.ownerId});`,function(err, rows) {
                 //console.log(temp.sql);
+                connection.release();
                 if (!err) {
                     console.log('flat is successfully Inserted'+rows);
                     appData.error = 0;
