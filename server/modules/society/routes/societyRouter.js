@@ -9,6 +9,7 @@ import UserValidator from './../../users/validator/userValidator';
 const societyController = new SocietyController();
 const userValidator = new UserValidator();
 router.use(cors());
+router.post('/owner/list',societyController.getOwnerList);
 router.post('/registerBuilding',societyController.registerBuilding);
 router.post('/registerFlat',societyController.registerFlat);
 router.post('/registerSociety',societyController.registerSociety);

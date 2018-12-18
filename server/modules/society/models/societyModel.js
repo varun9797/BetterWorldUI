@@ -15,9 +15,43 @@ class SocietyModel {
                 //console.log(temp.sql);
                 connection.release();
                 if (!err) {
-                    console.log('select owner query working fine '+rows);
+                    console.log('getOwner : Ok ');
                     appData.error = 0;
                     appData['data'] = 'User registered successfully!';
+                    appData['dbResponse'] = rows;
+                    appData['satusCode'] = 201;
+                    resolve(appData);
+                    //res.status(201).json(appData);
+                } else {
+                    console.log('got error '+err);
+                    appData['data'] = 'Error Occured!';
+                    appData['satusCode'] = 400;
+                    appData.error = err;
+                    reject(appData);
+                    //res.status(400).json(err);
+                }
+            });
+        });
+        
+    })
+
+    getOwnerList = (req) => new Promise((resolve, reject)=>{
+        var appData = {
+            'error': 1,
+            'satusCode':'',
+            'dbResponse':''
+        };
+        var societyIds = (req.body.societyIds && req.body.societyIds.length>0) ? `'${req.body.societyIds}'`:null;
+        var buildingNames = (req.body.buildingNames && req.body.buildingNames.length>0)?`'${req.body.buildingNames}'`:null;
+        var flatIds =  (req.body.flatIds && req.body.flatIds.length>0)?`'${req.body.flatIds}'`:null;
+
+        database.connection.getConnection((err, connection)=> {
+           const query =  connection.query(`call get_owner_details(${societyIds}, ${buildingNames}, ${flatIds})` ,function(err, rows) {
+                console.log(query.sql);
+                connection.release();
+                if (!err) {
+                    console.log('getOwnerList : Ok ');
+                    appData.error = 0;
                     appData['dbResponse'] = rows;
                     appData['satusCode'] = 201;
                     resolve(appData);
@@ -53,7 +87,7 @@ class SocietyModel {
             connection.release();
             //console.log(temp.sql);
             if (!err) {
-                console.log('select owner query working fine '+rows);
+                console.log('updateFlat : Ok ');
                 appData.error = 0;
                 appData['data'] = 'User registered successfully!';
                 appData['dbResponse'] = rows;
@@ -101,10 +135,8 @@ class SocietyModel {
                     if (!err) {
         
                         this.getOwner(null, ownerSearchData).then((response)=>{
-                            console.log('select owner query is working fine '+JSON.stringify(response));
-                            console.log('dbResponse.rows is ',JSON.stringify(response.dbResponse.rows));
-                            console.log('dbResponse.rows[0] is ',JSON.stringify(response.dbResponse));
-                            console.log('dbResponse.rows[0].ownerid is ',JSON.stringify(response.dbResponse[0].ownerid));
+                            console.log('this.getOwner : Ok ');
+
         
                             appData.error = 0;
                             //appData["data"] = "Owner id is "+dbResponse.rows[0].ownerid;

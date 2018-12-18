@@ -98,6 +98,16 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.getOwnerList = function (req, res) {
+        console.log('call get_owner_details(' + req.body.societyIds + ', ' + req.body.buildingNames + ', ' + req.body.flatIds + ')');
+        _this.societyModel.getOwnerList(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of getOwnerList ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.registerFlat = function (req, res) {
         console.log('insert into flat(flatname, buildingname, societyid, ownerid) \n        values (' + req.body.flatName + ', ' + req.body.buildingName + ', ' + req.body.societyId + ',\n             ' + req.body.ownerId + ');');
         _this.societyModel.registerFlat(req).then(function (dbResponse) {

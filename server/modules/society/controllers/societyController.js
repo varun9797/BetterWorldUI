@@ -85,6 +85,16 @@ class SocietyController {
         });
     }
 
+    getOwnerList = (req, res) => {
+        console.log(`call get_owner_details(${req.body.societyIds}, ${req.body.buildingNames}, ${req.body.flatIds})`);
+        this.societyModel.getOwnerList(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of getOwnerList ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
     registerFlat = (req, res) => {
         console.log(`insert into flat(flatname, buildingname, societyid, ownerid) 
         values (${req.body.flatName}, ${req.body.buildingName}, ${req.body.societyId},
