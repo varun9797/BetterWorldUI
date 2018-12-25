@@ -407,6 +407,37 @@ var SocietyModel = function SocietyModel() {
             });
         });
     };
+
+    this.deleteRow = function (req) {
+        return new Promise(function (resolve, reject) {
+            var appData = {
+                'error': 1,
+                'data': '',
+                'satusCode': '',
+                'dbResponse': ''
+            };
+            database.connection.getConnection(function (err, connection) {
+                connection.query('delete from ' + req.body.tableName + ' where ' + req.body.columnName + ' = ' + req.body.columnValue, function (err, rows) {
+                    //console.log(temp.sql);
+                    connection.release();
+                    if (!err) {
+                        console.log('delete successfully' + rows);
+                        appData.error = 0;
+                        appData['dbResponse'] = rows;
+                        appData['satusCode'] = 201;
+                        resolve(appData);
+                        //res.status(201).json(appData);
+                    } else {
+                        console.log('got error while deleting ' + err);
+                        appData['satusCode'] = 400;
+                        appData.error = err;
+                        reject(appData);
+                        //res.status(400).json(err);
+                    }
+                });
+            });
+        });
+    };
 };
 
 exports.default = SocietyModel;

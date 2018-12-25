@@ -118,6 +118,16 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.deleteRow = function (req, res) {
+        console.log('delete from ' + req.body.tableName + ' where ' + req.body.columnName + ' = ' + req.body.columnValue);
+        _this.societyModel.deleteRow(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of registerOwner ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
 };
 

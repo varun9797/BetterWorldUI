@@ -106,6 +106,15 @@ class SocietyController {
             res.status(err.satusCode).json(err);
         });
     }
+    deleteRow = (req, res) => {
+        console.log(`delete from ${req.body.tableName} where ${req.body.columnName} = ${req.body.columnValue}`);
+        this.societyModel.deleteRow(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of registerOwner ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
 }
 
 export default SocietyController;
