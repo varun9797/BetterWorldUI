@@ -41,7 +41,7 @@ export class TokenService {
             observer.next(false);
           }
         }, error=>{
-          alert("Error:"+JSON.stringify(error));
+          //alert("Error:"+JSON.stringify(error));
           observer.next(false);
         })
       } else {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from './services/token.service'
+import { CommonService } from './services/common.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +11,8 @@ import { Router } from '@angular/router';
 export class SocietyMgmtComponent implements OnInit {
   modalVar;
   isLogged = false;
-  constructor(public _tokenService : TokenService, public router: Router) { }
+  showList;
+  constructor(public _tokenService : TokenService, public router: Router, public _commonService:CommonService ) { }
 
   ngOnInit() {
     console.log("tttttttt",localStorage.getItem('TOKEN'));
@@ -21,6 +23,14 @@ export class SocietyMgmtComponent implements OnInit {
         this.isLogged = false; 
       }
     });
+
+    this._commonService.eventShowList.subscribe((showEvent)=>{
+        if(showEvent) {
+            this.showList = true;
+        } else {
+          this.showList = false;
+        }
+    })
     
   }
   
@@ -30,17 +40,23 @@ export class SocietyMgmtComponent implements OnInit {
     if(type == 'flats' || type == 'owners') {
       this._tokenService.isLogged().subscribe(flag=>{
         if(flag){
-          //this.isLogged = true; 
+          this.router.navigateByUrl('/societyManagment');
           this.modalVar = type;
         } else {
+          this.showList = false;
           alert("Please login first");
           this.router.navigateByUrl('/login');
         }
       });
-    } else {
+    } else if(type == 'buildings'){
+      this.router.navigateByUrl('/societyManagment');
       this.modalVar = type; 
-    }     
+    } else {
+      this.showList = true;
+      this.modalVar = type; 
+    }   
   }
+  
   logout(){
     localStorage.setItem('TOKEN', "");
     console.log("tttttttt",localStorage.getItem('TOKEN'));

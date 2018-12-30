@@ -1,55 +1,41 @@
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Modal Heading</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        <!-- <div *ngIf="modalName == 'society'">
-          <select name="socId">
-            <option>Select Society from list</option>
-            <option *ngFor="let s of society" value="{{s.societyid}}">{{s.societyname}}</option>
-          </select>
-        </div> -->
-        <!-- <div *ngIf="modalName == 'buildings'">
-          <select name="society" (change)="onSocietyChange($event.target.value)">
-            <option>Select Society from list</option>
-            <option *ngFor="let s of society" value="{{s.societyid}}">{{s.societyname}}</option>
-          </select>
-          <select name="building">
-            <option>Select Buildings from list</option>
-            <option *ngFor="let building of buildingList" value="{{building.buildingid}}">{{building.buildingname}}</option>
-          </select>
-        </div> -->
-        <div> {{modalName}}
-          <select *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )" name="society" [(ngModel)]="sid" (change)="onSocietyChange($event.target.value)">
-            
-            <option>Select Society from list</option>
-            <option *ngFor="let s of society" value="{{s.societyid}}">{{s.societyname}}</option>
-          </select>
-          <select *ngIf="(modalName == 'flats' || modalName == 'owners')"  [(ngModel)]="bid" name="building" (change)="onBuildingChange($event.target.value)">
-            <option>Select Buildings from list</option>
-            <option *ngFor="let building of buildingList" value="{{building.buildingname}}">{{building.buildingname}}</option>
-          </select>
-          <select name="flats" *ngIf="modalName == 'owners'">
-              <option>Select Flats from list</option>
-              <option *ngFor="let flat of flatList" value="{{flat.flatid}}">{{flat.flatname}}</option>
-            </select>
-        </div>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onSubmit()" data-dismiss="modal">Submit</button>
-      </div>
-
-    </div>
-  </div>
+<div> {{modalName}}
+    <mat-form-field  *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')">
+        <!-- <mat-select placeholder="Select Society" [formControl]="societyFormCtrl" multiple> -->
+        <mat-select placeholder="Select Society"  [formControl]="societyFormCtrl">
+          <!-- <mat-select-trigger>
+            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}
+            <span *ngIf="societyFormCtrl.value?.length > 1" class="example-additional-selection">
+              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})
+            </span>
+          </mat-select-trigger> -->
+          <mat-option *ngFor="let s of societyList" [value]="s.societyid">{{s.societyname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="(modalName == 'flats' || modalName == 'owners')">
+          <!-- <mat-select placeholder="Select Society" [formControl]="buildingFormCtrl" multiple> -->
+          <mat-select placeholder="Select flats"  [formControl]="buildingFormCtrl">
+            <!-- <mat-select-trigger>
+              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}
+              <span *ngIf="buildingFormCtrl.value?.length > 1" class="example-additional-selection">
+                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})
+              </span>
+            </mat-select-trigger> -->
+            <mat-option *ngFor="let building of buildingList" [value]="building.buildingname">{{building.buildingname}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field  *ngIf="modalName == 'owners'">
+            <!-- <mat-select placeholder="Select Society" [formControl]="buildingFormCtrl" multiple> -->
+            <mat-select placeholder="Select owners"  [formControl]="ownerFormCtrl" multiple>
+              <mat-select-trigger>
+                {{ownerFormCtrl.value ? ownerFormCtrl.value[0] : ''}}
+                <span *ngIf="ownerFormCtrl.value?.length > 1" class="example-additional-selection">
+                  (+{{ownerFormCtrl.value.length - 1}} {{ownerFormCtrl.value?.length === 2 ? 'other' : 'others'}})
+                </span>
+              </mat-select-trigger>
+              <mat-option *ngFor="let flat of flatList" [value]="flat.flatname">{{flat.flatname}}</mat-option>
+            </mat-select>
+          </mat-form-field>
 </div>
+<button *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )" type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>

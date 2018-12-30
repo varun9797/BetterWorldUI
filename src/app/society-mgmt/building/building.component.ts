@@ -11,7 +11,7 @@ import { CommonService } from '../services/common.service'
 })
 export class BuildingComponent implements OnInit, OnChanges {
   society; buildingList;
-  param1; societyInfo: any;
+  societyid; societyInfo: any;
   constructor(public _userService: UserService, 
     public router: Router, private route: ActivatedRoute, public _commonService: CommonService ) { }
 
@@ -22,12 +22,12 @@ export class BuildingComponent implements OnInit, OnChanges {
     this.getBuildingList();
   }
   getBuildingList() {
-    //this.param1 = this.route.snapshot.paramMap.get('societyid');
+    //this.societyid = this.route.snapshot.paramMap.get('societyid');
     this.route.params.subscribe((value) => {
-      this.param1 = value["societyid"]; // get param
-      console.log("this.param1:::" + JSON.stringify(value));
-      this.updateCalendar(this.param1);
-      this._userService.getBuilding(this.param1).subscribe((data) => {
+      this.societyid = value["societyid"]; // get param
+      console.log("this.societyid:::" + JSON.stringify(value));
+      this.updateCalendar(this.societyid);
+      this._userService.getBuilding(this.societyid).subscribe((data) => {
         this.buildingList = data.dbResponse;
       },
         error => {
@@ -35,7 +35,7 @@ export class BuildingComponent implements OnInit, OnChanges {
           this.society = error.message;
         });
 
-      this._userService.getSocietyInfo(this.param1).subscribe((data) => {
+      this._userService.getSocietyInfo(this.societyid).subscribe((data) => {
         this.societyInfo = data.dbResponse;
       },
         error => {

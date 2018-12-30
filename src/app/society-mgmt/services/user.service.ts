@@ -18,6 +18,7 @@ export class UserService {
   putPayment = config.default.HOST_NAME+"/society/flat/pendingPayment";
   flatPaymentHistory = config.default.HOST_NAME+"/society/paymenthistory";
   societyEventURL = config.default.HOST_NAME+"/society/societyEvent";
+  selectedTypeList = config.default.HOST_NAME+"/society/owner/list";
 
   getOwner(query): Observable<any> {
     console.log(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`);
@@ -77,6 +78,21 @@ export class UserService {
   getSocietyEvents(societyId): Observable<any> {
     console.log(`${this.societyEventURL}/societyid/?value='${societyId}'`);
     return this.http.get(`${this.societyEventURL}/societyid/?value='${societyId}'`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
+  getSelectedTypelist(societyIds, buildingNames, flatIds) {
+    let headers = new HttpHeaders().set('token', localStorage.getItem(this.TOKEN));
+    let searchObject = {
+      "societyIds": societyIds,
+      "buildingNames": buildingNames,
+      "flatIds": flatIds
+    }
+    console.log("searchObject ", searchObject);
+    return this.http.post(this.selectedTypeList, searchObject, {
+      headers: headers
+    })
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }

@@ -1,40 +1,40 @@
 <div class="container mainContainer">
   <div *ngIf="!isLogged">
-    <a routerLink="/login" class="btn btn-outline-warning homeicons w-100">Login</a>
+    <div routerLink="/login" class="btn btn-outline-warning homeicons w-100">Login</div>
   </div>
   <div *ngIf="isLogged">
-      <a class="btn btn-outline-warning homeicons w-100" (click)="logout()">Logout</a>
+      <div class="btn btn-outline-warning homeicons w-100" (click)="logout()">Logout</div>
   </div>
   <div>
-    <a routerLink="/register" class="btn btn-outline-danger homeicons w-100"> Register</a>
+    <div routerLink="/register" class="btn btn-outline-danger homeicons w-100"> Register</div>
   </div>
   <app-society-header></app-society-header>
   <div class="row">
     <div class="col-sm-12 text-center contentContainer">
       <div class="row">
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <a routerLink="/societyManagment/society" class="btn btn-outline-warning homeicons w-100">Society</a>
+          <div routerLink="/societyManagment/society" class="btn btn-outline-warning homeicons w-100" (click)="ShowModal('society')">Society</div>
         </div>
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" (click)="ShowModal('buildings')"
-            class="btn btn-outline-warning homeicons w-100">Buildings</a>
+          <div (click)="ShowModal('buildings')"
+            class="btn btn-outline-warning homeicons w-100">Buildings</div>
         </div>
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" (click)="ShowModal('flats')" class="btn btn-outline-danger homeicons w-100">Flats</a>
+          <div (click)="ShowModal('flats')" class="btn btn-outline-danger homeicons w-100">Flats</div>
         </div>
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <a href="javascript:void(0)" data-toggle="modal" data-target="#myModal" (click)="ShowModal('owners')" class="btn btn-outline-danger homeicons w-100">
-            owners</a>
+          <div (click)="ShowModal('owners')" class="btn btn-outline-danger homeicons w-100">
+            owners</div>
         </div>
       </div>
+
       <div *ngIf="modalVar">
         <app-modal [modalName]="modalVar"></app-modal>
       </div>
-      <div id="content">
+      
+      <div id="content" *ngIf="showList">
         <router-outlet></router-outlet>
       </div>
-
-
     </div>
   </div>
 </div>

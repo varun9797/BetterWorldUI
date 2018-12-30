@@ -7,6 +7,7 @@ export class CommonService {
   @Output()
   calenderData=new EventEmitter();
   eventCalenderData=new EventEmitter();
+  eventShowList=new EventEmitter();
   constructor() { }
 
   emitCalanderData(paymentHistory){
@@ -15,5 +16,9 @@ export class CommonService {
 
   emitEventCalanderData(societyEvents){
     this.eventCalenderData.emit(societyEvents)  
+  }
+
+  emitShowListEvent(showListEvent){
+    this.eventShowList.emit(showListEvent)  
   }
 }

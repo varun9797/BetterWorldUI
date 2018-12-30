@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -71,7 +71,7 @@ const routes: Routes = [
     SocietyComponent,
     ModalComponent,
     CalendarComponent,
-    EventCalendarComponent
+    EventCalendarComponent   
   ],
   imports: [
     BrowserModule,
@@ -84,7 +84,9 @@ const routes: Routes = [
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MaterialModule
   ],
   providers: [NeedAuthGuard],
   bootstrap: [AppComponent]
