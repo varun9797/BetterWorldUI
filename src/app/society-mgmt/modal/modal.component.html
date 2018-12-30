@@ -1,6 +1,6 @@
 
 
-<div> {{modalName}}
+<div>
     <mat-form-field  *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')">
         <!-- <mat-select placeholder="Select Society" [formControl]="societyFormCtrl" multiple> -->
         <mat-select placeholder="Select Society"  [formControl]="societyFormCtrl">
@@ -15,7 +15,7 @@
       </mat-form-field>
       <mat-form-field *ngIf="(modalName == 'flats' || modalName == 'owners')">
           <!-- <mat-select placeholder="Select Society" [formControl]="buildingFormCtrl" multiple> -->
-          <mat-select placeholder="Select flats"  [formControl]="buildingFormCtrl">
+          <mat-select placeholder="Select flat"  [formControl]="buildingFormCtrl">
             <!-- <mat-select-trigger>
               {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}
               <span *ngIf="buildingFormCtrl.value?.length > 1" class="example-additional-selection">

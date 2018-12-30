@@ -12,6 +12,7 @@ export class SocietyMgmtComponent implements OnInit {
   modalVar;
   isLogged = false;
   showList;
+  showSpinner;
   constructor(public _tokenService : TokenService, public router: Router, public _commonService:CommonService ) { }
 
   ngOnInit() {
@@ -36,24 +37,35 @@ export class SocietyMgmtComponent implements OnInit {
   
 
   ShowModal(type){
+    this.showSpinner = true;
     console.log(type);
     if(type == 'flats' || type == 'owners') {
       this._tokenService.isLogged().subscribe(flag=>{
         if(flag){
           this.router.navigateByUrl('/societyManagment');
           this.modalVar = type;
+          this.showSpinner = false;
+         // this.showList = false;
         } else {
           this.showList = false;
           alert("Please login first");
           this.router.navigateByUrl('/login');
+          this.showSpinner = false;
         }
       });
     } else if(type == 'buildings'){
-      this.router.navigateByUrl('/societyManagment');
-      this.modalVar = type; 
+      setTimeout(()=>{
+        this.router.navigateByUrl('/societyManagment');
+        this.modalVar = type; 
+        this.showSpinner = false;
+      },0)
+
     } else {
-      this.showList = true;
-      this.modalVar = type; 
+      setTimeout(()=>{
+        this.showList = true;
+        this.modalVar = type; 
+        this.showSpinner = false;
+      },0)
     }   
   }
   

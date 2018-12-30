@@ -1224,7 +1224,7 @@ module.exports = ".example-additional-selection {\r\n    opacity: 0.75;\r\n    f
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div> {{modalName}}\n    <mat-form-field  *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')\">\n        <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"societyFormCtrl\" multiple> -->\n        <mat-select placeholder=\"Select Society\"  [formControl]=\"societyFormCtrl\">\n          <!-- <mat-select-trigger>\n            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}\n            <span *ngIf=\"societyFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n            </span>\n          </mat-select-trigger> -->\n          <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\">{{s.societyname}}</mat-option>\n        </mat-select>\n      </mat-form-field>\n      <mat-form-field *ngIf=\"(modalName == 'flats' || modalName == 'owners')\">\n          <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n          <mat-select placeholder=\"Select flats\"  [formControl]=\"buildingFormCtrl\">\n            <!-- <mat-select-trigger>\n              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}\n              <span *ngIf=\"buildingFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n              </span>\n            </mat-select-trigger> -->\n            <mat-option *ngFor=\"let building of buildingList\" [value]=\"building.buildingname\">{{building.buildingname}}</mat-option>\n          </mat-select>\n        </mat-form-field>\n        <mat-form-field  *ngIf=\"modalName == 'owners'\">\n            <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n            <mat-select placeholder=\"Select owners\"  [formControl]=\"ownerFormCtrl\" multiple>\n              <mat-select-trigger>\n                {{ownerFormCtrl.value ? ownerFormCtrl.value[0] : ''}}\n                <span *ngIf=\"ownerFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                  (+{{ownerFormCtrl.value.length - 1}} {{ownerFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n                </span>\n              </mat-select-trigger>\n              <mat-option *ngFor=\"let flat of flatList\" [value]=\"flat.flatname\">{{flat.flatname}}</mat-option>\n            </mat-select>\n          </mat-form-field>\n</div>\n<button *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )\" type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmit()\">Submit</button>"
+module.exports = "\n\n<div>\n    <mat-form-field  *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')\">\n        <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"societyFormCtrl\" multiple> -->\n        <mat-select placeholder=\"Select Society\"  [formControl]=\"societyFormCtrl\">\n          <!-- <mat-select-trigger>\n            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}\n            <span *ngIf=\"societyFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n            </span>\n          </mat-select-trigger> -->\n          <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\">{{s.societyname}}</mat-option>\n        </mat-select>\n      </mat-form-field>\n      <mat-form-field *ngIf=\"(modalName == 'flats' || modalName == 'owners')\">\n          <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n          <mat-select placeholder=\"Select flat\"  [formControl]=\"buildingFormCtrl\">\n            <!-- <mat-select-trigger>\n              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}\n              <span *ngIf=\"buildingFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n              </span>\n            </mat-select-trigger> -->\n            <mat-option *ngFor=\"let building of buildingList\" [value]=\"building.buildingname\">{{building.buildingname}}</mat-option>\n          </mat-select>\n        </mat-form-field>\n        <mat-form-field  *ngIf=\"modalName == 'owners'\">\n            <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n            <mat-select placeholder=\"Select owners\"  [formControl]=\"ownerFormCtrl\" multiple>\n              <mat-select-trigger>\n                {{ownerFormCtrl.value ? ownerFormCtrl.value[0] : ''}}\n                <span *ngIf=\"ownerFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                  (+{{ownerFormCtrl.value.length - 1}} {{ownerFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n                </span>\n              </mat-select-trigger>\n              <mat-option *ngFor=\"let flat of flatList\" [value]=\"flat.flatname\">{{flat.flatname}}</mat-option>\n            </mat-select>\n          </mat-form-field>\n</div>\n<button *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )\" type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmit()\">Submit</button>"
 
 /***/ }),
 
@@ -1979,7 +1979,7 @@ module.exports = "#content{\r\n    overflow:scroll;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div *ngIf=\"!isLogged\">\r\n    <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n  </div>\r\n  <div *ngIf=\"isLogged\">\r\n      <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n  </div>\r\n  <div>\r\n    <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n  </div>\r\n  <app-society-header></app-society-header>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">Society</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn btn-outline-warning homeicons w-100\">Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"modalVar\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n      \r\n      <div id=\"content\" *ngIf=\"showList\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n  <div *ngIf=\"!isLogged\">\r\n    <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n  </div>\r\n  <div *ngIf=\"isLogged\">\r\n      <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n  </div>\r\n  <div>\r\n    <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n  </div>\r\n  <app-society-header></app-society-header>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">Society</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn btn-outline-warning homeicons w-100\">Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -2039,27 +2039,37 @@ var SocietyMgmtComponent = /** @class */ (function () {
     };
     SocietyMgmtComponent.prototype.ShowModal = function (type) {
         var _this = this;
+        this.showSpinner = true;
         console.log(type);
         if (type == 'flats' || type == 'owners') {
             this._tokenService.isLogged().subscribe(function (flag) {
                 if (flag) {
                     _this.router.navigateByUrl('/societyManagment');
                     _this.modalVar = type;
+                    _this.showSpinner = false;
+                    // this.showList = false;
                 }
                 else {
                     _this.showList = false;
                     alert("Please login first");
                     _this.router.navigateByUrl('/login');
+                    _this.showSpinner = false;
                 }
             });
         }
         else if (type == 'buildings') {
-            this.router.navigateByUrl('/societyManagment');
-            this.modalVar = type;
+            setTimeout(function () {
+                _this.router.navigateByUrl('/societyManagment');
+                _this.modalVar = type;
+                _this.showSpinner = false;
+            }, 0);
         }
         else {
-            this.showList = true;
-            this.modalVar = type;
+            setTimeout(function () {
+                _this.showList = true;
+                _this.modalVar = type;
+                _this.showSpinner = false;
+            }, 0);
         }
     };
     SocietyMgmtComponent.prototype.logout = function () {
