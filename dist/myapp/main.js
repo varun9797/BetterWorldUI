@@ -310,7 +310,7 @@ module.exports = ".homeIconList{\r\n    background-color: rgba(242, 242,242, .45
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-6 col-sm-6 text-left\">\r\n      <img src=\"assets/logo2.jpg\" class=\"img-fluid\" />\r\n    </div>\r\n    <div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <a routerLink=\"/home\" class='btn btn-outline-warning btn'>\r\n        Home\r\n      </a>\r\n    </div>\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-6 text-center\">\r\n      <h1>Lorem Ipsum</h1>\r\n      <div>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur</div>\r\n    </div>\r\n    <div class=\"col-sm-6 text-right\">\r\n      <img src=\"assets/Smart-Government-Solutions.png\" class=\"img-fluid\" />\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment\" class=\"btn btn-outline-warning homeicons w-100\">Society Management</a>\r\n    </div>\r\n\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-6 col-sm-6 text-left\">\r\n      <img src=\"assets/logo2.jpg\" class=\"img-fluid\" />\r\n    </div>\r\n    <div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <!-- <a routerLink=\"/home\" class='btn btn-outline-warning btn'>\r\n       \r\n        Home\r\n      </a> -->\r\n    </div>\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-6 text-center\">\r\n      <h1>Lorem Ipsum</h1>\r\n      <div>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur</div>\r\n    </div>\r\n    <div class=\"col-sm-6 text-right\">\r\n      <img src=\"assets/Smart-Government-Solutions.png\" class=\"img-fluid\" />\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment\" class=\"btn btn-outline-warning homeicons w-100\">Society Management</a>\r\n    </div>\r\n\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1916,7 +1916,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-xs-6 col-sm-6 text-left\">\r\n    <img src=\"assets/logo2.jpg\" class=\"img-fluid\" />\r\n  </div>\r\n  <div class=\"col-xs-6 col-sm-6 text-right\">\r\n    <a routerLink=\"/home\" class='btn btn-outline-warning btn'>\r\n      Home\r\n    </a>\r\n  </div>\r\n<!-- </div>\r\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\r\n    \r\n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\r\n  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\r\n      </li>\r\n  \r\n      \r\n      <li class=\"nav-item dropdown\">\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\r\n          Dropdown link\r\n        </a>\r\n        <div class=\"dropdown-menu\">\r\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\r\n        </div>\r\n      </li>\r\n    </ul>\r\n  </nav> -->"
+module.exports = "<div class=\"row\">\r\n  <div class=\"col-xs-6 col-sm-6 text-left\">\r\n    <img src=\"assets/logo2.jpg\" class=\"img-fluid\" />\r\n  </div>\r\n  <div class=\"col-xs-6 col-sm-6 text-right\">\r\n    <a routerLink=\"/home\" class='btn btn-outline-warning btn'>\r\n      <mat-icon>home</mat-icon>\r\n    </a>\r\n  </div>\r\n<!-- </div>\r\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\r\n    \r\n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\r\n  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\r\n      </li>\r\n  \r\n      \r\n      <li class=\"nav-item dropdown\">\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\r\n          Dropdown link\r\n        </a>\r\n        <div class=\"dropdown-menu\">\r\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\r\n        </div>\r\n      </li>\r\n    </ul>\r\n  </nav> -->"
 
 /***/ }),
 
@@ -1968,7 +1968,7 @@ var SocietyHeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#content{\r\n    overflow:scroll;\r\n}"
+module.exports = ""
 
 /***/ }),
 
@@ -1979,7 +1979,7 @@ module.exports = "#content{\r\n    overflow:scroll;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div *ngIf=\"!isLogged\">\r\n    <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n  </div>\r\n  <div *ngIf=\"isLogged\">\r\n      <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n  </div>\r\n  <div>\r\n    <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n  </div>\r\n  <app-society-header></app-society-header>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">Society</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn btn-outline-warning homeicons w-100\">Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n  <div *ngIf=\"!isLogged\">\r\n    <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login\r\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z\" /></svg>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"isLogged\">\r\n    <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">\r\n      Logout\r\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z\" /></svg></div>\r\n  </div>\r\n  <div>\r\n    <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n  </div>\r\n  <app-society-header></app-society-header>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n            Society\r\n          </div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\" class=\"btn btn-outline-warning homeicons w-100\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\r\n            Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\r\n            Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n        <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -2101,7 +2101,7 @@ var SocietyMgmtComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "table {\r\n    width: 100%;\r\n  }"
 
 /***/ }),
 
@@ -2112,7 +2112,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "      <div class=\"row\">\n          <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n            <table class=\"table\">\n                <thead>\n                  <tr>\n                    <th>Number</th>\n                    <th>Name</th>\n                    <th>Address</th>\n                    <th>Pincode</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr (click)=\"onSelect(soc.societyid)\" *ngFor=\"let soc of society\" id=\"{{soc.societyid}}\">\n                    <td>{{soc.societyid}}</td>\n                    <td>{{soc.societyname}}</td>\n                    <td>{{soc.address}}</td>\n                    <td>{{soc.pincode}}</td>\n                  </tr>\n                </tbody>\n              </table>\n          </div>\n        </div>\n\n<div class=\"row\" *ngIf=\"societyInfo\">\n  <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">    \n      Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n    Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n    Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n  </div>\n</div>\n<div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\n  <event-calendar-component></event-calendar-component>\n</div>"
+module.exports = "<div class=\"mat-elevation-z8\">\n    <table mat-table [dataSource]=\"dataSource\">\n  \n      <!-- Position Column -->\n      <ng-container matColumnDef=\"societyid\">\n        <th mat-cell *matHeaderCellDef> Society Id </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\n      </ng-container>\n  \n      <!-- Name Column -->\n      <ng-container matColumnDef=\"societyname\">\n        <th mat-cell *matHeaderCellDef> Society Name </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\n      </ng-container>\n  \n      <!-- Weight Column -->\n      <ng-container matColumnDef=\"address\">\n        <th mat-cell *matHeaderCellDef> Address </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\n      </ng-container>\n  \n      <!-- Symbol Column -->\n      <ng-container matColumnDef=\"pincode\">\n        <th mat-cell *matHeaderCellDef> Pincode </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\n      </ng-container>\n  \n      <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n  \n    <mat-paginator [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n  </div>\n  \n  <!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\n      <event-calendar-component></event-calendar-component>\n  </div>  -->"
 
 /***/ }),
 
@@ -2129,7 +2129,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/common.service */ "./src/app/society-mgmt/services/common.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/common.service */ "./src/app/society-mgmt/services/common.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2139,6 +2140,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -2155,6 +2157,10 @@ var SocietyComponent = /** @class */ (function () {
         var _this = this;
         this._userService.getSociety().subscribe(function (data) {
             _this.society = data.dbResponse;
+            _this.displayedColumns = ['societyid', 'societyname', 'address', 'pincode'];
+            var ELEMENT_DATA = data.dbResponse;
+            _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"](ELEMENT_DATA);
+            _this.dataSource.paginator = _this.paginator;
         }, function (error) {
             console.log(error);
             _this.society = error.message;
@@ -2175,6 +2181,10 @@ var SocietyComponent = /** @class */ (function () {
             _this.society = error.message;
         });
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatPaginator"]),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatPaginator"])
+    ], SocietyComponent.prototype, "paginator", void 0);
     SocietyComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-society',
@@ -2182,7 +2192,7 @@ var SocietyComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./society.component.css */ "./src/app/society-mgmt/society/society.component.css")]
         }),
         __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]])
     ], SocietyComponent);
     return SocietyComponent;
 }());

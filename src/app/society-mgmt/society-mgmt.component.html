@@ -1,9 +1,17 @@
 <div class="container mainContainer">
   <div *ngIf="!isLogged">
-    <div routerLink="/login" class="btn btn-outline-warning homeicons w-100">Login</div>
+    <div routerLink="/login" class="btn btn-outline-warning homeicons w-100">Login
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z" /></svg>
+    </div>
   </div>
   <div *ngIf="isLogged">
-      <div class="btn btn-outline-warning homeicons w-100" (click)="logout()">Logout</div>
+    <div class="btn btn-outline-warning homeicons w-100" (click)="logout()">
+      Logout
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z" /></svg></div>
   </div>
   <div>
     <div routerLink="/register" class="btn btn-outline-danger homeicons w-100"> Register</div>
@@ -13,23 +21,38 @@
     <div class="col-sm-12 text-center contentContainer">
       <div class="row">
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <div routerLink="/societyManagment/society" class="btn btn-outline-warning homeicons w-100" (click)="ShowModal('society')">Society</div>
+          <div routerLink="/societyManagment/society" class="btn btn-outline-warning homeicons w-100" (click)="ShowModal('society')">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z" />
+              <path d="M0 0h24v24H0z" fill="none" /></svg>
+            Society
+          </div>
         </div>
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <div (click)="ShowModal('buildings')"
-            class="btn btn-outline-warning homeicons w-100">Buildings</div>
+          <div (click)="ShowModal('buildings')" class="btn btn-outline-warning homeicons w-100">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" /></svg>
+            Buildings</div>
         </div>
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
-          <div (click)="ShowModal('flats')" class="btn btn-outline-danger homeicons w-100">Flats</div>
+          <div (click)="ShowModal('flats')" class="btn btn-outline-danger homeicons w-100">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z" /></svg>
+            Flats</div>
         </div>
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
           <div (click)="ShowModal('owners')" class="btn btn-outline-danger homeicons w-100">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" /></svg>
             owners</div>
         </div>
       </div>
 
       <div *ngIf="showSpinner">
-          <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+        <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
       </div>
       <div *ngIf="modalVar" [hidden]="showSpinner">
         <app-modal [modalName]="modalVar"></app-modal>
