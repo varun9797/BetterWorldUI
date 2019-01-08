@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\r\n<!-- <calendar-component></calendar-component> -->\r\n<!-- <event-calendar-component></event-calendar-component> -->"
+module.exports = "<router-outlet></router-outlet>\n<!-- <calendar-component></calendar-component> -->\n<!-- <event-calendar-component></event-calendar-component> -->"
 
 /***/ }),
 
@@ -126,6 +126,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angular_calendar__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! angular-calendar */ "./node_modules/angular-calendar/fesm5/angular-calendar.js");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 /* harmony import */ var _society_mgmt_event_calendar_event_calendar_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./society-mgmt/event-calendar/event-calendar.component */ "./src/app/society-mgmt/event-calendar/event-calendar.component.ts");
+/* harmony import */ var _society_mgmt_register_society_reg_society_reg_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./society-mgmt/register/society-reg/society-reg.component */ "./src/app/society-mgmt/register/society-reg/society-reg.component.ts");
+/* harmony import */ var _society_mgmt_register_building_reg_building_reg_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./society-mgmt/register/building-reg/building-reg.component */ "./src/app/society-mgmt/register/building-reg/building-reg.component.ts");
+/* harmony import */ var _society_mgmt_register_flat_reg_flat_reg_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./society-mgmt/register/flat-reg/flat-reg.component */ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.ts");
+/* harmony import */ var _society_mgmt_register_owner_reg_owner_reg_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./society-mgmt/register/owner-reg/owner-reg.component */ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -159,10 +163,21 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
+
+
 var routes = [
     { path: "", redirectTo: '/home', pathMatch: "full" },
     { path: "login", component: _society_mgmt_login_login_component__WEBPACK_IMPORTED_MODULE_16__["LoginComponent"] },
-    { path: "register", component: _society_mgmt_register_register_member_component__WEBPACK_IMPORTED_MODULE_15__["RegisterMemberComponent"] },
+    { path: "register", component: _society_mgmt_register_register_member_component__WEBPACK_IMPORTED_MODULE_15__["RegisterMemberComponent"],
+        children: [
+            { path: "society-reg", component: _society_mgmt_register_society_reg_society_reg_component__WEBPACK_IMPORTED_MODULE_27__["SocietyRegComponent"] },
+            { path: "building-reg", component: _society_mgmt_register_building_reg_building_reg_component__WEBPACK_IMPORTED_MODULE_28__["BuildingRegComponent"] },
+            { path: "flat-reg", component: _society_mgmt_register_flat_reg_flat_reg_component__WEBPACK_IMPORTED_MODULE_29__["FlatRegComponent"] },
+            { path: "owner-reg", component: _society_mgmt_register_owner_reg_owner_reg_component__WEBPACK_IMPORTED_MODULE_30__["OwnerRegComponent"] }
+        ]
+    },
     { path: "home", component: _home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"] },
     {
         path: "societyManagment", component: _society_mgmt_society_mgmt_component__WEBPACK_IMPORTED_MODULE_7__["SocietyMgmtComponent"],
@@ -201,7 +216,11 @@ var AppModule = /** @class */ (function () {
                 _society_mgmt_society_society_component__WEBPACK_IMPORTED_MODULE_17__["SocietyComponent"],
                 _society_mgmt_modal_modal_component__WEBPACK_IMPORTED_MODULE_18__["ModalComponent"],
                 _society_mgmt_calendar_calendar_component__WEBPACK_IMPORTED_MODULE_20__["CalendarComponent"],
-                _society_mgmt_event_calendar_event_calendar_component__WEBPACK_IMPORTED_MODULE_26__["EventCalendarComponent"]
+                _society_mgmt_event_calendar_event_calendar_component__WEBPACK_IMPORTED_MODULE_26__["EventCalendarComponent"],
+                _society_mgmt_register_society_reg_society_reg_component__WEBPACK_IMPORTED_MODULE_27__["SocietyRegComponent"],
+                _society_mgmt_register_building_reg_building_reg_component__WEBPACK_IMPORTED_MODULE_28__["BuildingRegComponent"],
+                _society_mgmt_register_flat_reg_flat_reg_component__WEBPACK_IMPORTED_MODULE_29__["FlatRegComponent"],
+                _society_mgmt_register_owner_reg_owner_reg_component__WEBPACK_IMPORTED_MODULE_30__["OwnerRegComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
@@ -299,7 +318,7 @@ var ErrorComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".homeIconList{\r\n    background-color: rgba(242, 242,242, .45);\r\n    min-width: 220px;\r\n    min-height: 80px;\r\n    margin: 10px;\r\n}\r\n.m-r-20 {\r\n    margin-right: 20px; }"
+module.exports = ".homeIconList{\n    background-color: rgba(242, 242,242, .45);\n    min-width: 220px;\n    min-height: 80px;\n    margin: 10px;\n}\n.m-r-20 {\n    margin-right: 20px; }"
 
 /***/ }),
 
@@ -310,7 +329,7 @@ module.exports = ".homeIconList{\r\n    background-color: rgba(242, 242,242, .45
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-6 col-sm-6 text-left\">\r\n      <img src=\"assets/logo2.jpg\" class=\"img-fluid\" />\r\n    </div>\r\n    <div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <!-- <a routerLink=\"/home\" class='btn btn-outline-warning btn'>\r\n       \r\n        Home\r\n      </a> -->\r\n    </div>\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-6 text-center\">\r\n      <h1>Lorem Ipsum</h1>\r\n      <div>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur</div>\r\n    </div>\r\n    <div class=\"col-sm-6 text-right\">\r\n      <img src=\"assets/Smart-Government-Solutions.png\" class=\"img-fluid\" />\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment\" class=\"btn btn-outline-warning homeicons w-100\">Society Management</a>\r\n    </div>\r\n\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\n  <div class=\"row h-100 justify-content-center align-items-center\">\n    <div class=\"col-xs-12 col-sm-12 text-center\">\n      <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n    </div>\n    <!--<div class=\"col-xs-6 col-sm-6 text-right\">\n      <a routerLink=\"/home\" class=''>\n        <img src=\"assets/logo.png\" class=\"img-fluid\" />\n      </a>\n    </div>-->\n  </div>\n  <br>\n  <div class=\"row h-100 justify-content-center align-items-center\">\n    <div class=\"col-sm-12 text-center\">\n      <h2><b>WELCOME TO SOCIETY MANAGEMENT</b></h2>\n      \n    </div>\n  </div>\n  <div class=\"row\">\n\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      <a routerLink=\"/societyManagment\">\n      <button mat-raised-button color=\"primary\">Society Management</button></a>\n    </div>\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      <img src=\"assets/banner.png\">\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -556,7 +575,7 @@ var BuildingComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h3 {\r\n    margin: 0 0 10px;\r\n  }\r\n  \r\n  pre {\r\n    background-color: #f5f5f5;\r\n    padding: 15px;\r\n  }"
+module.exports = "h3 {\n    margin: 0 0 10px;\n  }\n  \n  pre {\n    background-color: #f5f5f5;\n    padding: 15px;\n  }"
 
 /***/ }),
 
@@ -567,7 +586,7 @@ module.exports = "h3 {\r\n    margin: 0 0 10px;\r\n  }\r\n  \r\n  pre {\r\n    b
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-template #modalContent let-close=\"close\">\r\n  <div class=\"modal-header\">\r\n    <h5 class=\"modal-title\">Event action occurred</h5>\r\n    <button type=\"button\" class=\"close\" (click)=\"close()\">\r\n      <span aria-hidden=\"true\">&times;</span>\r\n    </button>\r\n  </div>\r\n  <div class=\"modal-body\">\r\n    <div>\r\n      Action:\r\n      <pre>{{ modalData?.action }}</pre>\r\n    </div>\r\n    <div>\r\n      Event:\r\n      <pre>{{ modalData?.event | json }}</pre>\r\n    </div>\r\n  </div>\r\n  <div class=\"modal-footer\">\r\n    <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"close()\">OK</button>\r\n  </div>\r\n</ng-template>\r\n\r\n<div class=\"text-center\">\r\n  <div>\r\n    <div class=\"btn-group\">\r\n      <div\r\n        class=\"btn btn-primary\"\r\n        mwlCalendarPreviousView\r\n        [view]=\"view\"\r\n        [(viewDate)]=\"viewDate\"\r\n        (viewDateChange)=\"activeDayIsOpen = false\">\r\n        Previous\r\n      </div>\r\n      <div\r\n        class=\"btn btn-outline-secondary\"\r\n        mwlCalendarToday\r\n        [(viewDate)]=\"viewDate\">\r\n        Today\r\n      </div>\r\n      <div\r\n        class=\"btn btn-primary\"\r\n        mwlCalendarNextView\r\n        [view]=\"view\"\r\n        [(viewDate)]=\"viewDate\"\r\n        (viewDateChange)=\"activeDayIsOpen = false\">\r\n        Next\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div>\r\n    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>\r\n  </div>\r\n  <div>\r\n    <div class=\"btn-group\">\r\n      <div\r\n        class=\"btn btn-primary\"\r\n        (click)=\"view = CalendarView.Month\"\r\n        [class.active]=\"view === CalendarView.Month\">\r\n        Month\r\n      </div>\r\n      <div\r\n        class=\"btn btn-primary\"\r\n        (click)=\"view = CalendarView.Week\"\r\n        [class.active]=\"view === CalendarView.Week\">\r\n        Week\r\n      </div>\r\n      <div\r\n        class=\"btn btn-primary\"\r\n        (click)=\"view = CalendarView.Day\"\r\n        [class.active]=\"view === CalendarView.Day\">\r\n        Day\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<br>\r\n<div [ngSwitch]=\"view\">\r\n  <mwl-calendar-month-view\r\n    *ngSwitchCase=\"CalendarView.Month\"\r\n    [viewDate]=\"viewDate\"\r\n    [events]=\"events\"\r\n    [refresh]=\"refresh\"\r\n    [activeDayIsOpen]=\"activeDayIsOpen\"\r\n    (dayClicked)=\"dayClicked($event.day)\"\r\n    (eventClicked)=\"handleEvent('Clicked', $event.event)\"\r\n    (eventTimesChanged)=\"eventTimesChanged($event)\">\r\n  </mwl-calendar-month-view>\r\n  <mwl-calendar-week-view\r\n    *ngSwitchCase=\"CalendarView.Week\"\r\n    [viewDate]=\"viewDate\"\r\n    [events]=\"events\"\r\n    [refresh]=\"refresh\"\r\n    (eventClicked)=\"handleEvent('Clicked', $event.event)\"\r\n    (eventTimesChanged)=\"eventTimesChanged($event)\">\r\n  </mwl-calendar-week-view>\r\n  <mwl-calendar-day-view\r\n    *ngSwitchCase=\"CalendarView.Day\"\r\n    [viewDate]=\"viewDate\"\r\n    [events]=\"events\"\r\n    [refresh]=\"refresh\"\r\n    (eventClicked)=\"handleEvent('Clicked', $event.event)\"\r\n    (eventTimesChanged)=\"eventTimesChanged($event)\">\r\n  </mwl-calendar-day-view>\r\n</div>\r\n\r\n<br><br><br>\r\n\r\n<h3>\r\n  Edit events\r\n  <button\r\n    class=\"btn btn-primary pull-right\"\r\n    (click)=\"addEvent()\">\r\n    Add new\r\n  </button>\r\n  <div class=\"clearfix\"></div>\r\n</h3>\r\n\r\n<!-- <table class=\"table table-bordered\">\r\n\r\n  <thead>\r\n    <tr>\r\n      <th>Title</th>\r\n      <th>Primary color</th>\r\n      <th>Secondary color</th>\r\n      <th>Starts at</th>\r\n      <th>Ends at</th>\r\n      <th>Remove</th>\r\n    </tr>\r\n  </thead>\r\n\r\n  <tbody>\r\n    <tr *ngFor=\"let event of events; let index = index\">\r\n      <td>\r\n        <input\r\n          type=\"text\"\r\n          class=\"form-control\"\r\n          [(ngModel)]=\"event.title\"\r\n          (keyup)=\"refresh.next()\">\r\n      </td>\r\n      <td>\r\n        <input\r\n          type=\"color\"\r\n          [(ngModel)]=\"event.color.primary\"\r\n          (change)=\"refresh.next()\">\r\n      </td>\r\n      <td>\r\n        <input\r\n          type=\"color\"\r\n          [(ngModel)]=\"event.color.secondary\"\r\n          (change)=\"refresh.next()\">\r\n      </td>\r\n      <td>\r\n        <input\r\n          class=\"form-control\"\r\n          type=\"text\"\r\n          mwlFlatpickr\r\n          [(ngModel)]=\"event.start\"\r\n          (ngModelChange)=\"refresh.next()\"\r\n          [altInput]=\"true\"\r\n          [convertModelValue]=\"true\"\r\n          [enableTime]=\"true\"\r\n          dateFormat=\"Y-m-dTH:i\"\r\n          altFormat=\"F j, Y H:i\"\r\n          placeholder=\"Not set\">\r\n      </td>\r\n      <td>\r\n        <input\r\n          class=\"form-control\"\r\n          type=\"text\"\r\n          mwlFlatpickr\r\n          [(ngModel)]=\"event.end\"\r\n          (ngModelChange)=\"refresh.next()\"\r\n          [altInput]=\"true\"\r\n          [convertModelValue]=\"true\"\r\n          [enableTime]=\"true\"\r\n          dateFormat=\"Y-m-dTH:i\"\r\n          altFormat=\"F j, Y H:i\"\r\n          placeholder=\"Not set\">\r\n      </td>\r\n      <td>\r\n        <button\r\n          class=\"btn btn-danger\"\r\n          (click)=\"events.splice(index, 1); refresh.next()\">\r\n          Delete\r\n        </button>\r\n      </td>\r\n    </tr>\r\n  </tbody>\r\n\r\n</table> -->"
+module.exports = "<ng-template #modalContent let-close=\"close\">\n  <div class=\"modal-header\">\n    <h5 class=\"modal-title\">Event action occurred</h5>\n    <button type=\"button\" class=\"close\" (click)=\"close()\">\n      <span aria-hidden=\"true\">&times;</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    <div>\n      Action:\n      <pre>{{ modalData?.action }}</pre>\n    </div>\n    <div>\n      Event:\n      <pre>{{ modalData?.event | json }}</pre>\n    </div>\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-outline-secondary\" (click)=\"close()\">OK</button>\n  </div>\n</ng-template>\n\n<div class=\"text-center\">\n  <div>\n    <div class=\"btn-group\">\n      <div\n        class=\"btn btn-primary\"\n        mwlCalendarPreviousView\n        [view]=\"view\"\n        [(viewDate)]=\"viewDate\"\n        (viewDateChange)=\"activeDayIsOpen = false\">\n        Previous\n      </div>\n      <div\n        class=\"btn btn-outline-secondary\"\n        mwlCalendarToday\n        [(viewDate)]=\"viewDate\">\n        Today\n      </div>\n      <div\n        class=\"btn btn-primary\"\n        mwlCalendarNextView\n        [view]=\"view\"\n        [(viewDate)]=\"viewDate\"\n        (viewDateChange)=\"activeDayIsOpen = false\">\n        Next\n      </div>\n    </div>\n  </div>\n  <div>\n    <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>\n  </div>\n  <div>\n    <div class=\"btn-group\">\n      <div\n        class=\"btn btn-primary\"\n        (click)=\"view = CalendarView.Month\"\n        [class.active]=\"view === CalendarView.Month\">\n        Month\n      </div>\n      <div\n        class=\"btn btn-primary\"\n        (click)=\"view = CalendarView.Week\"\n        [class.active]=\"view === CalendarView.Week\">\n        Week\n      </div>\n      <div\n        class=\"btn btn-primary\"\n        (click)=\"view = CalendarView.Day\"\n        [class.active]=\"view === CalendarView.Day\">\n        Day\n      </div>\n    </div>\n  </div>\n</div>\n<br>\n<div [ngSwitch]=\"view\">\n  <mwl-calendar-month-view\n    *ngSwitchCase=\"CalendarView.Month\"\n    [viewDate]=\"viewDate\"\n    [events]=\"events\"\n    [refresh]=\"refresh\"\n    [activeDayIsOpen]=\"activeDayIsOpen\"\n    (dayClicked)=\"dayClicked($event.day)\"\n    (eventClicked)=\"handleEvent('Clicked', $event.event)\"\n    (eventTimesChanged)=\"eventTimesChanged($event)\">\n  </mwl-calendar-month-view>\n  <mwl-calendar-week-view\n    *ngSwitchCase=\"CalendarView.Week\"\n    [viewDate]=\"viewDate\"\n    [events]=\"events\"\n    [refresh]=\"refresh\"\n    (eventClicked)=\"handleEvent('Clicked', $event.event)\"\n    (eventTimesChanged)=\"eventTimesChanged($event)\">\n  </mwl-calendar-week-view>\n  <mwl-calendar-day-view\n    *ngSwitchCase=\"CalendarView.Day\"\n    [viewDate]=\"viewDate\"\n    [events]=\"events\"\n    [refresh]=\"refresh\"\n    (eventClicked)=\"handleEvent('Clicked', $event.event)\"\n    (eventTimesChanged)=\"eventTimesChanged($event)\">\n  </mwl-calendar-day-view>\n</div>\n\n<br><br><br>\n\n<h3>\n  Edit events\n  <button\n    class=\"btn btn-primary pull-right\"\n    (click)=\"addEvent()\">\n    Add new\n  </button>\n  <div class=\"clearfix\"></div>\n</h3>\n\n<!-- <table class=\"table table-bordered\">\n\n  <thead>\n    <tr>\n      <th>Title</th>\n      <th>Primary color</th>\n      <th>Secondary color</th>\n      <th>Starts at</th>\n      <th>Ends at</th>\n      <th>Remove</th>\n    </tr>\n  </thead>\n\n  <tbody>\n    <tr *ngFor=\"let event of events; let index = index\">\n      <td>\n        <input\n          type=\"text\"\n          class=\"form-control\"\n          [(ngModel)]=\"event.title\"\n          (keyup)=\"refresh.next()\">\n      </td>\n      <td>\n        <input\n          type=\"color\"\n          [(ngModel)]=\"event.color.primary\"\n          (change)=\"refresh.next()\">\n      </td>\n      <td>\n        <input\n          type=\"color\"\n          [(ngModel)]=\"event.color.secondary\"\n          (change)=\"refresh.next()\">\n      </td>\n      <td>\n        <input\n          class=\"form-control\"\n          type=\"text\"\n          mwlFlatpickr\n          [(ngModel)]=\"event.start\"\n          (ngModelChange)=\"refresh.next()\"\n          [altInput]=\"true\"\n          [convertModelValue]=\"true\"\n          [enableTime]=\"true\"\n          dateFormat=\"Y-m-dTH:i\"\n          altFormat=\"F j, Y H:i\"\n          placeholder=\"Not set\">\n      </td>\n      <td>\n        <input\n          class=\"form-control\"\n          type=\"text\"\n          mwlFlatpickr\n          [(ngModel)]=\"event.end\"\n          (ngModelChange)=\"refresh.next()\"\n          [altInput]=\"true\"\n          [convertModelValue]=\"true\"\n          [enableTime]=\"true\"\n          dateFormat=\"Y-m-dTH:i\"\n          altFormat=\"F j, Y H:i\"\n          placeholder=\"Not set\">\n      </td>\n      <td>\n        <button\n          class=\"btn btn-danger\"\n          (click)=\"events.splice(index, 1); refresh.next()\">\n          Delete\n        </button>\n      </td>\n    </tr>\n  </tbody>\n\n</table> -->"
 
 /***/ }),
 
@@ -776,7 +795,7 @@ module.exports = {"HOST_NAME":"http://nodebw-env.xctnnannuz.us-east-1.elasticbea
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h3 {\r\n    margin: 0 0 10px;\r\n  }\r\n  \r\n  pre {\r\n    background-color: #f5f5f5;\r\n    padding: 15px;\r\n  }"
+module.exports = "h3 {\n    margin: 0 0 10px;\n  }\n  \n  pre {\n    background-color: #f5f5f5;\n    padding: 15px;\n  }"
 
 /***/ }),
 
@@ -1125,7 +1144,7 @@ var FlatsComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n.loginBox{\r\n    padding: 20px;\r\n    margin-top:20px;\r\n    border: 1px solid rgba(0, 0, 0, 0.16);\r\n    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n    -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n}"
+module.exports = "\n\n.loginBox{\n    padding: 20px;\n    margin-top:20px;\n    border: 1px solid rgba(0, 0, 0, 0.16);\n    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\n}"
 
 /***/ }),
 
@@ -1136,7 +1155,7 @@ module.exports = "\r\n\r\n.loginBox{\r\n    padding: 20px;\r\n    margin-top:20p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- main app container -->\n\n<div class=\"container\">\n    <div class=\"row mainContainer\">\n        <div class=\"d-none d-sm-block col-sm-8 align-self-center text-center\">\n            <h4>Lorem Ipsum</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore\n                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n            <img src=\"assets/login-detail.jpg\" class=\"img-fluid\" />\n        </div>\n        <div class=\"col-xs-12 col-sm-4 align-self-top\">\n            <br> <br>\n            <div class=\"loginBox\">\n                <h4 class=\" text-center\">Member login</h4>\n                <br>\n                <form name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n                    <div class=\"form-group\">\n                        <input type=\"text\" class=\"form-control\" name=\"uname\" placeholder=\"User Name\" [(ngModel)]=\"model.uname\" #uname=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && uname.invalid }\"\n                            required />\n                        <div *ngIf=\"f.submitted && uname.invalid\" class=\"invalid-feedback\">\n                            <div *ngIf=\"uname.errors.required\">username is required</div>\n                        </div>\n                    </div> \n                    <div class=\"form-group\">\n                        <input type=\"password\" class=\"form-control\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"model.password\" #password=\"ngModel\"\n                            [ngClass]=\"{ 'is-invalid': f.submitted && password.invalid }\" required />\n                        <div *ngIf=\"f.submitted && password.invalid\" class=\"invalid-feedback\">\n                            <div *ngIf=\"password.errors.required\">password is required</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <button class=\"btn btn-block btn-primary\">Login</button>\n                    </div>\n                    <div class=\"form-group text-center\">\n                        <a routerLink=\"/register\" class=\"btn btn-link\">Not a member? Sign up</a>\n                    </div>\n                </form>\n            </div>\n            <br> <br>\n        </div>\n        \n    </div>\n</div>"
+module.exports = "<!-- main app container -->\n\n<div class=\"container\">\n    <div class=\"row mainContainer\">\n        <div class=\"d-none d-sm-block col-sm-8 align-self-center text-center\">\n                <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n                <br>\n            <h4>Login Here</h4>\n            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore\n                magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\n                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n           \n        </div>\n        <div class=\"col-xs-12 col-sm-4 align-self-top\">\n            <br> <br>\n            <div class=\"loginBox\">\n                <h4 class=\" text-center\">Member login</h4>\n                <br>\n                <form name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\n                    <div class=\"form-group\">\n                        <input type=\"text\" class=\"form-control\" name=\"uname\" placeholder=\"User Name\" [(ngModel)]=\"model.uname\" #uname=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && uname.invalid }\"\n                            required />\n                        <div *ngIf=\"f.submitted && uname.invalid\" class=\"invalid-feedback\">\n                            <div *ngIf=\"uname.errors.required\">username is required</div>\n                        </div>\n                    </div> \n                    <div class=\"form-group\">\n                        <input type=\"password\" class=\"form-control\" placeholder=\"Password\" name=\"password\" [(ngModel)]=\"model.password\" #password=\"ngModel\"\n                            [ngClass]=\"{ 'is-invalid': f.submitted && password.invalid }\" required />\n                        <div *ngIf=\"f.submitted && password.invalid\" class=\"invalid-feedback\">\n                            <div *ngIf=\"password.errors.required\">password is required</div>\n                        </div>\n                    </div>\n                    <div class=\"form-group\">\n                        <button class=\"btn btn-block btn-primary\">Login</button>\n                    </div>\n                    <div class=\"form-group text-center\">\n                        <a routerLink=\"/register\" class=\"btn btn-link\">Not a member? Sign up</a>\n                    </div>\n                </form>\n            </div>\n            <br> <br>\n        </div>\n        \n    </div>\n</div>"
 
 /***/ }),
 
@@ -1213,7 +1232,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".example-additional-selection {\r\n    opacity: 0.75;\r\n    font-size: 0.75em;\r\n  }"
+module.exports = ".example-additional-selection {\n    opacity: 0.75;\n    font-size: 0.75em;\n  }"
 
 /***/ }),
 
@@ -1362,7 +1381,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  owners works!<br>\n  {{ownerData | json}}\n</p>\n"
+module.exports = "<div class=\"row\">\n    <div class=\"col-md-12 contentContainer\">\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>IsAdmin</th>\n            <th>Phone No</th>\n            <th>Email</th>\n            <th>Age</th>\n            <th>Gender</th>\n            <th>Password</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let owner of ownerData\">\n            <td>{{owner.ownerid}}</td>\n            <td>{{owner.ownername}}</td>\n            <td>{{owner.isadmin}}</td>\n            <td>{{owner.phonenumber}}</td>\n            <td>{{owner.email}}</td>\n            <td>{{owner.age}}</td>\n            <td>{{owner.gender}}</td>\n            <td>{{owner.password}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    </div>\n"
 
 /***/ }),
 
@@ -1378,6 +1397,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OwnersComponent", function() { return OwnersComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1389,16 +1409,35 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var OwnersComponent = /** @class */ (function () {
-    function OwnersComponent(_userService) {
+    function OwnersComponent(_userService, router, route) {
         this._userService = _userService;
+        this.router = router;
+        this.route = route;
+        this.model = {};
     }
     OwnersComponent.prototype.ngOnInit = function () {
+        this.getOwnerList();
+    };
+    OwnersComponent.prototype.ngOnChanges = function () {
+        this.getOwnerList();
+    };
+    //getSelectedTypelist(){
+    //console.log();
+    // this._userService.getSelectedTypelist(this.societyIds, this.buildingNames, this.flatIds).subscribe((data)=> {
+    // console.log("data is",this.ownerData)
+    // });
+    //}
+    OwnersComponent.prototype.getOwnerList = function () {
         var _this = this;
-        this._userService.getAllOwners().subscribe(function (data) {
-            _this.ownerData = data;
-        }, function (error) {
-            _this.ownerData = error;
+        this.route.params.subscribe(function (value) {
+            _this.param1 = value["societyIds"]; // get param
+            _this.param2 = value["buildingNames"]; // get param
+            _this.param3 = value["flatIds"]; // get param
+            _this._userService.getOwnerList(_this.param3).subscribe(function (data) {
+                _this.ownerData = data.dbResponse;
+            });
         });
     };
     OwnersComponent = __decorate([
@@ -1407,9 +1446,272 @@ var OwnersComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./owners.component.html */ "./src/app/society-mgmt/owners/owners.component.html"),
             styles: [__webpack_require__(/*! ./owners.component.css */ "./src/app/society-mgmt/owners/owners.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"]])
+        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
     ], OwnersComponent);
     return OwnersComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/building-reg/building-reg.component.css":
+/*!*******************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/building-reg/building-reg.component.css ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/building-reg/building-reg.component.html":
+/*!********************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/building-reg/building-reg.component.html ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\" container\">\n  <div class=\"formStyle row justify-content-center childContainer s-bg\">\n    <div class=\" col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle3}}</b></h1>\n          <!-- <p>{{pageDesc3}}</p> -->\n        </div>\n      </div>\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                    <mat-form-field>\n                      <mat-select placeholder=\"Select Society\">\n                        <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\"  [(ngModel)]=\"buildingreg.societyName\">\n                          {{s.societyname}}\n                        </mat-option>\n                      </mat-select>\n                    </mat-form-field>\n                  </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"buildingreg.buildingName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group text-center\">\n                  <button mat-raised-button color=\"primary\">Register</button>\n                </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n\n"
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/building-reg/building-reg.component.ts":
+/*!******************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/building-reg/building-reg.component.ts ***!
+  \******************************************************************************/
+/*! exports provided: BuildingRegComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BuildingRegComponent", function() { return BuildingRegComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
+/* harmony import */ var _register_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../register.service */ "./src/app/society-mgmt/register/register.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var BuildingRegComponent = /** @class */ (function () {
+    function BuildingRegComponent(_userService, _registerservice) {
+        this._userService = _userService;
+        this._registerservice = _registerservice;
+        this.pageTitle3 = "Building Register";
+        this.pageDesc3 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        this.buildingreg = {
+            societyName: "",
+            buildingName: ""
+        };
+    }
+    BuildingRegComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._userService.getSociety().subscribe(function (data) {
+            _this.societyList = data.dbResponse;
+        }, function (error) {
+            console.log(error);
+            _this.societyList = error.message;
+        });
+    };
+    BuildingRegComponent.prototype.onSubmit = function () {
+        console.log(this.buildingreg);
+        this._registerservice.registerBuilding(this.buildingreg).subscribe(function (data) {
+            console.log("data is", data);
+        });
+    };
+    BuildingRegComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-building-reg',
+            template: __webpack_require__(/*! ./building-reg.component.html */ "./src/app/society-mgmt/register/building-reg/building-reg.component.html"),
+            styles: [__webpack_require__(/*! ./building-reg.component.css */ "./src/app/society-mgmt/register/building-reg/building-reg.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _register_service__WEBPACK_IMPORTED_MODULE_2__["RegisterService"]])
+    ], BuildingRegComponent);
+    return BuildingRegComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.css":
+/*!***********************************************************************!*\
+  !*** ./src/app/society-mgmt/register/flat-reg/flat-reg.component.css ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.html":
+/*!************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/flat-reg/flat-reg.component.html ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-center childContainer s-bg\">\n    <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle2}}</b></h1>\n          <!-- <p>{{pageDesc2}}</p> -->\n        </div>\n      </div>\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"flatName\" class=\"form-control\" placeholder=\"Flat Name\" #fname=\"ngModel\" [(ngModel)]=\"flatName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"blldgName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field>\n                    <mat-select name=\"societyIdName\" placeholder=\"Select Society\" #sname=\"ngModel\" [(ngModel)]=\"flatreg.societyId\">\n                      <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\n                        {{s.societyname}}\n                      </mat-option>\n                    </mat-select>\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"ownerId\" class=\"form-control\" placeholder=\"Owner ID\" #oid=\"ngModel\" [(ngModel)]=\"flatreg.ownerid\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"tenantId\" class=\"form-control\" placeholder=\"Tenant ID\" #oid=\"ngModel\" [(ngModel)]=\"flatreg.tenantid\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group text-center\">\n                  <button mat-raised-button color=\"primary\">Register</button>\n                </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.ts":
+/*!**********************************************************************!*\
+  !*** ./src/app/society-mgmt/register/flat-reg/flat-reg.component.ts ***!
+  \**********************************************************************/
+/*! exports provided: FlatRegComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlatRegComponent", function() { return FlatRegComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
+/* harmony import */ var _register_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../register.service */ "./src/app/society-mgmt/register/register.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FlatRegComponent = /** @class */ (function () {
+    function FlatRegComponent(_userService, _registerservice) {
+        this._userService = _userService;
+        this._registerservice = _registerservice;
+        this.pageTitle2 = "Flat Register";
+        this.pageDesc2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        this.flatreg = {
+            flatname: "",
+            buildingname: "",
+            societyid: "",
+            ownerid: "",
+            tenantid: ""
+        };
+    }
+    FlatRegComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._userService.getSociety().subscribe(function (data) {
+            _this.societyList = data.dbResponse;
+        }, function (error) {
+            console.log(error);
+            _this.societyList = error.message;
+        });
+    };
+    FlatRegComponent.prototype.onSubmit = function () {
+        console.log(this.flatreg);
+        this._registerservice.registerFlat(this.flatreg).subscribe(function (data) {
+            console.log("data is", data);
+        });
+    };
+    FlatRegComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-flat-reg',
+            template: __webpack_require__(/*! ./flat-reg.component.html */ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.html"),
+            styles: [__webpack_require__(/*! ./flat-reg.component.css */ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _register_service__WEBPACK_IMPORTED_MODULE_2__["RegisterService"]])
+    ], FlatRegComponent);
+    return FlatRegComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.css":
+/*!*************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/owner-reg/owner-reg.component.css ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.html":
+/*!**************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/owner-reg/owner-reg.component.html ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n    <div class=\"row justify-content-center childContainer s-bg\">\n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n          <!-- <app-society-header></app-society-header> -->\n        <div class=\"row\">\n          <div class=\"col text-center\">\n            <h1><b>{{pageTitle1}}</b></h1>\n            <!-- <p>{{pageDesc1}}</p> -->\n          </div>\n        </div>\n        \n        <div class=\"row align-items-center text-center\">\n            <div class=\"col\">\n                <form class=\"formStyle\" #form1=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput name=\"name\" class=\"form-control\" #owner=\"ngModel\" [(ngModel)]=\"ownerreg.ownerName\" placeholder=\"Owner Name\">\n                      </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                          <input matInput name=\"email\" class=\"form-control\" #emailid=\"ngModel\" [(ngModel)]=\"ownerreg.email\" placeholder=\"Email\">\n                        </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput  name=\"phoneno\" class=\"form-control\" pattern=\"\\d{10}$\" #telno=\"ngModel\" [(ngModel)]=\"ownerreg.phoneNumber\" placeholder=\"Phone\">\n                      </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput  name=\"age\" class=\"form-control\" #ageno=\"ngModel\" [(ngModel)]=\"ownerreg.age\" placeholder=\"Age\">\n                      </mat-form-field>\n                    </div>\n                    <h5>Gender</h5>\n                    <mat-radio-group>\n                        <mat-radio-button name=\"gender\" value=\"Male\"  [(ngModel)]=\"ownerreg.gender\">Male</mat-radio-button>\n                        <mat-radio-button name=\"gender\" value=\"Female\"  [(ngModel)]=\"ownerreg.gender\">Female</mat-radio-button>\n                      </mat-radio-group>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                          <input matInput  name=\"password\" class=\"form-control\" #cname=\"ngModel\" [(ngModel)]=\"ownerreg.password\" placeholder=\"Password\">\n                        </mat-form-field>\n                    </div>\n                    <div class=\"from-check\">\n                        <mat-checkbox name=\"isAdmin\" [(ngModel)]=\"ownerreg.isAdmin\">Is Admin?</mat-checkbox>\n                      </div>\n                    <div class=\"form-group text-center\">\n                        <button mat-raised-button color=\"primary\">Register</button>\n                    </div>\n                \n                  </form>\n            </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <router-outlet></router-outlet>\n  \n\n"
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.ts":
+/*!************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/owner-reg/owner-reg.component.ts ***!
+  \************************************************************************/
+/*! exports provided: OwnerRegComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OwnerRegComponent", function() { return OwnerRegComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _register_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../register.service */ "./src/app/society-mgmt/register/register.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var OwnerRegComponent = /** @class */ (function () {
+    function OwnerRegComponent(_registerservice) {
+        this._registerservice = _registerservice;
+        this.pageTitle1 = "Owner Register";
+        this.pageDesc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        this.ownerreg = {
+            ownerName: "",
+            email: "",
+            phoneNumber: "",
+            age: "",
+            gender: "",
+            isAdmin: "",
+            password: ""
+        };
+    }
+    OwnerRegComponent.prototype.ngOnInit = function () {
+    };
+    OwnerRegComponent.prototype.onSubmit = function () {
+        console.log(this.ownerreg);
+        this._registerservice.registerOwner(this.ownerreg).subscribe(function (data) {
+            console.log("data is", data);
+        });
+    };
+    OwnerRegComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-owner-reg',
+            template: __webpack_require__(/*! ./owner-reg.component.html */ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.html"),
+            styles: [__webpack_require__(/*! ./owner-reg.component.css */ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.css")]
+        }),
+        __metadata("design:paramtypes", [_register_service__WEBPACK_IMPORTED_MODULE_1__["RegisterService"]])
+    ], OwnerRegComponent);
+    return OwnerRegComponent;
 }());
 
 
@@ -1423,7 +1725,7 @@ var OwnersComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\r\n\r\n.societyImage{\r\n    background-image:url('banner.png');\r\n}\r\n\r\n\r\n.mainContainer{\r\n    background-color: white;\r\n    margin-top:1em;\r\n    -ms-box-shadow: 0 3px 6px rgba(184, 157, 157, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n    -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);\r\n    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);    \r\n}\r\n\r\n"
 
 /***/ }),
 
@@ -1434,7 +1736,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <div class=\"row justify-content-center mainContainer\">\r\n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\r\n        <div class=\"row\">\r\n          <div class=\"col text-left\">\r\n            <a routerLink=\"/home\" class=\"btn btn-link\">Back</a>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col text-center\">\r\n            <h1>{{pageTitle}}</h1>\r\n            <p class=\"text-h3\">{{pageDesc}}</p>\r\n          </div>\r\n        </div>\r\n        <div class=\"row align-items-center\">\r\n          <div class=\"col\">\r\n              <form name=\"form\" (ngSubmit)=\"f.form.valid && onSubmit()\" #f=\"ngForm\" novalidate>\r\n                  <div class=\"form-group\">\r\n                      <input type=\"number\" class=\"form-control\" name=\"flatnum\" placeholder=\"{{formLabelNames.flatno}}\" [(ngModel)]=\"model.flatnum\" #flatnum=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && flatnum.invalid }\" required />\r\n                      <div *ngIf=\"f.submitted && flatnum.invalid\" class=\"invalid-feedback\">\r\n                          <div *ngIf=\"flatnum.errors.required\">Flat Number is required</div>\r\n                      </div>\r\n                  </div>\r\n                  <div class=\"form-row mb-4\">\r\n                      <div class=\"col\">\r\n                          <input type=\"text\" class=\"form-control\" name=\"fname\" placeholder=\"{{formLabelNames.ownerFname}}\" [(ngModel)]=\"model.fname\" #fname=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && fname.invalid }\" required />\r\n                          <div *ngIf=\"f.submitted && fname.invalid\" class=\"invalid-feedback\">\r\n                              <div *ngIf=\"fname.errors.required\">Owner First name is required</div>\r\n                          </div>\r\n                      </div>\r\n                      <div class=\"col\">\r\n                          <div class=\"form-group\">\r\n                              <input type=\"text\" class=\"form-control\" name=\"lname\" placeholder=\"{{formLabelNames.ownerLname}}\" [(ngModel)]=\"model.lname\" #lname=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && lname.invalid }\" required />\r\n                              <div *ngIf=\"f.submitted && lname.invalid\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"lname.errors.required\">Owner Last name is required</div>\r\n                              </div>\r\n                            </div>\r\n                      </div>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <input type=\"text\" class=\"form-control\" name=\"phone\" placeholder=\"{{formLabelNames.phone}}\" [(ngModel)]=\"model.phone\" #phone=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && phone.invalid }\" required/>\r\n                    <div *ngIf=\"f.submitted && phone.invalid\" class=\"invalid-feedback\">\r\n                      <div *ngIf=\"phone.errors.required\">Phone number is required</div>\r\n                      <div *ngIf=\"phone.errors.number\">Phone number is number</div>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                      <input type=\"email\" class=\"form-control\" name=\"paymentamount\" placeholder=\"{{formLabelNames.paymentamount}}\" [(ngModel)]=\"model.paymentamount\" #paymentamount=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && paymentamount.invalid }\" required />\r\n                      <div *ngIf=\"f.submitted && paymentamount.invalid\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"paymentamount.errors.required\">payment amount is required</div>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"form-row mb-4\">\r\n                        <div class=\"col\">\r\n                            <label for=\"paymentmethod\">{{formLabelNames.paymentmethod}}</label><br>\r\n                            \r\n                            <div class=\"form-check\">\r\n                              <label class=\"form-check-label\" for=\"cash\">\r\n                                <input type=\"checkbox\" [(ngModel)]=\"model.paymentmethod\" #paymentmethod=\"ngModel\" id=\"cash\" class=\"form-check-input\" name=\"paymentmethod\" value=\"{{formLabelNames.paymentmethodValue[0]}}\" checked>{{formLabelNames.paymentmethodValue[0]}}\r\n                              </label>\r\n                            </div>\r\n                            <div class=\"form-check\">\r\n                              <label class=\"form-check-label\" for=\"card\">\r\n                                <input type=\"checkbox\" class=\"form-check-input\" id=\"card\" name=\"paymentmethod\" value=\"{{formLabelNames.paymentmethodValue[1]}}\" (click)=\"clickCard()\">{{formLabelNames.paymentmethodValue[1]}}\r\n                              </label>\r\n                            </div>\r\n                            <div class=\"form-check\">\r\n                              <label class=\"form-check-label\">\r\n                                <input type=\"checkbox\" class=\"form-check-input\" value=\"{{formLabelNames.paymentmethodValue[2]}}\">{{formLabelNames.paymentmethodValue[2]}}\r\n                              </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col\" *ngIf=\"Debitcard\">                          \r\n                            <div class=\"form-group\">\r\n                                <input type=\"text\" class=\"form-control\" id=\"paymentamount\" placeholder=\"card number\">\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <input type=\"text\" class=\"form-control\" id=\"paymentamount\" placeholder=\"name on card\">\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-row mb-4\">\r\n                        <div class=\"col\">\r\n                            <label>{{formLabelNames.flatrented}}</label>\r\n                            <div class=\"form-check\">\r\n                              <label class=\"form-check-label\">\r\n                                <input type=\"radio\" class=\"form-check-input\" name=\"optradio\" (change)=\"radioChange($event)\" value=\"{{formLabelNames.rentedYes}}\">{{formLabelNames.rentedYes}}\r\n                              </label>\r\n                            </div>\r\n                            <div class=\"form-check\">\r\n                              <label class=\"form-check-label\">\r\n                                <input type=\"radio\" class=\"form-check-input\" name=\"optradio\" (change)=\"radioChange($event)\" value=\"{{formLabelNames.rentedNo}}\">{{formLabelNames.rentedNo}}\r\n                              </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col\" *ngIf=\"tenantDetails\" >\r\n                            <div class=\"form-group\" >\r\n                                  <input type=\"text\" class=\"form-control\" id=\"paymentamount\" placeholder=\"Tenant Name\">\r\n                             </div>\r\n                             <div class=\"form-group\">\r\n                                  <input type=\"text\" class=\"form-control\" id=\"paymentamount\" placeholder=\"Tenant Contact\">\r\n                             </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <input type=\"password\" class=\"form-control\" placeholder=\"{{formLabelNames.memPswd}}\" name=\"password\" [(ngModel)]=\"model.password\" #password=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && password.invalid }\" required />\r\n                        <div *ngIf=\"f.submitted && password.invalid\" class=\"invalid-feedback\">\r\n                            <div *ngIf=\"password.errors.required\">{{formLabelNames.memPswd}} is required</div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <input type=\"password\" class=\"form-control\" placeholder=\"{{formLabelNames.memConfrmPswd}}\" name=\"confirmpassword\" [(ngModel)]=\"model.confirmpassword\" #confirmpassword=\"ngModel\" [ngClass]=\"{ 'is-invalid': f.submitted && confirmpassword.invalid }\" required />\r\n                        <div *ngIf=\"f.submitted && confirmpassword.invalid\" class=\"invalid-feedback\">\r\n                            <div *ngIf=\"confirmpassword.errors.required\">Confirm password is required</div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group text-center\">\r\n                        <button class=\"btn btn-primary btn-lg\">Register</button>\r\n                    </div>\r\n                </form>         \r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>"
+module.exports = "<div class=\"container\">\n    <div class=\"row justify-content-center mainContainer\">\n        \n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n          <app-society-header></app-society-header>\n        <div class=\"row\">\n          <div class=\"col text-center\">\n            <h1><b>{{pageTitle}}</b></h1>\n            <p class=\"text-h3\">{{pageDesc}}</p>\n          </div>\n        </div>\n        <div class=\"row align-items-center\">\n          <div class=\"col\">\n              <div class=\"row\">\n                  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n                    <div routerLink=\"society-reg\" class=\"btn btn-outline-warning homeicons w-100\">\n                      <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                        <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\n                        <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n                      Society</div>\n                  </div>\n                  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n                    <div routerLink=\"building-reg\" class=\"btn btn-outline-warning homeicons w-100\">\n                      <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                        <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\n                      Buildings</div>\n                  </div>\n                  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n                    <div routerLink=\"flat-reg\" class=\"btn btn-outline-warning homeicons w-100\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                            <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                            <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\n                      Flats</div>\n                  </div>\n                  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n                    <div routerLink=\"owner-reg\" class=\"btn btn-outline-warning homeicons w-100\">\n                        <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                            <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                            <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\n                      owners</div>\n                  </div>\n                </div>   \n          </div>\n        </div>\n        \n        <div class=\"text-center contentContainer\">\n          <router-outlet></router-outlet>\n          </div>\n\n      </div>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -1463,7 +1765,7 @@ var RegisterMemberComponent = /** @class */ (function () {
         this.Debitcard = false;
         this.tenantDetails = false;
         this.pageTitle = "Register";
-        this.pageDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        this.pageDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
         this.formLabelNames = {
             flatno: "Flat Number",
             ownerFname: "Owner First Name",
@@ -1500,6 +1802,144 @@ var RegisterMemberComponent = /** @class */ (function () {
         })
     ], RegisterMemberComponent);
     return RegisterMemberComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/register.service.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/society-mgmt/register/register.service.ts ***!
+  \***********************************************************/
+/*! exports provided: RegisterService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterService", function() { return RegisterService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../config.json */ "./src/app/society-mgmt/config.json");
+var _config_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./../config.json */ "./src/app/society-mgmt/config.json", 1);
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var RegisterService = /** @class */ (function () {
+    function RegisterService(http) {
+        this.http = http;
+        this.postSocietyUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerSociety";
+        this.postOwnerUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/owner/list";
+        this.postFlatUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerFlat";
+        this.postBuildingUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerBuilding";
+    }
+    RegisterService.prototype.registerSociety = function (societyreg) {
+        return this.http.post(this.postSocietyUrl, societyreg);
+    };
+    RegisterService.prototype.registerOwner = function (ownerreg) {
+        return this.http.post(this.postOwnerUrl, ownerreg);
+    };
+    RegisterService.prototype.registerFlat = function (flatreg) {
+        return this.http.post(this.postFlatUrl, flatreg);
+    };
+    RegisterService.prototype.registerBuilding = function (buildingreg) {
+        return this.http.post(this.postBuildingUrl, buildingreg);
+    };
+    RegisterService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], RegisterService);
+    return RegisterService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/society-reg/society-reg.component.css":
+/*!*****************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/society-reg/society-reg.component.css ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/society-reg/society-reg.component.html":
+/*!******************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/society-reg/society-reg.component.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-center childContainer s-bg\">\n    <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle}}</b></h1>\n          <!-- <p>{{pageDesc}}</p> -->\n        </div>\n      </div>\n\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n              <div class=\"form-group\">\n                <mat-form-field class=\"example-full-width\">\n                  <input matInput name=\"societyName\" class=\"form-control\" placeholder=\"Society Name\" #sname=\"ngModel\" [(ngModel)]=\"societyreg.societyName\">\n                </mat-form-field>\n              </div>\n              <div class=\"form-group\">\n                <mat-form-field class=\"example-full-width\">\n                    <textarea matInput name=\"societyAddress\" class=\"form-control\" placeholder=\"Society Address\" #sadd=\"ngModel\" [(ngModel)]=\"societyreg.societyAddress\"></textarea>\n                  </mat-form-field>\n              </div>\n              <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"societyNumber\" class=\"form-control\" placeholder=\"Pincode\" #pcode=\"ngModel\" [(ngModel)]=\"societyreg.pincode\">\n                  </mat-form-field>\n              </div>\n              <div class=\"form-group text-center\">\n                <button mat-raised-button color=\"primary\">Register</button>\n              </div>\n          </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n"
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/society-reg/society-reg.component.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/society-reg/society-reg.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: SocietyRegComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SocietyRegComponent", function() { return SocietyRegComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _register_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../register.service */ "./src/app/society-mgmt/register/register.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SocietyRegComponent = /** @class */ (function () {
+    function SocietyRegComponent(_registerservice) {
+        this._registerservice = _registerservice;
+        this.pageTitle = "Society Register";
+        this.pageDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        this.societyreg = {
+            societyName: "",
+            societyAddress: "",
+            pincode: ""
+        };
+    }
+    SocietyRegComponent.prototype.ngOnInit = function () {
+    };
+    SocietyRegComponent.prototype.onSubmit = function () {
+        console.log(this.societyreg);
+        this._registerservice.registerSociety(this.societyreg).subscribe(function (data) {
+            console.log("data is", data);
+        });
+    };
+    SocietyRegComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-society-reg',
+            template: __webpack_require__(/*! ./society-reg.component.html */ "./src/app/society-mgmt/register/society-reg/society-reg.component.html"),
+            styles: [__webpack_require__(/*! ./society-reg.component.css */ "./src/app/society-mgmt/register/society-reg/society-reg.component.css")]
+        }),
+        __metadata("design:paramtypes", [_register_service__WEBPACK_IMPORTED_MODULE_1__["RegisterService"]])
+    ], SocietyRegComponent);
+    return SocietyRegComponent;
 }());
 
 
@@ -1848,6 +2288,11 @@ var UserService = /** @class */ (function () {
         return this.http.get(this.getFlatURL + "/buildingname/?value='" + buildingname + "'")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
+    UserService.prototype.getOwnerList = function (flatIds) {
+        console.log(this.getOwnerURL + "/flatIds/?value=" + flatIds);
+        return this.http.get(this.getOwnerURL + "/flatIds/?value='" + flatIds + "'")
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
     UserService.prototype.putFlatPayment = function (flatObj) {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('token', localStorage.getItem(this.TOKEN));
         console.log(flatObj);
@@ -1916,7 +2361,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n  <div class=\"col-xs-6 col-sm-6 text-left\">\r\n    <img src=\"assets/logo2.jpg\" class=\"img-fluid\" />\r\n  </div>\r\n  <div class=\"col-xs-6 col-sm-6 text-right\">\r\n    <a routerLink=\"/home\" class='btn btn-outline-warning btn'>\r\n      <mat-icon>home</mat-icon>\r\n    </a>\r\n  </div>\r\n<!-- </div>\r\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\r\n    \r\n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\r\n  \r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\r\n      </li>\r\n  \r\n      \r\n      <li class=\"nav-item dropdown\">\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\r\n          Dropdown link\r\n        </a>\r\n        <div class=\"dropdown-menu\">\r\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\r\n        </div>\r\n      </li>\r\n    </ul>\r\n  </nav> -->"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-6 col-sm-6 text-left\">\n    <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n  </div>\n  <div class=\"col-xs-6 col-sm-6 text-right\">\n    <div routerLink=\"/home\" class=\"home-btn\">\n      <button mat-raised-button color=\"primary\">Home</button>\n    </div>\n  </div>\n\n \n<!-- </div>\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\n    \n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\n  \n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\n      </li>\n  \n      \n      <li class=\"nav-item dropdown\">\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\n          Dropdown link\n        </a>\n        <div class=\"dropdown-menu\">\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\n        </div>\n      </li>\n    </ul>\n  </nav> -->"
 
 /***/ }),
 
@@ -1968,7 +2413,7 @@ var SocietyHeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "#content{\n    overflow:scroll;\n}"
 
 /***/ }),
 
@@ -1979,7 +2424,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div *ngIf=\"!isLogged\">\r\n    <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login\r\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M18.4 10.6C16.55 8.99 14.15 8 11.5 8c-4.65 0-8.58 3.03-9.96 7.22L3.9 16c1.05-3.19 4.05-5.5 7.6-5.5 1.95 0 3.73.72 5.12 1.88L13 16h9V7l-3.6 3.6z\" /></svg>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"isLogged\">\r\n    <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">\r\n      Logout\r\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z\" /></svg></div>\r\n  </div>\r\n  <div>\r\n    <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n  </div>\r\n  <app-society-header></app-society-header>\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n            Society\r\n          </div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\" class=\"btn btn-outline-warning homeicons w-100\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\r\n            Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\r\n            Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n        <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\n    <app-society-header></app-society-header>\n    <div class=\"row col-md-12 text-center\">\n      <div class=\"col-md-3\"></div>\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\n      </div>\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\n      </div>\n      <div class=\"col-md-3\">\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\n      </div>\n      <div class=\"col-md-3\"></div>\n    </div>\n    <!--<mat-divider></mat-divider>-->\n  <div class=\"row\">\n    <div class=\"col-sm-12 text-center contentContainer\">\n      <br>\n      <h2><b>Know More About Society</b></h2>\n      <div class=\"row\">\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n            Society</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('buildings')\"\n            class=\"btn btn-outline-warning homeicons w-100\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\n            Buildings</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\n            Flats</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\n            owners</div>\n        </div>\n      </div>\n\n      <div *ngIf=\"showSpinner\">\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\n      </div>\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\n        <app-modal [modalName]=\"modalVar\"></app-modal>\n      </div>\n\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\n        <router-outlet></router-outlet>\n      </div>\n    </div>\n\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n        <img src=\"assets/banner.png\">\n      </div> -->\n\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2101,7 +2546,7 @@ var SocietyMgmtComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "table {\r\n    width: 100%;\r\n  }"
+module.exports = "table {\r\n    width: 100%;\r\n  }\r\n\r\n  .tableClass {\r\n   font-weight: bold; \r\n  }"
 
 /***/ }),
 
@@ -2112,7 +2557,7 @@ module.exports = "table {\r\n    width: 100%;\r\n  }"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mat-elevation-z8\">\n    <table mat-table [dataSource]=\"dataSource\">\n  \n      <!-- Position Column -->\n      <ng-container matColumnDef=\"societyid\">\n        <th mat-cell *matHeaderCellDef> Society Id </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\n      </ng-container>\n  \n      <!-- Name Column -->\n      <ng-container matColumnDef=\"societyname\">\n        <th mat-cell *matHeaderCellDef> Society Name </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\n      </ng-container>\n  \n      <!-- Weight Column -->\n      <ng-container matColumnDef=\"address\">\n        <th mat-cell *matHeaderCellDef> Address </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\n      </ng-container>\n  \n      <!-- Symbol Column -->\n      <ng-container matColumnDef=\"pincode\">\n        <th mat-cell *matHeaderCellDef> Pincode </th>\n        <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\n      </ng-container>\n  \n      <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\n      <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n    </table>\n  \n    <mat-paginator [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n  </div>\n  \n  <!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\n      <event-calendar-component></event-calendar-component>\n  </div>  -->"
+module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\n\n    <!-- Position Column -->\n    <ng-container matColumnDef=\"societyid\">\n      <th mat-cell *matHeaderCellDef> Society Id </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"societyname\">\n      <th mat-cell *matHeaderCellDef> Society Name </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"address\">\n      <th mat-cell *matHeaderCellDef> Address </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\n    </ng-container>\n\n    <!-- Symbol Column -->\n    <ng-container matColumnDef=\"pincode\">\n      <th mat-cell *matHeaderCellDef> Pincode </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\n    </ng-container>\n\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n</div>\n\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\n    <event-calendar-component></event-calendar-component>\n</div>  -->"
 
 /***/ }),
 
