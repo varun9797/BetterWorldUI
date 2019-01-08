@@ -27,12 +27,24 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EventCalendarComponent } from './society-mgmt/event-calendar/event-calendar.component';
+import { SocietyRegComponent } from './society-mgmt/register/society-reg/society-reg.component';
+import { BuildingRegComponent } from './society-mgmt/register/building-reg/building-reg.component';
+import { FlatRegComponent } from './society-mgmt/register/flat-reg/flat-reg.component';
+import { OwnerRegComponent } from './society-mgmt/register/owner-reg/owner-reg.component';
 
 
 const routes: Routes = [
   { path: "", redirectTo: '/home', pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterMemberComponent },
+  { path: "register", component: RegisterMemberComponent ,
+  children:[
+  { path: "society-reg", component: SocietyRegComponent },
+  { path: "building-reg", component: BuildingRegComponent },
+  { path: "flat-reg", component: FlatRegComponent },
+  { path: "owner-reg", component: OwnerRegComponent }
+  ]  
+},
+  
   { path: "home", component: HomeComponent },
   {
     path: "societyManagment", component: SocietyMgmtComponent,
@@ -71,7 +83,11 @@ const routes: Routes = [
     SocietyComponent,
     ModalComponent,
     CalendarComponent,
-    EventCalendarComponent   
+    EventCalendarComponent,
+    SocietyRegComponent,
+    BuildingRegComponent,
+    FlatRegComponent,
+    OwnerRegComponent   
   ],
   imports: [
     BrowserModule,

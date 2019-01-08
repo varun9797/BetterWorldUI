@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row justify-content-center childContainer s-bg">
+    <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
+        <!-- <app-society-header></app-society-header> -->
+      <div class="row">
+        <div class="col text-center">
+          <h1><b>{{pageTitle}}</b></h1>
+          <!-- <p>{{pageDesc}}</p> -->
+        </div>
+      </div>
+
+      
+      <div class="row align-items-center text-center">
+          <div class="col">
+            <form class="formStyle" name="form" #sf="ngForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                  <input matInput name="societyName" class="form-control" placeholder="Society Name" #sname="ngModel" [(ngModel)]="societyreg.societyName">
+                </mat-form-field>
+              </div>
+              <div class="form-group">
+                <mat-form-field class="example-full-width">
+                    <textarea matInput name="societyAddress" class="form-control" placeholder="Society Address" #sadd="ngModel" [(ngModel)]="societyreg.societyAddress"></textarea>
+                  </mat-form-field>
+              </div>
+              <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput name="societyNumber" class="form-control" placeholder="Pincode" #pcode="ngModel" [(ngModel)]="societyreg.pincode">
+                  </mat-form-field>
+              </div>
+              <div class="form-group text-center">
+                <button mat-raised-button color="primary">Register</button>
+              </div>
+          </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+

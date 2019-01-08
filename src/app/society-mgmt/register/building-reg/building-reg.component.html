@@ -1,0 +1,40 @@
+<div class=" container">
+  <div class="formStyle row justify-content-center childContainer s-bg">
+    <div class=" col-xs-12 col-md-8 col-lg-8 col-xl-8">
+        <!-- <app-society-header></app-society-header> -->
+      <div class="row">
+        <div class="col text-center">
+          <h1><b>{{pageTitle3}}</b></h1>
+          <!-- <p>{{pageDesc3}}</p> -->
+        </div>
+      </div>
+      
+      <div class="row align-items-center text-center">
+          <div class="col">
+            <form class="formStyle" name="form" #sf="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <mat-form-field>
+                      <mat-select placeholder="Select Society">
+                        <mat-option *ngFor="let s of societyList" [value]="s.societyid"  [(ngModel)]="buildingreg.societyName">
+                          {{s.societyname}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <input matInput name="buildingName" class="form-control" placeholder="Building Name" #bname="ngModel" [(ngModel)]="buildingreg.buildingName">
+                  </mat-form-field>
+                </div>
+                <div class="form-group text-center">
+                  <button mat-raised-button color="primary">Register</button>
+                </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+

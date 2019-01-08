@@ -1,125 +1,53 @@
 <div class="container">
     <div class="row justify-content-center mainContainer">
+        
       <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
-        <div class="row">
-          <div class="col text-left">
-            <a routerLink="/home" class="btn btn-link">Back</a>
-          </div>
-        </div>
+          <app-society-header></app-society-header>
         <div class="row">
           <div class="col text-center">
-            <h1>{{pageTitle}}</h1>
+            <h1><b>{{pageTitle}}</b></h1>
             <p class="text-h3">{{pageDesc}}</p>
           </div>
         </div>
         <div class="row align-items-center">
           <div class="col">
-              <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-                  <div class="form-group">
-                      <input type="number" class="form-control" name="flatnum" placeholder="{{formLabelNames.flatno}}" [(ngModel)]="model.flatnum" #flatnum="ngModel" [ngClass]="{ 'is-invalid': f.submitted && flatnum.invalid }" required />
-                      <div *ngIf="f.submitted && flatnum.invalid" class="invalid-feedback">
-                          <div *ngIf="flatnum.errors.required">Flat Number is required</div>
-                      </div>
+              <div class="row">
+                  <div class="col-xs-12 col-sm-3 text-center contentContainer">
+                    <div routerLink="society-reg" class="btn btn-outline-warning homeicons w-100">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z" />
+                        <path d="M0 0h24v24H0z" fill="none" /></svg>
+                      Society</div>
                   </div>
-                  <div class="form-row mb-4">
-                      <div class="col">
-                          <input type="text" class="form-control" name="fname" placeholder="{{formLabelNames.ownerFname}}" [(ngModel)]="model.fname" #fname="ngModel" [ngClass]="{ 'is-invalid': f.submitted && fname.invalid }" required />
-                          <div *ngIf="f.submitted && fname.invalid" class="invalid-feedback">
-                              <div *ngIf="fname.errors.required">Owner First name is required</div>
-                          </div>
-                      </div>
-                      <div class="col">
-                          <div class="form-group">
-                              <input type="text" class="form-control" name="lname" placeholder="{{formLabelNames.ownerLname}}" [(ngModel)]="model.lname" #lname="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lname.invalid }" required />
-                              <div *ngIf="f.submitted && lname.invalid" class="invalid-feedback">
-                                <div *ngIf="lname.errors.required">Owner Last name is required</div>
-                              </div>
-                            </div>
-                      </div>
+                  <div class="col-xs-12 col-sm-3 text-center contentContainer">
+                    <div routerLink="building-reg" class="btn btn-outline-warning homeicons w-100">
+                      <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z" /></svg>
+                      Buildings</div>
                   </div>
-                  <div class="form-group">
-                    <input type="text" class="form-control" name="phone" placeholder="{{formLabelNames.phone}}" [(ngModel)]="model.phone" #phone="ngModel" [ngClass]="{ 'is-invalid': f.submitted && phone.invalid }" required/>
-                    <div *ngIf="f.submitted && phone.invalid" class="invalid-feedback">
-                      <div *ngIf="phone.errors.required">Phone number is required</div>
-                      <div *ngIf="phone.errors.number">Phone number is number</div>
-                    </div>
+                  <div class="col-xs-12 col-sm-3 text-center contentContainer">
+                    <div routerLink="flat-reg" class="btn btn-outline-warning homeicons w-100">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z" /></svg>
+                      Flats</div>
                   </div>
-                  <div class="form-group">
-                      <input type="email" class="form-control" name="paymentamount" placeholder="{{formLabelNames.paymentamount}}" [(ngModel)]="model.paymentamount" #paymentamount="ngModel" [ngClass]="{ 'is-invalid': f.submitted && paymentamount.invalid }" required />
-                      <div *ngIf="f.submitted && paymentamount.invalid" class="invalid-feedback">
-                        <div *ngIf="paymentamount.errors.required">payment amount is required</div>
-                      </div>
-                    </div>
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <label for="paymentmethod">{{formLabelNames.paymentmethod}}</label><br>
-                            
-                            <div class="form-check">
-                              <label class="form-check-label" for="cash">
-                                <input type="checkbox" [(ngModel)]="model.paymentmethod" #paymentmethod="ngModel" id="cash" class="form-check-input" name="paymentmethod" value="{{formLabelNames.paymentmethodValue[0]}}" checked>{{formLabelNames.paymentmethodValue[0]}}
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <label class="form-check-label" for="card">
-                                <input type="checkbox" class="form-check-input" id="card" name="paymentmethod" value="{{formLabelNames.paymentmethodValue[1]}}" (click)="clickCard()">{{formLabelNames.paymentmethodValue[1]}}
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" value="{{formLabelNames.paymentmethodValue[2]}}">{{formLabelNames.paymentmethodValue[2]}}
-                              </label>
-                            </div>
-                        </div>
-                        <div class="col" *ngIf="Debitcard">                          
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="paymentamount" placeholder="card number">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="paymentamount" placeholder="name on card">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row mb-4">
-                        <div class="col">
-                            <label>{{formLabelNames.flatrented}}</label>
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="optradio" (change)="radioChange($event)" value="{{formLabelNames.rentedYes}}">{{formLabelNames.rentedYes}}
-                              </label>
-                            </div>
-                            <div class="form-check">
-                              <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="optradio" (change)="radioChange($event)" value="{{formLabelNames.rentedNo}}">{{formLabelNames.rentedNo}}
-                              </label>
-                            </div>
-                        </div>
-                        <div class="col" *ngIf="tenantDetails" >
-                            <div class="form-group" >
-                                  <input type="text" class="form-control" id="paymentamount" placeholder="Tenant Name">
-                             </div>
-                             <div class="form-group">
-                                  <input type="text" class="form-control" id="paymentamount" placeholder="Tenant Contact">
-                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="{{formLabelNames.memPswd}}" name="password" [(ngModel)]="model.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required />
-                        <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
-                            <div *ngIf="password.errors.required">{{formLabelNames.memPswd}} is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" placeholder="{{formLabelNames.memConfrmPswd}}" name="confirmpassword" [(ngModel)]="model.confirmpassword" #confirmpassword="ngModel" [ngClass]="{ 'is-invalid': f.submitted && confirmpassword.invalid }" required />
-                        <div *ngIf="f.submitted && confirmpassword.invalid" class="invalid-feedback">
-                            <div *ngIf="confirmpassword.errors.required">Confirm password is required</div>
-                        </div>
-                    </div>
-                    <div class="form-group text-center">
-                        <button class="btn btn-primary btn-lg">Register</button>
-                    </div>
-                </form>         
+                  <div class="col-xs-12 col-sm-3 text-center contentContainer">
+                    <div routerLink="owner-reg" class="btn btn-outline-warning homeicons w-100">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" /></svg>
+                      owners</div>
+                  </div>
+                </div>   
           </div>
         </div>
+        
+        <div class="text-center contentContainer">
+          <router-outlet></router-outlet>
+          </div>
+
       </div>
     </div>
   </div>

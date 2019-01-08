@@ -1,4 +1,30 @@
-<p>
-  owners works!<br>
-  {{ownerData | json}}
-</p>
+<div class="row">
+    <div class="col-md-12 contentContainer">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>IsAdmin</th>
+            <th>Phone No</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let owner of ownerData">
+            <td>{{owner.ownerid}}</td>
+            <td>{{owner.ownername}}</td>
+            <td>{{owner.isadmin}}</td>
+            <td>{{owner.phonenumber}}</td>
+            <td>{{owner.email}}</td>
+            <td>{{owner.age}}</td>
+            <td>{{owner.gender}}</td>
+            <td>{{owner.password}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>

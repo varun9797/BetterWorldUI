@@ -54,6 +54,14 @@ export class UserService {
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }
+
+  getOwnerList(flatIds): Observable<any> {
+    console.log(`${this.getOwnerURL}/flatIds/?value=${flatIds}`);
+    return this.http.get(`${this.getOwnerURL}/flatIds/?value='${flatIds}'`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
   putFlatPayment(flatObj): Observable<any> {
     let headers = new HttpHeaders().set('token',localStorage.getItem(this.TOKEN));
     console.log(flatObj);

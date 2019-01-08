@@ -4,7 +4,7 @@
 @import '../node_modules/flatpickr/dist/flatpickr.min.css';
 
 html, body { height: 100%; }
-body { background-color: #dff0e8;margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { background-color: #e1fff1;margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .thin {font-weight:100;font-family: 'Raleway', sans-serif;}
 .bold, strong  {font-weight:600;font-family: 'Raleway', sans-serif;}
@@ -22,7 +22,17 @@ h4, h5 {font-weight:800;font-family: 'Raleway', sans-serif;}
     margin-top:1em;
     -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -ms-box-shadow: 0 3px 6px rgba(184, 157, 157, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);    
+}
+
+.childContainer{
+    background-color: rgba(255, 255, 255, 0.9);;
+    margin-top:1em;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    -ms-box-shadow: 0 3px 6px rgba(184, 157, 157, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);    
 }
@@ -32,3 +42,7 @@ h4, h5 {font-weight:800;font-family: 'Raleway', sans-serif;}
     padding: 15px
 }
 .homeicons{margin: 5px}
+.logo-img{max-height: 100px}
+.home-btn{padding-top: 30px}
+.mat-form-field-infix{width: 500px !important;}
+.mat-radio-label-content{padding-right: 15px !important;}

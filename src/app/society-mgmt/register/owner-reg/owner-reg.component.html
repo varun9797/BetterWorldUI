@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row justify-content-center childContainer s-bg">
+      <div class="col-xs-12 col-md-8 col-lg-8 col-xl-8">
+          <!-- <app-society-header></app-society-header> -->
+        <div class="row">
+          <div class="col text-center">
+            <h1><b>{{pageTitle1}}</b></h1>
+            <!-- <p>{{pageDesc1}}</p> -->
+          </div>
+        </div>
+        
+        <div class="row align-items-center text-center">
+            <div class="col">
+                <form class="formStyle" #form1="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group"> 
+                      <mat-form-field class="example-full-width">
+                        <input matInput name="name" class="form-control" #owner="ngModel" [(ngModel)]="ownerreg.ownerName" placeholder="Owner Name">
+                      </mat-form-field>
+                    </div>
+                    <div class="form-group"> 
+                      <mat-form-field class="example-full-width">
+                          <input matInput name="email" class="form-control" #emailid="ngModel" [(ngModel)]="ownerreg.email" placeholder="Email">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group"> 
+                      <mat-form-field class="example-full-width">
+                        <input matInput  name="phoneno" class="form-control" pattern="\d{10}$" #telno="ngModel" [(ngModel)]="ownerreg.phoneNumber" placeholder="Phone">
+                      </mat-form-field>
+                    </div>
+                    <div class="form-group"> 
+                      <mat-form-field class="example-full-width">
+                        <input matInput  name="age" class="form-control" #ageno="ngModel" [(ngModel)]="ownerreg.age" placeholder="Age">
+                      </mat-form-field>
+                    </div>
+                    <h5>Gender</h5>
+                    <mat-radio-group>
+                        <mat-radio-button name="gender" value="Male"  [(ngModel)]="ownerreg.gender">Male</mat-radio-button>
+                        <mat-radio-button name="gender" value="Female"  [(ngModel)]="ownerreg.gender">Female</mat-radio-button>
+                      </mat-radio-group>
+                    <div class="form-group"> 
+                      <mat-form-field class="example-full-width">
+                          <input matInput  name="password" class="form-control" #cname="ngModel" [(ngModel)]="ownerreg.password" placeholder="Password">
+                        </mat-form-field>
+                    </div>
+                    <div class="from-check">
+                        <mat-checkbox name="isAdmin" [(ngModel)]="ownerreg.isAdmin">Is Admin?</mat-checkbox>
+                      </div>
+                    <div class="form-group text-center">
+                        <button mat-raised-button color="primary">Register</button>
+                    </div>
+                
+                  </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+  
+
