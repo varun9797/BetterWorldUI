@@ -68,7 +68,7 @@ class SocietyController {
         this.societyModel.registerBuilding(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
-            console.log('catch block of registerOwner ',err);
+            console.log('catch block of registerBuilding ',err);
             res.status(err.satusCode).json(err);
         });
     }
@@ -80,7 +80,7 @@ class SocietyController {
         this.societyModel.registerSociety(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
-            console.log('catch block of registerOwner ',err);
+            console.log('catch block of registerSociety ',err);
             res.status(err.satusCode).json(err);
         });
     }
@@ -96,13 +96,11 @@ class SocietyController {
     }
 
     registerFlat = (req, res) => {
-        console.log(`insert into flat(flatname, buildingname, societyid, ownerid) 
-        values (${req.body.flatName}, ${req.body.buildingName}, ${req.body.societyId},
-             ${req.body.ownerId});`);
+        console.log(`insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`);
         this.societyModel.registerFlat(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
-            console.log('catch block of registerOwner ',err);
+            console.log('catch block of registerFlat ',err);
             res.status(err.satusCode).json(err);
         });
     }
