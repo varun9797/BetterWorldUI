@@ -113,6 +113,48 @@ class SocietyController {
             res.status(err.satusCode).json(err);
         });
     }
+
+    updateBuilding = (req, res) => {
+        console.log(`insert into building(buildingname, societyid) values
+        (${req.body.buildingName},'${req.body.societyid}');`);
+        this.societyModel.updateBuilding(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of updateBuilding ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
+    updateSociety = (req, res) => {
+        console.log(`society register query is--- 
+        insert into society(societyName, address, pincode) values 
+        ('${req.body.societyName}', '${req.body.address}', '${req.body.pincode}'`);
+        this.societyModel.updateSociety(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of updateSociety ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+    updateFlat = (req, res) => {
+        console.log(`insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`);
+        this.societyModel.updateFlat(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of updateFlat ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
+    updateOwner= (req, res) =>{
+        this.societyModel.updateOwner(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of updateOwner ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
 }
 
 export default SocietyController;

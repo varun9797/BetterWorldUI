@@ -83,7 +83,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.registerBuilding(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log('catch block of registerOwner ', err);
+            console.log('catch block of registerBuilding ', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -93,7 +93,7 @@ var SocietyController = function SocietyController() {
         _this.societyModel.registerSociety(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log('catch block of registerOwner ', err);
+            console.log('catch block of registerSociety ', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -109,11 +109,11 @@ var SocietyController = function SocietyController() {
     };
 
     this.registerFlat = function (req, res) {
-        console.log('insert into flat(flatname, buildingname, societyid, ownerid) \n        values (' + req.body.flatName + ', ' + req.body.buildingName + ', ' + req.body.societyId + ',\n             ' + req.body.ownerId + ');');
+        console.log('insert into flat(flatname, buildingname, societyid) values (\'' + req.body.flatName + '\', \'' + req.body.buildingName + '\', ' + req.body.societyId + ');');
         _this.societyModel.registerFlat(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
-            console.log('catch block of registerOwner ', err);
+            console.log('catch block of registerFlat ', err);
             res.status(err.satusCode).json(err);
         });
     };
@@ -124,6 +124,45 @@ var SocietyController = function SocietyController() {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
             console.log('catch block of registerOwner ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.updateBuilding = function (req, res) {
+        console.log('insert into building(buildingname, societyid) values\n        (' + req.body.buildingName + ',\'' + req.body.societyid + '\');');
+        _this.societyModel.updateBuilding(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of updateBuilding ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.updateSociety = function (req, res) {
+        console.log('society register query is--- \n        insert into society(societyName, address, pincode) values \n        (\'' + req.body.societyName + '\', \'' + req.body.address + '\', \'' + req.body.pincode + '\'');
+        _this.societyModel.updateSociety(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of updateSociety ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.updateFlat = function (req, res) {
+        console.log('insert into flat(flatname, buildingname, societyid) values (\'' + req.body.flatName + '\', \'' + req.body.buildingName + '\', ' + req.body.societyId + ');');
+        _this.societyModel.updateFlat(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of updateFlat ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
+    this.updateOwner = function (req, res) {
+        _this.societyModel.updateOwner(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of updateOwner ', err);
             res.status(err.satusCode).json(err);
         });
     };

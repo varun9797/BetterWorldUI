@@ -152,6 +152,50 @@ class SocietyModel {
         });
     });
 
+    updateBuilding = (req) => new Promise((resolve, reject) => {
+        let query = `insert into building(buildingname, societyid) values('${req.body.buildingName}',${req.body.societyid});`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('Building is successfully Updated: Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('got query error ', err);
+            reject(err);
+        });
+    });
+
+    updateSociety = (req) => new Promise((resolve, reject) => {
+        let query = `insert into society(societyName, address, pincode) values ('${req.body.societyName}', '${req.body.address}', '${req.body.pincode}');`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('Society is successfully Updated : Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('got query error ', err);
+            reject(err);
+        });
+    });
+
+    updateFlat = (req) => new Promise((resolve, reject) => {
+        let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('Flat is successfully Updated : Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('got query error ', err);
+            reject(err);
+        });
+    });
+
+    updateOwner = (req) => new Promise((resolve, reject) => {
+        let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('Flat is successfully Updated : Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('got query error ', err);
+            reject(err);
+        });
+    });
+
     deleteRow = (req) => new Promise((resolve, reject) => {
         let query = `delete from ${req.body.tableName} where ${req.body.columnName} = ${req.body.columnValue}`;
         this.queryMediator.queryConnection(query).then((result) => {
