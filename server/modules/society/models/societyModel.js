@@ -3,6 +3,7 @@ import QueryMediator from '../models/queryConnection';
 require("babel-core/register");
 require("babel-polyfill");
 
+
 class SocietyModel {
 
     constructor() {
