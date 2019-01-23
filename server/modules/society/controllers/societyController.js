@@ -6,6 +6,7 @@ class SocietyController {
          this.societyModel = new SocietyModel();
     }
 
+    
     registerOwner= (req, res) =>{
         this.societyModel.registerOwner(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
