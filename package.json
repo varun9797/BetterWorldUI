@@ -13,7 +13,7 @@
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./serverBuild ./server -s",
     "build": "npm run clean && npm run build-babel && node app.js",
-    "start": "npm i && node app.js",
+    "start": "node app.js",
     "server": "nodemon app.js",
     "dev": "npm run build && concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "dev1": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
