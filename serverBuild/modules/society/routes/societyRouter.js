@@ -13,7 +13,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var express = require('express');
 var router = express.Router();
 var cors = require('cors');
-var jwt = require('jsonwebtoken');
 
 var societyController = new _societyController2.default();
 var userValidator = new _userValidator2.default();

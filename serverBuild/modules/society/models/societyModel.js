@@ -4,6 +4,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _regenerator = require('babel-runtime/regenerator');
+
+var _regenerator2 = _interopRequireDefault(_regenerator);
+
 var _queryConnection = require('../models/queryConnection');
 
 var _queryConnection2 = _interopRequireDefault(_queryConnection);
@@ -15,9 +19,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 process.env.SECRET_KEY = 'varunv';
-
-require("babel-core/register");
-require("babel-polyfill");
 
 var SocietyModel = function SocietyModel() {
     var _this = this;
@@ -73,9 +74,9 @@ var SocietyModel = function SocietyModel() {
     };
 
     this.registerOwner = function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(req) {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(req) {
             var flatData, ownerSearchData, ownerInsertData, query, fetchOwnerResponse, insertMappingResponse;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
+            return _regenerator2.default.wrap(function _callee$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
