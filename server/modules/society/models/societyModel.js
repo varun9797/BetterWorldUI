@@ -9,6 +9,7 @@ class SocietyModel {
         this.queryMediator = new QueryMediator();
     }
 
+    
     getOwner = (req, searchData) => new Promise((resolve, reject) => {
         let query = `select ownerid from owner where phonenumber = ${searchData[0]} and email = \'${searchData[1]}\' `;
         this.queryMediator.queryConnection(query).then((result) => {
