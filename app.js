@@ -6,7 +6,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 var Users = require('./serverBuild/modules/users/routes/userRouter');
 var Society = require('./serverBuild/modules/society/routes/societyRouter');
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 // API calls
 
