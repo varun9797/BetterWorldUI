@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const session = require('express-session');
 const bodyParser = require('body-parser');
 var Users = require('./serverBuild/modules/users/routes/userRouter');
 var Society = require('./serverBuild/modules/society/routes/societyRouter');
@@ -15,7 +14,7 @@ app.use(bodyParser.json());
 
 
 app.use('/users',Users);
-app.use('/society',Society)
+app.use('/society',Society);
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express great  ' });
 });
