@@ -73,55 +73,61 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
-    this.registerOwner = function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(req) {
-            var flatData, ownerSearchData, ownerInsertData, query, fetchOwnerResponse, insertMappingResponse;
-            return _regenerator2.default.wrap(function _callee$(_context) {
-                while (1) {
-                    switch (_context.prev = _context.next) {
-                        case 0:
-                            flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
-                            ownerSearchData = [req.body.phoneNumber, req.body.email];
-                            ownerInsertData = [[req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
-                            query = 'insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values ?';
-                            _context.prev = 4;
-                            _context.next = 7;
-                            return _this.queryMediator.queryConnection(query, ownerInsertData);
+    this.registerOwner = function (req) {
+        return new Promise(function () {
+            var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(resolve, reject) {
+                var flatData, ownerSearchData, ownerInsertData, query, fetchOwnerResponse, insertMappingResponse;
+                return _regenerator2.default.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
+                                ownerSearchData = [req.body.phoneNumber, req.body.email];
+                                ownerInsertData = [[req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
+                                query = 'insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values ?';
+                                _context.prev = 4;
+                                _context.next = 7;
+                                return _this.queryMediator.queryConnection(query, ownerInsertData);
 
-                        case 7:
-                            _context.next = 9;
-                            return _this.getOwner(null, ownerSearchData);
+                            case 7:
+                                _context.next = 9;
+                                return _this.getOwner(null, ownerSearchData);
 
-                        case 9:
-                            fetchOwnerResponse = _context.sent;
-                            _context.next = 12;
-                            return _this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
+                            case 9:
+                                fetchOwnerResponse = _context.sent;
+                                _context.next = 12;
+                                return _this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
 
-                        case 12:
-                            insertMappingResponse = _context.sent;
+                            case 12:
+                                insertMappingResponse = _context.sent;
 
-                            console.log("Owner Registered Successfully: Ok");
-                            return _context.abrupt('return', insertMappingResponse);
+                                console.log("Owner Registered Successfully: Ok");
+                                resolve(insertMappingResponse);
+                                //return insertMappingResponse;
+                                _context.next = 21;
+                                break;
 
-                        case 17:
-                            _context.prev = 17;
-                            _context.t0 = _context['catch'](4);
+                            case 17:
+                                _context.prev = 17;
+                                _context.t0 = _context['catch'](4);
 
-                            console.log('got query error ', _context.t0);
-                            return _context.abrupt('return', _context.t0);
+                                console.log('got query error ', _context.t0);
+                                reject(_context.t0);
+                                //return err;
 
-                        case 21:
-                        case 'end':
-                            return _context.stop();
+                            case 21:
+                            case 'end':
+                                return _context.stop();
+                        }
                     }
-                }
-            }, _callee, _this, [[4, 17]]);
-        }));
+                }, _callee, _this, [[4, 17]]);
+            }));
 
-        return function (_x) {
-            return _ref.apply(this, arguments);
-        };
-    }();
+            return function (_x, _x2) {
+                return _ref.apply(this, arguments);
+            };
+        }());
+    };
 
     this.getDetails = function (req) {
         return new Promise(function (resolve, reject) {

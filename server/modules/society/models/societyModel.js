@@ -52,7 +52,7 @@ class SocietyModel {
         });
     })
 
-    registerOwner = async (req) => {
+    registerOwner = (req) =>  new Promise(async (resolve, reject) => {
         var flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
         var ownerSearchData = [req.body.phoneNumber, req.body.email];
         var ownerInsertData = [[req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
@@ -63,12 +63,14 @@ class SocietyModel {
             let fetchOwnerResponse = await this.getOwner(null, ownerSearchData);
             let insertMappingResponse = await this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
             console.log("Owner Registered Successfully: Ok");
-            return insertMappingResponse;
+            resolve(insertMappingResponse)
+            //return insertMappingResponse;
         } catch (err) {
             console.log('got query error ', err);
-            return err;
+            reject(err);
+            //return err;
         }
-    }
+    })
 
     getDetails = (req) => new Promise((resolve, reject) => {
         console.log('req.params.tableName', req.params.tableName);
