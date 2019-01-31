@@ -10,7 +10,7 @@ export class RegisterService {
   constructor(private http: HttpClient) { }
 
   postSocietyUrl= config.default.HOST_NAME+"/society/registerSociety";
-  postOwnerUrl= config.default.HOST_NAME+"/society/owner/list";
+  postOwnerUrl= config.default.HOST_NAME+"/society/registerOwner";
   postFlatUrl= config.default.HOST_NAME+"/society/registerFlat";
   postBuildingUrl= config.default.HOST_NAME+"/society/registerBuilding";
   

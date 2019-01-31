@@ -14,7 +14,7 @@ export class SocietyRegComponent implements OnInit {
 
   societyreg={
     societyName:"",
-    societyAddress:"",
+    address:"",
     pincode:""
   }
 
@@ -24,9 +24,10 @@ export class SocietyRegComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.societyreg);
+    console.log("**Before calling api**",this.societyreg);
     this._registerservice.registerSociety(this.societyreg).subscribe((data)=> {
-      console.log("data is",data)
+      console.log("**response from api**",data);
+      alert("society info added sucessfully")
     });
   }
 

@@ -14,8 +14,8 @@
             <form class="formStyle" name="form" #sf="ngForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <mat-form-field>
-                      <mat-select placeholder="Select Society">
-                        <mat-option *ngFor="let s of societyList" [value]="s.societyid"  [(ngModel)]="buildingreg.societyName">
+                      <mat-select name="societyIdName" placeholder="Select Society"  [(ngModel)]="buildingreg.societyid">
+                        <mat-option *ngFor="let s of societyList" [value]="s.societyid" >
                           {{s.societyname}}
                         </mat-option>
                       </mat-select>

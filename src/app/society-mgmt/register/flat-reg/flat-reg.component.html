@@ -14,12 +14,12 @@
             <form class="formStyle" name="form" #sf="ngForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput name="flatName" class="form-control" placeholder="Flat Name" #fname="ngModel" [(ngModel)]="flatName">
+                    <input matInput name="flatName" class="form-control" placeholder="Flat Name" #fname="ngModel" [(ngModel)]="flatreg.flatName">
                   </mat-form-field>
                 </div>
                 <div class="form-group">
                   <mat-form-field class="example-full-width">
-                    <input matInput name="buildingName" class="form-control" placeholder="Building Name" #bname="ngModel" [(ngModel)]="blldgName">
+                    <input matInput name="buildingName" class="form-control" placeholder="Building Name" #bname="ngModel" [(ngModel)]="flatreg.buildingName">
                   </mat-form-field>
                 </div>
                 <div class="form-group">
@@ -31,7 +31,7 @@
                     </mat-select>
                   </mat-form-field>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <mat-form-field class="example-full-width">
                     <input matInput name="ownerId" class="form-control" placeholder="Owner ID" #oid="ngModel" [(ngModel)]="flatreg.ownerid">
                   </mat-form-field>
@@ -40,7 +40,7 @@
                   <mat-form-field class="example-full-width">
                     <input matInput name="tenantId" class="form-control" placeholder="Tenant ID" #oid="ngModel" [(ngModel)]="flatreg.tenantid">
                   </mat-form-field>
-                </div>
+                </div> -->
                 <div class="form-group text-center">
                   <button mat-raised-button color="primary">Register</button>
                 </div>

@@ -15,7 +15,7 @@ export class BuildingRegComponent implements OnInit {
   societyList;
 
   buildingreg={
-    societyName:"",
+    societyid:"",
     buildingName:""
   }
 
@@ -32,9 +32,10 @@ export class BuildingRegComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.buildingreg);
+    console.log("**on submit method**",this.buildingreg);
     this._registerservice.registerBuilding(this.buildingreg).subscribe((data)=> {
-      console.log("data is",data)
+      console.log("api reponse is",data);
+      alert("building info added succesfully");
     });
   }
 

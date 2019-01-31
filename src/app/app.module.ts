@@ -17,7 +17,6 @@ import { SocietyHeaderComponent } from './society-mgmt/society-header/society-he
 import { RegisterMemberComponent } from './society-mgmt/register/register-member.component';
 import { LoginComponent } from './society-mgmt/login/login.component';
 import { SocietyComponent } from './society-mgmt/society/society.component';
-import { Component } from '@angular/core/src/metadata/directives';
 import { ModalComponent } from './society-mgmt/modal/modal.component';
 import { NeedAuthGuard } from './society-mgmt/services/NeedAuthGuard';
 import { CalendarComponent } from './society-mgmt/calendar/calendar.component';

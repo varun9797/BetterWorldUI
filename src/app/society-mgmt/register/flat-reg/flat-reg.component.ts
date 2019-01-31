@@ -16,11 +16,11 @@ export class FlatRegComponent implements OnInit {
   societyList;
 
   flatreg={
-    flatname:"",
-    buildingname:"",
-    societyid:"",
-    ownerid:"",
-    tenantid:""
+    flatName:"",
+    buildingName:"",
+    societyId:""
+    //ownerid:"",
+    //tenantid:""
   }
   constructor(public _userService : UserService, public _registerservice : RegisterService) { }
 
@@ -37,9 +37,10 @@ export class FlatRegComponent implements OnInit {
 
 
   onSubmit(){
-    console.log(this.flatreg);
+    console.log("**on submit**",this.flatreg);
     this._registerservice.registerFlat(this.flatreg).subscribe((data)=> {
-      console.log("data is",data)
+      console.log("**response from api**",data);
+      alert("flat info submitted sucessfully");
     });
   }
 

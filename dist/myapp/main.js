@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\n<!-- <calendar-component></calendar-component> -->\n<!-- <event-calendar-component></event-calendar-component> -->"
+module.exports = "<router-outlet></router-outlet>\r\n<!-- <calendar-component></calendar-component> -->\r\n<!-- <event-calendar-component></event-calendar-component> -->"
 
 /***/ }),
 
@@ -478,7 +478,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\" *ngIf=\"societyInfo\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n    </div>\n  </div>\n  \n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>buildingid</th>\n              <th>buildingname</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let building of buildingList\">\n              <td>{{building.buildingid}}</td>\n              <td>{{building.buildingname}}</td>\n            </tr>\n          </tbody>\n        </table>\n    </div>  \n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n<div [hidden]=\"!buildingList\">\n  <event-calendar-component></event-calendar-component>\n</div>\n\n"
+module.exports = "\n<div class=\"row\" *ngIf=\"societyInfo\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>buildingid</th>\n              <th>buildingname</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let building of buildingList\">\n              <td>{{building.buildingid}}</td>\n              <td>{{building.buildingname}}</td>\n            </tr>\n          </tbody>\n        </table>\n    </div>  \n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n<div [hidden]=\"!buildingList\">\n  <event-calendar-component></event-calendar-component>\n</div>\n\n"
 
 /***/ }),
 
@@ -1474,7 +1474,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\" container\">\n  <div class=\"formStyle row justify-content-center childContainer s-bg\">\n    <div class=\" col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle3}}</b></h1>\n          <!-- <p>{{pageDesc3}}</p> -->\n        </div>\n      </div>\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                    <mat-form-field>\n                      <mat-select placeholder=\"Select Society\">\n                        <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\"  [(ngModel)]=\"buildingreg.societyName\">\n                          {{s.societyname}}\n                        </mat-option>\n                      </mat-select>\n                    </mat-form-field>\n                  </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"buildingreg.buildingName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group text-center\">\n                  <button mat-raised-button color=\"primary\">Register</button>\n                </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n\n"
+module.exports = "<div class=\" container\">\n  <div class=\"formStyle row justify-content-center childContainer s-bg\">\n    <div class=\" col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle3}}</b></h1>\n          <!-- <p>{{pageDesc3}}</p> -->\n        </div>\n      </div>\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                    <mat-form-field>\n                      <mat-select name=\"societyIdName\" placeholder=\"Select Society\"  [(ngModel)]=\"buildingreg.societyid\">\n                        <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\n                          {{s.societyname}}\n                        </mat-option>\n                      </mat-select>\n                    </mat-form-field>\n                  </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"buildingreg.buildingName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group text-center\">\n                  <button mat-raised-button color=\"primary\">Register</button>\n                </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n\n"
 
 /***/ }),
 
@@ -1510,7 +1510,7 @@ var BuildingRegComponent = /** @class */ (function () {
         this.pageTitle3 = "Building Register";
         this.pageDesc3 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
         this.buildingreg = {
-            societyName: "",
+            societyid: "",
             buildingName: ""
         };
     }
@@ -1524,9 +1524,10 @@ var BuildingRegComponent = /** @class */ (function () {
         });
     };
     BuildingRegComponent.prototype.onSubmit = function () {
-        console.log(this.buildingreg);
+        console.log("**on submit method**", this.buildingreg);
         this._registerservice.registerBuilding(this.buildingreg).subscribe(function (data) {
-            console.log("data is", data);
+            console.log("api reponse is", data);
+            alert("building info added succesfully");
         });
     };
     BuildingRegComponent = __decorate([
@@ -1562,7 +1563,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-center childContainer s-bg\">\n    <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle2}}</b></h1>\n          <!-- <p>{{pageDesc2}}</p> -->\n        </div>\n      </div>\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"flatName\" class=\"form-control\" placeholder=\"Flat Name\" #fname=\"ngModel\" [(ngModel)]=\"flatName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"blldgName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field>\n                    <mat-select name=\"societyIdName\" placeholder=\"Select Society\" #sname=\"ngModel\" [(ngModel)]=\"flatreg.societyId\">\n                      <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\n                        {{s.societyname}}\n                      </mat-option>\n                    </mat-select>\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"ownerId\" class=\"form-control\" placeholder=\"Owner ID\" #oid=\"ngModel\" [(ngModel)]=\"flatreg.ownerid\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"tenantId\" class=\"form-control\" placeholder=\"Tenant ID\" #oid=\"ngModel\" [(ngModel)]=\"flatreg.tenantid\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group text-center\">\n                  <button mat-raised-button color=\"primary\">Register</button>\n                </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-center childContainer s-bg\">\n    <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle2}}</b></h1>\n          <!-- <p>{{pageDesc2}}</p> -->\n        </div>\n      </div>\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"flatName\" class=\"form-control\" placeholder=\"Flat Name\" #fname=\"ngModel\" [(ngModel)]=\"flatreg.flatName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"flatreg.buildingName\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field>\n                    <mat-select name=\"societyIdName\" placeholder=\"Select Society\" #sname=\"ngModel\" [(ngModel)]=\"flatreg.societyId\">\n                      <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\n                        {{s.societyname}}\n                      </mat-option>\n                    </mat-select>\n                  </mat-form-field>\n                </div>\n                <!-- <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"ownerId\" class=\"form-control\" placeholder=\"Owner ID\" #oid=\"ngModel\" [(ngModel)]=\"flatreg.ownerid\">\n                  </mat-form-field>\n                </div>\n                <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"tenantId\" class=\"form-control\" placeholder=\"Tenant ID\" #oid=\"ngModel\" [(ngModel)]=\"flatreg.tenantid\">\n                  </mat-form-field>\n                </div> -->\n                <div class=\"form-group text-center\">\n                  <button mat-raised-button color=\"primary\">Register</button>\n                </div>\n            </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -1598,11 +1599,11 @@ var FlatRegComponent = /** @class */ (function () {
         this.pageTitle2 = "Flat Register";
         this.pageDesc2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
         this.flatreg = {
-            flatname: "",
-            buildingname: "",
-            societyid: "",
-            ownerid: "",
-            tenantid: ""
+            flatName: "",
+            buildingName: "",
+            societyId: ""
+            //ownerid:"",
+            //tenantid:""
         };
     }
     FlatRegComponent.prototype.ngOnInit = function () {
@@ -1615,9 +1616,10 @@ var FlatRegComponent = /** @class */ (function () {
         });
     };
     FlatRegComponent.prototype.onSubmit = function () {
-        console.log(this.flatreg);
+        console.log("**on submit**", this.flatreg);
         this._registerservice.registerFlat(this.flatreg).subscribe(function (data) {
-            console.log("data is", data);
+            console.log("**response from api**", data);
+            alert("flat info submitted sucessfully");
         });
     };
     FlatRegComponent = __decorate([
@@ -1653,7 +1655,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"row justify-content-center childContainer s-bg\">\n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n          <!-- <app-society-header></app-society-header> -->\n        <div class=\"row\">\n          <div class=\"col text-center\">\n            <h1><b>{{pageTitle1}}</b></h1>\n            <!-- <p>{{pageDesc1}}</p> -->\n          </div>\n        </div>\n        \n        <div class=\"row align-items-center text-center\">\n            <div class=\"col\">\n                <form class=\"formStyle\" #form1=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput name=\"name\" class=\"form-control\" #owner=\"ngModel\" [(ngModel)]=\"ownerreg.ownerName\" placeholder=\"Owner Name\">\n                      </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                          <input matInput name=\"email\" class=\"form-control\" #emailid=\"ngModel\" [(ngModel)]=\"ownerreg.email\" placeholder=\"Email\">\n                        </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput  name=\"phoneno\" class=\"form-control\" pattern=\"\\d{10}$\" #telno=\"ngModel\" [(ngModel)]=\"ownerreg.phoneNumber\" placeholder=\"Phone\">\n                      </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput  name=\"age\" class=\"form-control\" #ageno=\"ngModel\" [(ngModel)]=\"ownerreg.age\" placeholder=\"Age\">\n                      </mat-form-field>\n                    </div>\n                    <h5>Gender</h5>\n                    <mat-radio-group>\n                        <mat-radio-button name=\"gender\" value=\"Male\"  [(ngModel)]=\"ownerreg.gender\">Male</mat-radio-button>\n                        <mat-radio-button name=\"gender\" value=\"Female\"  [(ngModel)]=\"ownerreg.gender\">Female</mat-radio-button>\n                      </mat-radio-group>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                          <input matInput  name=\"password\" class=\"form-control\" #cname=\"ngModel\" [(ngModel)]=\"ownerreg.password\" placeholder=\"Password\">\n                        </mat-form-field>\n                    </div>\n                    <div class=\"from-check\">\n                        <mat-checkbox name=\"isAdmin\" [(ngModel)]=\"ownerreg.isAdmin\">Is Admin?</mat-checkbox>\n                      </div>\n                    <div class=\"form-group text-center\">\n                        <button mat-raised-button color=\"primary\">Register</button>\n                    </div>\n                \n                  </form>\n            </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <router-outlet></router-outlet>\n  \n\n"
+module.exports = "<div class=\"container\">\n    <div class=\"row justify-content-center childContainer s-bg\">\n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n          <!-- <app-society-header></app-society-header> -->\n        <div class=\"row\">\n          <div class=\"col text-center\">\n            <h1><b>{{pageTitle1}}</b></h1>\n            <!-- <p>{{pageDesc1}}</p> -->\n          </div>\n        </div>\n        \n        <div class=\"row align-items-center text-center\">\n            <div class=\"col\">\n                <form class=\"formStyle\" #form1=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput name=\"name\" class=\"form-control\" #owner=\"ngModel\" [(ngModel)]=\"ownerreg.ownerName\" placeholder=\"Owner Name\">\n                      </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                          <input matInput name=\"email\" class=\"form-control\" #emailid=\"ngModel\" [(ngModel)]=\"ownerreg.email\" placeholder=\"Email\">\n                        </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput  name=\"phoneno\" class=\"form-control\" pattern=\"\\d{10}$\" #telno=\"ngModel\" [(ngModel)]=\"ownerreg.phoneNumber\" placeholder=\"Phone\">\n                      </mat-form-field>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                        <input matInput  name=\"age\" class=\"form-control\" #ageno=\"ngModel\" [(ngModel)]=\"ownerreg.age\" placeholder=\"Age\">\n                      </mat-form-field>\n                    </div>\n                    <h5>Gender</h5>\n                    <div class=\"form-group\"> \n                    <mat-radio-group name=\"gender\" [(ngModel)]=\"ownerreg.gender\">\n                        <mat-radio-button value=\"male\" >Male</mat-radio-button>\n                        <mat-radio-button value=\"female\">Female</mat-radio-button>\n                      </mat-radio-group>\n                    </div>\n                    <div class=\"form-group\"> \n                      <mat-form-field class=\"example-full-width\">\n                          <input matInput  name=\"password\" class=\"form-control\" #cname=\"ngModel\" [(ngModel)]=\"ownerreg.password\" placeholder=\"Password\">\n                        </mat-form-field>\n                    </div>\n                    <div class=\"from-check\">\n                        <mat-checkbox name=\"isAdmin\" [(ngModel)]=\"ownerreg.isAdmin\">Is Admin?</mat-checkbox>\n                      </div>\n                      <div class=\"form-group\">\n                        <mat-form-field class=\"example-full-width\">\n                          <input matInput name=\"flatName\" class=\"form-control\" placeholder=\"Flat Name\" #fname=\"ngModel\" [(ngModel)]=\"ownerreg.flatName\">\n                        </mat-form-field>\n                      </div>\n                      <div class=\"form-group\">\n                        <mat-form-field class=\"example-full-width\">\n                          <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"ownerreg.buildingName\">\n                        </mat-form-field>\n                      </div>\n                      <div class=\"form-group\">\n                        <mat-form-field>\n                          <mat-select name=\"societyIdName\" placeholder=\"Select Society\" #sname=\"ngModel\" [(ngModel)]=\"ownerreg.societyId\">\n                            <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\n                              {{s.societyname}}\n                            </mat-option>\n                          </mat-select>\n                        </mat-form-field>\n                      </div>\n                    <div class=\"form-group text-center\">\n                        <button mat-raised-button color=\"primary\">Register</button>\n                    </div>\n                \n                  </form>\n            </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <router-outlet></router-outlet>\n  \n\n"
 
 /***/ }),
 
@@ -1669,6 +1671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OwnerRegComponent", function() { return OwnerRegComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _register_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../register.service */ "./src/app/society-mgmt/register/register.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1680,8 +1683,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
+
 var OwnerRegComponent = /** @class */ (function () {
-    function OwnerRegComponent(_registerservice) {
+    function OwnerRegComponent(_userService, _registerservice) {
+        this._userService = _userService;
         this._registerservice = _registerservice;
         this.pageTitle1 = "Owner Register";
         this.pageDesc1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
@@ -1692,15 +1697,26 @@ var OwnerRegComponent = /** @class */ (function () {
             age: "",
             gender: "",
             isAdmin: "",
-            password: ""
+            password: "",
+            flatName: "",
+            buildingName: "",
+            societyId: ""
         };
     }
     OwnerRegComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._userService.getSociety().subscribe(function (data) {
+            _this.societyList = data.dbResponse;
+        }, function (error) {
+            console.log(error);
+            _this.societyList = error.message;
+        });
     };
     OwnerRegComponent.prototype.onSubmit = function () {
         console.log(this.ownerreg);
         this._registerservice.registerOwner(this.ownerreg).subscribe(function (data) {
             console.log("data is", data);
+            alert("owner info added sucessfully");
         });
     };
     OwnerRegComponent = __decorate([
@@ -1709,7 +1725,7 @@ var OwnerRegComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./owner-reg.component.html */ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.html"),
             styles: [__webpack_require__(/*! ./owner-reg.component.css */ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.css")]
         }),
-        __metadata("design:paramtypes", [_register_service__WEBPACK_IMPORTED_MODULE_1__["RegisterService"]])
+        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"], _register_service__WEBPACK_IMPORTED_MODULE_1__["RegisterService"]])
     ], OwnerRegComponent);
     return OwnerRegComponent;
 }());
@@ -1838,7 +1854,7 @@ var RegisterService = /** @class */ (function () {
     function RegisterService(http) {
         this.http = http;
         this.postSocietyUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerSociety";
-        this.postOwnerUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/owner/list";
+        this.postOwnerUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerOwner";
         this.postFlatUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerFlat";
         this.postBuildingUrl = _config_json__WEBPACK_IMPORTED_MODULE_2__.HOST_NAME + "/society/registerBuilding";
     }
@@ -1885,7 +1901,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-center childContainer s-bg\">\n    <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle}}</b></h1>\n          <!-- <p>{{pageDesc}}</p> -->\n        </div>\n      </div>\n\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n              <div class=\"form-group\">\n                <mat-form-field class=\"example-full-width\">\n                  <input matInput name=\"societyName\" class=\"form-control\" placeholder=\"Society Name\" #sname=\"ngModel\" [(ngModel)]=\"societyreg.societyName\">\n                </mat-form-field>\n              </div>\n              <div class=\"form-group\">\n                <mat-form-field class=\"example-full-width\">\n                    <textarea matInput name=\"societyAddress\" class=\"form-control\" placeholder=\"Society Address\" #sadd=\"ngModel\" [(ngModel)]=\"societyreg.societyAddress\"></textarea>\n                  </mat-form-field>\n              </div>\n              <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"societyNumber\" class=\"form-control\" placeholder=\"Pincode\" #pcode=\"ngModel\" [(ngModel)]=\"societyreg.pincode\">\n                  </mat-form-field>\n              </div>\n              <div class=\"form-group text-center\">\n                <button mat-raised-button color=\"primary\">Register</button>\n              </div>\n          </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row justify-content-center childContainer s-bg\">\n    <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\n        <!-- <app-society-header></app-society-header> -->\n      <div class=\"row\">\n        <div class=\"col text-center\">\n          <h1><b>{{pageTitle}}</b></h1>\n          <!-- <p>{{pageDesc}}</p> -->\n        </div>\n      </div>\n\n      \n      <div class=\"row align-items-center text-center\">\n          <div class=\"col\">\n            <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n              <div class=\"form-group\">\n                <mat-form-field class=\"example-full-width\">\n                  <input matInput name=\"societyName\" class=\"form-control\" placeholder=\"Society Name\" #sname=\"ngModel\" [(ngModel)]=\"societyreg.societyName\">\n                </mat-form-field>\n              </div>\n              <div class=\"form-group\">\n                <mat-form-field class=\"example-full-width\">\n                    <textarea matInput name=\"societyAddress\" class=\"form-control\" placeholder=\"Society Address\" #sadd=\"ngModel\" [(ngModel)]=\"societyreg.address\"></textarea>\n                  </mat-form-field>\n              </div>\n              <div class=\"form-group\">\n                  <mat-form-field class=\"example-full-width\">\n                    <input matInput name=\"societyNumber\" class=\"form-control\" placeholder=\"Pincode\" #pcode=\"ngModel\" [(ngModel)]=\"societyreg.pincode\">\n                  </mat-form-field>\n              </div>\n              <div class=\"form-group text-center\">\n                <button mat-raised-button color=\"primary\">Register</button>\n              </div>\n          </form>\n          </div>\n      </div>\n    </div>\n  </div>\n</div>\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -1919,16 +1935,17 @@ var SocietyRegComponent = /** @class */ (function () {
         this.pageDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
         this.societyreg = {
             societyName: "",
-            societyAddress: "",
+            address: "",
             pincode: ""
         };
     }
     SocietyRegComponent.prototype.ngOnInit = function () {
     };
     SocietyRegComponent.prototype.onSubmit = function () {
-        console.log(this.societyreg);
+        console.log("**Before calling api**", this.societyreg);
         this._registerservice.registerSociety(this.societyreg).subscribe(function (data) {
-            console.log("data is", data);
+            console.log("**response from api**", data);
+            alert("society info added sucessfully");
         });
     };
     SocietyRegComponent = __decorate([
@@ -2773,7 +2790,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\storage\class\11-1\myapp\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\storage\class\11-1\Angular\src\main.ts */"./src/main.ts");
 
 
 /***/ })
