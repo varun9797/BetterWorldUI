@@ -63,8 +63,10 @@ class SocietyModel {
             let fetchOwnerResponse = await this.getOwner(null, ownerSearchData);
             if(fetchOwnerResponse.dbResponse && fetchOwnerResponse.dbResponse[0] && fetchOwnerResponse.dbResponse[0].ownerid) {
                 let insertMappingResponse = await this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
+                fetchOwnerResponse.dbResponse = 'new owner record inserted and updated flat sucessfully';
                 resolve(insertMappingResponse);
             } else {
+                fetchOwnerResponse.dbResponse = 'new owner record inserted sucessfully';
                 resolve(fetchOwnerResponse);
             }
         } catch (err) {
@@ -179,16 +181,16 @@ class SocietyModel {
         });
     });
 
-    updateFlat = (req) => new Promise((resolve, reject) => {
-        let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;
-        this.queryMediator.queryConnection(query).then((result) => {
-            console.log('Flat is successfully Updated : Ok ');
-            resolve(result);
-        }).catch((err) => {
-            console.log('got query error ', err);
-            reject(err);
-        });
-    });
+    // updateFlat = (req) => new Promise((resolve, reject) => {
+    //     let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;
+    //     this.queryMediator.queryConnection(query).then((result) => {
+    //         console.log('Flat is successfully Updated : Ok ');
+    //         resolve(result);
+    //     }).catch((err) => {
+    //         console.log('got query error ', err);
+    //         reject(err);
+    //     });
+    // });
 
     updateOwner = (req) => new Promise((resolve, reject) => {
         let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;

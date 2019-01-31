@@ -139,12 +139,13 @@ class SocietyController {
     }
     updateFlat = (req, res) => {
         console.log(`insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`);
-        this.societyModel.updateFlat(req).then((dbResponse)=>{
-            res.status(dbResponse.satusCode).json(dbResponse);
-        }).catch((err)=>{
-            console.log('catch block of updateFlat ',err);
-            res.status(err.satusCode).json(err);
-        });
+        // this.societyModel.updateFlat(req).then((dbResponse)=>{
+        //     res.status(dbResponse.satusCode).json(dbResponse);
+        // }).catch((err)=>{
+        //     console.log('catch block of updateFlat ',err);
+        //     res.status(err.satusCode).json(err);
+        // });
+        res.status(200).json({dbResponse:'need to implement functionality'});
     }
 
     updateOwner= (req, res) =>{

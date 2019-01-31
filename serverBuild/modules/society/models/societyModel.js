@@ -97,7 +97,7 @@ var SocietyModel = function SocietyModel() {
                                 fetchOwnerResponse = _context.sent;
 
                                 if (!(fetchOwnerResponse.dbResponse && fetchOwnerResponse.dbResponse[0] && fetchOwnerResponse.dbResponse[0].ownerid)) {
-                                    _context.next = 17;
+                                    _context.next = 18;
                                     break;
                                 }
 
@@ -107,31 +107,33 @@ var SocietyModel = function SocietyModel() {
                             case 13:
                                 insertMappingResponse = _context.sent;
 
+                                fetchOwnerResponse.dbResponse = 'new owner record inserted and updated flat sucessfully';
                                 resolve(insertMappingResponse);
-                                _context.next = 18;
+                                _context.next = 20;
                                 break;
-
-                            case 17:
-                                resolve(fetchOwnerResponse);
 
                             case 18:
-                                _context.next = 24;
-                                break;
+                                fetchOwnerResponse.dbResponse = 'new owner record inserted sucessfully';
+                                resolve(fetchOwnerResponse);
 
                             case 20:
-                                _context.prev = 20;
+                                _context.next = 26;
+                                break;
+
+                            case 22:
+                                _context.prev = 22;
                                 _context.t0 = _context['catch'](4);
 
                                 console.log('got query error ', _context.t0);
                                 reject(_context.t0);
                                 //return err;
 
-                            case 24:
+                            case 26:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, _this, [[4, 20]]);
+                }, _callee, _this, [[4, 22]]);
             }));
 
             return function (_x, _x2) {
@@ -263,19 +265,6 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
-    this.updateFlat = function (req) {
-        return new Promise(function (resolve, reject) {
-            var query = 'insert into flat(flatname, buildingname, societyid) values (\'' + req.body.flatName + '\', \'' + req.body.buildingName + '\', ' + req.body.societyId + ');';
-            _this.queryMediator.queryConnection(query).then(function (result) {
-                console.log('Flat is successfully Updated : Ok ');
-                resolve(result);
-            }).catch(function (err) {
-                console.log('got query error ', err);
-                reject(err);
-            });
-        });
-    };
-
     this.updateOwner = function (req) {
         return new Promise(function (resolve, reject) {
             var query = 'insert into flat(flatname, buildingname, societyid) values (\'' + req.body.flatName + '\', \'' + req.body.buildingName + '\', ' + req.body.societyId + ');';
@@ -303,7 +292,20 @@ var SocietyModel = function SocietyModel() {
     };
 
     this.queryMediator = new _queryConnection2.default();
-};
+}
+
+// updateFlat = (req) => new Promise((resolve, reject) => {
+//     let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;
+//     this.queryMediator.queryConnection(query).then((result) => {
+//         console.log('Flat is successfully Updated : Ok ');
+//         resolve(result);
+//     }).catch((err) => {
+//         console.log('got query error ', err);
+//         reject(err);
+//     });
+// });
+
+;
 
 exports.default = SocietyModel;
 //# sourceMappingURL=societyModel.js.map
