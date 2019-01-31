@@ -95,32 +95,43 @@ var SocietyModel = function SocietyModel() {
 
                             case 9:
                                 fetchOwnerResponse = _context.sent;
-                                _context.next = 12;
+
+                                if (!(fetchOwnerResponse.dbResponse && fetchOwnerResponse.dbResponse[0] && fetchOwnerResponse.dbResponse[0].ownerid)) {
+                                    _context.next = 17;
+                                    break;
+                                }
+
+                                _context.next = 13;
                                 return _this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
 
-                            case 12:
+                            case 13:
                                 insertMappingResponse = _context.sent;
 
-                                console.log("Owner Registered Successfully: Ok");
                                 resolve(insertMappingResponse);
-                                //return insertMappingResponse;
-                                _context.next = 21;
+                                _context.next = 18;
                                 break;
 
                             case 17:
-                                _context.prev = 17;
+                                resolve(fetchOwnerResponse);
+
+                            case 18:
+                                _context.next = 24;
+                                break;
+
+                            case 20:
+                                _context.prev = 20;
                                 _context.t0 = _context['catch'](4);
 
                                 console.log('got query error ', _context.t0);
                                 reject(_context.t0);
                                 //return err;
 
-                            case 21:
+                            case 24:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, _this, [[4, 17]]);
+                }, _callee, _this, [[4, 20]]);
             }));
 
             return function (_x, _x2) {

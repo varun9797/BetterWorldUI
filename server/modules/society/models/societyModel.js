@@ -61,10 +61,12 @@ class SocietyModel {
         try {
             await this.queryMediator.queryConnection(query, ownerInsertData);
             let fetchOwnerResponse = await this.getOwner(null, ownerSearchData);
-            let insertMappingResponse = await this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
-            console.log("Owner Registered Successfully: Ok");
-            resolve(insertMappingResponse)
-            //return insertMappingResponse;
+            if(fetchOwnerResponse.dbResponse && fetchOwnerResponse.dbResponse[0] && fetchOwnerResponse.dbResponse[0].ownerid) {
+                let insertMappingResponse = await this.updateFlat(null, flatData, fetchOwnerResponse.dbResponse[0].ownerid);
+                resolve(insertMappingResponse);
+            } else {
+                resolve(fetchOwnerResponse);
+            }
         } catch (err) {
             console.log('got query error ', err);
             reject(err);
