@@ -29,6 +29,7 @@ router.delete('/delete',societyController.deleteRow);
 router.put('/flat/pendingPayment',userValidator.validateUser, societyController.updatePendingPaymentOfFlat);
 
 /********Search******/
+router.get('/:tableName/:columnName1/:columnName2',societyController.getDetailsUsingMultiParam);
 router.get('/:tableName/:columnName',societyController.getDetailsUsingQueryParam);
 router.get('/:tableName',societyController.getDetails);
 

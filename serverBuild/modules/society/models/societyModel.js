@@ -278,6 +278,20 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
+    this.getDetailsUsingMultiParam = function (req) {
+        return new Promise(function (resolve, reject) {
+            var query = 'select * from ' + req.params.tableName + ' where ' + req.params.columnName1 + ' = ' + req.query.value1 + ' and ' + req.params.columnName2 + ' = ' + req.query.value2;
+            console.log(query);
+            _this.queryMediator.queryConnection(query).then(function (result) {
+                console.log('getDetailsUsingMultiParam : Ok ');
+                resolve(result);
+            }).catch(function (err) {
+                console.log('got query error ', err);
+                reject(err);
+            });
+        });
+    };
+
     this.deleteRow = function (req) {
         return new Promise(function (resolve, reject) {
             var query = 'delete from ' + req.body.tableName + ' where ' + req.body.columnName + ' = ' + req.body.columnValue;

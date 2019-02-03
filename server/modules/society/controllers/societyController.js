@@ -157,6 +157,15 @@ class SocietyController {
         });
     }
 
+    getDetailsUsingMultiParam= (req, res) =>{
+        this.societyModel.getDetailsUsingMultiParam(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of updateOwner ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
 }
 
 export default SocietyController;

@@ -203,6 +203,18 @@ class SocietyModel {
         });
     });
 
+    getDetailsUsingMultiParam = (req) => new Promise((resolve, reject) => {
+        let query = `select * from ${req.params.tableName} where ${req.params.columnName1} = ${req.query.value1} and ${req.params.columnName2} = ${req.query.value2}`;
+        console.log(query);
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('getDetailsUsingMultiParam : Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('got query error ', err);
+            reject(err);
+        });
+    });
+
     deleteRow = (req) => new Promise((resolve, reject) => {
         let query = `delete from ${req.body.tableName} where ${req.body.columnName} = ${req.body.columnValue}`;
         this.queryMediator.queryConnection(query).then((result) => {

@@ -168,6 +168,15 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.getDetailsUsingMultiParam = function (req, res) {
+        _this.societyModel.getDetailsUsingMultiParam(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of updateOwner ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
 };
 
