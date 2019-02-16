@@ -4,7 +4,7 @@
         Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>
       Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     
       Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>
-      buildingname : {{this.param2}}<br>
+      buildingname : {{buildingName}}<br>
     </div>
   </div>
 <div class="row">
@@ -19,6 +19,8 @@
               <th>pendingpayment</th>
               <th>payment button</th>
               <th>Calender</th>
+              <th>Show Owner</th>
+              <th>Flat</th>
             </tr>
           </thead>
           <tbody>
@@ -28,11 +30,17 @@
               <td>{{flat.ownerid}}</td>
               <td>{{flat.pendingpayment}}</td>
               <td> 
-                  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#pendingModal" (click)="paymentID(flat)">Pay</button>
+                  <button type="button"  class="btn btn-info"  mat-stroked-button data-toggle="modal" data-target="#pendingModal" (click)="paymentID(flat)">Pay</button>
               </td>
               <td> 
-                <button type="button" class="btn btn-info" (click)="showCalender(flat.flatid)">Calender</button>
+                <button type="button"  class="btn btn-info"  mat-stroked-button (click)="showCalender(flat.flatid)">Calender</button>
               </td>
+              <td> 
+                  <button type="button" class="btn btn-info"  mat-stroked-button (click)="showOwner(societyid, buildingName,flat.flatid)">Show Owner</button>
+                </td>
+                <td> 
+                    <button type="button" class="btn btn-info"  mat-stroked-button (click)="deleteFlat(flat.flatid)">Delete</button>
+                  </td>
             </tr>
           </tbody>
         </table>

@@ -17,7 +17,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   model: any = {};
   errmsg;
   payAmount;
-  param1;param2; societyInfo: any;responseData:any;
+  societyid;buildingName; societyInfo: any;responseData:any;
   flatObj:any;
   constructor(public _userService: UserService,
      public router: Router, private route: 
@@ -31,9 +31,9 @@ export class FlatsComponent implements OnInit, OnChanges {
   }
   getflatList() {
     this.route.params.subscribe((value) => {
-      this.param1 = value["societyid"]; // get param
-      this.param2 = value["buildingid"]; // get param
-      this._userService.getFlatList(this.param2).subscribe((data) => {
+      this.societyid = value["societyid"]; // get param
+      this.buildingName = value["buildingName"]; // get param
+      this._userService.getFlatList(this.societyid, this.buildingName).subscribe((data) => {
         this.flatList = data.dbResponse;
       },
       error => {
@@ -41,7 +41,7 @@ export class FlatsComponent implements OnInit, OnChanges {
         this.society = error.message;
       });
 
-      this._userService.getSocietyInfo(this.param1).subscribe((data) => {
+      this._userService.getSocietyInfo(this.societyid).subscribe((data) => {
         this.societyInfo = data.dbResponse;
       },
         error => {
@@ -82,5 +82,9 @@ export class FlatsComponent implements OnInit, OnChanges {
         console.log(error);
         this.society = error.message;
       });
+  }
+  showOwner(societyid,buildingName,flatId){
+    this.router.navigate(['societyManagment',societyid,'buildings',buildingName,"flats",flatId,"owner"]); 
+    this._commonService.emitShowListEvent(true);
   }
 }

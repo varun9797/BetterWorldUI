@@ -185,8 +185,13 @@ var routes = [
             { path: "society", component: _society_mgmt_society_society_component__WEBPACK_IMPORTED_MODULE_17__["SocietyComponent"] },
             { path: ":societyid/buildings", component: _society_mgmt_building_building_component__WEBPACK_IMPORTED_MODULE_9__["BuildingComponent"] },
             {
-                path: ":societyid/buildings/:buildingid/flats",
+                path: ":societyid/buildings/:buildingName/flats",
                 component: _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatsComponent"],
+                canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]]
+            },
+            {
+                path: ":societyid/buildings/:buildingName/flats/:flatId/owner",
+                component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_11__["OwnersComponent"],
                 canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]]
             },
             { path: "owners", component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_11__["OwnersComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]] },
@@ -478,7 +483,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\" *ngIf=\"societyInfo\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>buildingid</th>\n              <th>buildingname</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let building of buildingList\">\n              <td>{{building.buildingid}}</td>\n              <td>{{building.buildingname}}</td>\n            </tr>\n          </tbody>\n        </table>\n    </div>  \n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n<div [hidden]=\"!buildingList\">\n  <event-calendar-component></event-calendar-component>\n</div>\n\n"
+module.exports = "\n<div class=\"row\" *ngIf=\"societyInfo\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>buildingid</th>\n              <th>buildingname</th>\n              <th>Flats</th>\n              <th>delete</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let building of buildingList\">\n              <td>{{building.buildingid}}</td>\n              <td>{{building.buildingname}}</td>\n              <td><button mat-stroked-button (click)=\"showFlats(societyInfo[0]?.societyid,building.buildingname)\">  <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>Show Flats\n                </button></td>\n              <td><button mat-stroked-button (click)=\"goToBuilding(element.societyid)\"> <svg\n                xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\n                <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n            </button></td>\n            </tr>\n          </tbody>\n        </table>\n    </div>  \n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n<div [hidden]=\"!buildingList\">\n  <event-calendar-component></event-calendar-component>\n</div>\n\n"
 
 /***/ }),
 
@@ -551,6 +556,10 @@ var BuildingComponent = /** @class */ (function () {
             console.log(error);
             _this.society = error.message;
         });
+    };
+    BuildingComponent.prototype.showFlats = function (societyId, buildingName) {
+        this.router.navigate(['societyManagment', societyId, 'buildings', buildingName, 'flats']);
+        this._commonService.emitShowListEvent(true);
     };
     BuildingComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1022,7 +1031,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\n      buildingname : {{this.param2}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>flatid</th>\n              <th>flatname</th>\n              <th>ownerid</th>\n              <th>pendingpayment</th>\n              <th>payment button</th>\n              <th>Calender</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr  *ngFor=\"let flat of flatList\">\n              <td>{{flat.flatid}}</td>\n              <td>{{flat.flatname}}</td>\n              <td>{{flat.ownerid}}</td>\n              <td>{{flat.pendingpayment}}</td>\n              <td> \n                  <button type=\"button\" class=\"btn btn-info\" data-toggle=\"modal\" data-target=\"#pendingModal\" (click)=\"paymentID(flat)\">Pay</button>\n              </td>\n              <td> \n                <button type=\"button\" class=\"btn btn-info\" (click)=\"showCalender(flat.flatid)\">Calender</button>\n              </td>\n            </tr>\n          </tbody>\n        </table>\n    </div>\n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n\n\n\n<!-- Modal -->\n<div id=\"pendingModal\" class=\"modal fade\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n      <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n    <!-- Modal content-->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Payment Option</h4>  \n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n          \n      </div>\n      <div class=\"modal-body\">\n          <input type=\"text\" class=\"form-control\" name=\"payAmount\" placeholder=\"Enter Paynding Payment amount\" [(ngModel)]=\"payAmount\" \n          required />\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" (click)=\"paymentMethod(payAmount)\" >Pay</button>\n        <div *ngIf=\"isClosedValue\">\n          <div data-dismiss=\"modal\"></div>\n        </div>\n      </div>\n    </div>\n</form>\n  </div>\n</div>\n<div>\n  <calendar-component></calendar-component>\n</div>"
+module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\n      buildingname : {{buildingName}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>flatid</th>\n              <th>flatname</th>\n              <th>ownerid</th>\n              <th>pendingpayment</th>\n              <th>payment button</th>\n              <th>Calender</th>\n              <th>Show Owner</th>\n              <th>Flat</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr  *ngFor=\"let flat of flatList\">\n              <td>{{flat.flatid}}</td>\n              <td>{{flat.flatname}}</td>\n              <td>{{flat.ownerid}}</td>\n              <td>{{flat.pendingpayment}}</td>\n              <td> \n                  <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button data-toggle=\"modal\" data-target=\"#pendingModal\" (click)=\"paymentID(flat)\">Pay</button>\n              </td>\n              <td> \n                <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button (click)=\"showCalender(flat.flatid)\">Calender</button>\n              </td>\n              <td> \n                  <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\n                </td>\n                <td> \n                    <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\n                  </td>\n            </tr>\n          </tbody>\n        </table>\n    </div>\n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n\n\n\n<!-- Modal -->\n<div id=\"pendingModal\" class=\"modal fade\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n      <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n    <!-- Modal content-->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Payment Option</h4>  \n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n          \n      </div>\n      <div class=\"modal-body\">\n          <input type=\"text\" class=\"form-control\" name=\"payAmount\" placeholder=\"Enter Paynding Payment amount\" [(ngModel)]=\"payAmount\" \n          required />\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" (click)=\"paymentMethod(payAmount)\" >Pay</button>\n        <div *ngIf=\"isClosedValue\">\n          <div data-dismiss=\"modal\"></div>\n        </div>\n      </div>\n    </div>\n</form>\n  </div>\n</div>\n<div>\n  <calendar-component></calendar-component>\n</div>"
 
 /***/ }),
 
@@ -1074,15 +1083,15 @@ var FlatsComponent = /** @class */ (function () {
     FlatsComponent.prototype.getflatList = function () {
         var _this = this;
         this.route.params.subscribe(function (value) {
-            _this.param1 = value["societyid"]; // get param
-            _this.param2 = value["buildingid"]; // get param
-            _this._userService.getFlatList(_this.param2).subscribe(function (data) {
+            _this.societyid = value["societyid"]; // get param
+            _this.buildingName = value["buildingName"]; // get param
+            _this._userService.getFlatList(_this.societyid, _this.buildingName).subscribe(function (data) {
                 _this.flatList = data.dbResponse;
             }, function (error) {
                 console.log(error);
                 _this.society = error.message;
             });
-            _this._userService.getSocietyInfo(_this.param1).subscribe(function (data) {
+            _this._userService.getSocietyInfo(_this.societyid).subscribe(function (data) {
                 _this.societyInfo = data.dbResponse;
             }, function (error) {
                 console.log(error);
@@ -1119,6 +1128,10 @@ var FlatsComponent = /** @class */ (function () {
             console.log(error);
             _this.society = error.message;
         });
+    };
+    FlatsComponent.prototype.showOwner = function (societyid, buildingName, flatId) {
+        this.router.navigate(['societyManagment', societyid, 'buildings', buildingName, "flats", flatId, "owner"]);
+        this._commonService.emitShowListEvent(true);
     };
     FlatsComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1308,10 +1321,10 @@ var ModalComponent = /** @class */ (function () {
                 _this.buildingList = error.message;
             });
         });
-        this.buildingFormCtrl.valueChanges.subscribe(function (buildingId) {
-            console.log("on changes....", buildingId);
-            _this.bid = buildingId;
-            _this._userService.getFlatList(buildingId).subscribe(function (data) {
+        this.buildingFormCtrl.valueChanges.subscribe(function (buildingName) {
+            console.log("on changes....", buildingName);
+            _this.buildingName = buildingName;
+            _this._userService.getFlatList(_this.sid, buildingName).subscribe(function (data) {
                 _this.flatList = data.dbResponse;
             }, function (error) {
                 console.log(error);
@@ -1319,15 +1332,15 @@ var ModalComponent = /** @class */ (function () {
             });
         });
     };
-    ModalComponent.prototype.onBuildingChange = function (buildingId) {
-        var _this = this;
-        this._userService.getFlatList(buildingId).subscribe(function (data) {
-            _this.flatList = data.dbResponse;
-        }, function (error) {
-            console.log(error);
-            _this.flatList = error.message;
-        });
-    };
+    // onBuildingChange(buildingId) {
+    //   this._userService.getFlatList(buildingId).subscribe((data) => {
+    //     this.flatList = data.dbResponse;
+    //   },
+    //     error => {
+    //       console.log(error);
+    //       this.flatList = error.message;
+    //     });
+    // }
     ModalComponent.prototype.onSubmit = function () {
         console.log(this.modalName);
         if (this.modalName == 'buildings') {
@@ -1335,7 +1348,7 @@ var ModalComponent = /** @class */ (function () {
             this._commonService.emitShowListEvent(true);
         }
         else if (this.modalName == 'flats') {
-            this.router.navigate(['societyManagment', this.sid, 'buildings', this.bid, 'flats']);
+            this.router.navigate(['societyManagment', this.sid, 'buildings', this.buildingName, 'flats']);
             this._commonService.emitShowListEvent(true);
         }
         else if (this.modalName == 'owners') {
@@ -1432,9 +1445,9 @@ var OwnersComponent = /** @class */ (function () {
     OwnersComponent.prototype.getOwnerList = function () {
         var _this = this;
         this.route.params.subscribe(function (value) {
-            _this.param1 = value["societyIds"]; // get param
-            _this.param2 = value["buildingNames"]; // get param
-            _this.param3 = value["flatIds"]; // get param
+            // this.param1 = value["societyid"]; // get param
+            // this.param2 = value["buildingName"]; // get param
+            _this.param3 = value["flatId"]; // get param
             _this._userService.getOwnerList(_this.param3).subscribe(function (data) {
                 _this.ownerData = data.dbResponse;
             });
@@ -2300,9 +2313,9 @@ var UserService = /** @class */ (function () {
         return this.http.get(this.getBuildingsURL + "/societyid/?value=" + socID)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
-    UserService.prototype.getFlatList = function (buildingname) {
+    UserService.prototype.getFlatList = function (societyId, buildingname) {
         console.log(this.getFlatURL + "/buildingname/?value=" + buildingname);
-        return this.http.get(this.getFlatURL + "/buildingname/?value='" + buildingname + "'")
+        return this.http.get("http://nodebw-env.xctnnannuz.us-east-1.elasticbeanstalk.com/society/flat/societyid/buildingname/?value1=" + societyId + "&value2=\"" + buildingname + "\"")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
     UserService.prototype.getOwnerList = function (flatIds) {
@@ -2378,7 +2391,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-6 col-sm-6 text-left\">\n    <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n  </div>\n  <div class=\"col-xs-6 col-sm-6 text-right\">\n    <div routerLink=\"/home\" class=\"home-btn\">\n      <button mat-raised-button color=\"primary\">Home</button>\n    </div>\n  </div>\n\n \n<!-- </div>\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\n    \n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\n  \n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\n      </li>\n  \n      \n      <li class=\"nav-item dropdown\">\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\n          Dropdown link\n        </a>\n        <div class=\"dropdown-menu\">\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\n        </div>\n      </li>\n    </ul>\n  </nav> -->"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-3 text-left\">\n    <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n  </div>\n<!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n  <div class=\"home-btn\">\n    <button mat-raised-button color=\"primary\" (click)=\"back()\">Back</button>\n  </div>\n</div> -->\n<!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n  <div routerLink=\"/societyManagment/society\" class=\"home-btn\">\n    <button mat-raised-button color=\"primary\">Go To Society Page</button>\n  </div>\n</div> -->\n\n  <!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n    <div routerLink=\"/home\" class=\"home-btn\">\n      <button mat-raised-button color=\"primary\">Home</button>\n    </div>\n  </div> -->\n  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n      <button mat-stroked-button (click)=\"back()\">\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z\"/></svg>\n        Back\n      </button>\n    </div>\n\n  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n    <button mat-stroked-button routerLink=\"/home\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n        <path d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\" />\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n      Home\n    </button>\n  </div>\n  </div>\n\n \n<!-- </div>\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\n    \n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\n  \n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\n      </li>\n  \n      \n      <li class=\"nav-item dropdown\">\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\n          Dropdown link\n        </a>\n        <div class=\"dropdown-menu\">\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\n        </div>\n      </li>\n    </ul>\n  </nav> -->"
 
 /***/ }),
 
@@ -2393,6 +2406,7 @@ module.exports = "<div class=\"row\">\n  <div class=\"col-xs-6 col-sm-6 text-lef
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SocietyHeaderComponent", function() { return SocietyHeaderComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2403,10 +2417,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var SocietyHeaderComponent = /** @class */ (function () {
-    function SocietyHeaderComponent() {
+    function SocietyHeaderComponent(_location) {
+        this._location = _location;
     }
     SocietyHeaderComponent.prototype.ngOnInit = function () {
+    };
+    SocietyHeaderComponent.prototype.back = function () {
+        this._location.back();
     };
     SocietyHeaderComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2414,7 +2433,7 @@ var SocietyHeaderComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./society-header.component.html */ "./src/app/society-mgmt/society-header/society-header.component.html"),
             styles: [__webpack_require__(/*! ./society-header.component.css */ "./src/app/society-mgmt/society-header/society-header.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"]])
     ], SocietyHeaderComponent);
     return SocietyHeaderComponent;
 }());
@@ -2574,7 +2593,7 @@ module.exports = "table {\r\n    width: 100%;\r\n  }\r\n\r\n  .tableClass {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\n\n    <!-- Position Column -->\n    <ng-container matColumnDef=\"societyid\">\n      <th mat-cell *matHeaderCellDef> Society Id </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"societyname\">\n      <th mat-cell *matHeaderCellDef> Society Name </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"address\">\n      <th mat-cell *matHeaderCellDef> Address </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\n    </ng-container>\n\n    <!-- Symbol Column -->\n    <ng-container matColumnDef=\"pincode\">\n      <th mat-cell *matHeaderCellDef> Pincode </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\n    </ng-container>\n\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n</div>\n\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\n    <event-calendar-component></event-calendar-component>\n</div>  -->"
+module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\n\n    <!-- Position Column -->\n    <ng-container matColumnDef=\"societyid\">\n      <th mat-cell *matHeaderCellDef> Society Id </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\n    </ng-container>\n\n    <!-- Name Column -->\n    <ng-container matColumnDef=\"societyname\">\n      <th mat-cell *matHeaderCellDef> Society Name </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\n    </ng-container>\n\n    <!-- Weight Column -->\n    <ng-container matColumnDef=\"address\">\n      <th mat-cell *matHeaderCellDef> Address </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\n    </ng-container>\n\n    <!-- Symbol Column -->\n    <ng-container matColumnDef=\"pincode\">\n      <th mat-cell *matHeaderCellDef> Pincode </th>\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"showBuilding\">\n      <th mat-cell *matHeaderCellDef> Show Buildings </th>\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"goToBuilding(element.societyid)\">             <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n        <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>Buildings\n        </button>\n      </td>\n    </ng-container>\n\n    <ng-container matColumnDef=\"delete\">\n      <th mat-cell *matHeaderCellDef>delete </th>\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"deleteBuilding(element.societyid)\"> <svg\n            xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n            <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\n            <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n        </button>\n      </td>\n    </ng-container>\n\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\n  </table>\n\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\n</div>\n\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\n    <event-calendar-component></event-calendar-component>\n</div>  -->"
 
 /***/ }),
 
@@ -2619,7 +2638,7 @@ var SocietyComponent = /** @class */ (function () {
         var _this = this;
         this._userService.getSociety().subscribe(function (data) {
             _this.society = data.dbResponse;
-            _this.displayedColumns = ['societyid', 'societyname', 'address', 'pincode'];
+            _this.displayedColumns = ['societyid', 'societyname', 'address', 'pincode', 'showBuilding', 'delete'];
             var ELEMENT_DATA = data.dbResponse;
             _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"](ELEMENT_DATA);
             _this.dataSource.paginator = _this.paginator;
@@ -2642,6 +2661,10 @@ var SocietyComponent = /** @class */ (function () {
             console.log(error);
             _this.society = error.message;
         });
+    };
+    SocietyComponent.prototype.goToBuilding = function (societyId) {
+        this.router.navigate(['societyManagment', societyId, 'buildings']);
+        this._commonService.emitShowListEvent(true);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_3__["MatPaginator"]),

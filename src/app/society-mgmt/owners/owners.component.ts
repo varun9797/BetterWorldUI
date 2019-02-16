@@ -37,9 +37,9 @@ export class OwnersComponent implements OnInit {
   getOwnerList(){
 
     this.route.params.subscribe((value) => {
-      this.param1 = value["societyIds"]; // get param
-      this.param2 = value["buildingNames"]; // get param
-      this.param3 = value["flatIds"]; // get param
+     // this.param1 = value["societyid"]; // get param
+     // this.param2 = value["buildingName"]; // get param
+      this.param3 = value["flatId"]; // get param
       this._userService.getOwnerList(this.param3).subscribe((data) => {
         this.ownerData = data.dbResponse;
       })

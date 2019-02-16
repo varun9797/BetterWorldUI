@@ -22,7 +22,7 @@ export class SocietyComponent implements OnInit {
   ngOnInit() { 
     this._userService.getSociety().subscribe((data) => {
       this.society = data.dbResponse;
-      this.displayedColumns   = ['societyid', 'societyname', 'address', 'pincode'];
+      this.displayedColumns   = ['societyid', 'societyname', 'address', 'pincode','showBuilding', 'delete'];
       const ELEMENT_DATA: societyField[] =data.dbResponse;
       this.dataSource = new MatTableDataSource<societyField>(ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
@@ -48,6 +48,10 @@ export class SocietyComponent implements OnInit {
         console.log(error);
         this.society = error.message;
       });
+  }
+  goToBuilding(societyId){
+      this.router.navigate(['societyManagment', societyId, 'buildings']);
+      this._commonService.emitShowListEvent(true);
   }
 
 }

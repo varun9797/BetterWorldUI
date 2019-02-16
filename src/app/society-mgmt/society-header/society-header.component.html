@@ -1,11 +1,38 @@
 <div class="row">
-  <div class="col-xs-6 col-sm-6 text-left">
+  <div class="col-xs-12 col-sm-3 text-left">
     <img src="assets/logo.png" class="img-fluid logo-img" />
   </div>
-  <div class="col-xs-6 col-sm-6 text-right">
+<!-- <div class="col-xs-3 col-sm-3 text-right">
+  <div class="home-btn">
+    <button mat-raised-button color="primary" (click)="back()">Back</button>
+  </div>
+</div> -->
+<!-- <div class="col-xs-3 col-sm-3 text-right">
+  <div routerLink="/societyManagment/society" class="home-btn">
+    <button mat-raised-button color="primary">Go To Society Page</button>
+  </div>
+</div> -->
+
+  <!-- <div class="col-xs-3 col-sm-3 text-right">
     <div routerLink="/home" class="home-btn">
       <button mat-raised-button color="primary">Home</button>
     </div>
+  </div> -->
+  <div class="col-xs-12 col-sm-3 text-center contentContainer">
+      <button mat-stroked-button (click)="back()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z"/></svg>
+        Back
+      </button>
+    </div>
+
+  <div class="col-xs-12 col-sm-3 text-center contentContainer">
+    <button mat-stroked-button routerLink="/home">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+        <path d="M0 0h24v24H0z" fill="none" /></svg>
+      Home
+    </button>
+  </div>
   </div>
 
  

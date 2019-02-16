@@ -54,4 +54,10 @@ export class BuildingComponent implements OnInit, OnChanges {
       this.society = error.message;
     });
   }
+
+  showFlats(societyId, buildingName){
+    this.router.navigate(['societyManagment', societyId, 'buildings', buildingName, 'flats']);
+    this._commonService.emitShowListEvent(true);
+  }
+
 }

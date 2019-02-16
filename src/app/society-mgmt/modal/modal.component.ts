@@ -12,7 +12,7 @@ import {FormControl} from '@angular/forms';
 export class ModalComponent implements OnInit {
   societyList;
   sid;
-  bid;
+  buildingName;
   buildingList;
   flatList;
   buildingObj;
@@ -50,10 +50,10 @@ export class ModalComponent implements OnInit {
             this.buildingList = error.message;
           });
       });
-      this.buildingFormCtrl.valueChanges.subscribe(buildingId => {
-        console.log("on changes....",buildingId);
-        this.bid=buildingId;
-        this._userService.getFlatList(buildingId).subscribe((data) => {
+      this.buildingFormCtrl.valueChanges.subscribe(buildingName => {
+        console.log("on changes....",buildingName);
+        this.buildingName=buildingName;
+        this._userService.getFlatList(this.sid,buildingName).subscribe((data) => {
           this.flatList = data.dbResponse;
         },
           error => {
@@ -64,15 +64,15 @@ export class ModalComponent implements OnInit {
     
   }
 
-  onBuildingChange(buildingId) {
-    this._userService.getFlatList(buildingId).subscribe((data) => {
-      this.flatList = data.dbResponse;
-    },
-      error => {
-        console.log(error);
-        this.flatList = error.message;
-      });
-  }
+  // onBuildingChange(buildingId) {
+  //   this._userService.getFlatList(buildingId).subscribe((data) => {
+  //     this.flatList = data.dbResponse;
+  //   },
+  //     error => {
+  //       console.log(error);
+  //       this.flatList = error.message;
+  //     });
+  // }
 
   onSubmit(){
     console.log(this.modalName);
@@ -81,7 +81,7 @@ export class ModalComponent implements OnInit {
       this._commonService.emitShowListEvent(true);
     }
     else if(this.modalName=='flats') {
-      this.router.navigate(['societyManagment',this.sid,'buildings',this.bid,'flats']);
+      this.router.navigate(['societyManagment',this.sid,'buildings',this.buildingName,'flats']);
       this._commonService.emitShowListEvent(true);
      }
      else if(this.modalName=='owners') {   
