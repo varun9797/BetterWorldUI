@@ -536,6 +536,7 @@ var BuildingComponent = /** @class */ (function () {
             _this.updateCalendar(_this.societyid);
             _this._userService.getBuilding(_this.societyid).subscribe(function (data) {
                 _this.buildingList = data.dbResponse;
+                _this._commonService.emitActiveType('building');
             }, function (error) {
                 console.log(error);
                 _this.society = error.message;
@@ -1087,6 +1088,7 @@ var FlatsComponent = /** @class */ (function () {
             _this.buildingName = value["buildingName"]; // get param
             _this._userService.getFlatList(_this.societyid, _this.buildingName).subscribe(function (data) {
                 _this.flatList = data.dbResponse;
+                _this._commonService.emitActiveType('flat');
             }, function (error) {
                 console.log(error);
                 _this.society = error.message;
@@ -1200,7 +1202,8 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(api, _tokenService, router) {
+    function LoginComponent(route, api, _tokenService, router) {
+        this.route = route;
         this.api = api;
         this._tokenService = _tokenService;
         this.router = router;
@@ -1209,6 +1212,7 @@ var LoginComponent = /** @class */ (function () {
         this.password = "soword";
     }
     LoginComponent.prototype.ngOnInit = function () {
+        this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || 'societyManagment/society';
     };
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -1216,8 +1220,11 @@ var LoginComponent = /** @class */ (function () {
             .subscribe(function (r) {
             if (r.token) {
                 // alert(r.token);
+                console.log("token set success fully");
                 _this._tokenService.setToken(r.token);
-                _this.router.navigateByUrl('/societyManagment');
+                //this.router.navigateByUrl(this.redirectUrl);
+                _this.router.navigate(['societyManagment', 'society']);
+                //this.router.navigateByUrl('/societyManagment');
             }
         }, function (err) {
             alert(err);
@@ -1229,7 +1236,7 @@ var LoginComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.component.html */ "./src/app/society-mgmt/login/login.component.html"),
             styles: [__webpack_require__(/*! ./login.component.css */ "./src/app/society-mgmt/login/login.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _services_token_service__WEBPACK_IMPORTED_MODULE_3__["TokenService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"], _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"], _services_token_service__WEBPACK_IMPORTED_MODULE_3__["TokenService"], _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
     ], LoginComponent);
     return LoginComponent;
 }());
@@ -1256,7 +1263,7 @@ module.exports = ".example-additional-selection {\n    opacity: 0.75;\n    font-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div>\n    <mat-form-field  *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')\">\n        <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"societyFormCtrl\" multiple> -->\n        <mat-select placeholder=\"Select Society\"  [formControl]=\"societyFormCtrl\">\n          <!-- <mat-select-trigger>\n            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}\n            <span *ngIf=\"societyFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n            </span>\n          </mat-select-trigger> -->\n          <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\">{{s.societyname}}</mat-option>\n        </mat-select>\n      </mat-form-field>\n      <mat-form-field *ngIf=\"(modalName == 'flats' || modalName == 'owners')\">\n          <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n          <mat-select placeholder=\"Select flat\"  [formControl]=\"buildingFormCtrl\">\n            <!-- <mat-select-trigger>\n              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}\n              <span *ngIf=\"buildingFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n              </span>\n            </mat-select-trigger> -->\n            <mat-option *ngFor=\"let building of buildingList\" [value]=\"building.buildingname\">{{building.buildingname}}</mat-option>\n          </mat-select>\n        </mat-form-field>\n        <mat-form-field  *ngIf=\"modalName == 'owners'\">\n            <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n            <mat-select placeholder=\"Select owners\"  [formControl]=\"ownerFormCtrl\" multiple>\n              <mat-select-trigger>\n                {{ownerFormCtrl.value ? ownerFormCtrl.value[0] : ''}}\n                <span *ngIf=\"ownerFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                  (+{{ownerFormCtrl.value.length - 1}} {{ownerFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n                </span>\n              </mat-select-trigger>\n              <mat-option *ngFor=\"let flat of flatList\" [value]=\"flat.flatname\">{{flat.flatname}}</mat-option>\n            </mat-select>\n          </mat-form-field>\n</div>\n<button *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )\" type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmit()\">Submit</button>"
+module.exports = "\n\n<div>\n    <mat-form-field  *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')\">\n        <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"societyFormCtrl\" multiple> -->\n        <mat-select placeholder=\"Select Society\"  [formControl]=\"societyFormCtrl\">\n          <!-- <mat-select-trigger>\n            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}\n            <span *ngIf=\"societyFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n            </span>\n          </mat-select-trigger> -->\n          <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\">{{s.societyname}}</mat-option>\n        </mat-select>\n      </mat-form-field>\n      <mat-form-field *ngIf=\"(modalName == 'flats' || modalName == 'owners')\">\n          <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n          <mat-select placeholder=\"Select building\"  [formControl]=\"buildingFormCtrl\">\n            <!-- <mat-select-trigger>\n              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}\n              <span *ngIf=\"buildingFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n              </span>\n            </mat-select-trigger> -->\n            <mat-option *ngFor=\"let building of buildingList\" [value]=\"building.buildingname\">{{building.buildingname}}</mat-option>\n          </mat-select>\n        </mat-form-field>\n        <mat-form-field  *ngIf=\"modalName == 'owners'\">\n            <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n            <mat-select placeholder=\"Select flat\"  [formControl]=\"flatFormCtrl\" multiple>\n              <mat-select-trigger>\n                {{flatFormCtrl.value ? flatFormCtrl.value[0] : ''}}\n                <span *ngIf=\"flatFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                  (+{{flatFormCtrl.value.length - 1}} {{flatFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n                </span>\n              </mat-select-trigger>\n              <mat-option *ngFor=\"let flat of flatList\" [value]=\"flat.flatname\">{{flat.flatname}}</mat-option>\n            </mat-select>\n          </mat-form-field>\n</div>\n<button *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )\" type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmit()\">Submit</button>"
 
 /***/ }),
 
@@ -1301,7 +1308,7 @@ var ModalComponent = /** @class */ (function () {
         this._commonService = _commonService;
         this.societyFormCtrl = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]();
         this.buildingFormCtrl = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]();
-        this.ownerFormCtrl = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]();
+        this.flatFormCtrl = new _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormControl"]();
     }
     ModalComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1354,6 +1361,9 @@ var ModalComponent = /** @class */ (function () {
         else if (this.modalName == 'owners') {
             this.router.navigate(['societyManagment', 'owners']);
             this._commonService.emitShowListEvent(true);
+            // setTimeout(()=>{
+            //   this._commonService.emitOwnerListRequestobj({societyId:this.societyFormCtrl.value,buildingName:this.buildingFormCtrl.value,flatid:this.flatFormCtrl.value});
+            // },1000) 
         }
     };
     __decorate([
@@ -1394,7 +1404,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <div class=\"col-md-12 contentContainer\">\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>IsAdmin</th>\n            <th>Phone No</th>\n            <th>Email</th>\n            <th>Age</th>\n            <th>Gender</th>\n            <th>Password</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let owner of ownerData\">\n            <td>{{owner.ownerid}}</td>\n            <td>{{owner.ownername}}</td>\n            <td>{{owner.isadmin}}</td>\n            <td>{{owner.phonenumber}}</td>\n            <td>{{owner.email}}</td>\n            <td>{{owner.age}}</td>\n            <td>{{owner.gender}}</td>\n            <td>{{owner.password}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    </div>\n"
+module.exports = "<div class=\"row\">\n    <h3>Owner Details</h3>\n    <div class=\"col-md-12 contentContainer\">\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>IsAdmin</th>\n            <th>Phone No</th>\n            <th>Email</th>\n            <th>Age</th>\n            <th>Gender</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let owner of ownerData\">\n            <td>{{owner.idOwner}}</td>\n            <td>{{owner.ownerName}}</td>\n            <td>{{owner.isAdmin}}</td>\n            <td>{{owner.ownerPhoneNumber}}</td>\n            <td>{{owner.ownerEmail}}</td>\n            <td>{{owner.ownerAge}}</td>\n            <td>{{owner.ownerGender}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    </div>\n"
 
 /***/ }),
 
@@ -1411,6 +1421,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../services/common.service */ "./src/app/society-mgmt/services/common.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1423,12 +1434,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var OwnersComponent = /** @class */ (function () {
-    function OwnersComponent(_userService, router, route) {
+    function OwnersComponent(_userService, router, route, _commonService) {
         this._userService = _userService;
         this.router = router;
         this.route = route;
-        this.model = {};
+        this._commonService = _commonService;
     }
     OwnersComponent.prototype.ngOnInit = function () {
         this.getOwnerList();
@@ -1436,21 +1448,32 @@ var OwnersComponent = /** @class */ (function () {
     OwnersComponent.prototype.ngOnChanges = function () {
         this.getOwnerList();
     };
-    //getSelectedTypelist(){
-    //console.log();
-    // this._userService.getSelectedTypelist(this.societyIds, this.buildingNames, this.flatIds).subscribe((data)=> {
-    // console.log("data is",this.ownerData)
-    // });
-    //}
+    // getSelectedTypelist(){
+    //   console.log();
+    //  this._userService.getSelectedTypelist(this.societyIds, this.buildingNames, this.flatIds).subscribe((data)=> {
+    //    console.log("data is",this.ownerData)
+    //  });
+    // }
+    // listenEventFromModal(){
+    //   this._commonService.eventOwnerRequestObj.subscribe((flatObj)=>{
+    //     this._userService.getSelectedTypelist([flatObj.societyId],[flatObj.buildingName],flatObj.flatid).subscribe((data:any) => {
+    //       this.ownerData = data.dbResponse[0];
+    //       this._commonService.emitActiveType('owner');
+    //     })
+    //   });
+    // }
     OwnersComponent.prototype.getOwnerList = function () {
         var _this = this;
         this.route.params.subscribe(function (value) {
-            // this.param1 = value["societyid"]; // get param
-            // this.param2 = value["buildingName"]; // get param
-            _this.param3 = value["flatId"]; // get param
-            _this._userService.getOwnerList(_this.param3).subscribe(function (data) {
-                _this.ownerData = data.dbResponse;
-            });
+            var societyid = value["societyid"]; // get param
+            var buildingName = value["buildingName"]; // get param
+            var flatId = value["flatId"]; // get param
+            if (true) {
+                _this._userService.getSelectedTypelist([societyid], [buildingName], [flatId]).subscribe(function (data) {
+                    _this.ownerData = data.dbResponse[0];
+                    _this._commonService.emitActiveType('owner');
+                });
+            }
         });
     };
     OwnersComponent = __decorate([
@@ -1460,7 +1483,7 @@ var OwnersComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./owners.component.css */ "./src/app/society-mgmt/owners/owners.component.css")]
         }),
         __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"], _services_common_service__WEBPACK_IMPORTED_MODULE_3__["CommonService"]])
     ], OwnersComponent);
     return OwnersComponent;
 }());
@@ -2135,6 +2158,7 @@ var CommonService = /** @class */ (function () {
         this.calenderData = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.eventCalenderData = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.eventShowList = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.eventIsActiveType = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
     }
     CommonService.prototype.emitCalanderData = function (paymentHistory) {
         this.calenderData.emit(paymentHistory);
@@ -2144,6 +2168,12 @@ var CommonService = /** @class */ (function () {
     };
     CommonService.prototype.emitShowListEvent = function (showListEvent) {
         this.eventShowList.emit(showListEvent);
+    };
+    CommonService.prototype.emitActiveType = function (type) {
+        this.eventIsActiveType.emit(type);
+    };
+    CommonService.prototype.emitOwnerListRequestobj = function (obj) {
+        this.eventOwnerRequestObj = obj;
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
@@ -2332,9 +2362,7 @@ var UserService = /** @class */ (function () {
             "flatid": flatObj.flatid
         };
         console.log(paramList);
-        return this.http.put(this.putPayment, paramList, {
-            headers: headers
-        })
+        return this.http.put(this.putPayment, paramList, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
     UserService.prototype.getFlatPaymentHistory = function (flatId) {
@@ -2391,7 +2419,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-3 text-left\">\n    <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n  </div>\n<!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n  <div class=\"home-btn\">\n    <button mat-raised-button color=\"primary\" (click)=\"back()\">Back</button>\n  </div>\n</div> -->\n<!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n  <div routerLink=\"/societyManagment/society\" class=\"home-btn\">\n    <button mat-raised-button color=\"primary\">Go To Society Page</button>\n  </div>\n</div> -->\n\n  <!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n    <div routerLink=\"/home\" class=\"home-btn\">\n      <button mat-raised-button color=\"primary\">Home</button>\n    </div>\n  </div> -->\n  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n      <button mat-stroked-button (click)=\"back()\">\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z\"/></svg>\n        Back\n      </button>\n    </div>\n\n  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n    <button mat-stroked-button routerLink=\"/home\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n        <path d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\" />\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n      Home\n    </button>\n  </div>\n  </div>\n\n \n<!-- </div>\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\n    \n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\n  \n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\n      </li>\n  \n      \n      <li class=\"nav-item dropdown\">\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\n          Dropdown link\n        </a>\n        <div class=\"dropdown-menu\">\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\n        </div>\n      </li>\n    </ul>\n  </nav> -->"
+module.exports = "<div class=\"row\">\n  <div class=\"col-xs-12 col-sm-3 text-left\">\n    <img routerLink=\"/home\" src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\n  </div>\n<!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n  <div class=\"home-btn\">\n    <button mat-raised-button color=\"primary\" (click)=\"back()\">Back</button>\n  </div>\n</div> -->\n<!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n  <div routerLink=\"/societyManagment/society\" class=\"home-btn\">\n    <button mat-raised-button color=\"primary\">Go To Society Page</button>\n  </div>\n</div> -->\n\n  <!-- <div class=\"col-xs-3 col-sm-3 text-right\">\n    <div routerLink=\"/home\" class=\"home-btn\">\n      <button mat-raised-button color=\"primary\">Home</button>\n    </div>\n  </div> -->\n  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n      <button mat-stroked-button (click)=\"back()\">\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M0 0h24v24H0z\" fill=\"none\"/><path d=\"M21 11H6.83l3.58-3.59L9 6l-6 6 6 6 1.41-1.41L6.83 13H21z\"/></svg>\n        Back\n      </button>\n    </div>\n\n  <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n    <button mat-stroked-button routerLink=\"/home\">\n      <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n        <path d=\"M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z\" />\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n      Home\n    </button>\n  </div>\n  </div>\n\n \n<!-- </div>\n<nav class=\"navbar navbar-expand-sm bg-dark navbar-dark\">\n    \n    <a class=\"navbar-brand\" href=\"#\">Logo</a>\n  \n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 1</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"#\">Link 2</a>\n      </li>\n  \n      \n      <li class=\"nav-item dropdown\">\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbardrop\" data-toggle=\"dropdown\">\n          Dropdown link\n        </a>\n        <div class=\"dropdown-menu\">\n          <a class=\"dropdown-item\" href=\"#\">Link 1</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 2</a>\n          <a class=\"dropdown-item\" href=\"#\">Link 3</a>\n        </div>\n      </li>\n    </ul>\n  </nav> -->"
 
 /***/ }),
 
@@ -2460,7 +2488,7 @@ module.exports = "#content{\n    overflow:scroll;\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\n    <app-society-header></app-society-header>\n    <div class=\"row col-md-12 text-center\">\n      <div class=\"col-md-3\"></div>\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\n      </div>\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\n      </div>\n      <div class=\"col-md-3\">\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\n      </div>\n      <div class=\"col-md-3\"></div>\n    </div>\n    <!--<mat-divider></mat-divider>-->\n  <div class=\"row\">\n    <div class=\"col-sm-12 text-center contentContainer\">\n      <br>\n      <h2><b>Know More About Society</b></h2>\n      <div class=\"row\">\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div routerLink=\"/societyManagment/society\" class=\"btn btn-outline-warning homeicons w-100\" (click)=\"ShowModal('society')\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n            Society</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('buildings')\"\n            class=\"btn btn-outline-warning homeicons w-100\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\n            Buildings</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('flats')\" class=\"btn btn-outline-danger homeicons w-100\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\n            Flats</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('owners')\" class=\"btn btn-outline-danger homeicons w-100\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\n            owners</div>\n        </div>\n      </div>\n\n      <div *ngIf=\"showSpinner\">\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\n      </div>\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\n        <app-modal [modalName]=\"modalVar\"></app-modal>\n      </div>\n\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\n        <router-outlet></router-outlet>\n      </div>\n    </div>\n\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n        <img src=\"assets/banner.png\">\n      </div> -->\n\n  </div>\n</div>"
+module.exports = "<div class=\"container mainContainer\">\n    <app-society-header></app-society-header>\n    <div class=\"row col-md-12 text-center\">\n      <div class=\"col-md-3\"></div>\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\n      </div>\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\n      </div>\n      <div class=\"col-md-3\">\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\n      </div>\n      <div class=\"col-md-3\"></div>\n    </div>\n    <!--<mat-divider></mat-divider>-->\n  <div class=\"row\">\n    <div class=\"col-sm-12 text-center contentContainer\">\n      <br>\n      <h2><b>I Love My Society</b></h2>\n      <div class=\"row\">\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div routerLink=\"/societyManagment/society\" class=\"btn  homeicons w-100\" [class.btn-success]=\"buttonClickObj.society\" [class.btn-outline-warning]=\"!buttonClickObj.society\" (click)=\"ShowModal('society')\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n            Society</div>\n        </div>\n        \n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('buildings')\"\n            class=\"btn homeicons w-100\" [class.btn-success]=\"buttonClickObj.building\" [class.btn-outline-warning]=\"!buttonClickObj.building\">\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\n            Buildings</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('flats')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.flat\" [class.btn-outline-warning]=\"!buttonClickObj.flat\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\n            Flats</div>\n        </div>\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\n          <div (click)=\"ShowModal('owners')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.owner\" [class.btn-outline-warning]=\"!buttonClickObj.owner\">\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\n            owners</div>\n        </div>\n      </div>\n\n      <div *ngIf=\"showSpinner\">\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\n      </div>\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\n        <app-modal [modalName]=\"modalVar\"></app-modal>\n      </div>\n\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\n        <router-outlet></router-outlet>\n      </div>\n    </div>\n\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n        <img src=\"assets/banner.png\">\n      </div> -->\n\n  </div>\n</div>"
 
 /***/ }),
 
@@ -2492,11 +2520,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var SocietyMgmtComponent = /** @class */ (function () {
-    function SocietyMgmtComponent(_tokenService, router, _commonService) {
+    function SocietyMgmtComponent(_activateroute, _tokenService, router, _commonService) {
+        this._activateroute = _activateroute;
         this._tokenService = _tokenService;
         this.router = router;
         this._commonService = _commonService;
         this.isLogged = false;
+        this.buttonClickObj = {
+            society: false,
+            building: false,
+            flat: false,
+            owner: false
+        };
     }
     SocietyMgmtComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -2516,6 +2551,33 @@ var SocietyMgmtComponent = /** @class */ (function () {
             else {
                 _this.showList = false;
             }
+        });
+        this.changeButtonColor();
+    };
+    SocietyMgmtComponent.prototype.changeButtonColor = function () {
+        var _this = this;
+        this._commonService.eventIsActiveType.subscribe(function (value) {
+            console.log("********", value);
+            if (value == "owner") {
+                _this.buttonClickObj.society = true;
+                _this.buttonClickObj.building = true;
+                _this.buttonClickObj.flat = true;
+                _this.buttonClickObj.owner = true;
+            }
+            else if (value == "flat") {
+                _this.buttonClickObj.society = true;
+                _this.buttonClickObj.building = true;
+                _this.buttonClickObj.flat = true;
+                _this.buttonClickObj.owner = false;
+            }
+            else if (value == "building") {
+                _this.buttonClickObj.society = true;
+                _this.buttonClickObj.building = true;
+                _this.buttonClickObj.flat = false;
+                _this.buttonClickObj.owner = false;
+            }
+        }, function (error) {
+            console.log(error);
         });
     };
     SocietyMgmtComponent.prototype.ShowModal = function (type) {
@@ -2547,6 +2609,11 @@ var SocietyMgmtComponent = /** @class */ (function () {
         }
         else {
             setTimeout(function () {
+                //Handling color of button
+                _this.buttonClickObj.society = true;
+                _this.buttonClickObj.building = false;
+                _this.buttonClickObj.flat = false;
+                _this.buttonClickObj.owner = false;
                 _this.showList = true;
                 _this.modalVar = type;
                 _this.showSpinner = false;
@@ -2566,7 +2633,7 @@ var SocietyMgmtComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./society-mgmt.component.html */ "./src/app/society-mgmt/society-mgmt.component.html"),
             styles: [__webpack_require__(/*! ./society-mgmt.component.css */ "./src/app/society-mgmt/society-mgmt.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_token_service__WEBPACK_IMPORTED_MODULE_1__["TokenService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_common_service__WEBPACK_IMPORTED_MODULE_2__["CommonService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _services_token_service__WEBPACK_IMPORTED_MODULE_1__["TokenService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _services_common_service__WEBPACK_IMPORTED_MODULE_2__["CommonService"]])
     ], SocietyMgmtComponent);
     return SocietyMgmtComponent;
 }());
