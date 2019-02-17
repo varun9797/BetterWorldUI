@@ -29,6 +29,7 @@ export class BuildingComponent implements OnInit, OnChanges {
       this.updateCalendar(this.societyid);
       this._userService.getBuilding(this.societyid).subscribe((data) => {
         this.buildingList = data.dbResponse;
+        this._commonService.emitActiveType('building');
       },
         error => {
           console.log(error);

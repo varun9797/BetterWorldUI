@@ -15,7 +15,7 @@
       </mat-form-field>
       <mat-form-field *ngIf="(modalName == 'flats' || modalName == 'owners')">
           <!-- <mat-select placeholder="Select Society" [formControl]="buildingFormCtrl" multiple> -->
-          <mat-select placeholder="Select flat"  [formControl]="buildingFormCtrl">
+          <mat-select placeholder="Select building"  [formControl]="buildingFormCtrl">
             <!-- <mat-select-trigger>
               {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}
               <span *ngIf="buildingFormCtrl.value?.length > 1" class="example-additional-selection">
@@ -27,11 +27,11 @@
         </mat-form-field>
         <mat-form-field  *ngIf="modalName == 'owners'">
             <!-- <mat-select placeholder="Select Society" [formControl]="buildingFormCtrl" multiple> -->
-            <mat-select placeholder="Select owners"  [formControl]="ownerFormCtrl" multiple>
+            <mat-select placeholder="Select flat"  [formControl]="flatFormCtrl" multiple>
               <mat-select-trigger>
-                {{ownerFormCtrl.value ? ownerFormCtrl.value[0] : ''}}
-                <span *ngIf="ownerFormCtrl.value?.length > 1" class="example-additional-selection">
-                  (+{{ownerFormCtrl.value.length - 1}} {{ownerFormCtrl.value?.length === 2 ? 'other' : 'others'}})
+                {{flatFormCtrl.value ? flatFormCtrl.value[0] : ''}}
+                <span *ngIf="flatFormCtrl.value?.length > 1" class="example-additional-selection">
+                  (+{{flatFormCtrl.value.length - 1}} {{flatFormCtrl.value?.length === 2 ? 'other' : 'others'}})
                 </span>
               </mat-select-trigger>
               <mat-option *ngFor="let flat of flatList" [value]="flat.flatname">{{flat.flatname}}</mat-option>

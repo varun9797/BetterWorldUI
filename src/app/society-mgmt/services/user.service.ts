@@ -11,14 +11,14 @@ export class UserService {
   TOKEN = 'TOKEN';
   constructor(public http: HttpClient) { }
 
-  getSocietyURL = config.default.HOST_NAME+"/society/society";
-  getBuildingsURL = config.default.HOST_NAME+"/society/building";
-  getOwnerURL = config.default.HOST_NAME+"/society/owner";
-  getFlatURL = config.default.HOST_NAME+"/society/flat";
-  putPayment = config.default.HOST_NAME+"/society/flat/pendingPayment";
-  flatPaymentHistory = config.default.HOST_NAME+"/society/paymenthistory";
-  societyEventURL = config.default.HOST_NAME+"/society/societyEvent";
-  selectedTypeList = config.default.HOST_NAME+"/society/owner/list";
+  getSocietyURL = config.default.HOST_NAME + "/society/society";
+  getBuildingsURL = config.default.HOST_NAME + "/society/building";
+  getOwnerURL = config.default.HOST_NAME + "/society/owner";
+  getFlatURL = config.default.HOST_NAME + "/society/flat";
+  putPayment = config.default.HOST_NAME + "/society/flat/pendingPayment";
+  flatPaymentHistory = config.default.HOST_NAME + "/society/paymenthistory";
+  societyEventURL = config.default.HOST_NAME + "/society/societyEvent";
+  selectedTypeList = config.default.HOST_NAME + "/society/owner/list";
 
   getOwner(query): Observable<any> {
     console.log(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`);
@@ -63,22 +63,20 @@ export class UserService {
   }
 
   putFlatPayment(flatObj): Observable<any> {
-    let headers = new HttpHeaders().set('token',localStorage.getItem(this.TOKEN));
+    let headers = new HttpHeaders().set('token', localStorage.getItem(this.TOKEN));
     console.log(flatObj);
     let paramList = {
       "pendingPayment": flatObj.pendingPayment,
-           "ownerid": flatObj.ownerid,
-           "flatid": flatObj.flatid
-   };
-   console.log(paramList);
-    return this.http.put(this.putPayment, paramList, {
-      headers:headers
-    })
-    .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      "ownerid": flatObj.ownerid,
+      "flatid": flatObj.flatid
+    };
+    console.log(paramList);
+    return this.http.put(this.putPayment, paramList, { headers: headers })
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }
   getFlatPaymentHistory(flatId): Observable<any> {
-    console.log("uuuuuuuu",`${this.flatPaymentHistory}/flatid/?value=${flatId}`);
+    console.log("uuuuuuuu", `${this.flatPaymentHistory}/flatid/?value=${flatId}`);
     return this.http.get(`${this.flatPaymentHistory}/flatid/?value=${flatId}`)
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));

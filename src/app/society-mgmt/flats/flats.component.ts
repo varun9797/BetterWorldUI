@@ -35,6 +35,7 @@ export class FlatsComponent implements OnInit, OnChanges {
       this.buildingName = value["buildingName"]; // get param
       this._userService.getFlatList(this.societyid, this.buildingName).subscribe((data) => {
         this.flatList = data.dbResponse;
+        this._commonService.emitActiveType('flat');
       },
       error => {
         console.log(error);

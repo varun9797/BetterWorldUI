@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from './services/token.service'
 import { CommonService } from './services/common.service'
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-society-mgmt',
@@ -13,7 +13,14 @@ export class SocietyMgmtComponent implements OnInit {
   isLogged = false;
   showList;
   showSpinner;
-  constructor(public _tokenService : TokenService, public router: Router, public _commonService:CommonService ) { }
+  buttonClickObj={
+    society:false,
+    building:false,
+    flat:false,
+    owner:false
+  };
+  constructor(private _activateroute: 
+    ActivatedRoute,public _tokenService : TokenService, public router: Router, public _commonService:CommonService ) { }
 
   ngOnInit() {
     console.log("tttttttt",localStorage.getItem('TOKEN'));
@@ -32,9 +39,35 @@ export class SocietyMgmtComponent implements OnInit {
           this.showList = false;
         }
     })
+
+    this.changeButtonColor();
     
   }
-  
+  changeButtonColor() {
+    this._commonService.eventIsActiveType.subscribe((value) => {
+      console.log("********",value)
+      if(value=="owner") {
+        this.buttonClickObj.society=true;
+        this.buttonClickObj.building=true;
+        this.buttonClickObj.flat = true;
+        this.buttonClickObj.owner=true;
+      } else if(value=="flat") {
+        this.buttonClickObj.society=true;
+        this.buttonClickObj.building=true;
+        this.buttonClickObj.flat = true;
+        this.buttonClickObj.owner=false;
+      } else if(value=="building") {
+        this.buttonClickObj.society=true;
+        this.buttonClickObj.building=true;
+        this.buttonClickObj.flat=false;
+        this.buttonClickObj.owner=false;
+      }
+    },
+      error => {
+        console.log(error);
+      });
+  }
+
 
   ShowModal(type){
     this.showSpinner = true;
@@ -62,6 +95,12 @@ export class SocietyMgmtComponent implements OnInit {
 
     } else {
       setTimeout(()=>{
+        //Handling color of button
+        this.buttonClickObj.society=true;
+        this.buttonClickObj.building=false;
+        this.buttonClickObj.flat = false;
+        this.buttonClickObj.owner=false;
+
         this.showList = true;
         this.modalVar = type; 
         this.showSpinner = false;

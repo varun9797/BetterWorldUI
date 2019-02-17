@@ -41,7 +41,7 @@ export class NeedAuthGuard implements CanActivate {
               this.router.createUrlTree(
                 ['/login'], {
                   queryParams: {
-                    redirectUrl
+                    redirectUrl:redirectUrl
                   }
                 }
               )
