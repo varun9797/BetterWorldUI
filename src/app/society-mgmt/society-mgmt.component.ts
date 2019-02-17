@@ -46,17 +46,17 @@ export class SocietyMgmtComponent implements OnInit {
   changeButtonColor() {
     this._commonService.eventIsActiveType.subscribe((value) => {
       console.log("********",value)
-      if(value=="owner") {
+      if(value=="owners") {
         this.buttonClickObj.society=true;
         this.buttonClickObj.building=true;
         this.buttonClickObj.flat = true;
         this.buttonClickObj.owner=true;
-      } else if(value=="flat") {
+      } else if(value=="flats") {
         this.buttonClickObj.society=true;
         this.buttonClickObj.building=true;
         this.buttonClickObj.flat = true;
         this.buttonClickObj.owner=false;
-      } else if(value=="building") {
+      } else if(value=="buildings") {
         this.buttonClickObj.society=true;
         this.buttonClickObj.building=true;
         this.buttonClickObj.flat=false;

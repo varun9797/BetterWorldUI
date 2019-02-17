@@ -12,6 +12,8 @@ import { CommonService } from '../services/common.service'
 export class BuildingComponent implements OnInit, OnChanges {
   society; buildingList;
   societyid; societyInfo: any;
+  showSpinner;
+  displayText;
   constructor(public _userService: UserService, 
     public router: Router, private route: ActivatedRoute, public _commonService: CommonService ) { }
 
@@ -23,17 +25,25 @@ export class BuildingComponent implements OnInit, OnChanges {
   }
   getBuildingList() {
     //this.societyid = this.route.snapshot.paramMap.get('societyid');
+    this.displayText=""
     this.route.params.subscribe((value) => {
       this.societyid = value["societyid"]; // get param
       console.log("this.societyid:::" + JSON.stringify(value));
       this.updateCalendar(this.societyid);
+      this.showSpinner=true;
+      this.displayText=""
       this._userService.getBuilding(this.societyid).subscribe((data) => {
         this.buildingList = data.dbResponse;
-        this._commonService.emitActiveType('building');
+        this.showSpinner=false;
+        if(!(this.buildingList[0] && this.buildingList[0].buildingid)){
+          this.displayText="No Record Found"
+        }
+        this._commonService.emitActiveType('buildings');
       },
         error => {
           console.log(error);
           this.society = error.message;
+          this.showSpinner=false;
         });
 
       this._userService.getSocietyInfo(this.societyid).subscribe((data) => {

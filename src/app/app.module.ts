@@ -60,6 +60,11 @@ const routes: Routes = [
         path: ":societyid/buildings/:buildingName/flats/:flatId/owner",
         component: OwnersComponent,
         canActivate: [NeedAuthGuard]
+      },  
+      {
+        path: ":societyid/buildings/:buildingName/owners",
+        component: OwnersComponent,
+        canActivate: [NeedAuthGuard]
       },
       { path: "owners", component: OwnersComponent, canActivate: [NeedAuthGuard] },
       { path: "tenats", component: TenantComponent, canActivate: [NeedAuthGuard] },

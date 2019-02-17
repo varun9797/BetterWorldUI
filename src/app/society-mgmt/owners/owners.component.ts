@@ -10,6 +10,8 @@ import {CommonService} from './../services/common.service'
 })
 export class OwnersComponent implements OnInit {
   ownerData;
+  showSpinner;
+  displayText= "";
   constructor(public _userService : UserService, public router: Router, private route: 
     ActivatedRoute, public _commonService:CommonService) { }
 
@@ -36,16 +38,23 @@ export class OwnersComponent implements OnInit {
   // }
 
   getOwnerList(){
+    this.displayText= "";
     this.route.params.subscribe((value) => {
-     let societyid = value["societyid"]; // get param
-      let buildingName = value["buildingName"]; // get param
-      let flatId = value["flatId"]; // get param
-      if(true) {
-        this._userService.getSelectedTypelist([societyid],[buildingName],[flatId]).subscribe((data:any) => {
+     let societyid = value["societyid"]? [value["societyid"]]:[]; // get param
+      let buildingName = value["buildingName"] ? [value["buildingName"]]:[]; // get param
+      let flatId = value["flatId"] ?[value["flatId"]]:[]; // get param
+      this.showSpinner=true
+      this.displayText= "";
+        this._userService.getSelectedTypelist(societyid,buildingName,flatId).subscribe((data:any) => {
+          this.showSpinner=false;
           this.ownerData = data.dbResponse[0];
-          this._commonService.emitActiveType('owner');
+          if(!(this.ownerData[0] && this.ownerData[0].idOwner)){
+            this.displayText="No Record Found"
+          }
+          this._commonService.emitActiveType('owners');
+
         })
-      }
+      
     });
   }
 

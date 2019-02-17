@@ -25,8 +25,7 @@
             <mat-option *ngFor="let building of buildingList" [value]="building.buildingname">{{building.buildingname}}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field  *ngIf="modalName == 'owners'">
-            <!-- <mat-select placeholder="Select Society" [formControl]="buildingFormCtrl" multiple> -->
+        <!-- <mat-form-field  *ngIf="modalName == 'owners'">
             <mat-select placeholder="Select flat"  [formControl]="flatFormCtrl" multiple>
               <mat-select-trigger>
                 {{flatFormCtrl.value ? flatFormCtrl.value[0] : ''}}
@@ -36,6 +35,6 @@
               </mat-select-trigger>
               <mat-option *ngFor="let flat of flatList" [value]="flat.flatname">{{flat.flatname}}</mat-option>
             </mat-select>
-          </mat-form-field>
+          </mat-form-field> -->
 </div>
 <button *ngIf="(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )" type="button" class="btn btn-primary" (click)="onSubmit()">Submit</button>

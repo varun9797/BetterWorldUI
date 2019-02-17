@@ -8,8 +8,11 @@
   </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 text-center contentContainer">
-      
-      <table class="table">
+        <div *ngIf="showSpinner">
+            <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+          </div>
+        <h3>{{displayText}}</h3>
+      <table *ngIf="!showSpinner && buildingList[0] && buildingList[0].buildingid" class="table">
           <thead>
             <tr>
               <th>buildingid</th>
@@ -40,6 +43,6 @@
     {{building | json}}
 </div>
 <div [hidden]="!buildingList">
-  <event-calendar-component></event-calendar-component>
+  <!-- <event-calendar-component></event-calendar-component> -->
 </div>
 

@@ -1,16 +1,26 @@
 <div class="row">
+
+  <div class="col-md-12 contentContainer">
+
     <h3>Owner Details</h3>
-    <div class="col-md-12 contentContainer">
+    <div *ngIf="showSpinner">
+        <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+      </div>
+    <h3>{{displayText}}</h3>
+    <div *ngIf="!showSpinner && ownerData[0] && ownerData[0].idOwner">
       <table class="table">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Owner ID</th>
             <th>Name</th>
             <th>IsAdmin</th>
             <th>Phone No</th>
             <th>Email</th>
             <th>Age</th>
             <th>Gender</th>
+            <th>Flat ID</th>
+            <th>Flat Name</th>
+            <th>Tenant Id</th>
           </tr>
         </thead>
         <tbody>
@@ -22,8 +32,12 @@
             <td>{{owner.ownerEmail}}</td>
             <td>{{owner.ownerAge}}</td>
             <td>{{owner.ownerGender}}</td>
+            <td>{{owner.idFlat}}</td>
+            <td>{{owner.flatName}}</td>
+            <td>{{owner.tenantId}}</td>
           </tr>
         </tbody>
       </table>
     </div>
-    </div>
+  </div>
+</div>

@@ -85,7 +85,8 @@ export class ModalComponent implements OnInit {
       this._commonService.emitShowListEvent(true);
      }
      else if(this.modalName=='owners') {   
-        this.router.navigate(['societyManagment','owners']);
+        //this.router.navigate(['societyManagment','owners']);
+        this.router.navigate(['societyManagment',this.sid,'buildings',this.buildingName,'owners']);
         this._commonService.emitShowListEvent(true);
         // setTimeout(()=>{
         //   this._commonService.emitOwnerListRequestobj({societyId:this.societyFormCtrl.value,buildingName:this.buildingFormCtrl.value,flatid:this.flatFormCtrl.value});

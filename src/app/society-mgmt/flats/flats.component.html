@@ -9,8 +9,11 @@
   </div>
 <div class="row">
     <div class="col-xs-12 col-sm-12 text-center contentContainer">
-      
-      <table class="table">
+        <div *ngIf="showSpinner">
+            <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+          </div>
+        <h3>{{displayText}}</h3>
+      <table *ngIf="!showSpinner && flatList[0] && flatList[0].flatid" class="table">
           <thead>
             <tr>
               <th>flatid</th>
@@ -78,5 +81,5 @@
   </div>
 </div>
 <div>
-  <calendar-component></calendar-component>
+  <!-- <calendar-component></calendar-component> -->
 </div>
