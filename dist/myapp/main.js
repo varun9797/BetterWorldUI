@@ -194,6 +194,11 @@ var routes = [
                 component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_11__["OwnersComponent"],
                 canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]]
             },
+            {
+                path: ":societyid/buildings/:buildingName/owners",
+                component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_11__["OwnersComponent"],
+                canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]]
+            },
             { path: "owners", component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_11__["OwnersComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]] },
             { path: "tenats", component: _society_mgmt_tenant_tenant_component__WEBPACK_IMPORTED_MODULE_12__["TenantComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_19__["NeedAuthGuard"]] },
         ]
@@ -483,7 +488,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\" *ngIf=\"societyInfo\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>buildingid</th>\n              <th>buildingname</th>\n              <th>Flats</th>\n              <th>delete</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let building of buildingList\">\n              <td>{{building.buildingid}}</td>\n              <td>{{building.buildingname}}</td>\n              <td><button mat-stroked-button (click)=\"showFlats(societyInfo[0]?.societyid,building.buildingname)\">  <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>Show Flats\n                </button></td>\n              <td><button mat-stroked-button (click)=\"goToBuilding(element.societyid)\"> <svg\n                xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\n                <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n            </button></td>\n            </tr>\n          </tbody>\n        </table>\n    </div>  \n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n<div [hidden]=\"!buildingList\">\n  <event-calendar-component></event-calendar-component>\n</div>\n\n"
+module.exports = "\n<div class=\"row\" *ngIf=\"societyInfo\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <BR>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}}<br>\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n        <div *ngIf=\"showSpinner\">\n            <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\n          </div>\n        <h3>{{displayText}}</h3>\n      <table *ngIf=\"!showSpinner && buildingList[0] && buildingList[0].buildingid\" class=\"table\">\n          <thead>\n            <tr>\n              <th>buildingid</th>\n              <th>buildingname</th>\n              <th>Flats</th>\n              <th>delete</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr *ngFor=\"let building of buildingList\">\n              <td>{{building.buildingid}}</td>\n              <td>{{building.buildingname}}</td>\n              <td><button mat-stroked-button (click)=\"showFlats(societyInfo[0]?.societyid,building.buildingname)\">  <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                <path d=\"M0 0h24v24H0z\" fill=\"none\" />\n                <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>Show Flats\n                </button></td>\n              <td><button mat-stroked-button (click)=\"goToBuilding(element.societyid)\"> <svg\n                xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\n                <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\n                <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\n            </button></td>\n            </tr>\n          </tbody>\n        </table>\n    </div>  \n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n<div [hidden]=\"!buildingList\">\n  <!-- <event-calendar-component></event-calendar-component> -->\n</div>\n\n"
 
 /***/ }),
 
@@ -530,16 +535,24 @@ var BuildingComponent = /** @class */ (function () {
     BuildingComponent.prototype.getBuildingList = function () {
         var _this = this;
         //this.societyid = this.route.snapshot.paramMap.get('societyid');
+        this.displayText = "";
         this.route.params.subscribe(function (value) {
             _this.societyid = value["societyid"]; // get param
             console.log("this.societyid:::" + JSON.stringify(value));
             _this.updateCalendar(_this.societyid);
+            _this.showSpinner = true;
+            _this.displayText = "";
             _this._userService.getBuilding(_this.societyid).subscribe(function (data) {
                 _this.buildingList = data.dbResponse;
-                _this._commonService.emitActiveType('building');
+                _this.showSpinner = false;
+                if (!(_this.buildingList[0] && _this.buildingList[0].buildingid)) {
+                    _this.displayText = "No Record Found";
+                }
+                _this._commonService.emitActiveType('buildings');
             }, function (error) {
                 console.log(error);
                 _this.society = error.message;
+                _this.showSpinner = false;
             });
             _this._userService.getSocietyInfo(_this.societyid).subscribe(function (data) {
                 _this.societyInfo = data.dbResponse;
@@ -1032,7 +1045,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\n      buildingname : {{buildingName}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n      \n      <table class=\"table\">\n          <thead>\n            <tr>\n              <th>flatid</th>\n              <th>flatname</th>\n              <th>ownerid</th>\n              <th>pendingpayment</th>\n              <th>payment button</th>\n              <th>Calender</th>\n              <th>Show Owner</th>\n              <th>Flat</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr  *ngFor=\"let flat of flatList\">\n              <td>{{flat.flatid}}</td>\n              <td>{{flat.flatname}}</td>\n              <td>{{flat.ownerid}}</td>\n              <td>{{flat.pendingpayment}}</td>\n              <td> \n                  <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button data-toggle=\"modal\" data-target=\"#pendingModal\" (click)=\"paymentID(flat)\">Pay</button>\n              </td>\n              <td> \n                <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button (click)=\"showCalender(flat.flatid)\">Calender</button>\n              </td>\n              <td> \n                  <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\n                </td>\n                <td> \n                    <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\n                  </td>\n            </tr>\n          </tbody>\n        </table>\n    </div>\n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n\n\n\n<!-- Modal -->\n<div id=\"pendingModal\" class=\"modal fade\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n      <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n    <!-- Modal content-->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Payment Option</h4>  \n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n          \n      </div>\n      <div class=\"modal-body\">\n          <input type=\"text\" class=\"form-control\" name=\"payAmount\" placeholder=\"Enter Paynding Payment amount\" [(ngModel)]=\"payAmount\" \n          required />\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" (click)=\"paymentMethod(payAmount)\" >Pay</button>\n        <div *ngIf=\"isClosedValue\">\n          <div data-dismiss=\"modal\"></div>\n        </div>\n      </div>\n    </div>\n</form>\n  </div>\n</div>\n<div>\n  <calendar-component></calendar-component>\n</div>"
+module.exports = "\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\n      buildingname : {{buildingName}}<br>\n    </div>\n  </div>\n<div class=\"row\">\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\n        <div *ngIf=\"showSpinner\">\n            <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\n          </div>\n        <h3>{{displayText}}</h3>\n      <table *ngIf=\"!showSpinner && flatList[0] && flatList[0].flatid\" class=\"table\">\n          <thead>\n            <tr>\n              <th>flatid</th>\n              <th>flatname</th>\n              <th>ownerid</th>\n              <th>pendingpayment</th>\n              <th>payment button</th>\n              <th>Calender</th>\n              <th>Show Owner</th>\n              <th>Flat</th>\n            </tr>\n          </thead>\n          <tbody>\n            <tr  *ngFor=\"let flat of flatList\">\n              <td>{{flat.flatid}}</td>\n              <td>{{flat.flatname}}</td>\n              <td>{{flat.ownerid}}</td>\n              <td>{{flat.pendingpayment}}</td>\n              <td> \n                  <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button data-toggle=\"modal\" data-target=\"#pendingModal\" (click)=\"paymentID(flat)\">Pay</button>\n              </td>\n              <td> \n                <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button (click)=\"showCalender(flat.flatid)\">Calender</button>\n              </td>\n              <td> \n                  <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\n                </td>\n                <td> \n                    <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\n                  </td>\n            </tr>\n          </tbody>\n        </table>\n    </div>\n  </div>\n<div *ngFor=\"\">\n    {{building | json}}\n</div>\n\n\n\n<!-- Modal -->\n<div id=\"pendingModal\" class=\"modal fade\" role=\"dialog\">\n  <div class=\"modal-dialog\">\n      <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\n    <!-- Modal content-->\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n          <h4 class=\"modal-title\">Payment Option</h4>  \n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n          \n      </div>\n      <div class=\"modal-body\">\n          <input type=\"text\" class=\"form-control\" name=\"payAmount\" placeholder=\"Enter Paynding Payment amount\" [(ngModel)]=\"payAmount\" \n          required />\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\" (click)=\"paymentMethod(payAmount)\" >Pay</button>\n        <div *ngIf=\"isClosedValue\">\n          <div data-dismiss=\"modal\"></div>\n        </div>\n      </div>\n    </div>\n</form>\n  </div>\n</div>\n<div>\n  <!-- <calendar-component></calendar-component> -->\n</div>"
 
 /***/ }),
 
@@ -1083,12 +1096,19 @@ var FlatsComponent = /** @class */ (function () {
     };
     FlatsComponent.prototype.getflatList = function () {
         var _this = this;
+        this.displayText = "";
         this.route.params.subscribe(function (value) {
             _this.societyid = value["societyid"]; // get param
             _this.buildingName = value["buildingName"]; // get param
+            _this.showSpinner = true;
+            _this.displayText = "";
             _this._userService.getFlatList(_this.societyid, _this.buildingName).subscribe(function (data) {
+                _this.showSpinner = false;
                 _this.flatList = data.dbResponse;
-                _this._commonService.emitActiveType('flat');
+                if (!(_this.flatList[0] && _this.flatList[0].flatid)) {
+                    _this.displayText = "No Record Found";
+                }
+                _this._commonService.emitActiveType('flats');
             }, function (error) {
                 console.log(error);
                 _this.society = error.message;
@@ -1263,7 +1283,7 @@ module.exports = ".example-additional-selection {\n    opacity: 0.75;\n    font-
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div>\n    <mat-form-field  *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')\">\n        <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"societyFormCtrl\" multiple> -->\n        <mat-select placeholder=\"Select Society\"  [formControl]=\"societyFormCtrl\">\n          <!-- <mat-select-trigger>\n            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}\n            <span *ngIf=\"societyFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n            </span>\n          </mat-select-trigger> -->\n          <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\">{{s.societyname}}</mat-option>\n        </mat-select>\n      </mat-form-field>\n      <mat-form-field *ngIf=\"(modalName == 'flats' || modalName == 'owners')\">\n          <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n          <mat-select placeholder=\"Select building\"  [formControl]=\"buildingFormCtrl\">\n            <!-- <mat-select-trigger>\n              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}\n              <span *ngIf=\"buildingFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n              </span>\n            </mat-select-trigger> -->\n            <mat-option *ngFor=\"let building of buildingList\" [value]=\"building.buildingname\">{{building.buildingname}}</mat-option>\n          </mat-select>\n        </mat-form-field>\n        <mat-form-field  *ngIf=\"modalName == 'owners'\">\n            <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n            <mat-select placeholder=\"Select flat\"  [formControl]=\"flatFormCtrl\" multiple>\n              <mat-select-trigger>\n                {{flatFormCtrl.value ? flatFormCtrl.value[0] : ''}}\n                <span *ngIf=\"flatFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                  (+{{flatFormCtrl.value.length - 1}} {{flatFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n                </span>\n              </mat-select-trigger>\n              <mat-option *ngFor=\"let flat of flatList\" [value]=\"flat.flatname\">{{flat.flatname}}</mat-option>\n            </mat-select>\n          </mat-form-field>\n</div>\n<button *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )\" type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmit()\">Submit</button>"
+module.exports = "\n\n<div>\n    <mat-form-field  *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners')\">\n        <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"societyFormCtrl\" multiple> -->\n        <mat-select placeholder=\"Select Society\"  [formControl]=\"societyFormCtrl\">\n          <!-- <mat-select-trigger>\n            {{societyFormCtrl.value ? societyFormCtrl.value[0] : ''}}\n            <span *ngIf=\"societyFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n              (+{{societyFormCtrl.value.length - 1}} {{societyFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n            </span>\n          </mat-select-trigger> -->\n          <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\">{{s.societyname}}</mat-option>\n        </mat-select>\n      </mat-form-field>\n      <mat-form-field *ngIf=\"(modalName == 'flats' || modalName == 'owners')\">\n          <!-- <mat-select placeholder=\"Select Society\" [formControl]=\"buildingFormCtrl\" multiple> -->\n          <mat-select placeholder=\"Select building\"  [formControl]=\"buildingFormCtrl\">\n            <!-- <mat-select-trigger>\n              {{buildingFormCtrl.value ? buildingFormCtrl.value[0] : ''}}\n              <span *ngIf=\"buildingFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                (+{{buildingFormCtrl.value.length - 1}} {{buildingFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n              </span>\n            </mat-select-trigger> -->\n            <mat-option *ngFor=\"let building of buildingList\" [value]=\"building.buildingname\">{{building.buildingname}}</mat-option>\n          </mat-select>\n        </mat-form-field>\n        <!-- <mat-form-field  *ngIf=\"modalName == 'owners'\">\n            <mat-select placeholder=\"Select flat\"  [formControl]=\"flatFormCtrl\" multiple>\n              <mat-select-trigger>\n                {{flatFormCtrl.value ? flatFormCtrl.value[0] : ''}}\n                <span *ngIf=\"flatFormCtrl.value?.length > 1\" class=\"example-additional-selection\">\n                  (+{{flatFormCtrl.value.length - 1}} {{flatFormCtrl.value?.length === 2 ? 'other' : 'others'}})\n                </span>\n              </mat-select-trigger>\n              <mat-option *ngFor=\"let flat of flatList\" [value]=\"flat.flatname\">{{flat.flatname}}</mat-option>\n            </mat-select>\n          </mat-form-field> -->\n</div>\n<button *ngIf=\"(modalName == 'flats' || modalName == 'buildings' || modalName == 'owners' )\" type=\"button\" class=\"btn btn-primary\" (click)=\"onSubmit()\">Submit</button>"
 
 /***/ }),
 
@@ -1359,7 +1379,8 @@ var ModalComponent = /** @class */ (function () {
             this._commonService.emitShowListEvent(true);
         }
         else if (this.modalName == 'owners') {
-            this.router.navigate(['societyManagment', 'owners']);
+            //this.router.navigate(['societyManagment','owners']);
+            this.router.navigate(['societyManagment', this.sid, 'buildings', this.buildingName, 'owners']);
             this._commonService.emitShowListEvent(true);
             // setTimeout(()=>{
             //   this._commonService.emitOwnerListRequestobj({societyId:this.societyFormCtrl.value,buildingName:this.buildingFormCtrl.value,flatid:this.flatFormCtrl.value});
@@ -1404,7 +1425,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\n    <h3>Owner Details</h3>\n    <div class=\"col-md-12 contentContainer\">\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>IsAdmin</th>\n            <th>Phone No</th>\n            <th>Email</th>\n            <th>Age</th>\n            <th>Gender</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let owner of ownerData\">\n            <td>{{owner.idOwner}}</td>\n            <td>{{owner.ownerName}}</td>\n            <td>{{owner.isAdmin}}</td>\n            <td>{{owner.ownerPhoneNumber}}</td>\n            <td>{{owner.ownerEmail}}</td>\n            <td>{{owner.ownerAge}}</td>\n            <td>{{owner.ownerGender}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n    </div>\n"
+module.exports = "<div class=\"row\">\n\n  <div class=\"col-md-12 contentContainer\">\n\n    <h3>Owner Details</h3>\n    <div *ngIf=\"showSpinner\">\n        <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\n      </div>\n    <h3>{{displayText}}</h3>\n    <div *ngIf=\"!showSpinner && ownerData[0] && ownerData[0].idOwner\">\n      <table class=\"table\">\n        <thead>\n          <tr>\n            <th>Owner ID</th>\n            <th>Name</th>\n            <th>IsAdmin</th>\n            <th>Phone No</th>\n            <th>Email</th>\n            <th>Age</th>\n            <th>Gender</th>\n            <th>Flat ID</th>\n            <th>Flat Name</th>\n            <th>Tenant Id</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let owner of ownerData\">\n            <td>{{owner.idOwner}}</td>\n            <td>{{owner.ownerName}}</td>\n            <td>{{owner.isAdmin}}</td>\n            <td>{{owner.ownerPhoneNumber}}</td>\n            <td>{{owner.ownerEmail}}</td>\n            <td>{{owner.ownerAge}}</td>\n            <td>{{owner.ownerGender}}</td>\n            <td>{{owner.idFlat}}</td>\n            <td>{{owner.flatName}}</td>\n            <td>{{owner.tenantId}}</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -1441,6 +1462,7 @@ var OwnersComponent = /** @class */ (function () {
         this.router = router;
         this.route = route;
         this._commonService = _commonService;
+        this.displayText = "";
     }
     OwnersComponent.prototype.ngOnInit = function () {
         this.getOwnerList();
@@ -1464,16 +1486,21 @@ var OwnersComponent = /** @class */ (function () {
     // }
     OwnersComponent.prototype.getOwnerList = function () {
         var _this = this;
+        this.displayText = "";
         this.route.params.subscribe(function (value) {
-            var societyid = value["societyid"]; // get param
-            var buildingName = value["buildingName"]; // get param
-            var flatId = value["flatId"]; // get param
-            if (true) {
-                _this._userService.getSelectedTypelist([societyid], [buildingName], [flatId]).subscribe(function (data) {
-                    _this.ownerData = data.dbResponse[0];
-                    _this._commonService.emitActiveType('owner');
-                });
-            }
+            var societyid = value["societyid"] ? [value["societyid"]] : []; // get param
+            var buildingName = value["buildingName"] ? [value["buildingName"]] : []; // get param
+            var flatId = value["flatId"] ? [value["flatId"]] : []; // get param
+            _this.showSpinner = true;
+            _this.displayText = "";
+            _this._userService.getSelectedTypelist(societyid, buildingName, flatId).subscribe(function (data) {
+                _this.showSpinner = false;
+                _this.ownerData = data.dbResponse[0];
+                if (!(_this.ownerData[0] && _this.ownerData[0].idOwner)) {
+                    _this.displayText = "No Record Found";
+                }
+                _this._commonService.emitActiveType('owners');
+            });
         });
     };
     OwnersComponent = __decorate([
@@ -2558,19 +2585,19 @@ var SocietyMgmtComponent = /** @class */ (function () {
         var _this = this;
         this._commonService.eventIsActiveType.subscribe(function (value) {
             console.log("********", value);
-            if (value == "owner") {
+            if (value == "owners") {
                 _this.buttonClickObj.society = true;
                 _this.buttonClickObj.building = true;
                 _this.buttonClickObj.flat = true;
                 _this.buttonClickObj.owner = true;
             }
-            else if (value == "flat") {
+            else if (value == "flats") {
                 _this.buttonClickObj.society = true;
                 _this.buttonClickObj.building = true;
                 _this.buttonClickObj.flat = true;
                 _this.buttonClickObj.owner = false;
             }
-            else if (value == "building") {
+            else if (value == "buildings") {
                 _this.buttonClickObj.society = true;
                 _this.buttonClickObj.building = true;
                 _this.buttonClickObj.flat = false;
