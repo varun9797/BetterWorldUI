@@ -11,7 +11,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SocietyMgmtComponent implements OnInit {
   modalVar;
   isLogged = false;
-  showList;
+  showList=true;
   showSpinner;
   buttonClickObj={
     society:false,
@@ -31,7 +31,7 @@ export class SocietyMgmtComponent implements OnInit {
         this.isLogged = false; 
       }
     });
-
+    
     this._commonService.eventShowList.subscribe((showEvent)=>{
         if(showEvent) {
             this.showList = true;
@@ -61,7 +61,7 @@ export class SocietyMgmtComponent implements OnInit {
         this.buttonClickObj.building=true;
         this.buttonClickObj.flat=false;
         this.buttonClickObj.owner=false;
-      }
+      } 
     },
       error => {
         console.log(error);
