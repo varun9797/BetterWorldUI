@@ -3,7 +3,7 @@
     <div class="row col-md-12 text-center">
       <div class="col-md-3"></div>
       <div *ngIf="!isLogged" class="col-md-3"> 
-        <div routerLink="/login" class="btn btn-outline-warning homeicons w-100">Login</div>
+        <div routerLink="/societyManagment/login" class="btn btn-outline-warning homeicons w-100">Login</div>
       </div>
       <div *ngIf="isLogged" class="col-md-3">
           <div class="btn btn-outline-warning homeicons w-100" (click)="logout()">Logout</div>

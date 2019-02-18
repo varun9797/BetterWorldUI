@@ -82,7 +82,7 @@ export class SocietyMgmtComponent implements OnInit {
         } else {
           this.showList = false;
           alert("Please login first");
-          this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('/societyManagment/login');
           this.showSpinner = false;
         }
       });

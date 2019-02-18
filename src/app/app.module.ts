@@ -34,7 +34,7 @@ import { OwnerRegComponent } from './society-mgmt/register/owner-reg/owner-reg.c
 
 const routes: Routes = [
   { path: "", redirectTo: '/home', pathMatch: "full" },
-  { path: "login", component: LoginComponent },
+  
   { path: "register", component: RegisterMemberComponent ,
   children:[
   { path: "society-reg", component: SocietyRegComponent },
@@ -50,6 +50,7 @@ const routes: Routes = [
 
     children: [
       { path: "society", component: SocietyComponent },
+      { path: "login", component: LoginComponent },
       { path: ":societyid/buildings", component: BuildingComponent },
       {
         path: ":societyid/buildings/:buildingName/flats",

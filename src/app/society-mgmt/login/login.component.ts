@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
            // alert(r.token);
             console.log("token set success fully");
             this._tokenService.setToken(r.token);
-            //this.router.navigateByUrl(this.redirectUrl);
-            this.router.navigate(['societyManagment','society']);
+            this.router.navigateByUrl(this.redirectUrl);
+            //this.router.navigate(['societyManagment','society']);
             //this.router.navigateByUrl('/societyManagment');
           }
         },
