@@ -100,10 +100,24 @@ class SocietyModel {
         });
     })
 
-    updatePendingPaymentOfFlat = (req) => new Promise((resolve, reject) => {
-        console.log('req.params.tableName', req.params.tableName);
+    // updatePendingPaymentOfFlat = (req) => new Promise((resolve, reject) => {
+    //     console.log('req.params.tableName', req.params.tableName);
 
-        let query = `update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}`;
+    //     let query = `update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}`;
+    //     this.queryMediator.queryConnection(query).then((result) => {
+    //         console.log('pending payment successfully updated : Ok ');
+    //         resolve(result);
+    //     }).catch((err) => {
+    //         console.log('got query error ', err);
+    //         reject(err);
+    //     });
+    // })
+
+    updatePendingPaymentOfFlat = (req) => new Promise((resolve, reject) => {
+        //console.log('req.params.tableName', req.params.tableName);
+
+        //let query = `update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}`;
+        let query = `call update_pending_payment(${req.body.flatid}, ${req.body.pendingPayment}, ${req.body.ownerid})`;
         this.queryMediator.queryConnection(query).then((result) => {
             console.log('pending payment successfully updated : Ok ');
             resolve(result);
@@ -116,7 +130,7 @@ class SocietyModel {
     updatePaymentHistory = (req) => new Promise((resolve, reject) => {
         const currentDate = new Date();
 
-        let query = `insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${req.body.flatid},${req.body.pendingPayment},'${currentDate.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2')}','${currentDate.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2')}',${req.body.ownerid});`;
+        let query = `insert into paymenthistory(flatid,paid,ownerid) values (${req.body.flatid},${req.body.pendingPayment},${req.body.ownerid});`;
         this.queryMediator.queryConnection(query).then((result) => {
             console.log('pending payment history successfully updated : Ok ');
             resolve(result);

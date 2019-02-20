@@ -9,6 +9,7 @@ class QueryMediator {
             'satusCode': '',
             'dbResponse': ''
         };
+        console.log(query);
         return new Promise((resolve, reject) => {
             database.connection.getConnection((err, connection) => {
                 if (err) {

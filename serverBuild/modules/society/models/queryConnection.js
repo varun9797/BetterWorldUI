@@ -20,6 +20,7 @@ var QueryMediator = function QueryMediator() {
             'satusCode': '',
             'dbResponse': ''
         };
+        console.log(query);
         return new Promise(function (resolve, reject) {
             database.connection.getConnection(function (err, connection) {
                 if (err) {

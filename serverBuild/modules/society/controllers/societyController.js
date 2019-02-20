@@ -8,6 +8,14 @@ var _societyModel = require('./../models/societyModel');
 
 var _societyModel2 = _interopRequireDefault(_societyModel);
 
+var _blockchain = require('./../../blockchain/blockchain');
+
+var _blockchain2 = _interopRequireDefault(_blockchain);
+
+var _block = require('../../blockchain/block');
+
+var _block2 = _interopRequireDefault(_block);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29,7 +37,7 @@ var SocietyController = function SocietyController() {
     };
 
     this.getDetails = function (req, res) {
-        console.log('checking auto deploye1111');
+        //console.log('checking auto deploye1111');
         _this.societyModel.getDetails(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
@@ -39,7 +47,7 @@ var SocietyController = function SocietyController() {
     };
 
     this.getDetailsUsingQueryParam = function (req, res) {
-        console.log('select * from ' + req.params.tableName + ' where ' + req.params.columnName + ' = ' + req.query.value);
+        //console.log(`select * from ${req.params.tableName} where ${req.params.columnName} = ${req.query.value}`);
         _this.societyModel.getDetailsUsingQueryParam(req).then(function (dbResponse) {
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch(function (err) {
@@ -49,17 +57,18 @@ var SocietyController = function SocietyController() {
     };
 
     this.updatePendingPaymentOfFlat = function (req, res) {
-        console.log('update flat set pendingpayment = \'' + req.body.pendingPayment + '\' where ownerid =' + req.body.ownerid + ' and flatId =' + req.body.flatid + ';');
+        //console.log(`update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`);
         _this.societyModel.updatePendingPaymentOfFlat(req).then(function (dbResponse) {
-            console.log('updatePendingPaymentOfFlat successfully done!!');
-            _this.updatePaymentHistory(req, function (resFlag, responseData) {
-                if (resFlag) {
-                    res.status(dbResponse.satusCode).json(responseData);
-                } else {
+            res.status(dbResponse.satusCode).json(dbResponse);
+            // console.log('updatePendingPaymentOfFlat successfully done!!');
+            // this.updatePaymentHistory(req, (resFlag, responseData)=>{
+            //     if(resFlag){
+            //res.status(dbResponse.satusCode).json(responseData);
+            // } else {
 
-                    res.status(400).json(responseData);
-                }
-            });
+            //     res.status(400).json(responseData);
+            // }
+            //});
         }).catch(function (err) {
             console.log('catch block of updatePendingPaymentOfFlat', err);
             res.status(err.satusCode).json(err);
@@ -69,7 +78,7 @@ var SocietyController = function SocietyController() {
     this.updatePaymentHistory = function (reqBody, callback) {
         var currentDate = new Date();
         //console.log(`update paymentHistory set paymentHistory = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`)
-        console.log('insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + reqBody.body.flatid + ',' + reqBody.body.pendingPayment + ',\'' + currentDate.toISOString() + '\',\'' + currentDate.toISOString() + '\',' + reqBody.body.ownerid + ');');
+        //console.log(`insert into paymenthistory(flatid,paid,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},${reqBody.body.ownerid});`);
         _this.societyModel.updatePaymentHistory(reqBody).then(function (dbResponse) {
             callback(true, dbResponse);
         }).catch(function (err) {
@@ -178,7 +187,31 @@ var SocietyController = function SocietyController() {
     };
 
     this.societyModel = new _societyModel2.default();
-};
+    this.blockChain = new _blockchain2.default();
+}
+
+// getDetails= (req, res) =>{
+//     console.log('checking auto deploye1111');
+//     this.societyModel.getDetails(req).then((dbResponse)=>{
+//         if(req.params.tableName == 'flat'){
+//             console.log('*****Inside flat table*******');
+//             dbResponse.dbResponse.forEach((element,i) => {
+//                 this.blockChain.addBlock(new Block(i,'12/2/2029',element));
+//                 console.log('wait dude new block is in progress....');
+//             });
+
+//             console.log('is valid',this.blockChain.isChainValid());
+//             this.blockChain.chain[3].data = 'temprored';
+//             console.log('is valid',this.blockChain.isChainValid());
+//             res.status(dbResponse.satusCode).json(this.blockChain);
+//         }
+//       //  res.status(dbResponse.satusCode).json(dbResponse);
+//     }).catch((err)=>{
+//         console.log('catch block of getDetails',err);
+//         res.status(err.satusCode).json(err);
+//     });
+// }
+;
 
 exports.default = SocietyController;
 //# sourceMappingURL=societyController.js.map

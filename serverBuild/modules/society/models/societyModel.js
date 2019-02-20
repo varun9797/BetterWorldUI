@@ -172,9 +172,10 @@ var SocietyModel = function SocietyModel() {
 
     this.updatePendingPaymentOfFlat = function (req) {
         return new Promise(function (resolve, reject) {
-            console.log('req.params.tableName', req.params.tableName);
+            //console.log('req.params.tableName', req.params.tableName);
 
-            var query = 'update flat set pendingpayment = \'' + req.body.pendingPayment + '\' where ownerid =' + req.body.ownerid + ' and flatId =' + req.body.flatid;
+            //let query = `update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}`;
+            var query = 'call update_pending_payment(' + req.body.flatid + ', ' + req.body.pendingPayment + ', ' + req.body.ownerid + ')';
             _this.queryMediator.queryConnection(query).then(function (result) {
                 console.log('pending payment successfully updated : Ok ');
                 resolve(result);
@@ -189,7 +190,7 @@ var SocietyModel = function SocietyModel() {
         return new Promise(function (resolve, reject) {
             var currentDate = new Date();
 
-            var query = 'insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (' + req.body.flatid + ',' + req.body.pendingPayment + ',\'' + currentDate.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2') + '\',\'' + currentDate.toISOString().replace(/([^T]+)T([^\.]+).*/g, '$1 $2') + '\',' + req.body.ownerid + ');';
+            var query = 'insert into paymenthistory(flatid,paid,ownerid) values (' + req.body.flatid + ',' + req.body.pendingPayment + ',' + req.body.ownerid + ');';
             _this.queryMediator.queryConnection(query).then(function (result) {
                 console.log('pending payment history successfully updated : Ok ');
                 resolve(result);
@@ -307,6 +308,19 @@ var SocietyModel = function SocietyModel() {
 
     this.queryMediator = new _queryConnection2.default();
 }
+
+// updatePendingPaymentOfFlat = (req) => new Promise((resolve, reject) => {
+//     console.log('req.params.tableName', req.params.tableName);
+
+//     let query = `update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid}`;
+//     this.queryMediator.queryConnection(query).then((result) => {
+//         console.log('pending payment successfully updated : Ok ');
+//         resolve(result);
+//     }).catch((err) => {
+//         console.log('got query error ', err);
+//         reject(err);
+//     });
+// })
 
 // updateFlat = (req) => new Promise((resolve, reject) => {
 //     let query = `insert into flat(flatname, buildingname, societyid) values ('${req.body.flatName}', '${req.body.buildingName}', ${req.body.societyId});`;

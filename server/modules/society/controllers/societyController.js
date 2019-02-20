@@ -1,9 +1,12 @@
 import SocietyModel from './../models/societyModel';
+import BlockChain from './../../blockchain/blockchain'
+import Block from '../../blockchain/block';
 process.env.SECRET_KEY = 'varunv';
 
 class SocietyController {
     constructor(){
          this.societyModel = new SocietyModel();
+         this.blockChain = new BlockChain();
     }
 
     
@@ -16,7 +19,7 @@ class SocietyController {
         });
     }
     getDetails= (req, res) =>{
-        console.log('checking auto deploye1111');
+        //console.log('checking auto deploye1111');
         this.societyModel.getDetails(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
@@ -24,8 +27,31 @@ class SocietyController {
             res.status(err.satusCode).json(err);
         });
     }
+
+
+    // getDetails= (req, res) =>{
+    //     console.log('checking auto deploye1111');
+    //     this.societyModel.getDetails(req).then((dbResponse)=>{
+    //         if(req.params.tableName == 'flat'){
+    //             console.log('*****Inside flat table*******');
+    //             dbResponse.dbResponse.forEach((element,i) => {
+    //                 this.blockChain.addBlock(new Block(i,'12/2/2029',element));
+    //                 console.log('wait dude new block is in progress....');
+    //             });
+                
+    //             console.log('is valid',this.blockChain.isChainValid());
+    //             this.blockChain.chain[3].data = 'temprored';
+    //             console.log('is valid',this.blockChain.isChainValid());
+    //             res.status(dbResponse.satusCode).json(this.blockChain);
+    //         }
+    //       //  res.status(dbResponse.satusCode).json(dbResponse);
+    //     }).catch((err)=>{
+    //         console.log('catch block of getDetails',err);
+    //         res.status(err.satusCode).json(err);
+    //     });
+    // }
     getDetailsUsingQueryParam= (req, res) =>{
-        console.log(`select * from ${req.params.tableName} where ${req.params.columnName} = ${req.query.value}`);
+        //console.log(`select * from ${req.params.tableName} where ${req.params.columnName} = ${req.query.value}`);
         this.societyModel.getDetailsUsingQueryParam(req).then((dbResponse)=>{
             res.status(dbResponse.satusCode).json(dbResponse);
         }).catch((err)=>{
@@ -34,17 +60,18 @@ class SocietyController {
         }); 
     }
     updatePendingPaymentOfFlat= (req, res) =>{
-        console.log(`update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`);
+        //console.log(`update flat set pendingpayment = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`);
         this.societyModel.updatePendingPaymentOfFlat(req).then((dbResponse)=>{
-            console.log('updatePendingPaymentOfFlat successfully done!!');
-            this.updatePaymentHistory(req, (resFlag, responseData)=>{
-                if(resFlag){
-                    res.status(dbResponse.satusCode).json(responseData);
-                } else {
+            res.status(dbResponse.satusCode).json(dbResponse);
+            // console.log('updatePendingPaymentOfFlat successfully done!!');
+            // this.updatePaymentHistory(req, (resFlag, responseData)=>{
+            //     if(resFlag){
+                    //res.status(dbResponse.satusCode).json(responseData);
+                // } else {
                     
-                    res.status(400).json(responseData);
-                }
-            });
+                //     res.status(400).json(responseData);
+                // }
+            //});
         }).catch((err)=>{
             console.log('catch block of updatePendingPaymentOfFlat',err);
             res.status(err.satusCode).json(err);
@@ -54,7 +81,7 @@ class SocietyController {
     updatePaymentHistory= (reqBody,callback) =>{
         const currentDate = new Date();
         //console.log(`update paymentHistory set paymentHistory = '${req.body.pendingPayment}' where ownerid =${req.body.ownerid} and flatId =${req.body.flatid};`)
-        console.log(`insert into paymenthistory(flatid,paid,createddate,updateddate,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},'${currentDate.toISOString()}','${currentDate.toISOString()}',${reqBody.body.ownerid});`);
+        //console.log(`insert into paymenthistory(flatid,paid,ownerid) values (${reqBody.body.flatid},${reqBody.body.pendingPayment},${reqBody.body.ownerid});`);
         this.societyModel.updatePaymentHistory(reqBody).then((dbResponse)=>{
             callback(true, dbResponse);
         }).catch((err)=>{
