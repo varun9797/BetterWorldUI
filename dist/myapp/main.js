@@ -807,7 +807,7 @@ var CalendarComponent = /** @class */ (function () {
 /*! exports provided: HOST_NAME, default */
 /***/ (function(module) {
 
-module.exports = {"HOST_NAME":"http://localhost:5000"};
+module.exports = {"HOST_NAME":"http://nodebw-env.xctnnannuz.us-east-1.elasticbeanstalk.com"};
 
 /***/ }),
 
