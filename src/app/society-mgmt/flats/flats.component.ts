@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from "../services/user.service"
 import { ParamMap, Router, ActivatedRoute } from '@angular/router';
 import { OnChanges } from '@angular/core';
 import { TokenService } from '../services/token.service'
 import { CommonService } from '../services/common.service'
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-flats',
@@ -21,6 +22,11 @@ export class FlatsComponent implements OnInit, OnChanges {
   flatObj:any;
   showSpinner;
   displayText;
+  paymentHistoryData;
+
+  displayedColumns: string[];
+  dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(public _userService: UserService,
      public router: Router, private route: 
      ActivatedRoute, public _tokenService: TokenService, public _commonService:CommonService) { }
@@ -93,8 +99,37 @@ export class FlatsComponent implements OnInit, OnChanges {
         this.society = error.message;
       });
   }
+
+  showFlatPatmentHistory(flatId){
+    this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
+      console.log(data.dbResponse);
+      this.paymentHistoryData= data.dbResponse;
+      this.displayedColumns   = ['idpaymenthistory', 'paid', 'remainingbalance', 'createddate'];
+      const ELEMENT_DATA: flatPaymentHistory[] =data.dbResponse;
+      this.dataSource = new MatTableDataSource<flatPaymentHistory>(ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+      //this.displayedColumns   = ['societyid', 'societyname', 'address', 'pincode','showBuilding', 'delete'];
+      //this._commonService.emitCalanderData(data.dbResponse);
+    },
+      error => {
+        console.log(error);
+        this.society = error.message;
+      });
+  }
+
   showOwner(societyid,buildingName,flatId){
     this.router.navigate(['societyManagment',societyid,'buildings',buildingName,"flats",flatId,"owner"]); 
     this._commonService.emitShowListEvent(true);
   }
+}
+
+
+export interface flatPaymentHistory {
+  createddate: string;
+  flatid: number;
+  idpaymenthistory: number;
+  ownerid: number;
+  paid: number;
+  remainingbalance:number;
+  updateddate:string
 }
