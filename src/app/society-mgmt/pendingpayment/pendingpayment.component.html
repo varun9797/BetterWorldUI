@@ -1,0 +1,50 @@
+
+<div class="container">
+        <div class="formStyle row justify-content-center childContainer s-bg">
+            <div class=" col-xs-12 col-md-8 col-lg-8 col-xl-8">
+                <div class="row">
+                    <div class="col text-center">
+                      <h1><b>{{pageTitle3}}</b></h1>
+                      <!-- <p>{{pageDesc3}}</p> -->
+                    </div>
+                </div>
+                <div class="row align-items-center text-center" ng-app>
+                    <div class="col">
+                        <form class="formStyle" name="form">
+                            <div class="form-group">
+                                <mat-form-field class="example-full-width">
+                                    <label>All Municipal Dues</label>
+                                    <input matInput type="number" name="a" class="form-control" [(ngModel)]="dues">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <label>Sinking Funds</label>
+                                    <input matInput type="number" name="b" class="form-control"  [(ngModel)]="funds">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                    <label>Periodic Building Maintenance</label>
+                                    <input matInput type="number" name="c" class="form-control"  [(ngModel)]="maintenance">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                        <label>Common Area Maintenance & Parking</label>
+                                    <input matInput type="number" name="d" class="form-control" [(ngModel)]="parking">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                        <label>Total</label>
+                                    <input matInput type="number" name="d" class="form-control" value="{{total}}">
+                                </mat-form-field>
+                                <mat-form-field class="example-full-width">
+                                        <label>Paying Amount</label>
+                                    <input matInput type="number" name="pay" class="form-control" [(ngModel)]="payamt">
+                                </mat-form-field>
+                                <p><button mat-raised-button color="primary" (click)="pendingpayment()">Show Pending amount</button></p>
+                                <h3>Pending Amount: {{pendingamt}}</h3>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+    

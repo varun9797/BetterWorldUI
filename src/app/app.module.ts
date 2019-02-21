@@ -30,6 +30,8 @@ import { SocietyRegComponent } from './society-mgmt/register/society-reg/society
 import { BuildingRegComponent } from './society-mgmt/register/building-reg/building-reg.component';
 import { FlatRegComponent } from './society-mgmt/register/flat-reg/flat-reg.component';
 import { OwnerRegComponent } from './society-mgmt/register/owner-reg/owner-reg.component';
+import { PendingpaymentComponent } from './society-mgmt/pendingpayment/pendingpayment.component';
+
 
 
 const routes: Routes = [
@@ -45,6 +47,8 @@ const routes: Routes = [
 },
   
   { path: "home", component: HomeComponent },
+  
+ 
   {
     path: "societyManagment", component: SocietyMgmtComponent,
 
@@ -56,6 +60,7 @@ const routes: Routes = [
         component: FlatsComponent,
         canActivate: [NeedAuthGuard]
       },
+      { path: "pay", component: PendingpaymentComponent },
       {
         path: ":societyid/buildings/:buildingName/flats/:flatId/owner",
         component: OwnersComponent,
@@ -96,7 +101,8 @@ const routes: Routes = [
     SocietyRegComponent,
     BuildingRegComponent,
     FlatRegComponent,
-    OwnerRegComponent   
+    OwnerRegComponent,
+    PendingpaymentComponent 
   ],
   imports: [
     BrowserModule,
