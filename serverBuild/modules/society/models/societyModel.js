@@ -38,6 +38,19 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
+    this.callStoredProc = function (req) {
+        return new Promise(function (resolve, reject) {
+            var query = 'call ' + req.body.storedProc;
+            _this.queryMediator.queryConnection(query).then(function (result) {
+                console.log('callStoredProc : Ok ');
+                resolve(result);
+            }).catch(function (err) {
+                console.log('got query error ', err);
+                reject(err);
+            });
+        });
+    };
+
     this.getOwnerList = function (req) {
         return new Promise(function (resolve, reject) {
             var societyIds = req.body.societyIds && req.body.societyIds.length > 0 ? '\'' + req.body.societyIds + '\'' : null;

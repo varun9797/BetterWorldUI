@@ -186,6 +186,15 @@ var SocietyController = function SocietyController() {
         });
     };
 
+    this.callStoredProc = function (req, res) {
+        _this.societyModel.callStoredProc(req).then(function (dbResponse) {
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch(function (err) {
+            console.log('catch block of callStoredProc ', err);
+            res.status(err.satusCode).json(err);
+        });
+    };
+
     this.societyModel = new _societyModel2.default();
     this.blockChain = new _blockchain2.default();
 }

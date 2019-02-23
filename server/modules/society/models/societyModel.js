@@ -21,6 +21,17 @@ class SocietyModel {
         });
     })
 
+    callStoredProc = (req) => new Promise((resolve, reject) => {
+        let query = `call ${req.body.storedProc}`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('callStoredProc : Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('got query error ', err);
+            reject(err);
+        });
+    })
+
     getOwnerList = (req) => new Promise((resolve, reject) => {
         var societyIds = (req.body.societyIds && req.body.societyIds.length > 0) ? `'${req.body.societyIds}'` : null;
         var buildingNames = (req.body.buildingNames && req.body.buildingNames.length > 0) ? `'${req.body.buildingNames}'` : null;

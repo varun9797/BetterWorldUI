@@ -15,7 +15,7 @@ router.post('/registerBuilding',societyController.registerBuilding);
 router.post('/registerFlat',societyController.registerFlat);
 router.post('/registerSociety',societyController.registerSociety);
 router.post('/registerOwner',societyController.registerOwner);
-
+router.post('/storedProc',societyController.callStoredProc);
 /******Update Api******/
 router.post('/updateBuilding',societyController.updateBuilding);
 router.post('/updateFlat',societyController.updateFlat);

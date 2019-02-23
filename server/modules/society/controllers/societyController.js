@@ -193,6 +193,15 @@ class SocietyController {
         });
     }
 
+    callStoredProc = (req, res)=>{
+        this.societyModel.callStoredProc(req).then((dbResponse)=>{
+            res.status(dbResponse.satusCode).json(dbResponse);
+        }).catch((err)=>{
+            console.log('catch block of callStoredProc ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
 }
 
 export default SocietyController;
