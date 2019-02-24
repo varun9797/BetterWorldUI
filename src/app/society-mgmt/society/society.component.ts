@@ -26,6 +26,7 @@ export class SocietyComponent implements OnInit {
       const ELEMENT_DATA: societyField[] =data.dbResponse;
       this.dataSource = new MatTableDataSource<societyField>(ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+      this._commonService.emitActiveType('society');
     },
       error => {
         console.log(error);

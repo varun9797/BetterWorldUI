@@ -18,6 +18,8 @@
     <div class="col-sm-12 text-center contentContainer">
       <br>
       <h2><b>I Love My Society</b></h2>
+      
+      <mat-progress-bar mode="determinate" [value]="progressPercent"></mat-progress-bar>
       <div class="row">
         <div class="col-xs-12 col-sm-3 text-center contentContainer">
           <div routerLink="/societyManagment/society" class="btn  homeicons w-100" [class.btn-success]="buttonClickObj.society" [class.btn-outline-warning]="!buttonClickObj.society" (click)="ShowModal('society')">

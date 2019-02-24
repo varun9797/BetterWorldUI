@@ -2750,7 +2750,7 @@ module.exports = "#content{\r\n    overflow:scroll;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n    <app-society-header></app-society-header>\r\n    <div class=\"row col-md-12 text-center\">\r\n      <div class=\"col-md-3\"></div>\r\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \r\n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n      </div>\r\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\r\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n      </div>\r\n      <div class=\"col-md-3\"></div>\r\n    </div>\r\n    <!--<mat-divider></mat-divider>-->\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <br>\r\n      <h2><b>I Love My Society</b></h2>\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn  homeicons w-100\" [class.btn-success]=\"buttonClickObj.society\" [class.btn-outline-warning]=\"!buttonClickObj.society\" (click)=\"ShowModal('society')\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n            Society</div>\r\n        </div>\r\n        \r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn homeicons w-100\" [class.btn-success]=\"buttonClickObj.building\" [class.btn-outline-warning]=\"!buttonClickObj.building\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\r\n            Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.flat\" [class.btn-outline-warning]=\"!buttonClickObj.flat\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\r\n            Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.owner\" [class.btn-outline-warning]=\"!buttonClickObj.owner\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <img src=\"assets/banner.png\">\r\n      </div> -->\r\n\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n    <app-society-header></app-society-header>\r\n    <div class=\"row col-md-12 text-center\">\r\n      <div class=\"col-md-3\"></div>\r\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \r\n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n      </div>\r\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\r\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n      </div>\r\n      <div class=\"col-md-3\"></div>\r\n    </div>\r\n    <!--<mat-divider></mat-divider>-->\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <br>\r\n      <h2><b>I Love My Society</b></h2>\r\n      \r\n      <mat-progress-bar mode=\"determinate\" [value]=\"progressPercent\"></mat-progress-bar>\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn  homeicons w-100\" [class.btn-success]=\"buttonClickObj.society\" [class.btn-outline-warning]=\"!buttonClickObj.society\" (click)=\"ShowModal('society')\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n            Society</div>\r\n        </div>\r\n        \r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn homeicons w-100\" [class.btn-success]=\"buttonClickObj.building\" [class.btn-outline-warning]=\"!buttonClickObj.building\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\r\n            Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.flat\" [class.btn-outline-warning]=\"!buttonClickObj.flat\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\r\n            Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.owner\" [class.btn-outline-warning]=\"!buttonClickObj.owner\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <img src=\"assets/banner.png\">\r\n      </div> -->\r\n\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -2789,6 +2789,7 @@ var SocietyMgmtComponent = /** @class */ (function () {
         this._commonService = _commonService;
         this.isLogged = false;
         this.showList = true;
+        this.progressPercent = 0;
         this.buttonClickObj = {
             society: false,
             building: false,
@@ -2820,24 +2821,17 @@ var SocietyMgmtComponent = /** @class */ (function () {
     SocietyMgmtComponent.prototype.changeButtonColor = function () {
         var _this = this;
         this._commonService.eventIsActiveType.subscribe(function (value) {
-            console.log("********", value);
             if (value == "owners") {
-                _this.buttonClickObj.society = true;
-                _this.buttonClickObj.building = true;
-                _this.buttonClickObj.flat = true;
-                _this.buttonClickObj.owner = true;
+                _this.enableFields(true, true, true, true);
             }
             else if (value == "flats") {
-                _this.buttonClickObj.society = true;
-                _this.buttonClickObj.building = true;
-                _this.buttonClickObj.flat = true;
-                _this.buttonClickObj.owner = false;
+                _this.enableFields(true, true, true);
             }
             else if (value == "buildings") {
-                _this.buttonClickObj.society = true;
-                _this.buttonClickObj.building = true;
-                _this.buttonClickObj.flat = false;
-                _this.buttonClickObj.owner = false;
+                _this.enableFields(true, true);
+            }
+            else {
+                _this.enableFields(true);
             }
         }, function (error) {
             console.log(error);
@@ -2846,7 +2840,6 @@ var SocietyMgmtComponent = /** @class */ (function () {
     SocietyMgmtComponent.prototype.ShowModal = function (type) {
         var _this = this;
         this.showSpinner = true;
-        console.log(type);
         if (type == 'flats' || type == 'owners') {
             this._tokenService.isLogged().subscribe(function (flag) {
                 if (flag) {
@@ -2862,8 +2855,15 @@ var SocietyMgmtComponent = /** @class */ (function () {
                     _this.showSpinner = false;
                 }
             });
+            if (type == 'flats') {
+                this.enableFields(true, true, true);
+            }
+            else {
+                this.enableFields(true, true, true, true);
+            }
         }
         else if (type == 'buildings') {
+            this.enableFields(true, true);
             setTimeout(function () {
                 _this.router.navigateByUrl('/societyManagment');
                 _this.modalVar = type;
@@ -2872,20 +2872,27 @@ var SocietyMgmtComponent = /** @class */ (function () {
         }
         else {
             setTimeout(function () {
-                //Handling color of button
-                _this.buttonClickObj.society = true;
-                _this.buttonClickObj.building = false;
-                _this.buttonClickObj.flat = false;
-                _this.buttonClickObj.owner = false;
+                _this.progressPercent = 25;
+                _this.enableFields(true);
                 _this.showList = true;
                 _this.modalVar = type;
                 _this.showSpinner = false;
             }, 0);
         }
     };
+    SocietyMgmtComponent.prototype.enableFields = function (society, building, flat, owner) {
+        if (society === void 0) { society = false; }
+        if (building === void 0) { building = false; }
+        if (flat === void 0) { flat = false; }
+        if (owner === void 0) { owner = false; }
+        this.progressPercent = owner ? 100 : (flat ? 75 : building ? 50 : society ? 25 : 0);
+        this.buttonClickObj.society = society;
+        this.buttonClickObj.building = building;
+        this.buttonClickObj.flat = flat;
+        this.buttonClickObj.owner = owner;
+    };
     SocietyMgmtComponent.prototype.logout = function () {
         localStorage.setItem('TOKEN', "");
-        console.log("tttttttt", localStorage.getItem('TOKEN'));
         this.isLogged = false;
         this.router.navigateByUrl('/societyManagment');
         window.location.reload();
@@ -2972,6 +2979,7 @@ var SocietyComponent = /** @class */ (function () {
             var ELEMENT_DATA = data.dbResponse;
             _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatTableDataSource"](ELEMENT_DATA);
             _this.dataSource.paginator = _this.paginator;
+            _this._commonService.emitActiveType('society');
         }, function (error) {
             console.log(error);
             _this.society = error.message;

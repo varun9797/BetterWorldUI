@@ -13,6 +13,7 @@ export class SocietyMgmtComponent implements OnInit {
   isLogged = false;
   showList=true;
   showSpinner;
+  progressPercent =0;
   buttonClickObj={
     society:false,
     building:false,
@@ -45,23 +46,15 @@ export class SocietyMgmtComponent implements OnInit {
   }
   changeButtonColor() {
     this._commonService.eventIsActiveType.subscribe((value) => {
-      console.log("********",value)
       if(value=="owners") {
-        this.buttonClickObj.society=true;
-        this.buttonClickObj.building=true;
-        this.buttonClickObj.flat = true;
-        this.buttonClickObj.owner=true;
+        this.enableFields(true, true,true,true);
       } else if(value=="flats") {
-        this.buttonClickObj.society=true;
-        this.buttonClickObj.building=true;
-        this.buttonClickObj.flat = true;
-        this.buttonClickObj.owner=false;
+        this.enableFields(true, true,true);
       } else if(value=="buildings") {
-        this.buttonClickObj.society=true;
-        this.buttonClickObj.building=true;
-        this.buttonClickObj.flat=false;
-        this.buttonClickObj.owner=false;
-      } 
+        this.enableFields(true, true);
+      } else {
+        this.enableFields(true);
+      }
     },
       error => {
         console.log(error);
@@ -71,7 +64,6 @@ export class SocietyMgmtComponent implements OnInit {
 
   ShowModal(type){
     this.showSpinner = true;
-    console.log(type);
     if(type == 'flats' || type == 'owners') {
       this._tokenService.isLogged().subscribe(flag=>{
         if(flag){
@@ -86,7 +78,13 @@ export class SocietyMgmtComponent implements OnInit {
           this.showSpinner = false;
         }
       });
+      if(type == 'flats'){
+        this.enableFields(true, true,true);
+      } else {
+        this.enableFields(true, true,true,true);
+      }
     } else if(type == 'buildings'){
+      this.enableFields(true, true);
       setTimeout(()=>{
         this.router.navigateByUrl('/societyManagment');
         this.modalVar = type; 
@@ -95,24 +93,26 @@ export class SocietyMgmtComponent implements OnInit {
 
     } else {
       setTimeout(()=>{
-        //Handling color of button
-        this.buttonClickObj.society=true;
-        this.buttonClickObj.building=false;
-        this.buttonClickObj.flat = false;
-        this.buttonClickObj.owner=false;
-
+        this.progressPercent=25;
+        this.enableFields(true);
         this.showList = true;
         this.modalVar = type; 
         this.showSpinner = false;
       },0)
     }   
   }
+
+  enableFields(society=false,building=false,flat=false,owner=false){
+    this.progressPercent = owner? 100:(flat? 75:building? 50: society? 25:0);
+    this.buttonClickObj.society=society;
+    this.buttonClickObj.building=building;
+    this.buttonClickObj.flat = flat;
+    this.buttonClickObj.owner=owner;
+  }
   
   logout(){
     localStorage.setItem('TOKEN', "");
-    console.log("tttttttt",localStorage.getItem('TOKEN'));
     this.isLogged = false; 
-    
     this.router.navigateByUrl('/societyManagment');
     window.location.reload();
   }
