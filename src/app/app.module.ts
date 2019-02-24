@@ -70,6 +70,8 @@ const routes: Routes = [
         canActivate: [NeedAuthGuard]
       },
       { path: "owners", component: OwnersComponent, canActivate: [NeedAuthGuard] },
+      { path: "owners/:ownerId", component: OwnersComponent, canActivate: [NeedAuthGuard] },
+      { path: "owners/:ownerId/flats", component: FlatsComponent, canActivate: [NeedAuthGuard] },
       { path: "tenats", component: TenantComponent, canActivate: [NeedAuthGuard] },
     ]
 

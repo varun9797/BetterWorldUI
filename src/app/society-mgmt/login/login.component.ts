@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private route: ActivatedRoute,private api: ApiService, private _tokenService: TokenService, public router: Router) { }
 
   ngOnInit() {
-    this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || 'societyManagment/society';
+    this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || 'societyManagment';
   }
 
   onSubmit() {
@@ -32,7 +32,12 @@ export class LoginComponent implements OnInit {
            // alert(r.token);
             console.log("token set success fully");
             this._tokenService.setToken(r.token);
-            this.router.navigateByUrl(this.redirectUrl);
+            if(this.redirectUrl == 'societyManagment'){
+              this.router.navigate(['societyManagment', 'owners' ,r.dbResponse[0].ownerid,'flats']);
+            } else {
+              this.router.navigateByUrl(this.redirectUrl);
+            }
+            
             //this.router.navigate(['societyManagment','society']);
             //this.router.navigateByUrl('/societyManagment');
           }

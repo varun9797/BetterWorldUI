@@ -44,29 +44,52 @@ export class FlatsComponent implements OnInit, OnChanges {
     this.route.params.subscribe((value) => {
       this.societyid = value["societyid"]; // get param
       this.buildingName = value["buildingName"]; // get param
+      let ownerId = value["ownerId"];
       this.showSpinner=true;
       this.displayText=""
-      this._userService.getFlatList(this.societyid, this.buildingName).subscribe((data) => {
-        this.showSpinner=false;
-        this.flatList = data.dbResponse;
-        if(!(this.flatList[0] && this.flatList[0].flatid)){
-          this.displayText="No Record Found"
-        }
-        this._commonService.emitActiveType('flats');
-      },
-      error => {
-        console.log(error);
-        this.society = error.message;
-      });
+      if(ownerId){
+        this._userService.getOwnerFlatList(ownerId).subscribe((data) => {
+          this.commonResponse(data);
+          this.societyid = this.flatList[0].societyid;
+          this.buildingName = this.flatList[0].buildingname;
+          this.setSocietyInfo(this.societyid);
+        },
+        error => {
+          console.log(error);
+          this.society = error.message;
+        });
+      } else {
+        this._userService.getFlatList(this.societyid, this.buildingName).subscribe((data) => {
+          this.commonResponse(data);
+        },
+        error => {
+          console.log(error);
+          this.society = error.message;
+        });
+      }
+      this.setSocietyInfo(this.societyid);
+    });
+  }
 
-      this._userService.getSocietyInfo(this.societyid).subscribe((data) => {
+  setSocietyInfo(societyid){
+    if(societyid){
+      this._userService.getSocietyInfo(societyid).subscribe((data) => {
         this.societyInfo = data.dbResponse;
       },
         error => {
           console.log(error);
           this.society = error.message;
         });
-    });
+    }
+  }
+
+  commonResponse(data){
+    this.showSpinner=false;
+    this.flatList = data.dbResponse;
+    if(!(this.flatList[0] && this.flatList[0].flatid)){
+      this.displayText="No Record Found"
+    }
+    this._commonService.emitActiveType('flats');
   }
 
   openPaymentDialog(flat) {

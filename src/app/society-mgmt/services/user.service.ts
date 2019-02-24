@@ -27,6 +27,14 @@ export class UserService {
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }
+
+  getOwnerByID(ownerId): Observable<any> {
+    console.log(`${this.getOwnerURL}/ownerid/?value='${ownerId}'`);
+    return this.http.get(`${this.getOwnerURL}/ownerid/?value=${ownerId}`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
   getAllOwners(): Observable<any> {
     console.log(`${this.getOwnerURL}`);
     return this.http.get(`${this.getOwnerURL}`)
@@ -52,6 +60,13 @@ export class UserService {
   getFlatList(societyId, buildingname): Observable<any> {
     console.log(`${this.getFlatURL}/buildingname/?value=${buildingname}`);
     return this.http.get(`http://nodebw-env.xctnnannuz.us-east-1.elasticbeanstalk.com/society/flat/societyid/buildingname/?value1=${societyId}&value2="${buildingname}"`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
+  getOwnerFlatList(ownerId): Observable<any> {
+    console.log(`${this.getFlatURL}/ownerid/?value=${ownerId}`);
+    return this.http.get(`${this.getFlatURL}/ownerid/?value=${ownerId}`)
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }

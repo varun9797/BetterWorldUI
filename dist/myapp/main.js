@@ -204,6 +204,8 @@ var routes = [
                 canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_20__["NeedAuthGuard"]]
             },
             { path: "owners", component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_12__["OwnersComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_20__["NeedAuthGuard"]] },
+            { path: "owners/:ownerId", component: _society_mgmt_owners_owners_component__WEBPACK_IMPORTED_MODULE_12__["OwnersComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_20__["NeedAuthGuard"]] },
+            { path: "owners/:ownerId/flats", component: _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatsComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_20__["NeedAuthGuard"]] },
             { path: "tenats", component: _society_mgmt_tenant_tenant_component__WEBPACK_IMPORTED_MODULE_13__["TenantComponent"], canActivate: [_society_mgmt_services_NeedAuthGuard__WEBPACK_IMPORTED_MODULE_20__["NeedAuthGuard"]] },
         ]
     },
@@ -347,7 +349,7 @@ module.exports = ".homeIconList{\n    background-color: rgba(242, 242,242, .45);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center\">\r\n      <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\r\n    </div>\r\n    <!--<div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <a routerLink=\"/home\" class=''>\r\n        <img src=\"assets/logo.png\" class=\"img-fluid\" />\r\n      </a>\r\n    </div>-->\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-12 text-center\">\r\n      <h2><b>WELCOME TO SOCIETY MANAGEMENT</b></h2>\r\n      \r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment/society\">\r\n      <button mat-raised-button color=\"primary\">Society Management</button></a>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <img src=\"assets/banner.png\">\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center\">\r\n      <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\r\n    </div>\r\n    <!--<div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <a routerLink=\"/home\" class=''>\r\n        <img src=\"assets/logo.png\" class=\"img-fluid\" />\r\n      </a>\r\n    </div>-->\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-12 text-center\">\r\n      <h2><b>WELCOME TO SOCIETY MANAGEMENT</b></h2>\r\n      \r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-6 text-center contentContainer\">\r\n      <a routerLink=\"/login\">\r\n      <button style=\"width: 180px\" mat-raised-button color=\"primary\">My Flats</button></a>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-6 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment/society\">\r\n      <button mat-raised-button color=\"primary\">Society Management</button></a>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <img src=\"assets/banner.png\">\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -1140,26 +1142,49 @@ var FlatsComponent = /** @class */ (function () {
         this.route.params.subscribe(function (value) {
             _this.societyid = value["societyid"]; // get param
             _this.buildingName = value["buildingName"]; // get param
+            var ownerId = value["ownerId"];
             _this.showSpinner = true;
             _this.displayText = "";
-            _this._userService.getFlatList(_this.societyid, _this.buildingName).subscribe(function (data) {
-                _this.showSpinner = false;
-                _this.flatList = data.dbResponse;
-                if (!(_this.flatList[0] && _this.flatList[0].flatid)) {
-                    _this.displayText = "No Record Found";
-                }
-                _this._commonService.emitActiveType('flats');
-            }, function (error) {
-                console.log(error);
-                _this.society = error.message;
-            });
-            _this._userService.getSocietyInfo(_this.societyid).subscribe(function (data) {
+            if (ownerId) {
+                _this._userService.getOwnerFlatList(ownerId).subscribe(function (data) {
+                    _this.commonResponse(data);
+                    _this.societyid = _this.flatList[0].societyid;
+                    _this.buildingName = _this.flatList[0].buildingname;
+                    _this.setSocietyInfo(_this.societyid);
+                }, function (error) {
+                    console.log(error);
+                    _this.society = error.message;
+                });
+            }
+            else {
+                _this._userService.getFlatList(_this.societyid, _this.buildingName).subscribe(function (data) {
+                    _this.commonResponse(data);
+                }, function (error) {
+                    console.log(error);
+                    _this.society = error.message;
+                });
+            }
+            _this.setSocietyInfo(_this.societyid);
+        });
+    };
+    FlatsComponent.prototype.setSocietyInfo = function (societyid) {
+        var _this = this;
+        if (societyid) {
+            this._userService.getSocietyInfo(societyid).subscribe(function (data) {
                 _this.societyInfo = data.dbResponse;
             }, function (error) {
                 console.log(error);
                 _this.society = error.message;
             });
-        });
+        }
+    };
+    FlatsComponent.prototype.commonResponse = function (data) {
+        this.showSpinner = false;
+        this.flatList = data.dbResponse;
+        if (!(this.flatList[0] && this.flatList[0].flatid)) {
+            this.displayText = "No Record Found";
+        }
+        this._commonService.emitActiveType('flats');
     };
     FlatsComponent.prototype.openPaymentDialog = function (flat) {
         var _this = this;
@@ -1458,7 +1483,7 @@ var LoginComponent = /** @class */ (function () {
         this.password = "soword";
     }
     LoginComponent.prototype.ngOnInit = function () {
-        this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || 'societyManagment/society';
+        this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || 'societyManagment';
     };
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -1468,7 +1493,12 @@ var LoginComponent = /** @class */ (function () {
                 // alert(r.token);
                 console.log("token set success fully");
                 _this._tokenService.setToken(r.token);
-                _this.router.navigateByUrl(_this.redirectUrl);
+                if (_this.redirectUrl == 'societyManagment') {
+                    _this.router.navigate(['societyManagment', 'owners', r.dbResponse[0].ownerid, 'flats']);
+                }
+                else {
+                    _this.router.navigateByUrl(_this.redirectUrl);
+                }
                 //this.router.navigate(['societyManagment','society']);
                 //this.router.navigateByUrl('/societyManagment');
             }
@@ -1696,20 +1726,6 @@ var OwnersComponent = /** @class */ (function () {
     OwnersComponent.prototype.ngOnChanges = function () {
         this.getOwnerList();
     };
-    // getSelectedTypelist(){
-    //   console.log();
-    //  this._userService.getSelectedTypelist(this.societyIds, this.buildingNames, this.flatIds).subscribe((data)=> {
-    //    console.log("data is",this.ownerData)
-    //  });
-    // }
-    // listenEventFromModal(){
-    //   this._commonService.eventOwnerRequestObj.subscribe((flatObj)=>{
-    //     this._userService.getSelectedTypelist([flatObj.societyId],[flatObj.buildingName],flatObj.flatid).subscribe((data:any) => {
-    //       this.ownerData = data.dbResponse[0];
-    //       this._commonService.emitActiveType('owner');
-    //     })
-    //   });
-    // }
     OwnersComponent.prototype.getOwnerList = function () {
         var _this = this;
         this.displayText = "";
@@ -1717,17 +1733,28 @@ var OwnersComponent = /** @class */ (function () {
             var societyid = value["societyid"] ? [value["societyid"]] : []; // get param
             var buildingName = value["buildingName"] ? [value["buildingName"]] : []; // get param
             var flatId = value["flatId"] ? [value["flatId"]] : []; // get param
+            var ownerId = value["ownerId"];
             _this.showSpinner = true;
             _this.displayText = "";
-            _this._userService.getSelectedTypelist(societyid, buildingName, flatId).subscribe(function (data) {
-                _this.showSpinner = false;
-                _this.ownerData = data.dbResponse[0];
-                if (!(_this.ownerData[0] && _this.ownerData[0].idOwner)) {
-                    _this.displayText = "No Record Found";
-                }
-                _this._commonService.emitActiveType('owners');
-            });
+            if (ownerId) {
+                _this._userService.getOwnerByID(ownerId).subscribe(function (data) {
+                    _this.commonResponse(data);
+                });
+            }
+            else {
+                _this._userService.getSelectedTypelist(societyid, buildingName, flatId).subscribe(function (data) {
+                    _this.commonResponse(data);
+                });
+            }
         });
+    };
+    OwnersComponent.prototype.commonResponse = function (data) {
+        this.showSpinner = false;
+        this.ownerData = data.dbResponse[0];
+        if (!(this.ownerData[0] && this.ownerData[0].idOwner)) {
+            this.displayText = "No Record Found";
+        }
+        this._commonService.emitActiveType('owners');
     };
     OwnersComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2579,6 +2606,11 @@ var UserService = /** @class */ (function () {
         return this.http.get(this.getOwnerURL + "/phonenumber/?value='" + query.oPhoneNumber + "'")
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
+    UserService.prototype.getOwnerByID = function (ownerId) {
+        console.log(this.getOwnerURL + "/ownerid/?value='" + ownerId + "'");
+        return this.http.get(this.getOwnerURL + "/ownerid/?value=" + ownerId)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
     UserService.prototype.getAllOwners = function () {
         console.log("" + this.getOwnerURL);
         return this.http.get("" + this.getOwnerURL)
@@ -2600,6 +2632,11 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getFlatList = function (societyId, buildingname) {
         console.log(this.getFlatURL + "/buildingname/?value=" + buildingname);
         return this.http.get("http://nodebw-env.xctnnannuz.us-east-1.elasticbeanstalk.com/society/flat/societyid/buildingname/?value1=" + societyId + "&value2=\"" + buildingname + "\"")
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
+    UserService.prototype.getOwnerFlatList = function (ownerId) {
+        console.log(this.getFlatURL + "/ownerid/?value=" + ownerId);
+        return this.http.get(this.getFlatURL + "/ownerid/?value=" + ownerId)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
     UserService.prototype.getOwnerList = function (flatIds) {
