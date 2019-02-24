@@ -113,6 +113,7 @@ class UserModel {
                             appData.error = 0;
                             appData.isAdmin = rows[0].isadmin;
                             appData['token'] = token;
+                            appData['dbResponse'] = dbResponse;
                             appData['satusCode'] = 200;
                             resolve(appData);
                             //res.status(200).json(appData);
