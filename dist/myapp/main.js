@@ -170,6 +170,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: "", redirectTo: '/home', pathMatch: "full" },
     { path: "login", component: _society_mgmt_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"] },
@@ -235,9 +236,10 @@ var AppModule = /** @class */ (function () {
                 _society_mgmt_register_flat_reg_flat_reg_component__WEBPACK_IMPORTED_MODULE_30__["FlatRegComponent"],
                 _society_mgmt_register_owner_reg_owner_reg_component__WEBPACK_IMPORTED_MODULE_31__["OwnerRegComponent"],
                 _society_mgmt_flats_pendingpayment_pendingpayment_component__WEBPACK_IMPORTED_MODULE_11__["PendingpaymentComponent"],
-                _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatDialogBox"]
+                _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatDialogBox"],
+                _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["PaymentHistoryDialogBox"]
             ],
-            entryComponents: [_society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatDialogBox"]],
+            entryComponents: [_society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatDialogBox"], _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["PaymentHistoryDialogBox"]],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
@@ -1033,6 +1035,17 @@ var EventCalendarComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/society-mgmt/flats/PaymentHistoryDialogBox.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/society-mgmt/flats/PaymentHistoryDialogBox.html ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>Payment History for flat id {{data.flatId}}</h1>\r\n<div mat-dialog-content style=\"overflow: auto\">\r\n    <div class=\"tableClass\" class=\"mat-elevation-z8\">\r\n            <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\r\n          \r\n              <!-- Position Column -->\r\n              <ng-container matColumnDef=\"idpaymenthistory\">\r\n                <th mat-cell *matHeaderCellDef> Payment Id </th>\r\n                <td mat-cell *matCellDef=\"let element\"> {{element.idpaymenthistory}} </td>\r\n              </ng-container>\r\n          \r\n              <!-- Name Column -->\r\n              <ng-container matColumnDef=\"amount\">\r\n                <th mat-cell *matHeaderCellDef> Amount </th>\r\n                <td mat-cell *matCellDef=\"let element\"> {{element.amount}} </td>\r\n              </ng-container>\r\n\r\n               <!-- Name Column -->\r\n              <ng-container matColumnDef=\"type\">\r\n                <th mat-cell *matHeaderCellDef> Type </th>\r\n                <td mat-cell *matCellDef=\"let element\"> {{element.paymentType}} </td>\r\n              </ng-container>\r\n          \r\n              <!-- Weight Column -->\r\n              <ng-container matColumnDef=\"remainingbalance\">\r\n                <th mat-cell *matHeaderCellDef> Remaining Balance </th>\r\n                <td mat-cell *matCellDef=\"let element\"> {{element.remainingbalance}} </td>\r\n              </ng-container>\r\n\r\n              <ng-container matColumnDef=\"createddate\">\r\n                  <th mat-cell *matHeaderCellDef> Payment Date </th>\r\n                  <td mat-cell *matCellDef=\"let element\"> {{element.createddate}} </td>\r\n                </ng-container>\r\n          \r\n          \r\n              <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n              <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n            </table>\r\n          \r\n            <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\r\n          </div>\r\n</div>"
+
+/***/ }),
+
 /***/ "./src/app/society-mgmt/flats/flat-dialogBox.html":
 /*!********************************************************!*\
   !*** ./src/app/society-mgmt/flats/flat-dialogBox.html ***!
@@ -1040,7 +1053,7 @@ var EventCalendarComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>Payment Form</h1>\r\n<div mat-dialog-content style=\"overflow: hidden\">\r\n    <app-pendingpayment [pendingPaymentFlatObj]=\"data.flatObj\" (paidAmount)=\"paymentMethod($event)\">\r\n    </app-pendingpayment>\r\n    <div mat-dialog-actions>\r\n        <button mat-button mat-dialog-close cdkFocusInitial>close</button>\r\n    </div>\r\n</div>"
+module.exports = "<h1 mat-dialog-title>Payment Form</h1>\r\n<div mat-dialog-content style=\"overflow: auto\">\r\n    <app-pendingpayment [pendingPaymentFlatObj]=\"data.flatObj\" (paidAmount)=\"paymentMethod($event)\">\r\n    </app-pendingpayment>\r\n    <div mat-dialog-actions>\r\n        <button mat-button mat-dialog-close cdkFocusInitial>close</button>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -1062,7 +1075,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \r\n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\r\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \r\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\r\n      buildingname : {{buildingName}}<br>\r\n    </div>\r\n  </div>\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <div *ngIf=\"showSpinner\">\r\n            <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n          </div>\r\n        <h3>{{displayText}}</h3>\r\n      <table *ngIf=\"!showSpinner && flatList[0] && flatList[0].flatid\" class=\"table\">\r\n          <thead>\r\n            <tr>\r\n              <th>flatid</th>\r\n              <th>flatname</th>\r\n              <th>ownerid</th>\r\n              <th>pendingpayment</th>\r\n              <th>payment button</th>\r\n              <!-- <th>Calender</th> -->\r\n              <th>Show Owner</th>\r\n              <th>Payment History</th>\r\n              <th>Flat</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr  *ngFor=\"let flat of flatList\">\r\n              <td>{{flat.flatid}}</td>\r\n              <td>{{flat.flatname}}</td>\r\n              <td>{{flat.ownerid}}</td>\r\n              <td>{{flat.pendingpayment}}</td>\r\n              <td> \r\n                  <!-- <button type=\"button\"  class=\"btn btn-info\"  mat-stroked-button data-toggle=\"modal\" data-target=\"#pendingModal\" (click)=\"setFlat(flat)\">Pay</button> -->\r\n                 \r\n                      <button mat-raised-button (click)=\"openDialog(flat)\">Pick one</button>\r\n                   \r\n                </td>\r\n              <td> \r\n                <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button data-toggle=\"modal\" data-target=\"#flatPaymentHistoryModal\" (click)=\"showFlatPatmentHistory(flat.flatid)\">Show Payment History</button>\r\n              </td>\r\n              <td> \r\n                  <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\r\n                </td>\r\n                <td> \r\n                    <button type=\"button\" class=\"btn btn-info\"  mat-stroked-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\r\n                  </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n    </div>\r\n  </div>\r\n<div *ngFor=\"\">\r\n    {{building | json}}\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-- Payment History Modal -->\r\n<div id=\"flatPaymentHistoryModal\" class=\"modal fade\" role=\"dialog\">\r\n  <div class=\"modal-dialog\">\r\n      <form name=\"form\" (ngSubmit)=\"f.form.valid\" #f=\"ngForm\" novalidate>\r\n    <!-- Modal content-->\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n          <h4 class=\"modal-title\">Flat Payment History</h4>  \r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n         <div class=\"tableClass\" class=\"mat-elevation-z8\">\r\n              <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\r\n            \r\n                <!-- Position Column -->\r\n                <ng-container matColumnDef=\"idpaymenthistory\">\r\n                  <th mat-cell *matHeaderCellDef> Payment Id </th>\r\n                  <td mat-cell *matCellDef=\"let element\"> {{element.idpaymenthistory}} </td>\r\n                </ng-container>\r\n            \r\n                <!-- Name Column -->\r\n                <ng-container matColumnDef=\"amount\">\r\n                  <th mat-cell *matHeaderCellDef> Amount </th>\r\n                  <td mat-cell *matCellDef=\"let element\"> {{element.amount}} </td>\r\n                </ng-container>\r\n\r\n                 <!-- Name Column -->\r\n                <ng-container matColumnDef=\"type\">\r\n                  <th mat-cell *matHeaderCellDef> Type </th>\r\n                  <td mat-cell *matCellDef=\"let element\"> {{element.paymentType}} </td>\r\n                </ng-container>\r\n            \r\n                <!-- Weight Column -->\r\n                <ng-container matColumnDef=\"remainingbalance\">\r\n                  <th mat-cell *matHeaderCellDef> Remaining Balance </th>\r\n                  <td mat-cell *matCellDef=\"let element\"> {{element.remainingbalance}} </td>\r\n                </ng-container>\r\n\r\n                <ng-container matColumnDef=\"createddate\">\r\n                    <th mat-cell *matHeaderCellDef> Payment Date </th>\r\n                    <td mat-cell *matCellDef=\"let element\"> {{element.createddate}} </td>\r\n                  </ng-container>\r\n            \r\n            \r\n                <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n                <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n              </table>\r\n            \r\n              <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\r\n            </div>\r\n\r\n      </div>\r\n    </div>\r\n</form>\r\n  </div>\r\n</div>\r\n\r\n<div>\r\n  <!-- <calendar-component></calendar-component> -->\r\n</div>"
+module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \r\n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\r\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \r\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\r\n      buildingname : {{buildingName}}<br>\r\n    </div>\r\n  </div>\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <div *ngIf=\"showSpinner\">\r\n            <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n          </div>\r\n        <h3>{{displayText}}</h3>\r\n      <table *ngIf=\"!showSpinner && flatList[0] && flatList[0].flatid\" class=\"table\">\r\n          <thead>\r\n            <tr>\r\n              <th>flatid</th>\r\n              <th>flatname</th>\r\n              <th>ownerid</th>\r\n              <th>pendingpayment</th>\r\n              <th>payment button</th>\r\n              <!-- <th>Calender</th> -->\r\n              <th>Show Owner</th>\r\n              <th>Payment History</th>\r\n              <th>Flat</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let flat of flatList\">\r\n              <td>{{flat.flatid}}</td>\r\n              <td>{{flat.flatname}}</td>\r\n              <td>{{flat.ownerid}}</td>\r\n              <td>{{flat.pendingpayment}}</td>\r\n              <td>\r\n                <button mat-raised-button (click)=\"openPaymentDialog(flat)\">Pay</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"openPaymentHistoryDialog(flat.flatid)\">Payment History</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n    </div>\r\n  </div>\r\n<div>\r\n  <!-- <calendar-component></calendar-component> -->\r\n</div>"
 
 /***/ }),
 
@@ -1070,13 +1083,14 @@ module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-1
 /*!*******************************************************!*\
   !*** ./src/app/society-mgmt/flats/flats.component.ts ***!
   \*******************************************************/
-/*! exports provided: FlatsComponent, FlatDialogBox */
+/*! exports provided: FlatsComponent, FlatDialogBox, PaymentHistoryDialogBox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlatsComponent", function() { return FlatsComponent; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FlatDialogBox", function() { return FlatDialogBox; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PaymentHistoryDialogBox", function() { return PaymentHistoryDialogBox; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
@@ -1147,7 +1161,7 @@ var FlatsComponent = /** @class */ (function () {
             });
         });
     };
-    FlatsComponent.prototype.openDialog = function (flat) {
+    FlatsComponent.prototype.openPaymentDialog = function (flat) {
         var _this = this;
         this.flatObj = flat;
         var dialogRef = this.dialog.open(FlatDialogBox, {
@@ -1159,6 +1173,13 @@ var FlatsComponent = /** @class */ (function () {
             console.log('The dialog was closed');
             if (amount)
                 _this.paymentMethod(amount);
+        });
+    };
+    FlatsComponent.prototype.openPaymentHistoryDialog = function (flatId) {
+        this.dialog.open(PaymentHistoryDialogBox, {
+            data: {
+                flatId: flatId
+            }
         });
     };
     FlatsComponent.prototype.paymentMethod = function (payAmount) {
@@ -1183,20 +1204,6 @@ var FlatsComponent = /** @class */ (function () {
         this._userService.getFlatPaymentHistory(flatId).subscribe(function (data) {
             console.log(data.dbResponse);
             _this._commonService.emitCalanderData(data.dbResponse);
-        }, function (error) {
-            console.log(error);
-            _this.society = error.message;
-        });
-    };
-    FlatsComponent.prototype.showFlatPatmentHistory = function (flatId) {
-        var _this = this;
-        this._userService.getFlatPaymentHistory(flatId).subscribe(function (data) {
-            console.log(data.dbResponse);
-            _this.paymentHistoryData = data.dbResponse;
-            _this.displayedColumns = ['idpaymenthistory', 'amount', 'remainingbalance', 'type', 'createddate'];
-            var ELEMENT_DATA = data.dbResponse;
-            _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatTableDataSource"](ELEMENT_DATA);
-            _this.dataSource.paginator = _this.paginator;
         }, function (error) {
             console.log(error);
             _this.society = error.message;
@@ -1240,6 +1247,47 @@ var FlatDialogBox = /** @class */ (function () {
         __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogRef"], Object])
     ], FlatDialogBox);
     return FlatDialogBox;
+}());
+
+var PaymentHistoryDialogBox = /** @class */ (function () {
+    function PaymentHistoryDialogBox(_userService, dialogRef, data) {
+        this._userService = _userService;
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    PaymentHistoryDialogBox.prototype.ngOnInit = function () {
+        this.showFlatPatmentHistory(this.data.flatId);
+    };
+    PaymentHistoryDialogBox.prototype.paymentHistoryMethod = function (amount) {
+        this.dialogRef.close(amount);
+    };
+    PaymentHistoryDialogBox.prototype.showFlatPatmentHistory = function (flatId) {
+        var _this = this;
+        this._userService.getFlatPaymentHistory(flatId).subscribe(function (data) {
+            console.log(data.dbResponse);
+            _this.paymentHistoryData = data.dbResponse;
+            _this.displayedColumns = ['idpaymenthistory', 'amount', 'remainingbalance', 'type', 'createddate'];
+            var ELEMENT_DATA = data.dbResponse;
+            _this.dataSource = new _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatTableDataSource"](ELEMENT_DATA);
+            _this.dataSource.paginator = _this.paginator;
+        }, function (error) {
+            console.log(error);
+            alert("something went wrong");
+        });
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])(_angular_material__WEBPACK_IMPORTED_MODULE_5__["MatPaginator"]),
+        __metadata("design:type", _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatPaginator"])
+    ], PaymentHistoryDialogBox.prototype, "paginator", void 0);
+    PaymentHistoryDialogBox = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'PaymentHistoryDialogBox',
+            template: __webpack_require__(/*! ./PaymentHistoryDialogBox.html */ "./src/app/society-mgmt/flats/PaymentHistoryDialogBox.html"),
+        }),
+        __param(2, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_5__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialogRef"], Object])
+    ], PaymentHistoryDialogBox);
+    return PaymentHistoryDialogBox;
 }());
 
 

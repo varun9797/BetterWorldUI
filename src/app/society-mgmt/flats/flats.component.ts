@@ -69,7 +69,7 @@ export class FlatsComponent implements OnInit, OnChanges {
     });
   }
 
-  openDialog(flat) {
+  openPaymentDialog(flat) {
     this.flatObj = flat;
     const dialogRef = this.dialog.open(FlatDialogBox, {
       data: {
@@ -80,6 +80,14 @@ export class FlatsComponent implements OnInit, OnChanges {
       console.log('The dialog was closed');
       if(amount)
       this.paymentMethod(amount);
+    });
+  }
+
+  openPaymentHistoryDialog(flatId){
+    this.dialog.open(PaymentHistoryDialogBox, {
+      data: {
+        flatId:flatId
+      }
     });
   }
 
@@ -114,20 +122,6 @@ export class FlatsComponent implements OnInit, OnChanges {
       });
   }
 
-  showFlatPatmentHistory(flatId){
-    this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
-      console.log(data.dbResponse);
-      this.paymentHistoryData= data.dbResponse;
-      this.displayedColumns   = ['idpaymenthistory', 'amount', 'remainingbalance', 'type' , 'createddate'];
-      const ELEMENT_DATA: flatPaymentHistory[] =data.dbResponse;
-      this.dataSource = new MatTableDataSource<flatPaymentHistory>(ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-    },
-      error => {
-        console.log(error);
-        this.society = error.message;
-      });
-  }
 
   showOwner(societyid,buildingName,flatId){
     this.router.navigate(['societyManagment',societyid,'buildings',buildingName,"flats",flatId,"owner"]); 
@@ -149,6 +143,7 @@ export interface flatPaymentHistory {
 
 export interface DialogData {
   flatObj: any;
+  flatId:any
 }
 
 @Component({
@@ -160,8 +155,44 @@ export class FlatDialogBox {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
 
   }
-
   paymentMethod(amount){
     this.dialogRef.close(amount);
+  }
+}
+
+@Component({
+  selector: 'PaymentHistoryDialogBox',
+  templateUrl: 'PaymentHistoryDialogBox.html',
+})
+export class PaymentHistoryDialogBox implements OnInit {
+  paymentHistoryData;
+  displayedColumns;
+  dataSource;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
+  constructor(public _userService: UserService,public dialogRef: MatDialogRef<FlatDialogBox>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
+
+  ngOnInit(){
+    this.showFlatPatmentHistory(this.data.flatId)
+  }
+  paymentHistoryMethod(amount){
+    this.dialogRef.close(amount);
+  }
+
+  showFlatPatmentHistory(flatId){
+    this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
+      console.log(data.dbResponse);
+      this.paymentHistoryData= data.dbResponse;
+      this.displayedColumns   = ['idpaymenthistory', 'amount', 'remainingbalance', 'type' , 'createddate'];
+      const ELEMENT_DATA: flatPaymentHistory[] =data.dbResponse;
+      this.dataSource = new MatTableDataSource<flatPaymentHistory>(ELEMENT_DATA);
+      this.dataSource.paginator = this.paginator;
+    },
+      error => {
+        console.log(error);
+        alert("something went wrong");
+      });
   }
 }

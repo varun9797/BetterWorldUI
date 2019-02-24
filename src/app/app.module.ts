@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { BuildingComponent } from './society-mgmt/building/building.component';
 import { FlatsComponent } from './society-mgmt/flats/flats.component';
 import { FlatDialogBox } from './society-mgmt/flats/flats.component';
+import { PaymentHistoryDialogBox } from './society-mgmt/flats/flats.component';
 import { PendingpaymentComponent } from './society-mgmt/flats/pendingpayment/pendingpayment.component';
 import { OwnersComponent } from './society-mgmt/owners/owners.component';
 import { TenantComponent } from './society-mgmt/tenant/tenant.component';
@@ -100,9 +101,10 @@ const routes: Routes = [
     FlatRegComponent,
     OwnerRegComponent,
     PendingpaymentComponent,
-    FlatDialogBox   
+    FlatDialogBox,
+    PaymentHistoryDialogBox   
   ],
-  entryComponents: [FlatDialogBox],
+  entryComponents: [FlatDialogBox, PaymentHistoryDialogBox],
   imports: [
     BrowserModule,
     FormsModule,
