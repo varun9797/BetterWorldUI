@@ -1,10 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { UserService } from "../services/user.service"
-import { ParamMap, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OnChanges } from '@angular/core';
 import { TokenService } from '../services/token.service'
 import { CommonService } from '../services/common.service'
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
 
 @Component({
   selector: 'app-flats',
@@ -23,11 +25,11 @@ export class FlatsComponent implements OnInit, OnChanges {
   showSpinner;
   displayText;
   paymentHistoryData;
-
+  showPaymentModal=false;
   displayedColumns: string[];
   dataSource;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(public _userService: UserService,
+  constructor(public dialog: MatDialog,public _userService: UserService,
      public router: Router, private route: 
      ActivatedRoute, public _tokenService: TokenService, public _commonService:CommonService) { }
 
@@ -66,6 +68,21 @@ export class FlatsComponent implements OnInit, OnChanges {
         });
     });
   }
+
+  openDialog(flat) {
+    this.flatObj = flat;
+    const dialogRef = this.dialog.open(FlatDialogBox, {
+      data: {
+        flatObj:flat
+      }
+    });
+    dialogRef.afterClosed().subscribe(amount => {
+      console.log('The dialog was closed');
+      if(amount)
+      this.paymentMethod(amount);
+    });
+  }
+
   paymentMethod(payAmount){
     this.flatObj.pendingPayment = payAmount;
     console.log(payAmount , this.flatObj.pendingPayment);
@@ -86,9 +103,6 @@ export class FlatsComponent implements OnInit, OnChanges {
         alert("Payment successfully updated!");
       });
   }
-  paymentID(flatObj){
-    this.flatObj =flatObj;
-  }
   showCalender(flatId){
     this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
       console.log(data.dbResponse);
@@ -104,12 +118,10 @@ export class FlatsComponent implements OnInit, OnChanges {
     this._userService.getFlatPaymentHistory(flatId).subscribe((data) => {
       console.log(data.dbResponse);
       this.paymentHistoryData= data.dbResponse;
-      this.displayedColumns   = ['idpaymenthistory', 'paid', 'remainingbalance', 'createddate'];
+      this.displayedColumns   = ['idpaymenthistory', 'amount', 'remainingbalance', 'type' , 'createddate'];
       const ELEMENT_DATA: flatPaymentHistory[] =data.dbResponse;
       this.dataSource = new MatTableDataSource<flatPaymentHistory>(ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
-      //this.displayedColumns   = ['societyid', 'societyname', 'address', 'pincode','showBuilding', 'delete'];
-      //this._commonService.emitCalanderData(data.dbResponse);
     },
       error => {
         console.log(error);
@@ -128,8 +140,28 @@ export interface flatPaymentHistory {
   createddate: string;
   flatid: number;
   idpaymenthistory: number;
+  paymentType:number;
   ownerid: number;
   paid: number;
   remainingbalance:number;
   updateddate:string
+}
+
+export interface DialogData {
+  flatObj: any;
+}
+
+@Component({
+  selector: 'dialog-data-example-dialog',
+  templateUrl: 'flat-dialogBox.html',
+})
+export class FlatDialogBox {
+  constructor(public dialogRef: MatDialogRef<FlatDialogBox>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+  }
+
+  paymentMethod(amount){
+    this.dialogRef.close(amount);
+  }
 }

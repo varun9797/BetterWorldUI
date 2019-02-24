@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="formStyle row justify-content-center childContainer s-bg">
+        <div class=" col-xs-12 col-md-8 col-lg-8 col-xl-8">
+            <div class="row">
+                <div class="col text-center">
+                    <h1><b>{{pageTitle3}}</b></h1>
+                    <!-- <p>{{pageDesc3}}</p> -->
+                </div>
+            </div>
+            <div class="row align-items-center text-center" ng-app>
+                <div class="col">
+                    <form class="formStyle" name="form">
+                        <div class="form-group">
+                            <mat-form-field *ngIf="pendingPaymentFlatObj" class="col-xs-12 col-sm-2 example-full-width">
+                                <label>Pending Amount</label>
+                                <input [disabled]="isEditable" matInput type="number" name="pendingAmt"
+                                    class="form-control" [(ngModel)]="pendingPaymentFlatObj.pendingpayment">
+                            </mat-form-field>
+                            <mat-form-field class="col-xs-12 col-sm-2 example-full-width">
+                                <label>All Municipal Dues</label>
+                                <input [disabled]="isEditable" matInput type="number" name="dues" class="form-control"
+                                    [(ngModel)]="paymentStructure.dues">
+                            </mat-form-field>
+                            <mat-form-field class="col-xs-12 col-sm-2 example-full-width">
+                                <label>Sinking Funds</label>
+                                <input [disabled]="isEditable" matInput type="number" name="funds" class="form-control"
+                                    [(ngModel)]="paymentStructure.funds">
+                            </mat-form-field>
+                            <mat-form-field class="col-xs-12 col-sm-2 example-full-width">
+                                <label>Periodic Building Maintenance</label>
+                                <input [disabled]="isEditable" matInput type="number" name="maintenance"
+                                    class="form-control" [(ngModel)]="paymentStructure.maintenance">
+                            </mat-form-field>
+                            <mat-form-field class="col-xs-12 col-sm-2 example-full-width">
+                                <label>Common Area Maintenance & Parking</label>
+                                <input [disabled]="isEditable" matInput type="number" name="parking"
+                                    class="form-control" [(ngModel)]="paymentStructure.parking">
+                            </mat-form-field>
+                            <mat-form-field class=" col-xs-12 col-sm-2 example-full-width">
+                                <label>
+                                    <div class="btn btn-primary" (click)="calculateTotal()">Calculate Total</div>
+                                </label>
+                                <input [disabled]="isEditable" matInput type="number" name="d" class="form-control"
+                                    value="{{total}}">
+                            </mat-form-field>
+                            <mat-form-field class="col-xs-12 col-sm-2 example-full-width">
+                                <label>Paying Amount</label>
+                                <input matInput type="number" name="pay" class="form-control" [(ngModel)]="payamt">
+                            </mat-form-field>
+                            <div class="btn btn-primary" (click)="payment(payamt)">Pay</div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

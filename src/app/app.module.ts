@@ -10,6 +10,8 @@ import { SocietyMgmtComponent } from './society-mgmt/society-mgmt.component';
 import { HomeComponent } from './home/home.component';
 import { BuildingComponent } from './society-mgmt/building/building.component';
 import { FlatsComponent } from './society-mgmt/flats/flats.component';
+import { FlatDialogBox } from './society-mgmt/flats/flats.component';
+import { PendingpaymentComponent } from './society-mgmt/flats/pendingpayment/pendingpayment.component';
 import { OwnersComponent } from './society-mgmt/owners/owners.component';
 import { TenantComponent } from './society-mgmt/tenant/tenant.component';
 import { ErrorComponent } from './error/error.component';
@@ -96,8 +98,11 @@ const routes: Routes = [
     SocietyRegComponent,
     BuildingRegComponent,
     FlatRegComponent,
-    OwnerRegComponent   
+    OwnerRegComponent,
+    PendingpaymentComponent,
+    FlatDialogBox   
   ],
+  entryComponents: [FlatDialogBox],
   imports: [
     BrowserModule,
     FormsModule,

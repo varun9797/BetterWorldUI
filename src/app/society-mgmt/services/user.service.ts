@@ -19,6 +19,7 @@ export class UserService {
   flatPaymentHistory = config.default.HOST_NAME + "/society/paymenthistory";
   societyEventURL = config.default.HOST_NAME + "/society/societyEvent";
   selectedTypeList = config.default.HOST_NAME + "/society/owner/list";
+  callStoredProcUrl = config.default.HOST_NAME + "/society/storedProc";
 
   getOwner(query): Observable<any> {
     console.log(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`);
@@ -84,6 +85,16 @@ export class UserService {
   getSocietyEvents(societyId): Observable<any> {
     console.log(`${this.societyEventURL}/societyid/?value='${societyId}'`);
     return this.http.get(`${this.societyEventURL}/societyid/?value='${societyId}'`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
+  callStoredProc(storedProcString): Observable<any> {
+    const postObj = {
+        storedProc:storedProcString
+    }
+    console.log(`${this.callStoredProcUrl}`);
+    return this.http.post(`${this.callStoredProcUrl}`,postObj)
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }
