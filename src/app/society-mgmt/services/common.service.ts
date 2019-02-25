@@ -1,4 +1,5 @@
 import { Injectable, EventEmitter, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ export class CommonService {
   eventCalenderData=new EventEmitter<any>();
   eventShowList=new EventEmitter<any>();
   eventIsActiveType = new EventEmitter<any>();
+  private loginUserSubject = new BehaviorSubject(null);
+  loginUserInfo = this.loginUserSubject.asObservable();
   // eventOwnerRequestObj = new EventEmitter<any>();
   eventOwnerRequestObj;
   constructor() { }
@@ -31,5 +34,9 @@ export class CommonService {
 
   emitOwnerListRequestobj(obj){
     this.eventOwnerRequestObj = obj
+  }
+
+  setLoginUserInfo(message: string) {
+    this.loginUserSubject.next(message)
   }
 }

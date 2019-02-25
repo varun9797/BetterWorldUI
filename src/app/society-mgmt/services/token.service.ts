@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { CommonService } from './common.service';
 import * as config from "./../config.json";
 
 const TOKEN = 'TOKEN';
@@ -11,7 +12,7 @@ const TOKEN = 'TOKEN';
 })
 export class TokenService {
   validateTokenUrl = config.default.HOST_NAME+"/users/validateToken";
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _commonService:CommonService) {
   }
 
   setToken(token: string): void {
@@ -35,6 +36,7 @@ export class TokenService {
         this.isValidToken(token).subscribe(data=>{
           if(data.error == 0){
           //  alert(token);
+          this._commonService.setLoginUserInfo(data);
             observer.next(true);
           } else {
             alert("User is not Valid");

@@ -1,5 +1,13 @@
 <div class="container mainContainer">
     <app-society-header></app-society-header>
+    <div *ngIf="loginUserInfo && loginUserInfo.name">
+      Welcome {{loginUserInfo.name}}<br>
+      Id: {{loginUserInfo.id}}<br>
+      {{loginUserInfo.email}}<br>
+      {{loginUserInfo.phone}}<br>
+      {{loginUserInfo.age}}
+    </div>
+    
     <div class="row col-md-12 text-center">
       <div class="col-md-3"></div>
       <div *ngIf="!isLogged" class="col-md-3"> 

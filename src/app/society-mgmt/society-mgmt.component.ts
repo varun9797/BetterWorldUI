@@ -20,6 +20,13 @@ export class SocietyMgmtComponent implements OnInit {
     flat:false,
     owner:false
   };
+  loginUserInfo = {
+    name:"",
+    id:"",
+    email:"",
+    phone:""
+  }
+
   constructor(private _activateroute: 
     ActivatedRoute,public _tokenService : TokenService, public router: Router, public _commonService:CommonService ) { }
 
@@ -28,6 +35,7 @@ export class SocietyMgmtComponent implements OnInit {
     this._tokenService.isLogged().subscribe(flag=>{
       if(flag){
         this.isLogged = true; 
+        this.getLoginUserData();
       } else {
         this.isLogged = false; 
       }
@@ -44,6 +52,16 @@ export class SocietyMgmtComponent implements OnInit {
     this.changeButtonColor();
     
   }
+
+  getLoginUserData(){
+    this._commonService.loginUserInfo.subscribe((userInfo)=>{
+      this.loginUserInfo.name = userInfo.data.ownername;
+      this.loginUserInfo.id = userInfo.data.ownerid;
+      this.loginUserInfo.phone = userInfo.data.phoneNumber;
+      this.loginUserInfo.email = userInfo.data.email;
+    })
+  }
+
   changeButtonColor() {
     this._commonService.eventIsActiveType.subscribe((value) => {
       if(value=="owners") {

@@ -2423,6 +2423,7 @@ var ApiService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommonService", function() { return CommonService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2433,12 +2434,15 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
 var CommonService = /** @class */ (function () {
     function CommonService() {
         this.calenderData = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.eventCalenderData = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.eventShowList = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
         this.eventIsActiveType = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.loginUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_1__["BehaviorSubject"](null);
+        this.loginUserInfo = this.loginUserSubject.asObservable();
     }
     CommonService.prototype.emitCalanderData = function (paymentHistory) {
         this.calenderData.emit(paymentHistory);
@@ -2454,6 +2458,9 @@ var CommonService = /** @class */ (function () {
     };
     CommonService.prototype.emitOwnerListRequestobj = function (obj) {
         this.eventOwnerRequestObj = obj;
+    };
+    CommonService.prototype.setLoginUserInfo = function (message) {
+        this.loginUserSubject.next(message);
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
@@ -2486,8 +2493,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../config.json */ "./src/app/society-mgmt/config.json");
-var _config_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./../config.json */ "./src/app/society-mgmt/config.json", 1);
+/* harmony import */ var _common_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./common.service */ "./src/app/society-mgmt/services/common.service.ts");
+/* harmony import */ var _config_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../config.json */ "./src/app/society-mgmt/config.json");
+var _config_json__WEBPACK_IMPORTED_MODULE_5___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./../config.json */ "./src/app/society-mgmt/config.json", 1);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2502,11 +2510,13 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var TOKEN = 'TOKEN';
 var TokenService = /** @class */ (function () {
-    function TokenService(http) {
+    function TokenService(http, _commonService) {
         this.http = http;
-        this.validateTokenUrl = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/users/validateToken";
+        this._commonService = _commonService;
+        this.validateTokenUrl = _config_json__WEBPACK_IMPORTED_MODULE_5__.HOST_NAME + "/users/validateToken";
     }
     TokenService.prototype.setToken = function (token) {
         localStorage.setItem(TOKEN, token);
@@ -2527,6 +2537,7 @@ var TokenService = /** @class */ (function () {
                 _this.isValidToken(token).subscribe(function (data) {
                     if (data.error == 0) {
                         //  alert(token);
+                        _this._commonService.setLoginUserInfo(data);
                         observer.next(true);
                     }
                     else {
@@ -2548,7 +2559,7 @@ var TokenService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _common_service__WEBPACK_IMPORTED_MODULE_4__["CommonService"]])
     ], TokenService);
     return TokenService;
 }());
@@ -2787,7 +2798,7 @@ module.exports = "#content{\r\n    overflow:scroll;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n    <app-society-header></app-society-header>\r\n    <div class=\"row col-md-12 text-center\">\r\n      <div class=\"col-md-3\"></div>\r\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \r\n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n      </div>\r\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\r\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n      </div>\r\n      <div class=\"col-md-3\"></div>\r\n    </div>\r\n    <!--<mat-divider></mat-divider>-->\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <br>\r\n      <h2><b>I Love My Society</b></h2>\r\n      \r\n      <mat-progress-bar mode=\"determinate\" [value]=\"progressPercent\"></mat-progress-bar>\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn  homeicons w-100\" [class.btn-success]=\"buttonClickObj.society\" [class.btn-outline-warning]=\"!buttonClickObj.society\" (click)=\"ShowModal('society')\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n            Society</div>\r\n        </div>\r\n        \r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn homeicons w-100\" [class.btn-success]=\"buttonClickObj.building\" [class.btn-outline-warning]=\"!buttonClickObj.building\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\r\n            Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.flat\" [class.btn-outline-warning]=\"!buttonClickObj.flat\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\r\n            Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.owner\" [class.btn-outline-warning]=\"!buttonClickObj.owner\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <img src=\"assets/banner.png\">\r\n      </div> -->\r\n\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n    <app-society-header></app-society-header>\r\n    <div *ngIf=\"loginUserInfo && loginUserInfo.name\">\r\n      Welcome {{loginUserInfo.name}}<br>\r\n      Id: {{loginUserInfo.id}}<br>\r\n      {{loginUserInfo.email}}<br>\r\n      {{loginUserInfo.phone}}<br>\r\n      {{loginUserInfo.age}}\r\n    </div>\r\n    \r\n    <div class=\"row col-md-12 text-center\">\r\n      <div class=\"col-md-3\"></div>\r\n      <div *ngIf=\"!isLogged\" class=\"col-md-3\"> \r\n        <div routerLink=\"/login\" class=\"btn btn-outline-warning homeicons w-100\">Login</div>\r\n      </div>\r\n      <div *ngIf=\"isLogged\" class=\"col-md-3\">\r\n          <div class=\"btn btn-outline-warning homeicons w-100\" (click)=\"logout()\">Logout</div>\r\n      </div>\r\n      <div class=\"col-md-3\">\r\n        <div routerLink=\"/register\" class=\"btn btn-outline-danger homeicons w-100\"> Register</div>\r\n      </div>\r\n      <div class=\"col-md-3\"></div>\r\n    </div>\r\n    <!--<mat-divider></mat-divider>-->\r\n  <div class=\"row\">\r\n    <div class=\"col-sm-12 text-center contentContainer\">\r\n      <br>\r\n      <h2><b>I Love My Society</b></h2>\r\n      \r\n      <mat-progress-bar mode=\"determinate\" [value]=\"progressPercent\"></mat-progress-bar>\r\n      <div class=\"row\">\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div routerLink=\"/societyManagment/society\" class=\"btn  homeicons w-100\" [class.btn-success]=\"buttonClickObj.society\" [class.btn-outline-warning]=\"!buttonClickObj.society\" (click)=\"ShowModal('society')\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M15 11V5l-3-3-3 3v2H3v14h18V11h-6zm-8 8H5v-2h2v2zm0-4H5v-2h2v2zm0-4H5V9h2v2zm6 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2zm6 12h-2v-2h2v2zm0-4h-2v-2h2v2z\" />\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n            Society</div>\r\n        </div>\r\n        \r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('buildings')\"\r\n            class=\"btn homeicons w-100\" [class.btn-success]=\"buttonClickObj.building\" [class.btn-outline-warning]=\"!buttonClickObj.building\">\r\n            <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n              <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n              <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>\r\n            Buildings</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('flats')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.flat\" [class.btn-outline-warning]=\"!buttonClickObj.flat\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z\" /></svg>\r\n            Flats</div>\r\n        </div>\r\n        <div class=\"col-xs-12 col-sm-3 text-center contentContainer\">\r\n          <div (click)=\"ShowModal('owners')\" class=\"btn homeicons w-100\"  [class.btn-success]=\"buttonClickObj.owner\" [class.btn-outline-warning]=\"!buttonClickObj.owner\">\r\n              <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n                  <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n                  <path d=\"M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z\" /></svg>\r\n            owners</div>\r\n        </div>\r\n      </div>\r\n\r\n      <div *ngIf=\"showSpinner\">\r\n          <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n      </div>\r\n      <div *ngIf=\"modalVar\" [hidden]=\"showSpinner\">\r\n        <app-modal [modalName]=\"modalVar\"></app-modal>\r\n      </div>\r\n\r\n      <div id=\"content\" *ngIf=\"showList\" [hidden]=\"showSpinner\">\r\n        <router-outlet></router-outlet>\r\n      </div>\r\n    </div>\r\n\r\n    <!-- <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <img src=\"assets/banner.png\">\r\n      </div> -->\r\n\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -2833,6 +2844,12 @@ var SocietyMgmtComponent = /** @class */ (function () {
             flat: false,
             owner: false
         };
+        this.loginUserInfo = {
+            name: "",
+            id: "",
+            email: "",
+            phone: ""
+        };
     }
     SocietyMgmtComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -2840,6 +2857,7 @@ var SocietyMgmtComponent = /** @class */ (function () {
         this._tokenService.isLogged().subscribe(function (flag) {
             if (flag) {
                 _this.isLogged = true;
+                _this.getLoginUserData();
             }
             else {
                 _this.isLogged = false;
@@ -2854,6 +2872,15 @@ var SocietyMgmtComponent = /** @class */ (function () {
             }
         });
         this.changeButtonColor();
+    };
+    SocietyMgmtComponent.prototype.getLoginUserData = function () {
+        var _this = this;
+        this._commonService.loginUserInfo.subscribe(function (userInfo) {
+            _this.loginUserInfo.name = userInfo.data.ownername;
+            _this.loginUserInfo.id = userInfo.data.ownerid;
+            _this.loginUserInfo.phone = userInfo.data.phoneNumber;
+            _this.loginUserInfo.email = userInfo.data.email;
+        });
     };
     SocietyMgmtComponent.prototype.changeButtonColor = function () {
         var _this = this;
