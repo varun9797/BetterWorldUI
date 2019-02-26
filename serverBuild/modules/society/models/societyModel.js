@@ -94,10 +94,10 @@ var SocietyModel = function SocietyModel() {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
+                                flatData = [req.body.societyId, req.body.buildingName, req.body.flatName];
                                 ownerSearchData = [req.body.phoneNumber, req.body.email];
-                                ownerInsertData = [[req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
-                                query = 'insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values ?';
+                                ownerInsertData = [[req.body.ownerName, req.body.type, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
+                                query = 'insert into owner(ownername,type,phonenumber,email, age, gender, password) values ?';
                                 _context.prev = 4;
                                 _context.next = 7;
                                 return _this.queryMediator.queryConnection(query, ownerInsertData);

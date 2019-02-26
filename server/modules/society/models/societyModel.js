@@ -64,11 +64,11 @@ class SocietyModel {
     })
 
     registerOwner = (req) =>  new Promise(async (resolve, reject) => {
-        var flatData = [req.body.societyId, req.body.buildingName, req.body.flatNumber];
+        var flatData = [req.body.societyId, req.body.buildingName, req.body.flatName];
         var ownerSearchData = [req.body.phoneNumber, req.body.email];
-        var ownerInsertData = [[req.body.ownerName, req.body.isAdmin, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
+        var ownerInsertData = [[req.body.ownerName, req.body.type, req.body.phoneNumber, req.body.email, req.body.age, req.body.gender, req.body.password]];
 
-        let query = 'insert into owner(ownername,isadmin,phonenumber,email, age, gender, password) values ?';
+        let query = 'insert into owner(ownername,type,phonenumber,email, age, gender, password) values ?';
         try {
             await this.queryMediator.queryConnection(query, ownerInsertData);
             let fetchOwnerResponse = await this.getOwner(null, ownerSearchData);
