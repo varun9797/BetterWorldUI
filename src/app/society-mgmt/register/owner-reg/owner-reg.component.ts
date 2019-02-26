@@ -17,14 +17,14 @@ export class OwnerRegComponent implements OnInit {
     email:"",
     phoneNumber:"",
     age:"",
-    gender:"",
-    isAdmin:"",
+    gender:1,
+    type:3,
     password:"",
     flatName:"",
     buildingName:"",
     societyId:""
   }
-
+  isSocietyAdmin:false;
   constructor(public _userService : UserService,public _registerservice : RegisterService) { }
 
   ngOnInit() {
@@ -35,6 +35,10 @@ export class OwnerRegComponent implements OnInit {
         console.log(error);
         this.societyList = error.message;
       });
+  }
+
+  checkAdminFlag(isAdminFlag){
+    isAdminFlag?this.ownerreg.type=2:this.ownerreg.type=3;
   }
 
   onSubmit(){

@@ -349,7 +349,7 @@ module.exports = ".homeIconList{\n    background-color: rgba(242, 242,242, .45);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center\">\r\n      <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\r\n    </div>\r\n    <!--<div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <a routerLink=\"/home\" class=''>\r\n        <img src=\"assets/logo.png\" class=\"img-fluid\" />\r\n      </a>\r\n    </div>-->\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-12 text-center\">\r\n      <h2><b>WELCOME TO SOCIETY MANAGEMENT</b></h2>\r\n      \r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-6 text-center contentContainer\">\r\n      <a routerLink=\"/login\">\r\n      <button style=\"width: 180px\" mat-raised-button color=\"primary\">My Flats</button></a>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-6 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment/society\">\r\n      <button mat-raised-button color=\"primary\">Society Management</button></a>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <img src=\"assets/banner.png\">\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center\">\r\n      <img src=\"assets/logo.png\" class=\"img-fluid logo-img\" />\r\n    </div>\r\n    <div *ngIf=\"loginUserInfo && loginUserInfo.name\">\r\n      Welcome {{loginUserInfo.name}}<br>\r\n      Id: {{loginUserInfo.id}}<br>\r\n      {{loginUserInfo.email}}<br>\r\n      {{loginUserInfo.phone}}<br>\r\n      {{loginUserInfo.age}}<br>\r\n      <button (click)=\"logout()\" mat-raised-button color=\"primary\">Logout</button>\r\n    </div>\r\n    <div *ngIf=\"!(loginUserInfo && loginUserInfo.name)\">\r\n      <button routerLink=\"/login\" mat-raised-button color=\"primary\">Login</button>\r\n    </div>\r\n    <!--<div class=\"col-xs-6 col-sm-6 text-right\">\r\n      <a routerLink=\"/home\" class=''>\r\n        <img src=\"assets/logo.png\" class=\"img-fluid\" />\r\n      </a>\r\n    </div>-->\r\n  </div>\r\n  <br>\r\n  <div class=\"row h-100 justify-content-center align-items-center\">\r\n    <div class=\"col-sm-12 text-center\">\r\n      <h2><b>WELCOME TO SOCIETY MANAGEMENT</b></h2>\r\n      \r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-6 text-center contentContainer\">\r\n      <button style=\"width: 180px\" (click)=\"redirectToFlatPage()\" mat-raised-button color=\"primary\">My Flats</button>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-6 text-center contentContainer\">\r\n      <a routerLink=\"/societyManagment/society\">\r\n      <button mat-raised-button color=\"primary\">Society Management</button></a>\r\n    </div>\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n      <img src=\"assets/banner.png\">\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -364,6 +364,9 @@ module.exports = "<div class=\"container mainContainer\">\r\n  <div class=\"row 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _society_mgmt_services_token_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../society-mgmt/services/token.service */ "./src/app/society-mgmt/services/token.service.ts");
+/* harmony import */ var _society_mgmt_services_common_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../society-mgmt/services/common.service */ "./src/app/society-mgmt/services/common.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -374,10 +377,48 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+
+
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent() {
+    function HomeComponent(_tokenService, _commonService, router) {
+        this._tokenService = _tokenService;
+        this._commonService = _commonService;
+        this.router = router;
+        this.loginUserInfo = {
+            name: "",
+            id: "",
+            email: "",
+            phone: ""
+        };
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._tokenService.isLogged().subscribe(function (isValid) {
+            _this.getLoginUserData();
+        });
+    };
+    HomeComponent.prototype.getLoginUserData = function () {
+        var _this = this;
+        this._commonService.loginUserInfo.subscribe(function (userInfo) {
+            _this.loginUserInfo.name = userInfo.data.ownername;
+            _this.loginUserInfo.id = userInfo.data.ownerid;
+            _this.loginUserInfo.phone = userInfo.data.phoneNumber;
+            _this.loginUserInfo.email = userInfo.data.email;
+        });
+    };
+    HomeComponent.prototype.redirectToFlatPage = function () {
+        if (this.loginUserInfo.id) {
+            this.router.navigate(['societyManagment', 'owners', this.loginUserInfo.id, 'flats']);
+        }
+        else {
+            this.router.navigate(['login']);
+        }
+    };
+    HomeComponent.prototype.logout = function () {
+        localStorage.setItem('TOKEN', "");
+        this.router.navigateByUrl('/home');
+        window.location.reload();
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -385,7 +426,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [_society_mgmt_services_token_service__WEBPACK_IMPORTED_MODULE_1__["TokenService"], _society_mgmt_services_common_service__WEBPACK_IMPORTED_MODULE_2__["CommonService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -1971,7 +2012,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n    <div class=\"row justify-content-center childContainer s-bg\">\r\n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\r\n          <!-- <app-society-header></app-society-header> -->\r\n        <div class=\"row\">\r\n          <div class=\"col text-center\">\r\n            <h1><b>{{pageTitle1}}</b></h1>\r\n            <!-- <p>{{pageDesc1}}</p> -->\r\n          </div>\r\n        </div>\r\n        \r\n        <div class=\"row align-items-center text-center\">\r\n            <div class=\"col\">\r\n                <form class=\"formStyle\" #form1=\"ngForm\" (ngSubmit)=\"onSubmit()\">\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                        <input matInput name=\"name\" class=\"form-control\" #owner=\"ngModel\" [(ngModel)]=\"ownerreg.ownerName\" placeholder=\"Owner Name\">\r\n                      </mat-form-field>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                          <input matInput name=\"email\" class=\"form-control\" #emailid=\"ngModel\" [(ngModel)]=\"ownerreg.email\" placeholder=\"Email\">\r\n                        </mat-form-field>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                        <input matInput  name=\"phoneno\" class=\"form-control\" pattern=\"\\d{10}$\" #telno=\"ngModel\" [(ngModel)]=\"ownerreg.phoneNumber\" placeholder=\"Phone\">\r\n                      </mat-form-field>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                        <input matInput  name=\"age\" class=\"form-control\" #ageno=\"ngModel\" [(ngModel)]=\"ownerreg.age\" placeholder=\"Age\">\r\n                      </mat-form-field>\r\n                    </div>\r\n                    <h5>Gender</h5>\r\n                    <div class=\"form-group\"> \r\n                    <mat-radio-group name=\"gender\" [(ngModel)]=\"ownerreg.gender\">\r\n                        <mat-radio-button value=\"male\" >Male</mat-radio-button>\r\n                        <mat-radio-button value=\"female\">Female</mat-radio-button>\r\n                      </mat-radio-group>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                          <input matInput  name=\"password\" class=\"form-control\" #cname=\"ngModel\" [(ngModel)]=\"ownerreg.password\" placeholder=\"Password\">\r\n                        </mat-form-field>\r\n                    </div>\r\n                    <div class=\"from-check\">\r\n                        <mat-checkbox name=\"isAdmin\" [(ngModel)]=\"ownerreg.isAdmin\">Is Admin?</mat-checkbox>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <mat-form-field class=\"example-full-width\">\r\n                          <input matInput name=\"flatName\" class=\"form-control\" placeholder=\"Flat Name\" #fname=\"ngModel\" [(ngModel)]=\"ownerreg.flatName\">\r\n                        </mat-form-field>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <mat-form-field class=\"example-full-width\">\r\n                          <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"ownerreg.buildingName\">\r\n                        </mat-form-field>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <mat-form-field>\r\n                          <mat-select name=\"societyIdName\" placeholder=\"Select Society\" #sname=\"ngModel\" [(ngModel)]=\"ownerreg.societyId\">\r\n                            <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\r\n                              {{s.societyname}}\r\n                            </mat-option>\r\n                          </mat-select>\r\n                        </mat-form-field>\r\n                      </div>\r\n                    <div class=\"form-group text-center\">\r\n                        <button mat-raised-button color=\"primary\">Register</button>\r\n                    </div>\r\n                \r\n                  </form>\r\n            </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <router-outlet></router-outlet>\r\n  \r\n\r\n"
+module.exports = "<div class=\"container\">\r\n    <div class=\"row justify-content-center childContainer s-bg\">\r\n      <div class=\"col-xs-12 col-md-8 col-lg-8 col-xl-8\">\r\n          <!-- <app-society-header></app-society-header> -->\r\n        <div class=\"row\">\r\n          <div class=\"col text-center\">\r\n            <h1><b>{{pageTitle1}}</b></h1>\r\n            <!-- <p>{{pageDesc1}}</p> -->\r\n          </div>\r\n        </div>\r\n        \r\n        <div class=\"row align-items-center text-center\">\r\n            <div class=\"col\">\r\n                <form class=\"formStyle\" #form1=\"ngForm\" (ngSubmit)=\"onSubmit()\">\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                        <input matInput name=\"name\" class=\"form-control\" #owner=\"ngModel\" [(ngModel)]=\"ownerreg.ownerName\" placeholder=\"Owner Name\">\r\n                      </mat-form-field>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                          <input matInput name=\"email\" class=\"form-control\" #emailid=\"ngModel\" [(ngModel)]=\"ownerreg.email\" placeholder=\"Email\">\r\n                        </mat-form-field>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                        <input matInput  name=\"phoneno\" class=\"form-control\" pattern=\"\\d{10}$\" #telno=\"ngModel\" [(ngModel)]=\"ownerreg.phoneNumber\" placeholder=\"Phone\">\r\n                      </mat-form-field>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                        <input matInput  name=\"age\" class=\"form-control\" #ageno=\"ngModel\" [(ngModel)]=\"ownerreg.age\" placeholder=\"Age\">\r\n                      </mat-form-field>\r\n                    </div>\r\n                    <h5>Gender</h5>\r\n                    <div class=\"form-group\"> \r\n                    <mat-radio-group name=\"gender\" [(ngModel)]=\"ownerreg.gender\">\r\n                        <mat-radio-button value=1>Male</mat-radio-button>\r\n                        <mat-radio-button value=2>Female</mat-radio-button>\r\n                      </mat-radio-group>\r\n                    </div>\r\n                    <div class=\"form-group\"> \r\n                      <mat-form-field class=\"example-full-width\">\r\n                          <input matInput  name=\"password\" class=\"form-control\" #cname=\"ngModel\" [(ngModel)]=\"ownerreg.password\" placeholder=\"Password\">\r\n                        </mat-form-field>\r\n                    </div>\r\n                    <div class=\"from-check\">\r\n                        <mat-checkbox name=\"isAdmin\" (change)=\"checkAdminFlag(isSocietyAdmin)\" [(ngModel)]=\"isSocietyAdmin\">Is Society Admin?</mat-checkbox>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <mat-form-field class=\"example-full-width\">\r\n                          <input matInput name=\"flatName\" class=\"form-control\" placeholder=\"Flat Name\" #fname=\"ngModel\" [(ngModel)]=\"ownerreg.flatName\">\r\n                        </mat-form-field>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <mat-form-field class=\"example-full-width\">\r\n                          <input matInput name=\"buildingName\" class=\"form-control\" placeholder=\"Building Name\" #bname=\"ngModel\" [(ngModel)]=\"ownerreg.buildingName\">\r\n                        </mat-form-field>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <mat-form-field>\r\n                          <mat-select name=\"societyIdName\" placeholder=\"Select Society\" #sname=\"ngModel\" [(ngModel)]=\"ownerreg.societyId\">\r\n                            <mat-option *ngFor=\"let s of societyList\" [value]=\"s.societyid\" >\r\n                              {{s.societyname}}\r\n                            </mat-option>\r\n                          </mat-select>\r\n                        </mat-form-field>\r\n                      </div>\r\n                    <div class=\"form-group text-center\">\r\n                        <button mat-raised-button color=\"primary\">Register</button>\r\n                    </div>\r\n                \r\n                  </form>\r\n            </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <router-outlet></router-outlet>\r\n  \r\n\r\n"
 
 /***/ }),
 
@@ -2011,8 +2052,8 @@ var OwnerRegComponent = /** @class */ (function () {
             email: "",
             phoneNumber: "",
             age: "",
-            gender: "",
-            isAdmin: "",
+            gender: 1,
+            type: 3,
             password: "",
             flatName: "",
             buildingName: "",
@@ -2027,6 +2068,9 @@ var OwnerRegComponent = /** @class */ (function () {
             console.log(error);
             _this.societyList = error.message;
         });
+    };
+    OwnerRegComponent.prototype.checkAdminFlag = function (isAdminFlag) {
+        isAdminFlag ? this.ownerreg.type = 2 : this.ownerreg.type = 3;
     };
     OwnerRegComponent.prototype.onSubmit = function () {
         console.log(this.ownerreg);
@@ -2530,7 +2574,6 @@ var TokenService = /** @class */ (function () {
     };
     TokenService.prototype.isLogged = function () {
         var _this = this;
-        var isValid;
         return new rxjs__WEBPACK_IMPORTED_MODULE_2__["Observable"](function (observer) {
             var token = localStorage.getItem(TOKEN);
             if (token) {

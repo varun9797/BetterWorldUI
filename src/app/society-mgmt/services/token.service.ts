@@ -29,7 +29,6 @@ export class TokenService {
   }
 
   isLogged() :Observable<any> {
-    let isValid;
     return new Observable(observer => {
       let token = localStorage.getItem(TOKEN)
       if(token) {

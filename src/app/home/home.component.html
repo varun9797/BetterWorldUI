@@ -3,6 +3,17 @@
     <div class="col-xs-12 col-sm-12 text-center">
       <img src="assets/logo.png" class="img-fluid logo-img" />
     </div>
+    <div *ngIf="loginUserInfo && loginUserInfo.name">
+      Welcome {{loginUserInfo.name}}<br>
+      Id: {{loginUserInfo.id}}<br>
+      {{loginUserInfo.email}}<br>
+      {{loginUserInfo.phone}}<br>
+      {{loginUserInfo.age}}<br>
+      <button (click)="logout()" mat-raised-button color="primary">Logout</button>
+    </div>
+    <div *ngIf="!(loginUserInfo && loginUserInfo.name)">
+      <button routerLink="/login" mat-raised-button color="primary">Login</button>
+    </div>
     <!--<div class="col-xs-6 col-sm-6 text-right">
       <a routerLink="/home" class=''>
         <img src="assets/logo.png" class="img-fluid" />
@@ -18,8 +29,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-sm-6 text-center contentContainer">
-      <a routerLink="/login">
-      <button style="width: 180px" mat-raised-button color="primary">My Flats</button></a>
+      <button style="width: 180px" (click)="redirectToFlatPage()" mat-raised-button color="primary">My Flats</button>
     </div>
     <div class="col-xs-12 col-sm-6 text-center contentContainer">
       <a routerLink="/societyManagment/society">

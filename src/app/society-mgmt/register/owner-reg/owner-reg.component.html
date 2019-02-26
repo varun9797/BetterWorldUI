@@ -35,8 +35,8 @@
                     <h5>Gender</h5>
                     <div class="form-group"> 
                     <mat-radio-group name="gender" [(ngModel)]="ownerreg.gender">
-                        <mat-radio-button value="male" >Male</mat-radio-button>
-                        <mat-radio-button value="female">Female</mat-radio-button>
+                        <mat-radio-button value=1>Male</mat-radio-button>
+                        <mat-radio-button value=2>Female</mat-radio-button>
                       </mat-radio-group>
                     </div>
                     <div class="form-group"> 
@@ -45,7 +45,7 @@
                         </mat-form-field>
                     </div>
                     <div class="from-check">
-                        <mat-checkbox name="isAdmin" [(ngModel)]="ownerreg.isAdmin">Is Admin?</mat-checkbox>
+                        <mat-checkbox name="isAdmin" (change)="checkAdminFlag(isSocietyAdmin)" [(ngModel)]="isSocietyAdmin">Is Society Admin?</mat-checkbox>
                       </div>
                       <div class="form-group">
                         <mat-form-field class="example-full-width">
