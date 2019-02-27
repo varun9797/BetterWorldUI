@@ -319,6 +319,46 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
+    this.insertPaymentStructure = function (req) {
+        return new Promise(function (resolve, reject) {
+            var body = req.body;
+            var query = 'insert into dev_society.paymentstructure(buildingMaintenance, parkingMaintenance, municipalDue, sinkingFund, electricityCharge, updatedBy) values (' + body.buildingMaintenance + ',' + body.parkingMaintenance + ',' + body.municipalDue + ',' + body.sinkingFund + ',' + body.electricityCharge + ',' + body.updatedBy + ');';
+            _this.queryMediator.queryConnection(query).then(function (result) {
+                console.log('insertPaymentStructure: Ok ');
+                resolve(result);
+            }).catch(function (err) {
+                console.log('insertPaymentStructure : Error ', err);
+                reject(err);
+            });
+        });
+    };
+
+    this.insertPaymentReceipt = function (recieptArray) {
+        return new Promise(function (resolve, reject) {
+            var query = 'insert into dev_society.paymentreceipt(flatid, monthlyamount, paymentStructureid) values ?';
+            _this.queryMediator.queryConnection(query, recieptArray).then(function (result) {
+                console.log('insertPaymentReceipt: Ok ');
+                resolve(result);
+            }).catch(function (err) {
+                console.log('insertPaymentReceipt : Error ', err);
+                reject(err);
+            });
+        });
+    };
+
+    this.getFlatIdsByOwnerId = function (ownerId) {
+        return new Promise(function (resolve, reject) {
+            var query = 'SELECT flatid FROM dev_society.flat where ownerid = ' + ownerId;
+            _this.queryMediator.queryConnection(query).then(function (result) {
+                console.log('insertPaymentReceipt: Ok ');
+                resolve(result);
+            }).catch(function (err) {
+                console.log('insertPaymentReceipt : Error ', err);
+                reject(err);
+            });
+        });
+    };
+
     this.queryMediator = new _queryConnection2.default();
 }
 

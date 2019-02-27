@@ -21,6 +21,7 @@ router.post('/owner/list', societyController.getOwnerList);
 
 /******Add Api********/
 router.post('/registerBuilding', societyController.registerBuilding);
+router.post('/paymentstructure', societyController.insertPaymentStructure);
 router.post('/registerFlat', societyController.registerFlat);
 router.post('/registerSociety', societyController.registerSociety);
 router.post('/registerOwner', societyController.registerOwner);

@@ -202,6 +202,54 @@ class SocietyController {
         });
     }
 
+    insertPaymentStructure = async (req, res)=>{
+        this.societyModel.insertPaymentStructure(req).then( async (dbResponse)=>{
+            let body = req.body;
+            let totalAmount = (body.buildingMaintenance||0)+(body.parkingMaintenance||0)+(body.municipalDue||0)+(body.sinkingFund||0)+(body.electricityCharge||0);
+            let paymentStructureId = dbResponse.dbResponse.insertId;
+            const result = await this.getFlatIdsByOwnerId(req.body.updatedBy, totalAmount, paymentStructureId);
+            res.status(dbResponse.satusCode).json(result);
+        }).catch((err)=>{
+            console.log('catch block of callStoredProc ',err);
+            res.status(err.satusCode).json(err);
+        });
+    }
+
+    getFlatIdsByOwnerId = async (ownerId, totalAmount, paymentStructureId) =>{
+        try {
+            let ids= await  this.societyModel.getFlatIdsByOwnerId(ownerId);
+            const recieptArray = this.createPaymentRecieptArray(ids, totalAmount, paymentStructureId);
+            let response = await this.insertRecieptArray(recieptArray)
+            return response;
+        } catch(err){
+            console.log(err);
+            return err;
+        }
+    }
+
+    insertRecieptArray = async (recieptArray) =>{
+        try {
+            let response = await this.societyModel.insertPaymentReceipt(recieptArray);
+            response.dbResponse= 'payment Reciept inserted successfully!!';
+            return response;
+        } catch(err){
+            console.log(err);
+        }
+    }
+
+    createPaymentRecieptArray = (ids, totalAmount, paymentStructureId) =>{
+        let recieptArray = [];
+        let innerArray;
+        ids.dbResponse.forEach((element)=>{
+            innerArray=[];
+            innerArray.push(element.flatid);
+            innerArray.push(totalAmount);
+            innerArray.push(paymentStructureId);
+            recieptArray.push(innerArray);
+        });
+        return recieptArray;
+    }
+
 }
 
 export default SocietyController;

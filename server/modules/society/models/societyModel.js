@@ -250,6 +250,42 @@ class SocietyModel {
             reject(err);
         });
     });
+
+    insertPaymentStructure = (req) => new Promise((resolve, reject) => {
+        let body = req.body;
+        let query = `insert into dev_society.paymentstructure(buildingMaintenance, parkingMaintenance, municipalDue, sinkingFund, electricityCharge, updatedBy) values (${body.buildingMaintenance},${body.parkingMaintenance},${body.municipalDue},${body.sinkingFund},${body.electricityCharge},${body.updatedBy});`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('insertPaymentStructure: Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('insertPaymentStructure : Error ', err);
+            reject(err);
+        });
+    });
+
+    insertPaymentReceipt = (recieptArray) => new Promise((resolve, reject) => {
+        let query = 'insert into dev_society.paymentreceipt(flatid, monthlyamount, paymentStructureid) values ?';
+        this.queryMediator.queryConnection(query, recieptArray).then((result) => {
+            console.log('insertPaymentReceipt: Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('insertPaymentReceipt : Error ', err);
+            reject(err);
+        });
+    });
+
+    getFlatIdsByOwnerId = (ownerId) => new Promise((resolve, reject) => {
+        let query = `SELECT flatid FROM dev_society.flat where ownerid = ${ownerId}`;
+        this.queryMediator.queryConnection(query).then((result) => {
+            console.log('insertPaymentReceipt: Ok ');
+            resolve(result);
+        }).catch((err) => {
+            console.log('insertPaymentReceipt : Error ', err);
+            reject(err);
+        });
+    });
+
+
 }
 
 export default SocietyModel;
