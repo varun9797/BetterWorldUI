@@ -201,31 +201,61 @@ var SocietyController = function SocietyController() {
         });
     };
 
-    this.insertPaymentStructure = function () {
+    this.insertOrUpdatePaymentStructure = function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2(req, res) {
             return _regenerator2.default.wrap(function _callee2$(_context2) {
                 while (1) {
                     switch (_context2.prev = _context2.next) {
                         case 0:
-                            _this.societyModel.insertPaymentStructure(req).then(function () {
+                            _this.societyModel.insertOrUpdatePaymentStructure(req).then(function () {
                                 var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(dbResponse) {
-                                    var body, totalAmount, paymentStructureId, result;
+                                    var body, totalAmount, idsArray, response, recieptArray, paymentStructureId, _recieptArray;
+
                                     return _regenerator2.default.wrap(function _callee$(_context) {
                                         while (1) {
                                             switch (_context.prev = _context.next) {
                                                 case 0:
                                                     body = req.body;
                                                     totalAmount = (body.buildingMaintenance || 0) + (body.parkingMaintenance || 0) + (body.municipalDue || 0) + (body.sinkingFund || 0) + (body.electricityCharge || 0);
+                                                    _context.next = 4;
+                                                    return _this.getFlatIdsByOwnerId(req.body.updatedBy);
+
+                                                case 4:
+                                                    idsArray = _context.sent;
+                                                    response = void 0;
+
+                                                    if (!(req.method == 'PUT')) {
+                                                        _context.next = 16;
+                                                        break;
+                                                    }
+
+                                                    _context.next = 9;
+                                                    return _this.deleteCurrentRecieptIds(body.id);
+
+                                                case 9:
+                                                    response = _context.sent;
+                                                    recieptArray = _this.createPaymentRecieptArray(idsArray, totalAmount, body.id);
+                                                    _context.next = 13;
+                                                    return _this.insertRecieptArray(recieptArray);
+
+                                                case 13:
+                                                    response = _context.sent;
+                                                    _context.next = 21;
+                                                    break;
+
+                                                case 16:
                                                     paymentStructureId = dbResponse.dbResponse.insertId;
-                                                    _context.next = 5;
-                                                    return _this.getFlatIdsByOwnerId(req.body.updatedBy, totalAmount, paymentStructureId);
+                                                    _recieptArray = _this.createPaymentRecieptArray(idsArray, totalAmount, paymentStructureId);
+                                                    _context.next = 20;
+                                                    return _this.insertRecieptArray(_recieptArray);
 
-                                                case 5:
-                                                    result = _context.sent;
+                                                case 20:
+                                                    response = _context.sent;
 
-                                                    res.status(dbResponse.satusCode).json(result);
+                                                case 21:
+                                                    res.status(dbResponse.satusCode).json(response);
 
-                                                case 7:
+                                                case 22:
                                                 case 'end':
                                                     return _context.stop();
                                             }
@@ -237,7 +267,7 @@ var SocietyController = function SocietyController() {
                                     return _ref2.apply(this, arguments);
                                 };
                             }()).catch(function (err) {
-                                console.log('catch block of callStoredProc ', err);
+                                console.log('catch block of insertOrUpdatePaymentStructure ', err);
                                 res.status(err.satusCode).json(err);
                             });
 
@@ -255,8 +285,8 @@ var SocietyController = function SocietyController() {
     }();
 
     this.getFlatIdsByOwnerId = function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3(ownerId, totalAmount, paymentStructureId) {
-            var ids, recieptArray, response;
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3(ownerId) {
+            var ids;
             return _regenerator2.default.wrap(function _callee3$(_context3) {
                 while (1) {
                     switch (_context3.prev = _context3.next) {
@@ -267,67 +297,96 @@ var SocietyController = function SocietyController() {
 
                         case 3:
                             ids = _context3.sent;
-                            recieptArray = _this.createPaymentRecieptArray(ids, totalAmount, paymentStructureId);
-                            _context3.next = 7;
-                            return _this.insertRecieptArray(recieptArray);
+                            return _context3.abrupt('return', ids);
 
                         case 7:
-                            response = _context3.sent;
-                            return _context3.abrupt('return', response);
-
-                        case 11:
-                            _context3.prev = 11;
+                            _context3.prev = 7;
                             _context3.t0 = _context3['catch'](0);
 
-                            console.log(_context3.t0);
+                            console.log('catch block of getFlatIdsByOwnerId', _context3.t0);
                             return _context3.abrupt('return', _context3.t0);
 
-                        case 15:
+                        case 11:
                         case 'end':
                             return _context3.stop();
                     }
                 }
-            }, _callee3, _this, [[0, 11]]);
+            }, _callee3, _this, [[0, 7]]);
         }));
 
-        return function (_x4, _x5, _x6) {
+        return function (_x4) {
             return _ref3.apply(this, arguments);
         };
     }();
 
-    this.insertRecieptArray = function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee4(recieptArray) {
-            var response;
+    this.deleteCurrentRecieptIds = function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee4(paymentStructureId) {
+            var ids;
             return _regenerator2.default.wrap(function _callee4$(_context4) {
                 while (1) {
                     switch (_context4.prev = _context4.next) {
                         case 0:
                             _context4.prev = 0;
                             _context4.next = 3;
-                            return _this.societyModel.insertPaymentReceipt(recieptArray);
+                            return _this.societyModel.deleteCurrentRecieptIds(paymentStructureId);
 
                         case 3:
-                            response = _context4.sent;
+                            ids = _context4.sent;
+                            return _context4.abrupt('return', ids);
 
-                            response.dbResponse = 'payment Reciept inserted successfully!!';
-                            return _context4.abrupt('return', response);
-
-                        case 8:
-                            _context4.prev = 8;
+                        case 7:
+                            _context4.prev = 7;
                             _context4.t0 = _context4['catch'](0);
 
-                            console.log(_context4.t0);
+                            console.log('catch block of deleteCurrentRecieptIds', _context4.t0);
+                            return _context4.abrupt('return', _context4.t0);
 
                         case 11:
                         case 'end':
                             return _context4.stop();
                     }
                 }
-            }, _callee4, _this, [[0, 8]]);
+            }, _callee4, _this, [[0, 7]]);
         }));
 
-        return function (_x7) {
+        return function (_x5) {
             return _ref4.apply(this, arguments);
+        };
+    }();
+
+    this.insertRecieptArray = function () {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee5(recieptArray) {
+            var response;
+            return _regenerator2.default.wrap(function _callee5$(_context5) {
+                while (1) {
+                    switch (_context5.prev = _context5.next) {
+                        case 0:
+                            _context5.prev = 0;
+                            _context5.next = 3;
+                            return _this.societyModel.insertRecieptArray(recieptArray);
+
+                        case 3:
+                            response = _context5.sent;
+
+                            response.dbResponse = 'payment Reciept inserted successfully!!';
+                            return _context5.abrupt('return', response);
+
+                        case 8:
+                            _context5.prev = 8;
+                            _context5.t0 = _context5['catch'](0);
+
+                            console.log('catch block of insertRecieptArray', _context5.t0);
+
+                        case 11:
+                        case 'end':
+                            return _context5.stop();
+                    }
+                }
+            }, _callee5, _this, [[0, 8]]);
+        }));
+
+        return function (_x6) {
+            return _ref5.apply(this, arguments);
         };
     }();
 

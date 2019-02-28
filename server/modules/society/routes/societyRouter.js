@@ -12,7 +12,7 @@ router.post('/owner/list',societyController.getOwnerList);
 
 /******Add Api********/
 router.post('/registerBuilding',societyController.registerBuilding);
-router.post('/paymentstructure',societyController.insertPaymentStructure);
+router.post('/paymentstructure',societyController.insertOrUpdatePaymentStructure);
 router.post('/registerFlat',societyController.registerFlat);
 router.post('/registerSociety',societyController.registerSociety);
 router.post('/registerOwner',societyController.registerOwner);
@@ -22,6 +22,7 @@ router.post('/updateBuilding',societyController.updateBuilding);
 router.post('/updateFlat',societyController.updateFlat);
 router.post('/updateSociety',societyController.updateSociety);
 router.post('/updateOwner',societyController.updateOwner);
+router.put('/paymentstructure',societyController.insertOrUpdatePaymentStructure);
 
 /*******Delete Api*********/
 router.delete('/delete',societyController.deleteRow);

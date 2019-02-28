@@ -319,28 +319,36 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
-    this.insertPaymentStructure = function (req) {
+    this.insertOrUpdatePaymentStructure = function (req) {
         return new Promise(function (resolve, reject) {
             var body = req.body;
-            var query = 'insert into dev_society.paymentstructure(buildingMaintenance, parkingMaintenance, municipalDue, sinkingFund, electricityCharge, updatedBy) values (' + body.buildingMaintenance + ',' + body.parkingMaintenance + ',' + body.municipalDue + ',' + body.sinkingFund + ',' + body.electricityCharge + ',' + body.updatedBy + ');';
-            _this.queryMediator.queryConnection(query).then(function (result) {
-                console.log('insertPaymentStructure: Ok ');
+            var query = void 0;
+            var valuesArray = null;
+            console.log("req.method---", req.method);
+            if (req.method == 'POST') {
+                query = 'insert into paymentstructure(buildingMaintenance, parkingMaintenance, municipalDue, sinkingFund, electricityCharge, updatedBy) values (' + body.buildingMaintenance + ',' + body.parkingMaintenance + ',' + body.municipalDue + ',' + body.sinkingFund + ',' + body.electricityCharge + ',' + body.updatedBy + ');';
+            } else if (req.method == 'PUT') {
+                query = 'update paymentstructure set buildingMaintenance =' + body.buildingMaintenance + ', parkingMaintenance=' + body.parkingMaintenance + ', municipalDue=' + body.municipalDue + ', sinkingFund=' + body.sinkingFund + ', electricityCharge=' + body.electricityCharge + ', updatedBy=' + body.updatedBy + ' where id = ' + body.id;
+                // valuesArray = [body.buildingMaintenance, body.parkingMaintenance, body.municipalDue, body.sinkingFund, body.electricityCharge, body.updatedBy, body.id];
+            }
+            _this.queryMediator.queryConnection(query, valuesArray).then(function (result) {
+                console.log('insertOrUpdatePaymentStructure: Ok ');
                 resolve(result);
             }).catch(function (err) {
-                console.log('insertPaymentStructure : Error ', err);
+                console.log('insertOrUpdatePaymentStructure : Error ', err);
                 reject(err);
             });
         });
     };
 
-    this.insertPaymentReceipt = function (recieptArray) {
+    this.insertRecieptArray = function (recieptArray) {
         return new Promise(function (resolve, reject) {
-            var query = 'insert into dev_society.paymentreceipt(flatid, monthlyamount, paymentStructureid) values ?';
+            var query = 'insert into paymentreceipt(flatid, monthlyamount, paymentStructureid) values ?';
             _this.queryMediator.queryConnection(query, recieptArray).then(function (result) {
-                console.log('insertPaymentReceipt: Ok ');
+                console.log('insertOrUpdateRecieptArray: Ok ');
                 resolve(result);
             }).catch(function (err) {
-                console.log('insertPaymentReceipt : Error ', err);
+                console.log('insertOrUpdateRecieptArray : Error ', err);
                 reject(err);
             });
         });
@@ -348,7 +356,7 @@ var SocietyModel = function SocietyModel() {
 
     this.getFlatIdsByOwnerId = function (ownerId) {
         return new Promise(function (resolve, reject) {
-            var query = 'SELECT flatid FROM dev_society.flat where ownerid = ' + ownerId;
+            var query = 'SELECT flatid FROM flat where ownerid = ' + ownerId;
             _this.queryMediator.queryConnection(query).then(function (result) {
                 console.log('insertPaymentReceipt: Ok ');
                 resolve(result);
@@ -358,6 +366,92 @@ var SocietyModel = function SocietyModel() {
             });
         });
     };
+
+    this.deleteCurrentRecieptIds = function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2(paymentStructureId) {
+            var recieptIdsArray, query, deleteResponse;
+            return _regenerator2.default.wrap(function _callee2$(_context2) {
+                while (1) {
+                    switch (_context2.prev = _context2.next) {
+                        case 0:
+                            _context2.next = 2;
+                            return _this.getCurrentReciepts(paymentStructureId);
+
+                        case 2:
+                            recieptIdsArray = _context2.sent;
+                            query = 'DELETE FROM paymentreceipt WHERE id IN (' + recieptIdsArray + ')';
+                            _context2.prev = 4;
+                            _context2.next = 7;
+                            return _this.queryMediator.queryConnection(query);
+
+                        case 7:
+                            deleteResponse = _context2.sent;
+
+                            console.log('deleteCurrentRecieptIds: Ok ', deleteResponse);
+                            return _context2.abrupt('return', deleteResponse);
+
+                        case 12:
+                            _context2.prev = 12;
+                            _context2.t0 = _context2['catch'](4);
+
+                            console.error('deleteCurrentRecieptIds : Error', _context2.t0);
+                            throw _context2.t0;
+
+                        case 16:
+                        case 'end':
+                            return _context2.stop();
+                    }
+                }
+            }, _callee2, _this, [[4, 12]]);
+        }));
+
+        return function (_x3) {
+            return _ref2.apply(this, arguments);
+        };
+    }();
+
+    this.getCurrentReciepts = function () {
+        var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3(paymentStructureId) {
+            var query, recieptIdsArray, idsArray;
+            return _regenerator2.default.wrap(function _callee3$(_context3) {
+                while (1) {
+                    switch (_context3.prev = _context3.next) {
+                        case 0:
+                            query = 'SELECT id FROM paymentreceipt where paymentStructureid = ' + paymentStructureId + ' and MONTH(createdDate) = MONTH(CURRENT_DATE())\n        AND YEAR(createdDate) = YEAR(CURRENT_DATE())';
+                            _context3.prev = 1;
+                            _context3.next = 4;
+                            return _this.queryMediator.queryConnection(query);
+
+                        case 4:
+                            recieptIdsArray = _context3.sent;
+
+                            console.log('getCurrentReciepts: Ok ', recieptIdsArray);
+                            idsArray = [];
+
+                            recieptIdsArray.dbResponse.forEach(function (element) {
+                                idsArray.push(element.id);
+                            });
+                            return _context3.abrupt('return', idsArray);
+
+                        case 11:
+                            _context3.prev = 11;
+                            _context3.t0 = _context3['catch'](1);
+
+                            console.error('getCurrentReciepts : Error', _context3.t0);
+                            throw _context3.t0;
+
+                        case 15:
+                        case 'end':
+                            return _context3.stop();
+                    }
+                }
+            }, _callee3, _this, [[1, 11]]);
+        }));
+
+        return function (_x4) {
+            return _ref3.apply(this, arguments);
+        };
+    }();
 
     this.queryMediator = new _queryConnection2.default();
 }

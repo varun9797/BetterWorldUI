@@ -202,38 +202,57 @@ class SocietyController {
         });
     }
 
-    insertPaymentStructure = async (req, res)=>{
-        this.societyModel.insertPaymentStructure(req).then( async (dbResponse)=>{
+    insertOrUpdatePaymentStructure = async (req, res)=>{
+        this.societyModel.insertOrUpdatePaymentStructure(req).then( async (dbResponse)=>{
             let body = req.body;
             let totalAmount = (body.buildingMaintenance||0)+(body.parkingMaintenance||0)+(body.municipalDue||0)+(body.sinkingFund||0)+(body.electricityCharge||0);
-            let paymentStructureId = dbResponse.dbResponse.insertId;
-            const result = await this.getFlatIdsByOwnerId(req.body.updatedBy, totalAmount, paymentStructureId);
-            res.status(dbResponse.satusCode).json(result);
+
+            const idsArray = await this.getFlatIdsByOwnerId(req.body.updatedBy);
+            
+            let response ;
+            if(req.method=='PUT'){
+                response = await this.deleteCurrentRecieptIds(body.id);
+                const recieptArray = this.createPaymentRecieptArray(idsArray, totalAmount, body.id);
+                response = await this.insertRecieptArray(recieptArray);
+            } else {
+                let paymentStructureId = dbResponse.dbResponse.insertId;
+                const recieptArray = this.createPaymentRecieptArray(idsArray, totalAmount, paymentStructureId);
+                response = await this.insertRecieptArray(recieptArray);
+            }
+            res.status(dbResponse.satusCode).json(response);
         }).catch((err)=>{
-            console.log('catch block of callStoredProc ',err);
+            console.log('catch block of insertOrUpdatePaymentStructure ',err);
             res.status(err.satusCode).json(err);
         });
     }
 
-    getFlatIdsByOwnerId = async (ownerId, totalAmount, paymentStructureId) =>{
+    getFlatIdsByOwnerId = async (ownerId) =>{
         try {
             let ids= await  this.societyModel.getFlatIdsByOwnerId(ownerId);
-            const recieptArray = this.createPaymentRecieptArray(ids, totalAmount, paymentStructureId);
-            let response = await this.insertRecieptArray(recieptArray)
-            return response;
+            return ids;
         } catch(err){
-            console.log(err);
+            console.log('catch block of getFlatIdsByOwnerId',err);
+            return err;
+        }
+    }
+
+    deleteCurrentRecieptIds = async (paymentStructureId) =>{
+        try {
+            let ids= await  this.societyModel.deleteCurrentRecieptIds(paymentStructureId);
+            return ids;
+        } catch(err){
+            console.log('catch block of deleteCurrentRecieptIds',err);
             return err;
         }
     }
 
     insertRecieptArray = async (recieptArray) =>{
         try {
-            let response = await this.societyModel.insertPaymentReceipt(recieptArray);
+            let response = await this.societyModel.insertRecieptArray(recieptArray);
             response.dbResponse= 'payment Reciept inserted successfully!!';
             return response;
         } catch(err){
-            console.log(err);
+            console.log('catch block of insertRecieptArray',err);
         }
     }
 

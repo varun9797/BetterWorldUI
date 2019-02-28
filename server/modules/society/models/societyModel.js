@@ -251,31 +251,39 @@ class SocietyModel {
         });
     });
 
-    insertPaymentStructure = (req) => new Promise((resolve, reject) => {
+    insertOrUpdatePaymentStructure = (req) => new Promise((resolve, reject) => {
         let body = req.body;
-        let query = `insert into dev_society.paymentstructure(buildingMaintenance, parkingMaintenance, municipalDue, sinkingFund, electricityCharge, updatedBy) values (${body.buildingMaintenance},${body.parkingMaintenance},${body.municipalDue},${body.sinkingFund},${body.electricityCharge},${body.updatedBy});`;
-        this.queryMediator.queryConnection(query).then((result) => {
-            console.log('insertPaymentStructure: Ok ');
+        let query;
+        let valuesArray=null;
+        console.log("req.method---",req.method);
+        if(req.method == 'POST'){
+            query = `insert into paymentstructure(buildingMaintenance, parkingMaintenance, municipalDue, sinkingFund, electricityCharge, updatedBy) values (${body.buildingMaintenance},${body.parkingMaintenance},${body.municipalDue},${body.sinkingFund},${body.electricityCharge},${body.updatedBy});`;
+        } else if(req.method == 'PUT'){
+            query = `update paymentstructure set buildingMaintenance =${body.buildingMaintenance}, parkingMaintenance=${body.parkingMaintenance}, municipalDue=${body.municipalDue}, sinkingFund=${body.sinkingFund}, electricityCharge=${body.electricityCharge}, updatedBy=${body.updatedBy} where id = ${body.id}`;
+            // valuesArray = [body.buildingMaintenance, body.parkingMaintenance, body.municipalDue, body.sinkingFund, body.electricityCharge, body.updatedBy, body.id];
+        }
+        this.queryMediator.queryConnection(query, valuesArray).then((result) => {
+            console.log('insertOrUpdatePaymentStructure: Ok ');
             resolve(result);
         }).catch((err) => {
-            console.log('insertPaymentStructure : Error ', err);
+            console.log('insertOrUpdatePaymentStructure : Error ', err);
             reject(err);
         });
     });
 
-    insertPaymentReceipt = (recieptArray) => new Promise((resolve, reject) => {
-        let query = 'insert into dev_society.paymentreceipt(flatid, monthlyamount, paymentStructureid) values ?';
+    insertRecieptArray = (recieptArray) => new Promise((resolve, reject) => {
+        let query = 'insert into paymentreceipt(flatid, monthlyamount, paymentStructureid) values ?';
         this.queryMediator.queryConnection(query, recieptArray).then((result) => {
-            console.log('insertPaymentReceipt: Ok ');
+            console.log('insertOrUpdateRecieptArray: Ok ');
             resolve(result);
         }).catch((err) => {
-            console.log('insertPaymentReceipt : Error ', err);
+            console.log('insertOrUpdateRecieptArray : Error ', err);
             reject(err);
         });
     });
 
     getFlatIdsByOwnerId = (ownerId) => new Promise((resolve, reject) => {
-        let query = `SELECT flatid FROM dev_society.flat where ownerid = ${ownerId}`;
+        let query = `SELECT flatid FROM flat where ownerid = ${ownerId}`;
         this.queryMediator.queryConnection(query).then((result) => {
             console.log('insertPaymentReceipt: Ok ');
             resolve(result);
@@ -284,6 +292,37 @@ class SocietyModel {
             reject(err);
         });
     });
+
+    deleteCurrentRecieptIds =async (paymentStructureId)=>{
+        const recieptIdsArray = await this.getCurrentReciepts(paymentStructureId);
+        const query = `DELETE FROM paymentreceipt WHERE id IN (${recieptIdsArray})`;
+        try {
+            const deleteResponse = await this.queryMediator.queryConnection(query);  
+            console.log('deleteCurrentRecieptIds: Ok ', deleteResponse);    
+            return deleteResponse;
+        } catch(err){
+            console.error('deleteCurrentRecieptIds : Error',err);
+            throw err;
+        }
+
+    }
+
+    getCurrentReciepts = async (paymentStructureId)=>{
+        let query = `SELECT id FROM paymentreceipt where paymentStructureid = ${paymentStructureId} and MONTH(createdDate) = MONTH(CURRENT_DATE())
+        AND YEAR(createdDate) = YEAR(CURRENT_DATE())`;
+        try {
+            const recieptIdsArray = await this.queryMediator.queryConnection(query);
+            console.log('getCurrentReciepts: Ok ', recieptIdsArray); 
+            let idsArray = [];
+            recieptIdsArray.dbResponse.forEach((element)=>{
+                idsArray.push(element.id);
+            })
+            return idsArray;
+        } catch(err){
+            console.error('getCurrentReciepts : Error',err);
+            throw err;
+        }
+    }
 
 
 }
