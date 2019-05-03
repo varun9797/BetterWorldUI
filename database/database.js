@@ -9,7 +9,7 @@ var mysql = require('mysql');
 
 var connection = mysql.createPool({
     connectionLimit: 100,
-    host:'betterworld.cqdt99obscjn.us-east-1.rds.amazonaws.com',
+    host:'final-betterworld0ccb3fb2-2f45-447f-a872-08f7b2396f81.cqdt99obscjn.us-east-1.rds.amazonaws.com',
     user:'verma9797',
     password:'qwer#123',
     database:'dev_society',

@@ -319,6 +319,51 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
+    this.IsCurrentMonthPaymentStructureExist = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+        var query, recordCount;
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        query = 'select count(id) as count from dev_society.paymentstructure  where MONTH(createdDate) = MONTH(CURRENT_DATE())\n        AND YEAR(createdDate) = YEAR(CURRENT_DATE());';
+                        _context2.prev = 1;
+                        _context2.next = 4;
+                        return _this.queryMediator.queryConnection(query);
+
+                    case 4:
+                        recordCount = _context2.sent;
+
+                        console.log('IsCurrentMonthPaymentStructureExist: Ok ', recordCount.dbResponse[0].count);
+
+                        if (!(recordCount > 0)) {
+                            _context2.next = 10;
+                            break;
+                        }
+
+                        return _context2.abrupt('return', true);
+
+                    case 10:
+                        return _context2.abrupt('return', false);
+
+                    case 11:
+                        _context2.next = 17;
+                        break;
+
+                    case 13:
+                        _context2.prev = 13;
+                        _context2.t0 = _context2['catch'](1);
+
+                        console.error('IsCurrentMonthPaymentStructureExist : Error', _context2.t0);
+                        throw _context2.t0;
+
+                    case 17:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, _this, [[1, 13]]);
+    }));
+
     this.insertOrUpdatePaymentStructure = function (req) {
         return new Promise(function (resolve, reject) {
             var body = req.body;
@@ -368,62 +413,62 @@ var SocietyModel = function SocietyModel() {
     };
 
     this.deleteCurrentRecieptIds = function () {
-        var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2(paymentStructureId) {
-            var recieptIdsArray, query, deleteResponse;
-            return _regenerator2.default.wrap(function _callee2$(_context2) {
-                while (1) {
-                    switch (_context2.prev = _context2.next) {
-                        case 0:
-                            _context2.next = 2;
-                            return _this.getCurrentReciepts(paymentStructureId);
-
-                        case 2:
-                            recieptIdsArray = _context2.sent;
-                            query = 'DELETE FROM paymentreceipt WHERE id IN (' + recieptIdsArray + ')';
-                            _context2.prev = 4;
-                            _context2.next = 7;
-                            return _this.queryMediator.queryConnection(query);
-
-                        case 7:
-                            deleteResponse = _context2.sent;
-
-                            console.log('deleteCurrentRecieptIds: Ok ', deleteResponse);
-                            return _context2.abrupt('return', deleteResponse);
-
-                        case 12:
-                            _context2.prev = 12;
-                            _context2.t0 = _context2['catch'](4);
-
-                            console.error('deleteCurrentRecieptIds : Error', _context2.t0);
-                            throw _context2.t0;
-
-                        case 16:
-                        case 'end':
-                            return _context2.stop();
-                    }
-                }
-            }, _callee2, _this, [[4, 12]]);
-        }));
-
-        return function (_x3) {
-            return _ref2.apply(this, arguments);
-        };
-    }();
-
-    this.getCurrentReciepts = function () {
         var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3(paymentStructureId) {
-            var query, recieptIdsArray, idsArray;
+            var recieptIdsArray, query, deleteResponse;
             return _regenerator2.default.wrap(function _callee3$(_context3) {
                 while (1) {
                     switch (_context3.prev = _context3.next) {
                         case 0:
+                            _context3.next = 2;
+                            return _this.getCurrentReciepts(paymentStructureId);
+
+                        case 2:
+                            recieptIdsArray = _context3.sent;
+                            query = 'DELETE FROM paymentreceipt WHERE id IN (' + recieptIdsArray + ')';
+                            _context3.prev = 4;
+                            _context3.next = 7;
+                            return _this.queryMediator.queryConnection(query);
+
+                        case 7:
+                            deleteResponse = _context3.sent;
+
+                            console.log('deleteCurrentRecieptIds: Ok ', deleteResponse);
+                            return _context3.abrupt('return', deleteResponse);
+
+                        case 12:
+                            _context3.prev = 12;
+                            _context3.t0 = _context3['catch'](4);
+
+                            console.error('deleteCurrentRecieptIds : Error', _context3.t0);
+                            throw _context3.t0;
+
+                        case 16:
+                        case 'end':
+                            return _context3.stop();
+                    }
+                }
+            }, _callee3, _this, [[4, 12]]);
+        }));
+
+        return function (_x3) {
+            return _ref3.apply(this, arguments);
+        };
+    }();
+
+    this.getCurrentReciepts = function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee4(paymentStructureId) {
+            var query, recieptIdsArray, idsArray;
+            return _regenerator2.default.wrap(function _callee4$(_context4) {
+                while (1) {
+                    switch (_context4.prev = _context4.next) {
+                        case 0:
                             query = 'SELECT id FROM paymentreceipt where paymentStructureid = ' + paymentStructureId + ' and MONTH(createdDate) = MONTH(CURRENT_DATE())\n        AND YEAR(createdDate) = YEAR(CURRENT_DATE())';
-                            _context3.prev = 1;
-                            _context3.next = 4;
+                            _context4.prev = 1;
+                            _context4.next = 4;
                             return _this.queryMediator.queryConnection(query);
 
                         case 4:
-                            recieptIdsArray = _context3.sent;
+                            recieptIdsArray = _context4.sent;
 
                             console.log('getCurrentReciepts: Ok ', recieptIdsArray);
                             idsArray = [];
@@ -431,25 +476,25 @@ var SocietyModel = function SocietyModel() {
                             recieptIdsArray.dbResponse.forEach(function (element) {
                                 idsArray.push(element.id);
                             });
-                            return _context3.abrupt('return', idsArray);
+                            return _context4.abrupt('return', idsArray);
 
                         case 11:
-                            _context3.prev = 11;
-                            _context3.t0 = _context3['catch'](1);
+                            _context4.prev = 11;
+                            _context4.t0 = _context4['catch'](1);
 
-                            console.error('getCurrentReciepts : Error', _context3.t0);
-                            throw _context3.t0;
+                            console.error('getCurrentReciepts : Error', _context4.t0);
+                            throw _context4.t0;
 
                         case 15:
                         case 'end':
-                            return _context3.stop();
+                            return _context4.stop();
                     }
                 }
-            }, _callee3, _this, [[1, 11]]);
+            }, _callee4, _this, [[1, 11]]);
         }));
 
         return function (_x4) {
-            return _ref3.apply(this, arguments);
+            return _ref4.apply(this, arguments);
         };
     }();
 

@@ -251,6 +251,23 @@ class SocietyModel {
         });
     });
 
+    IsCurrentMonthPaymentStructureExist = async () => {
+        let query = `select count(id) as count from dev_society.paymentstructure  where MONTH(createdDate) = MONTH(CURRENT_DATE())
+        AND YEAR(createdDate) = YEAR(CURRENT_DATE());`;
+        try {
+            const recordCount = await this.queryMediator.queryConnection(query);
+            console.log('IsCurrentMonthPaymentStructureExist: Ok ', recordCount.dbResponse[0].count); 
+            if(recordCount >0){
+                return true;
+            } else {
+                return false;
+            }
+        } catch(err){
+            console.error('IsCurrentMonthPaymentStructureExist : Error',err);
+            throw err;
+        }
+    }
+
     insertOrUpdatePaymentStructure = (req) => new Promise((resolve, reject) => {
         let body = req.body;
         let query;
