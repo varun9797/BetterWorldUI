@@ -412,7 +412,7 @@ var SocietyModel = function SocietyModel() {
         });
     };
 
-    this.deleteCurrentRecieptIds = function () {
+    this.disableCurrentRecieptIds = function () {
         var _ref3 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3(paymentStructureId) {
             var recieptIdsArray, query, deleteResponse;
             return _regenerator2.default.wrap(function _callee3$(_context3) {
@@ -424,7 +424,9 @@ var SocietyModel = function SocietyModel() {
 
                         case 2:
                             recieptIdsArray = _context3.sent;
-                            query = 'DELETE FROM paymentreceipt WHERE id IN (' + recieptIdsArray + ')';
+
+                            //const query = `DELETE FROM paymentreceipt WHERE id IN (${recieptIdsArray})`;
+                            query = 'update paymentreceipt set isActive = 0 WHERE id IN (' + recieptIdsArray + ')';
                             _context3.prev = 4;
                             _context3.next = 7;
                             return _this.queryMediator.queryConnection(query);
@@ -432,14 +434,14 @@ var SocietyModel = function SocietyModel() {
                         case 7:
                             deleteResponse = _context3.sent;
 
-                            console.log('deleteCurrentRecieptIds: Ok ', deleteResponse);
+                            console.log('disableCurrentRecieptIds: Ok ', deleteResponse);
                             return _context3.abrupt('return', deleteResponse);
 
                         case 12:
                             _context3.prev = 12;
                             _context3.t0 = _context3['catch'](4);
 
-                            console.error('deleteCurrentRecieptIds : Error', _context3.t0);
+                            console.error('disableCurrentRecieptIds : Error', _context3.t0);
                             throw _context3.t0;
 
                         case 16:

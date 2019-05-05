@@ -310,15 +310,16 @@ class SocietyModel {
         });
     });
 
-    deleteCurrentRecieptIds =async (paymentStructureId)=>{
+    disableCurrentRecieptIds =async (paymentStructureId)=>{
         const recieptIdsArray = await this.getCurrentReciepts(paymentStructureId);
-        const query = `DELETE FROM paymentreceipt WHERE id IN (${recieptIdsArray})`;
+        //const query = `DELETE FROM paymentreceipt WHERE id IN (${recieptIdsArray})`;
+        const query = `update paymentreceipt set isActive = 0 WHERE id IN (${recieptIdsArray})`;
         try {
             const deleteResponse = await this.queryMediator.queryConnection(query);  
-            console.log('deleteCurrentRecieptIds: Ok ', deleteResponse);    
+            console.log('disableCurrentRecieptIds: Ok ', deleteResponse);    
             return deleteResponse;
         } catch(err){
-            console.error('deleteCurrentRecieptIds : Error',err);
+            console.error('disableCurrentRecieptIds : Error',err);
             throw err;
         }
 

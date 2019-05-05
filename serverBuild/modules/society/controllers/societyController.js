@@ -230,7 +230,7 @@ var SocietyController = function SocietyController() {
                                                     }
 
                                                     _context.next = 9;
-                                                    return _this.deleteCurrentRecieptIds(body.id);
+                                                    return _this.disableCurrentRecieptIds(body.id);
 
                                                 case 9:
                                                     response = _context.sent;
@@ -304,7 +304,7 @@ var SocietyController = function SocietyController() {
                             _context3.t0 = _context3['catch'](0);
 
                             console.log('catch block of getFlatIdsByOwnerId', _context3.t0);
-                            return _context3.abrupt('return', _context3.t0);
+                            throw _context3.t0;
 
                         case 11:
                         case 'end':
@@ -319,7 +319,7 @@ var SocietyController = function SocietyController() {
         };
     }();
 
-    this.deleteCurrentRecieptIds = function () {
+    this.disableCurrentRecieptIds = function () {
         var _ref4 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee4(paymentStructureId) {
             var ids;
             return _regenerator2.default.wrap(function _callee4$(_context4) {
@@ -328,7 +328,7 @@ var SocietyController = function SocietyController() {
                         case 0:
                             _context4.prev = 0;
                             _context4.next = 3;
-                            return _this.societyModel.deleteCurrentRecieptIds(paymentStructureId);
+                            return _this.societyModel.disableCurrentRecieptIds(paymentStructureId);
 
                         case 3:
                             ids = _context4.sent;
@@ -338,8 +338,8 @@ var SocietyController = function SocietyController() {
                             _context4.prev = 7;
                             _context4.t0 = _context4['catch'](0);
 
-                            console.log('catch block of deleteCurrentRecieptIds', _context4.t0);
-                            return _context4.abrupt('return', _context4.t0);
+                            console.log('catch block of disableCurrentRecieptIds', _context4.t0);
+                            throw _context4.t0;
 
                         case 11:
                         case 'end':
@@ -376,8 +376,9 @@ var SocietyController = function SocietyController() {
                             _context5.t0 = _context5['catch'](0);
 
                             console.log('catch block of insertRecieptArray', _context5.t0);
+                            throw _context5.t0;
 
-                        case 11:
+                        case 12:
                         case 'end':
                             return _context5.stop();
                     }

@@ -211,7 +211,7 @@ class SocietyController {
             
             let response ;
             if(req.method=='PUT'){
-                response = await this.deleteCurrentRecieptIds(body.id);
+                response = await this.disableCurrentRecieptIds(body.id);
                 const recieptArray = this.createPaymentRecieptArray(idsArray, totalAmount, body.id);
                 response = await this.insertRecieptArray(recieptArray);
             } else {
@@ -232,17 +232,17 @@ class SocietyController {
             return ids;
         } catch(err){
             console.log('catch block of getFlatIdsByOwnerId',err);
-            return err;
+            throw err;
         }
     }
 
-    deleteCurrentRecieptIds = async (paymentStructureId) =>{
+    disableCurrentRecieptIds = async (paymentStructureId) =>{
         try {
-            let ids= await  this.societyModel.deleteCurrentRecieptIds(paymentStructureId);
+            let ids= await  this.societyModel.disableCurrentRecieptIds(paymentStructureId);
             return ids;
         } catch(err){
-            console.log('catch block of deleteCurrentRecieptIds',err);
-            return err;
+            console.log('catch block of disableCurrentRecieptIds',err);
+            throw err;
         }
     }
 
@@ -253,6 +253,7 @@ class SocietyController {
             return response;
         } catch(err){
             console.log('catch block of insertRecieptArray',err);
+            throw err;
         }
     }
 
