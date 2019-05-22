@@ -338,7 +338,7 @@ var ErrorComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".homeIconList{\n    background-color: rgba(242, 242,242, .45);\n    min-width: 220px;\n    min-height: 80px;\n    margin: 10px;\n}\n.m-r-20 {\n    margin-right: 20px; }"
+module.exports = ".homeIconList{\r\n    background-color: rgba(242, 242,242, .45);\r\n    min-width: 220px;\r\n    min-height: 80px;\r\n    margin: 10px;\r\n}\r\n.m-r-20 {\r\n    margin-right: 20px; }"
 
 /***/ }),
 
@@ -649,7 +649,7 @@ var BuildingComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "h3 {\n    margin: 0 0 10px;\n  }\n  \n  pre {\n    background-color: #f5f5f5;\n    padding: 15px;\n  }"
+module.exports = "h3 {\r\n    margin: 0 0 10px;\r\n  }\r\n  \r\n  pre {\r\n    background-color: #f5f5f5;\r\n    padding: 15px;\r\n  }"
 
 /***/ }),
 
@@ -3037,7 +3037,7 @@ module.exports = "table {\r\n    width: 100%;\r\n  }\r\n\r\n  .tableClass {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\r\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\r\n\r\n    <!-- Position Column -->\r\n    <ng-container matColumnDef=\"societyid\">\r\n      <th mat-cell *matHeaderCellDef> Society Id </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Name Column -->\r\n    <ng-container matColumnDef=\"societyname\">\r\n      <th mat-cell *matHeaderCellDef> Society Name </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Weight Column -->\r\n    <ng-container matColumnDef=\"address\">\r\n      <th mat-cell *matHeaderCellDef> Address </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Symbol Column -->\r\n    <ng-container matColumnDef=\"pincode\">\r\n      <th mat-cell *matHeaderCellDef> Pincode </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"showBuilding\">\r\n      <th mat-cell *matHeaderCellDef> Show Buildings </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"goToBuilding(element.societyid)\">             <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>Buildings\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"delete\">\r\n      <th mat-cell *matHeaderCellDef>delete </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"deleteBuilding(element.societyid)\"> <svg\r\n            xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n            <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\r\n            <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n  </table>\r\n\r\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\r\n</div>\r\n\r\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\r\n    <event-calendar-component></event-calendar-component>\r\n</div>  -->"
+module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\r\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\r\n\r\n    \r\n\r\n    <!-- Position Column -->\r\n    <ng-container matColumnDef=\"societyid\">\r\n      <th mat-cell *matHeaderCellDef> Society Id </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Name Column -->\r\n    <ng-container matColumnDef=\"societyname\">\r\n      <th mat-cell *matHeaderCellDef> Society Name </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Weight Column -->\r\n    <ng-container matColumnDef=\"address\">\r\n      <th mat-cell *matHeaderCellDef> Address </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Symbol Column -->\r\n    <ng-container matColumnDef=\"pincode\">\r\n      <th mat-cell *matHeaderCellDef> Pincode </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"showBuilding\">\r\n      <th mat-cell *matHeaderCellDef> Show Buildings </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"goToBuilding(element.societyid)\">             <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>Buildings\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"delete\">\r\n      <th mat-cell *matHeaderCellDef>delete </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"deleteBuilding(element.societyid)\"> <svg\r\n            xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n            <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\r\n            <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n  </table>\r\n\r\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\r\n</div>\r\n\r\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\r\n    <event-calendar-component></event-calendar-component>\r\n</div>  -->"
 
 /***/ }),
 
@@ -3149,7 +3149,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  tenant works!\n</p>\n"
+module.exports = "<p>\r\n  tenant works!\r\n</p>\r\n"
 
 /***/ }),
 
@@ -3258,7 +3258,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\storage\class\11-1\Angular\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! E:\Storage\BetterWorldUI\src\main.ts */"./src/main.ts");
 
 
 /***/ })
