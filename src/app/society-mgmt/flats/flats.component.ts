@@ -15,7 +15,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class FlatsComponent implements OnInit, OnChanges {
   
-  society; flatList;
+  society; flatList;uniqueSocietyId;selectedIdFlatDetails;
   isClosedValue = false;
   model: any = {};
   errmsg;
@@ -52,7 +52,10 @@ export class FlatsComponent implements OnInit, OnChanges {
           this.commonResponse(data);
           this.societyid = this.flatList[0].societyid;
           this.buildingName = this.flatList[0].buildingname;
-          this.setSocietyInfo(this.societyid);
+  
+          this.uniqueSocietyId = [...Array.from(new Set<any>(this.flatList.map(({societyid})=>societyid))).sort()];
+          
+         // this.setSocietyInfo(this.societyid);
         },
         error => {
           console.log(error);
@@ -67,7 +70,7 @@ export class FlatsComponent implements OnInit, OnChanges {
           this.society = error.message;
         });
       }
-      this.setSocietyInfo(this.societyid);
+      //this.setSocietyInfo(this.societyid);
     });
   }
 
@@ -81,6 +84,15 @@ export class FlatsComponent implements OnInit, OnChanges {
           this.society = error.message;
         });
     }
+  }
+
+  showFlatAndSocietyDetailsById(selectedSocietyID)
+  {
+    this.setSocietyInfo(selectedSocietyID);
+    console.log(selectedSocietyID);
+    this.selectedIdFlatDetails = this.flatList.filter(val => val.societyid == selectedSocietyID)
+
+    console.log(this.selectedIdFlatDetails);
   }
 
   commonResponse(data){

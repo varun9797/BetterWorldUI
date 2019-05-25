@@ -1,13 +1,21 @@
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 text-left contentContainer">    
-        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>
+<mat-form-field>
+  <mat-label>Society ID</mat-label>
+  <mat-select [(ngModel)]="selectedSocietyID" (selectionChange)="showFlatAndSocietyDetailsById(selectedSocietyID)">
+    <mat-option *ngFor="let uniqueid of uniqueSocietyId" [value]=uniqueid >
+      {{uniqueid}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div class="row" *ngIf="societyInfo">
+    <div class="col-xs-12 col-sm-12 text-left contentContainer">   
+      
+      Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>
       Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     
       Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>
       buildingname : {{buildingName}}<br>
     </div>
   </div>
-<div class="row">
+<div class="row" *ngIf="selectedIdFlatDetails">
     <div class="col-xs-12 col-sm-12 text-center contentContainer">
         <div *ngIf="showSpinner">
             <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
@@ -28,7 +36,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let flat of flatList">
+            <tr *ngFor="let flat of selectedIdFlatDetails">
               <td>{{flat.flatid}}</td>
               <td>{{flat.flatname}}</td>
               <td>{{flat.ownerid}}</td>
