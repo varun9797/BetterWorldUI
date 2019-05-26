@@ -5,7 +5,10 @@
       Id: {{loginUserInfo.id}}<br>
       {{loginUserInfo.email}}<br>
       {{loginUserInfo.phone}}<br>
-      {{loginUserInfo.age}}
+      {{loginUserInfo.age}}<br>
+      <div>
+          <button style="width: 180px" (click)="redirectToFlatPage()" mat-raised-button color="primary">My Flats</button>
+      </div>
     </div>
     
     <div class="row col-md-12 text-center">

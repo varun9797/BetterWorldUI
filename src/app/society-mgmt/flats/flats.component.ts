@@ -29,6 +29,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   showPaymentModal=false;
   displayedColumns: string[];
   dataSource;
+  ownerId;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(public dialog: MatDialog,public _userService: UserService,
      public router: Router, private route: 
@@ -36,6 +37,7 @@ export class FlatsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.getflatList();
+    this.setOwnerId();
   }
   ngOnChanges() {
     this.getflatList();
