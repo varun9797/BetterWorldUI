@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { UserService } from "../services/user.service"
 import { Router, ActivatedRoute } from '@angular/router';
+
 import { OnChanges } from '@angular/core';
 import { TokenService } from '../services/token.service'
 import { CommonService } from '../services/common.service'
@@ -50,9 +51,11 @@ export class FlatsComponent implements OnInit, OnChanges {
       if(ownerId){
         this._userService.getOwnerFlatList(ownerId).subscribe((data) => {
           this.commonResponse(data);
-          this.societyid = this.flatList[0].societyid;
-          this.buildingName = this.flatList[0].buildingname;
-          this.setSocietyInfo(this.societyid);
+          if(this.flatList.length==1){
+            this.societyid = this.flatList[0].societyid;
+            this.buildingName = this.flatList[0].buildingname;
+            this.setSocietyInfo(this.societyid);
+          }
         },
         error => {
           console.log(error);
@@ -115,10 +118,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   }
 
   paymentMethod(payAmount){
-    this.flatObj.pendingPayment = payAmount;
-    console.log(payAmount , this.flatObj.pendingPayment);
-    console.log(this.flatObj);
-    
+    this.flatObj.pendingPayment = payAmount; 
     this._userService.putFlatPayment(this.flatObj).subscribe(
       (data) => {
       this.responseData = data.dbResponse;

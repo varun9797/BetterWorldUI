@@ -1,12 +1,19 @@
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 text-left contentContainer">    
+    <div class="col-xs-4 col-sm-4 text-left contentContainer">    
         Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>
       Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     
       Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>
       buildingname : {{buildingName}}<br>
     </div>
+    <div class="col-xs-4 col-sm-4 text-right contentContainer">
+        <button mat-raised-button routerLink="/societyManagment/monthlyReciept">Create Monthy Reciept</button>
+    </div>
+    <div class="col-xs-4 col-sm-4 text-right contentContainer">
+      <button mat-raised-button routerLink="/societyManagment/society">Show All Society</button>
   </div>
+  </div>
+  
 <div class="row">
     <div class="col-xs-12 col-sm-12 text-center contentContainer">
         <div *ngIf="showSpinner">
@@ -16,19 +23,23 @@
       <table *ngIf="!showSpinner && flatList[0] && flatList[0].flatid" class="table">
           <thead>
             <tr>
+              <th>Society Id</th>
               <th>flatid</th>
               <th>flatname</th>
               <th>ownerid</th>
               <th>pendingpayment</th>
               <th>payment button</th>
               <!-- <th>Calender</th> -->
+              
               <th>Show Owner</th>
               <th>Payment History</th>
               <th>Flat</th>
+              
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let flat of flatList">
+              <td>{{flat.societyid}}</td>
               <td>{{flat.flatid}}</td>
               <td>{{flat.flatname}}</td>
               <td>{{flat.ownerid}}</td>
