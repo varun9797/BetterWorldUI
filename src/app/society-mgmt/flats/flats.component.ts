@@ -37,7 +37,6 @@ export class FlatsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.getflatList();
-    this.setOwnerId();
   }
   ngOnChanges() {
     this.getflatList();
