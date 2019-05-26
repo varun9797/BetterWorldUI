@@ -61,6 +61,13 @@ export class SocietyMgmtComponent implements OnInit {
       this.loginUserInfo.email = userInfo.data.email;
     })
   }
+  redirectToFlatPage(){
+    if(this.loginUserInfo.id){
+      this.router.navigate(['societyManagment','owners',this.loginUserInfo.id,'flats']);
+    } else {
+      this.router.navigate(['login']);
+    }
+  }
 
   changeButtonColor() {
     this._commonService.eventIsActiveType.subscribe((value) => {

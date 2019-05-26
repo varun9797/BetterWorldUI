@@ -31,15 +31,13 @@ export class LoginComponent implements OnInit {
           if (r.token) {
            // alert(r.token);
             console.log("token set success fully");
+            
             this._tokenService.setToken(r.token);
             if(this.redirectUrl == 'societyManagment'){
               this.router.navigate(['societyManagment', 'owners' ,r.dbResponse[0].ownerid,'flats']);
             } else {
               this.router.navigateByUrl(this.redirectUrl);
             }
-            
-            //this.router.navigate(['societyManagment','society']);
-            //this.router.navigateByUrl('/societyManagment');
           }
         },
         err => {

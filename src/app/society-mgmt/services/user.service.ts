@@ -20,7 +20,9 @@ export class UserService {
   societyEventURL = config.default.HOST_NAME + "/society/societyEvent";
   selectedTypeList = config.default.HOST_NAME + "/society/owner/list";
   callStoredProcUrl = config.default.HOST_NAME + "/society/storedProc";
-
+  createMonthlyReciptUrl = config.default.HOST_NAME + "/society/paymentstructure";
+  currentPaymentStructureUrl = config.default.HOST_NAME + "/society/paymentStrcture";
+  ownerSocietyList = config.default.HOST_NAME + "/society/owner";
   getOwner(query): Observable<any> {
     console.log(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`);
     return this.http.get(`${this.getOwnerURL}/phonenumber/?value='${query.oPhoneNumber}'`)
@@ -71,6 +73,13 @@ export class UserService {
       ));
   }
 
+  getOwnersocietyList(ownerId): Observable<any> {
+    console.log(`${this.ownerSocietyList}/${ownerId}`);
+    return this.http.get(`${this.ownerSocietyList}/${ownerId}`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
   getOwnerList(flatIds): Observable<any> {
     console.log(`${this.getOwnerURL}/flatIds/?value=${flatIds}`);
     return this.http.get(`${this.getOwnerURL}/flatIds/?value='${flatIds}'`)
@@ -110,6 +119,27 @@ export class UserService {
     }
     console.log(`${this.callStoredProcUrl}`);
     return this.http.post(`${this.callStoredProcUrl}`,postObj)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
+  createRecipt(recieptObj) {
+    console.log("createRecipt object",recieptObj);
+    return this.http.post(`${this.createMonthlyReciptUrl}`,recieptObj)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
+  updateRecipt(recieptObj) {
+    console.log("updateRecipt object",recieptObj);
+    return this.http.put(`${this.createMonthlyReciptUrl}`,recieptObj)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
+  getExistingRecipt(userId) {
+    console.log("getExistingRecipt ",`${this.currentPaymentStructureUrl}/${userId}`);
+    return this.http.get(`${this.currentPaymentStructureUrl}/${userId}`)
       .pipe(catchError((error: HttpErrorResponse) => throwError(error)
       ));
   }

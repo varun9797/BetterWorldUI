@@ -35,7 +35,11 @@ export class TokenService {
         this.isValidToken(token).subscribe(data=>{
           if(data.error == 0){
           //  alert(token);
-          this._commonService.setLoginUserInfo(data);
+          let jwtData = token.split('.')[1]
+          let decodedJwtJsonData = window.atob(jwtData)
+          let decodedJwtData = JSON.parse(decodedJwtJsonData)
+          console.log("************",{data:decodedJwtData});
+          this._commonService.setLoginUserInfo({data:decodedJwtData});
             observer.next(true);
           } else {
             alert("User is not Valid");

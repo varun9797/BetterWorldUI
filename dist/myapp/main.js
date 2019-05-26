@@ -131,6 +131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _society_mgmt_register_building_reg_building_reg_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./society-mgmt/register/building-reg/building-reg.component */ "./src/app/society-mgmt/register/building-reg/building-reg.component.ts");
 /* harmony import */ var _society_mgmt_register_flat_reg_flat_reg_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./society-mgmt/register/flat-reg/flat-reg.component */ "./src/app/society-mgmt/register/flat-reg/flat-reg.component.ts");
 /* harmony import */ var _society_mgmt_register_owner_reg_owner_reg_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./society-mgmt/register/owner-reg/owner-reg.component */ "./src/app/society-mgmt/register/owner-reg/owner-reg.component.ts");
+/* harmony import */ var _society_mgmt_register_monthly_reciept_monthly_reciept_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./society-mgmt/register/monthly-reciept/monthly-reciept.component */ "./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -171,10 +172,12 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var routes = [
     { path: "", redirectTo: '/home', pathMatch: "full" },
     { path: "login", component: _society_mgmt_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"] },
-    { path: "register", component: _society_mgmt_register_register_member_component__WEBPACK_IMPORTED_MODULE_16__["RegisterMemberComponent"],
+    {
+        path: "register", component: _society_mgmt_register_register_member_component__WEBPACK_IMPORTED_MODULE_16__["RegisterMemberComponent"],
         children: [
             { path: "society-reg", component: _society_mgmt_register_society_reg_society_reg_component__WEBPACK_IMPORTED_MODULE_28__["SocietyRegComponent"] },
             { path: "building-reg", component: _society_mgmt_register_building_reg_building_reg_component__WEBPACK_IMPORTED_MODULE_29__["BuildingRegComponent"] },
@@ -187,6 +190,7 @@ var routes = [
         path: "societyManagment", component: _society_mgmt_society_mgmt_component__WEBPACK_IMPORTED_MODULE_7__["SocietyMgmtComponent"],
         children: [
             { path: "society", component: _society_mgmt_society_society_component__WEBPACK_IMPORTED_MODULE_18__["SocietyComponent"] },
+            { path: "monthlyReciept", component: _society_mgmt_register_monthly_reciept_monthly_reciept_component__WEBPACK_IMPORTED_MODULE_32__["MonthlyRecieptComponent"] },
             { path: ":societyid/buildings", component: _society_mgmt_building_building_component__WEBPACK_IMPORTED_MODULE_9__["BuildingComponent"] },
             {
                 path: ":societyid/buildings/:buildingName/flats",
@@ -239,7 +243,8 @@ var AppModule = /** @class */ (function () {
                 _society_mgmt_register_owner_reg_owner_reg_component__WEBPACK_IMPORTED_MODULE_31__["OwnerRegComponent"],
                 _society_mgmt_flats_pendingpayment_pendingpayment_component__WEBPACK_IMPORTED_MODULE_11__["PendingpaymentComponent"],
                 _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatDialogBox"],
-                _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["PaymentHistoryDialogBox"]
+                _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["PaymentHistoryDialogBox"],
+                _society_mgmt_register_monthly_reciept_monthly_reciept_component__WEBPACK_IMPORTED_MODULE_32__["MonthlyRecieptComponent"]
             ],
             entryComponents: [_society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["FlatDialogBox"], _society_mgmt_flats_flats_component__WEBPACK_IMPORTED_MODULE_10__["PaymentHistoryDialogBox"]],
             imports: [
@@ -858,7 +863,35 @@ var CalendarComponent = /** @class */ (function () {
 /*! exports provided: HOST_NAME, default */
 /***/ (function(module) {
 
-module.exports = {"HOST_NAME":"http://nodebw-env.xctnnannuz.us-east-1.elasticbeanstalk.com"};
+module.exports = {"HOST_NAME":"http://localhost:5000"};
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/constant/constant.ts":
+/*!***************************************************!*\
+  !*** ./src/app/society-mgmt/constant/constant.ts ***!
+  \***************************************************/
+/*! exports provided: constant */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "constant", function() { return constant; });
+// const constant=  {
+//     SOCIETY_ADMIN:2,
+//     PRINCIPAL_ADMIN:1,
+//     USER:3
+// }
+var constant = /** @class */ (function () {
+    function constant() {
+    }
+    constant.SOCIETY_ADMIN = 2;
+    constant.PRINCIPAL_ADMIN = 1;
+    constant.USER = 3;
+    return constant;
+}());
+
+
 
 /***/ }),
 
@@ -1118,7 +1151,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-left contentContainer\">    \r\n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\r\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \r\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\r\n      buildingname : {{buildingName}}<br>\r\n    </div>\r\n  </div>\r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <div *ngIf=\"showSpinner\">\r\n            <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n          </div>\r\n        <h3>{{displayText}}</h3>\r\n      <table *ngIf=\"!showSpinner && flatList[0] && flatList[0].flatid\" class=\"table\">\r\n          <thead>\r\n            <tr>\r\n              <th>flatid</th>\r\n              <th>flatname</th>\r\n              <th>ownerid</th>\r\n              <th>pendingpayment</th>\r\n              <th>payment button</th>\r\n              <!-- <th>Calender</th> -->\r\n              <th>Show Owner</th>\r\n              <th>Payment History</th>\r\n              <th>Flat</th>\r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let flat of flatList\">\r\n              <td>{{flat.flatid}}</td>\r\n              <td>{{flat.flatname}}</td>\r\n              <td>{{flat.ownerid}}</td>\r\n              <td>{{flat.pendingpayment}}</td>\r\n              <td>\r\n                <button mat-raised-button (click)=\"openPaymentDialog(flat)\">Pay</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"openPaymentHistoryDialog(flat.flatid)\">Payment History</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n    </div>\r\n  </div>\r\n<div>\r\n  <!-- <calendar-component></calendar-component> -->\r\n</div>"
+module.exports = "\r\n<div class=\"row\">\r\n    <div class=\"col-xs-4 col-sm-4 text-left contentContainer\">    \r\n        Society ID:  {{societyInfo && societyInfo[0]?.societyid}} <br>\r\n      Society Name: {{societyInfo && societyInfo[0]?.societyname}} ,  <br>     \r\n      Society Address: {{societyInfo && societyInfo[0]?.address}},{{societyInfo && societyInfo[0]?.pincode}}<br><br>\r\n      buildingname : {{buildingName}}<br>\r\n    </div>\r\n    <div class=\"col-xs-4 col-sm-4 text-right contentContainer\">\r\n        <button mat-raised-button routerLink=\"/societyManagment/monthlyReciept\">Create Monthy Reciept</button>\r\n    </div>\r\n    <div class=\"col-xs-4 col-sm-4 text-right contentContainer\">\r\n      <button mat-raised-button routerLink=\"/societyManagment/society\">Show All Society</button>\r\n  </div>\r\n  </div>\r\n  \r\n<div class=\"row\">\r\n    <div class=\"col-xs-12 col-sm-12 text-center contentContainer\">\r\n        <div *ngIf=\"showSpinner\">\r\n            <i class=\"fa fa-spinner fa-spin\" style=\"font-size:24px\"></i>\r\n          </div>\r\n        <h3>{{displayText}}</h3>\r\n      <table *ngIf=\"!showSpinner && flatList[0] && flatList[0].flatid\" class=\"table\">\r\n          <thead>\r\n            <tr>\r\n              <th>Society Id</th>\r\n              <th>flatid</th>\r\n              <th>flatname</th>\r\n              <th>ownerid</th>\r\n              <th>pendingpayment</th>\r\n              <th>payment button</th>\r\n              <!-- <th>Calender</th> -->\r\n              \r\n              <th>Show Owner</th>\r\n              <th>Payment History</th>\r\n              <th>Flat</th>\r\n              \r\n            </tr>\r\n          </thead>\r\n          <tbody>\r\n            <tr *ngFor=\"let flat of flatList\">\r\n              <td>{{flat.societyid}}</td>\r\n              <td>{{flat.flatid}}</td>\r\n              <td>{{flat.flatname}}</td>\r\n              <td>{{flat.ownerid}}</td>\r\n              <td>{{flat.pendingpayment}}</td>\r\n              <td>\r\n                <button mat-raised-button (click)=\"openPaymentDialog(flat)\">Pay</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"openPaymentHistoryDialog(flat.flatid)\">Payment History</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"showOwner(societyid, buildingName,flat.flatid)\">Show Owner</button>\r\n              </td>\r\n              <td>\r\n                  <button mat-raised-button (click)=\"deleteFlat(flat.flatid)\">Delete</button>\r\n              </td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n    </div>\r\n  </div>\r\n<div>\r\n  <!-- <calendar-component></calendar-component> -->\r\n</div>"
 
 /***/ }),
 
@@ -1189,9 +1222,11 @@ var FlatsComponent = /** @class */ (function () {
             if (ownerId) {
                 _this._userService.getOwnerFlatList(ownerId).subscribe(function (data) {
                     _this.commonResponse(data);
-                    _this.societyid = _this.flatList[0].societyid;
-                    _this.buildingName = _this.flatList[0].buildingname;
-                    _this.setSocietyInfo(_this.societyid);
+                    if (_this.flatList.length == 1) {
+                        _this.societyid = _this.flatList[0].societyid;
+                        _this.buildingName = _this.flatList[0].buildingname;
+                        _this.setSocietyInfo(_this.societyid);
+                    }
                 }, function (error) {
                     console.log(error);
                     _this.society = error.message;
@@ -1251,8 +1286,6 @@ var FlatsComponent = /** @class */ (function () {
     FlatsComponent.prototype.paymentMethod = function (payAmount) {
         var _this = this;
         this.flatObj.pendingPayment = payAmount;
-        console.log(payAmount, this.flatObj.pendingPayment);
-        console.log(this.flatObj);
         this._userService.putFlatPayment(this.flatObj).subscribe(function (data) {
             _this.responseData = data.dbResponse;
         }, function (error) {
@@ -1540,8 +1573,6 @@ var LoginComponent = /** @class */ (function () {
                 else {
                     _this.router.navigateByUrl(_this.redirectUrl);
                 }
-                //this.router.navigate(['societyManagment','society']);
-                //this.router.navigateByUrl('/societyManagment');
             }
         }, function (err) {
             alert(err);
@@ -1988,6 +2019,130 @@ var FlatRegComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_user_service__WEBPACK_IMPORTED_MODULE_1__["UserService"], _register_service__WEBPACK_IMPORTED_MODULE_2__["RegisterService"]])
     ], FlatRegComponent);
     return FlatRegComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.css":
+/*!*************************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.css ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.html":
+/*!**************************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.html ***!
+  \**************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<div class=\"row align-items-center text-center\">\n \n  <div class=\"col\">\n    <button  mat-raised-button color=\"primary\" (click)=\"goBack()\">Back</button>\n    <form class=\"formStyle\" name=\"form\" #sf=\"ngForm\" (ngSubmit)=\"onSubmit()\">\n      <h4>#Reciept No- {{societyReciept.id}}</h4>\n      <div class=\"form-group\">\n        <mat-form-field class=\"example-full-width\">\n          <input [readonly]=\"disableField\" matInput name=\"societyName\" class=\"form-control\" placeholder=\"Building Maintenance\" #sname=\"ngModel\" [(ngModel)]=\"societyReciept.buildingMaintenance\">\n        </mat-form-field>\n      </div>\n      <div class=\"form-group\">\n        <mat-form-field class=\"example-full-width\">\n            <textarea [readonly]=\"disableField\" matInput name=\"societyAddress\" class=\"form-control\" placeholder=\"Parking Maintenance\" #sadd=\"ngModel\" [(ngModel)]=\"societyReciept.parkingMaintenance\"></textarea>\n          </mat-form-field>\n      </div>\n      <div class=\"form-group\">\n          <mat-form-field class=\"example-full-width\">\n            <input [readonly]=\"disableField\" matInput name=\"societyNumber\" class=\"form-control\" placeholder=\"Municipal Due\" #pcode=\"ngModel\" [(ngModel)]=\"societyReciept.municipalDue\">\n          </mat-form-field>\n      </div>\n      <div class=\"form-group\">\n        <mat-form-field class=\"example-full-width\">\n          <input [readonly]=\"disableField\" matInput name=\"societyName\" class=\"form-control\" placeholder=\"Sinking Fund\" #sname=\"ngModel\" [(ngModel)]=\"societyReciept.sinkingFund\">\n        </mat-form-field>\n      </div>\n      <div class=\"form-group\">\n        <mat-form-field class=\"example-full-width\">\n            <textarea [readonly]=\"disableField\" matInput name=\"societyAddress\" class=\"form-control\" placeholder=\"Electricity Charge\" #sadd=\"ngModel\" [(ngModel)]=\"societyReciept.electricityCharge\"></textarea>\n          </mat-form-field>\n      </div>\n     \n      <div *ngIf=\"!disableField\" class=\"form-group text-center\">\n        <button mat-raised-button color=\"primary\">Create</button>\n      </div>\n  </form>\n  </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.ts":
+/*!************************************************************************************!*\
+  !*** ./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: MonthlyRecieptComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MonthlyRecieptComponent", function() { return MonthlyRecieptComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _services_common_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/common.service */ "./src/app/society-mgmt/services/common.service.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/user.service */ "./src/app/society-mgmt/services/user.service.ts");
+/* harmony import */ var _constant_constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constant/constant */ "./src/app/society-mgmt/constant/constant.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var MonthlyRecieptComponent = /** @class */ (function () {
+    function MonthlyRecieptComponent(_location, _commonService, _userService) {
+        this._location = _location;
+        this._commonService = _commonService;
+        this._userService = _userService;
+        this.societyReciept = {
+            buildingMaintenance: 0,
+            parkingMaintenance: 0,
+            municipalDue: 0,
+            sinkingFund: 0,
+            electricityCharge: 0,
+            updatedBy: 0,
+            id: 0,
+            societyId: null
+        };
+        this.disableField = true;
+    }
+    MonthlyRecieptComponent.prototype.ngOnInit = function () {
+        this.createOrUpdateReciept();
+    };
+    MonthlyRecieptComponent.prototype.goBack = function () {
+        this._location.back();
+    };
+    MonthlyRecieptComponent.prototype.createOrUpdateReciept = function () {
+        var _this = this;
+        this.disableField = true;
+        this._commonService.loginUserInfo.subscribe(function (user) {
+            if (user && user.data && (user.data.type == _constant_constant__WEBPACK_IMPORTED_MODULE_4__["constant"].SOCIETY_ADMIN || user.data.type == _constant_constant__WEBPACK_IMPORTED_MODULE_4__["constant"].PRINCIPAL_ADMIN)) {
+                _this.disableField = false;
+            }
+            if (user && user.data) {
+                _this.societyId =
+                    _this.societyReciept.updatedBy = user.data.ownerid;
+                _this._userService.getExistingRecipt(_this.societyReciept.updatedBy).subscribe(function (response) {
+                    console.log("get existing!!!", response);
+                    var obj = response.dbResponse[0];
+                    if (obj) {
+                        _this.societyReciept.buildingMaintenance = obj.buildingMaintenance;
+                        _this.societyReciept.parkingMaintenance = obj.parkingMaintenance;
+                        _this.societyReciept.municipalDue = obj.municipalDue;
+                        _this.societyReciept.sinkingFund = obj.sinkingFund;
+                        _this.societyReciept.electricityCharge = obj.electricityCharge;
+                        _this.societyReciept.id = obj.id;
+                    }
+                });
+            }
+        });
+    };
+    MonthlyRecieptComponent.prototype.onSubmit = function () {
+        this.societyReciept.societyId =
+            this._userService.createRecipt(this.societyReciept).subscribe(function (response) {
+                console.log("response is", response);
+                alert("successfully saved your form");
+            }, function (error) {
+                console.log("unable to submit form", error);
+                alert("unable to submit form");
+            });
+    };
+    MonthlyRecieptComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-monthly-reciept',
+            template: __webpack_require__(/*! ./monthly-reciept.component.html */ "./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.html"),
+            styles: [__webpack_require__(/*! ./monthly-reciept.component.css */ "./src/app/society-mgmt/register/monthly-reciept/monthly-reciept.component.css")]
+        }),
+        __metadata("design:paramtypes", [_angular_common__WEBPACK_IMPORTED_MODULE_1__["Location"], _services_common_service__WEBPACK_IMPORTED_MODULE_2__["CommonService"], _services_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"]])
+    ], MonthlyRecieptComponent);
+    return MonthlyRecieptComponent;
 }());
 
 
@@ -2580,7 +2735,11 @@ var TokenService = /** @class */ (function () {
                 _this.isValidToken(token).subscribe(function (data) {
                     if (data.error == 0) {
                         //  alert(token);
-                        _this._commonService.setLoginUserInfo(data);
+                        var jwtData = token.split('.')[1];
+                        var decodedJwtJsonData = window.atob(jwtData);
+                        var decodedJwtData = JSON.parse(decodedJwtJsonData);
+                        console.log("************", { data: decodedJwtData });
+                        _this._commonService.setLoginUserInfo({ data: decodedJwtData });
                         observer.next(true);
                     }
                     else {
@@ -2654,6 +2813,9 @@ var UserService = /** @class */ (function () {
         this.societyEventURL = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/society/societyEvent";
         this.selectedTypeList = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/society/owner/list";
         this.callStoredProcUrl = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/society/storedProc";
+        this.createMonthlyReciptUrl = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/society/paymentstructure";
+        this.currentPaymentStructureUrl = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/society/paymentStrcture";
+        this.ownerSocietyList = _config_json__WEBPACK_IMPORTED_MODULE_4__.HOST_NAME + "/society/owner";
     }
     UserService.prototype.getOwner = function (query) {
         console.log(this.getOwnerURL + "/phonenumber/?value='" + query.oPhoneNumber + "'");
@@ -2693,6 +2855,11 @@ var UserService = /** @class */ (function () {
         return this.http.get(this.getFlatURL + "/ownerid/?value=" + ownerId)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
+    UserService.prototype.getOwnersocietyList = function (ownerId) {
+        console.log(this.ownerSocietyList + "/" + ownerId);
+        return this.http.get(this.ownerSocietyList + "/" + ownerId)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
     UserService.prototype.getOwnerList = function (flatIds) {
         console.log(this.getOwnerURL + "/flatIds/?value=" + flatIds);
         return this.http.get(this.getOwnerURL + "/flatIds/?value='" + flatIds + "'")
@@ -2726,6 +2893,21 @@ var UserService = /** @class */ (function () {
         };
         console.log("" + this.callStoredProcUrl);
         return this.http.post("" + this.callStoredProcUrl, postObj)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
+    UserService.prototype.createRecipt = function (recieptObj) {
+        console.log("createRecipt object", recieptObj);
+        return this.http.post("" + this.createMonthlyReciptUrl, recieptObj)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
+    UserService.prototype.updateRecipt = function (recieptObj) {
+        console.log("updateRecipt object", recieptObj);
+        return this.http.put("" + this.createMonthlyReciptUrl, recieptObj)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
+    };
+    UserService.prototype.getExistingRecipt = function (userId) {
+        console.log("getExistingRecipt ", this.currentPaymentStructureUrl + "/" + userId);
+        return this.http.get(this.currentPaymentStructureUrl + "/" + userId)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (error) { return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["throwError"])(error); }));
     };
     UserService.prototype.getSelectedTypelist = function (societyIds, buildingNames, flatIds) {
@@ -3037,7 +3219,7 @@ module.exports = "table {\r\n    width: 100%;\r\n  }\r\n\r\n  .tableClass {\r\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\r\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\r\n\r\n    <!-- Position Column -->\r\n    <ng-container matColumnDef=\"societyid\">\r\n      <th mat-cell *matHeaderCellDef> Society Id </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Name Column -->\r\n    <ng-container matColumnDef=\"societyname\">\r\n      <th mat-cell *matHeaderCellDef> Society Name </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Weight Column -->\r\n    <ng-container matColumnDef=\"address\">\r\n      <th mat-cell *matHeaderCellDef> Address </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Symbol Column -->\r\n    <ng-container matColumnDef=\"pincode\">\r\n      <th mat-cell *matHeaderCellDef> Pincode </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"showBuilding\">\r\n      <th mat-cell *matHeaderCellDef> Show Buildings </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"goToBuilding(element.societyid)\">             <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>Buildings\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"delete\">\r\n      <th mat-cell *matHeaderCellDef>delete </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"deleteBuilding(element.societyid)\"> <svg\r\n            xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n            <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\r\n            <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n  </table>\r\n\r\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\r\n</div>\r\n\r\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\r\n    <event-calendar-component></event-calendar-component>\r\n</div>  -->"
+module.exports = "<div class=\"tableClass\" class=\"mat-elevation-z8\">\r\n  <table class=\"tableClass\"  mat-table [dataSource]=\"dataSource\">\r\n\r\n    \r\n\r\n    <!-- Position Column -->\r\n    <ng-container matColumnDef=\"societyid\">\r\n      <th mat-cell *matHeaderCellDef> Society Id </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyid}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Name Column -->\r\n    <ng-container matColumnDef=\"societyname\">\r\n      <th mat-cell *matHeaderCellDef> Society Name </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.societyname}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Weight Column -->\r\n    <ng-container matColumnDef=\"address\">\r\n      <th mat-cell *matHeaderCellDef> Address </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.address}} </td>\r\n    </ng-container>\r\n\r\n    <!-- Symbol Column -->\r\n    <ng-container matColumnDef=\"pincode\">\r\n      <th mat-cell *matHeaderCellDef> Pincode </th>\r\n      <td mat-cell *matCellDef=\"let element\"> {{element.pincode}} </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"showBuilding\">\r\n      <th mat-cell *matHeaderCellDef> Show Buildings </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"goToBuilding(element.societyid)\">             <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n        <path d=\"M0 0h24v24H0z\" fill=\"none\" />\r\n        <path d=\"M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z\" /></svg>Buildings\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <ng-container matColumnDef=\"delete\">\r\n      <th mat-cell *matHeaderCellDef>delete </th>\r\n      <td mat-cell *matCellDef=\"let element\"> <button mat-stroked-button (click)=\"deleteBuilding(element.societyid)\"> <svg\r\n            xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\">\r\n            <path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z\" />\r\n            <path d=\"M0 0h24v24H0z\" fill=\"none\" /></svg>\r\n        </button>\r\n      </td>\r\n    </ng-container>\r\n\r\n    <tr mat-row *matHeaderRowDef=\"displayedColumns\"></tr>\r\n    <tr mat-row *matRowDef=\"let row; columns: displayedColumns;\"></tr>\r\n  </table>\r\n\r\n  <mat-paginator class=\"tableClass\" [pageSizeOptions]=\"[5, 10, 20]\" showFirstLastButtons></mat-paginator>\r\n</div>\r\n\r\n<!-- <div [hidden]=\"!(societyInfo && societyInfo[0]?.societyid)\">\r\n    <event-calendar-component></event-calendar-component>\r\n</div>  -->"
 
 /***/ }),
 

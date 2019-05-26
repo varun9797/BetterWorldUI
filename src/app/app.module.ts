@@ -33,19 +33,21 @@ import { SocietyRegComponent } from './society-mgmt/register/society-reg/society
 import { BuildingRegComponent } from './society-mgmt/register/building-reg/building-reg.component';
 import { FlatRegComponent } from './society-mgmt/register/flat-reg/flat-reg.component';
 import { OwnerRegComponent } from './society-mgmt/register/owner-reg/owner-reg.component';
+import { MonthlyRecieptComponent } from './society-mgmt/register/monthly-reciept/monthly-reciept.component';
 
 
 const routes: Routes = [
   { path: "", redirectTo: '/home', pathMatch: "full" },
   { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterMemberComponent ,
-  children:[
-  { path: "society-reg", component: SocietyRegComponent },
-  { path: "building-reg", component: BuildingRegComponent },
-  { path: "flat-reg", component: FlatRegComponent },
-  { path: "owner-reg", component: OwnerRegComponent }
-  ]  
-},
+  {
+    path: "register", component: RegisterMemberComponent,
+    children: [
+      { path: "society-reg", component: SocietyRegComponent },
+      { path: "building-reg", component: BuildingRegComponent },
+      { path: "flat-reg", component: FlatRegComponent },
+      { path: "owner-reg", component: OwnerRegComponent }
+    ]
+  },
   
   { path: "home", component: HomeComponent },
   {
@@ -53,6 +55,7 @@ const routes: Routes = [
 
     children: [
       { path: "society", component: SocietyComponent },
+      { path: "monthlyReciept", component: MonthlyRecieptComponent },
       { path: ":societyid/buildings", component: BuildingComponent },
       {
         path: ":societyid/buildings/:buildingName/flats",
@@ -104,7 +107,8 @@ const routes: Routes = [
     OwnerRegComponent,
     PendingpaymentComponent,
     FlatDialogBox,
-    PaymentHistoryDialogBox   
+    PaymentHistoryDialogBox,
+    MonthlyRecieptComponent   
   ],
   entryComponents: [FlatDialogBox, PaymentHistoryDialogBox],
   imports: [

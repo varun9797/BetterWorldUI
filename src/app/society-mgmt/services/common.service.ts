@@ -36,7 +36,7 @@ export class CommonService {
     this.eventOwnerRequestObj = obj
   }
 
-  setLoginUserInfo(message: string) {
+  setLoginUserInfo(message: any) {
     this.loginUserSubject.next(message)
   }
 }

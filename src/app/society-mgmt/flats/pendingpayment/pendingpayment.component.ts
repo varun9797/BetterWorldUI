@@ -9,6 +9,8 @@ import { UserService } from "../../services/user.service"
 export class PendingpaymentComponent implements OnInit {
   total: number;
   isEditable = true;
+  pageTitle3;
+  payamt;
   paymentStructure = {
     dues:0,
     funds:0,
