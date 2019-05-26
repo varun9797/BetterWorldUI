@@ -24,22 +24,24 @@
       <table *ngIf="!showSpinner && flatList[0] && flatList[0].flatid" class="table">
           <thead>
             <tr>
-              <th>flatid</th>
+              <!-- <th>flatid</th> -->
               <th>flatname</th>
-              <th>ownerid</th>
+              <th>buildingname</th>
+              <!-- <th>ownerid</th> -->
               <th>pendingpayment</th>
               <th>payment button</th>
               <!-- <th>Calender</th> -->
-              <th>Show Owner</th>
+              <!-- <th>Show Owner</th> -->
               <th>Payment History</th>
-              <th>Flat</th>
+              <!-- <th>Flat</th> -->
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let flat of selectedIdFlatDetails">
-              <td>{{flat.flatid}}</td>
+              <!-- <td>{{flat.flatid}}</td> -->
               <td>{{flat.flatname}}</td>
-              <td>{{flat.ownerid}}</td>
+              <td>{{flat.buildingname}}</td>
+              <!-- <td>{{flat.ownerid}}</td> -->
               <td>{{flat.pendingpayment}}</td>
               <td>
                 <button mat-raised-button (click)="openPaymentDialog(flat)">Pay</button>
@@ -47,12 +49,12 @@
               <td>
                   <button mat-raised-button (click)="openPaymentHistoryDialog(flat.flatid)">Payment History</button>
               </td>
-              <td>
+              <!-- <td>
                   <button mat-raised-button (click)="showOwner(societyid, buildingName,flat.flatid)">Show Owner</button>
-              </td>
-              <td>
+              </td> -->
+              <!-- <td>
                   <button mat-raised-button (click)="deleteFlat(flat.flatid)">Delete</button>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>

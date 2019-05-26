@@ -28,6 +28,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   showPaymentModal=false;
   displayedColumns: string[];
   dataSource;
+  selectedSocietyID;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(public dialog: MatDialog,public _userService: UserService,
      public router: Router, private route: 
@@ -54,7 +55,7 @@ export class FlatsComponent implements OnInit, OnChanges {
           this.buildingName = this.flatList[0].buildingname;
   
           this.uniqueSocietyId = [...Array.from(new Set<any>(this.flatList.map(({societyid})=>societyid))).sort()];
-          
+          this.showFlatAndSocietyDetailsById(this.selectedSocietyID);
          // this.setSocietyInfo(this.societyid);
         },
         error => {
