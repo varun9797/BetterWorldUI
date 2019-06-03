@@ -15,7 +15,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 })
 export class FlatsComponent implements OnInit, OnChanges {
   
-  society; flatList;uniqueSocietyId;selectedIdFlatDetails;
+  society; flatList;uniqueSocietyId;selectedIdFlatDetails; 
+  flatListBySocietyId;
+  selectedOption = "myFlats";
   isClosedValue = false;
   model: any = {};
   errmsg;
@@ -28,7 +30,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   showPaymentModal=false;
   displayedColumns: string[];
   dataSource;
-  selectedSocietyID;
+  selectedSocietyId;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(public dialog: MatDialog,public _userService: UserService,
      public router: Router, private route: 
@@ -40,12 +42,13 @@ export class FlatsComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.getflatList();
   }
-  getflatList() {
+  getflatList(callback?:any) {
     this.displayText=""
     this.route.params.subscribe((value) => {
       this.societyid = value["societyid"]; // get param
       this.buildingName = value["buildingName"]; // get param
       let ownerId = value["ownerId"];
+     
       this.showSpinner=true;
       this.displayText=""
       if(ownerId){
@@ -55,7 +58,14 @@ export class FlatsComponent implements OnInit, OnChanges {
           this.buildingName = this.flatList[0].buildingname;
   
           this.uniqueSocietyId = [...Array.from(new Set<any>(this.flatList.map(({societyid})=>societyid))).sort()];
-          this.showFlatAndSocietyDetailsById(this.selectedSocietyID);
+          console.log(this.selectedSocietyId);
+          if(this.selectedSocietyId) {
+            this.showFlatDetailsBySocietyId(this.selectedSocietyId);
+          }
+         // this.showFlatAndSocietyDetailsById(this.selectedSocietyID);
+          if(callback){
+            callback();
+          }
          // this.setSocietyInfo(this.societyid);
         },
         error => {
@@ -78,7 +88,7 @@ export class FlatsComponent implements OnInit, OnChanges {
   setSocietyInfo(societyid){
     if(societyid){
       this._userService.getSocietyInfo(societyid).subscribe((data) => {
-        this.societyInfo = data.dbResponse;
+        this.societyInfo = data.dbResponse;  
       },
         error => {
           console.log(error);
@@ -87,14 +97,55 @@ export class FlatsComponent implements OnInit, OnChanges {
     }
   }
 
-  showFlatAndSocietyDetailsById(selectedSocietyID)
+getFlatBySocietyId(selectedSocietyId,callback?:any)
+{
+  
+  this._userService.getFlatListBySocietyId(selectedSocietyId).subscribe((data)=>{
+    this.flatList=data.dbResponse;
+    this.showFlatDetailsBySocietyId(selectedSocietyId);
+   // this.showSpinner=true;
+    if(callback){
+      callback();
+    }
+
+  },error => {
+    console.log(error);
+  });
+ 
+ 
+}
+
+  showFlatAndSocietyDetailsById(selectedSocietyId)
   {
-    this.setSocietyInfo(selectedSocietyID);
-    console.log(selectedSocietyID);
-    this.selectedIdFlatDetails = this.flatList.filter(val => val.societyid == selectedSocietyID)
+    this.setSocietyInfo(selectedSocietyId);
+    if (this.selectedOption == "myFlats") {
+      this.getflatList(()=>{
+        this.showFlatDetailsBySocietyId(selectedSocietyId);
+      });
+    }
+    else {
+      this.getFlatBySocietyId(selectedSocietyId, () => {
+        this.showFlatDetailsBySocietyId(selectedSocietyId);
+      });
+      
+      
+    }
+
+ 
+  }
+
+  showFlatDetailsBySocietyId(societyid)
+  {
+    // this._userService.getFlatListBySocietyId(societyid).subscribe((data)=>{
+    //        this.flatListBySocietyId=data.dbResponse;
+    // });
+    console.log(societyid);
+    console.log(this.flatList);
+    this.selectedIdFlatDetails = this.flatList.filter(val => val.societyid == societyid)
 
     console.log(this.selectedIdFlatDetails);
   }
+
 
   commonResponse(data){
     this.showSpinner=false;

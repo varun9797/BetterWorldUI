@@ -64,6 +64,13 @@ export class UserService {
       ));
   }
 
+  getFlatListBySocietyId(societyId): Observable<any> {
+    console.log(`${this.getFlatURL}/?value=${societyId}`);
+    return this.http.get(`http://nodebw-env.xctnnannuz.us-east-1.elasticbeanstalk.com/society/flat/societyid/?value=${societyId}`)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(error)
+      ));
+  }
+
   getOwnerFlatList(ownerId): Observable<any> {
     console.log(`${this.getFlatURL}/ownerid/?value=${ownerId}`);
     return this.http.get(`${this.getFlatURL}/ownerid/?value=${ownerId}`)

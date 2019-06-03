@@ -1,6 +1,12 @@
+<mat-radio-group [(ngModel)] = "selectedOption" aria-label="Select an option"> 
+  <mat-radio-button value="myFlats"   (click)="getflatList()"> My Flats </mat-radio-button>
+  
+  <mat-radio-button value="allFlats"   (click)="getFlatBySocietyId(selectedSocietyId)"> All Flats </mat-radio-button>
+</mat-radio-group>
+<br>
 <mat-form-field>
   <mat-label>Society ID</mat-label>
-  <mat-select [(ngModel)]="selectedSocietyID" (selectionChange)="showFlatAndSocietyDetailsById(selectedSocietyID)">
+  <mat-select [(ngModel)]="selectedSocietyId" (selectionChange)="showFlatAndSocietyDetailsById(selectedSocietyId)">
     <mat-option *ngFor="let uniqueid of uniqueSocietyId" [value]=uniqueid >
       {{uniqueid}}
     </mat-option>
